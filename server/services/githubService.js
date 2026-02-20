@@ -1,0 +1,493 @@
+/**
+ * GitHub Data Service
+ * Fetches and normalizes repository data from GitHub REST API
+ */
+
+const GITHUB_API_BASE = 'https://api.github.com';
+
+/**
+ * Parse a GitHub repo URL or owner/repo string into owner and repo
+ * @param {string} repoUrl - The repo URL or owner/repo format
+ * @returns {{ owner: string, repo: string }}
+ */
+export function parseRepoUrl(repoUrl) {
+  // Handle both https://github.com/owner/repo and owner/repo formats
+  const urlPattern = /github\.com\/([^\/]+)\/([^\/]+)/;
+  const shortPattern = /^([^\/]+)\/([^\/]+)$/;
+
+  let match = repoUrl.match(urlPattern);
+  if (match) {
+    return { owner: match[1], repo: match[2].replace(/\.git$/, '') };
+  }
+
+  match = repoUrl.trim().match(shortPattern);
+  if (match) {
+    return { owner: match[1], repo: match[2].replace(/\.git$/, '') };
+  }
+
+  throw new Error('Invalid repository URL. Use https://github.com/owner/repo or owner/repo format.');
+}
+
+/**
+ * Make an authenticated request to the GitHub API
+ */
+async function githubFetch(endpoint, token) {
+  const url = `${GITHUB_API_BASE}${endpoint}`;
+  const headers = {
+    'Accept': 'application/vnd.github.v3+json',
+    'User-Agent': 'ProjectPulse'
+  };
+
+  if (token) {
+    headers['Authorization'] = `Bearer ${token}`;
+  }
+
+  const response = await fetch(url, { headers });
+
+  if (response.status === 404) {
+    throw new Error('Repository not found. Make sure the repository exists and is public.');
+  }
+
+  if (response.status === 403) {
+    const rateLimitRemaining = response.headers.get('X-RateLimit-Remaining');
+    if (rateLimitRemaining === '0') {
+      const resetTime = response.headers.get('X-RateLimit-Reset');
+      const resetDate = new Date(resetTime * 1000);
+      throw new Error(`GitHub API rate limit exceeded. Resets at ${resetDate.toLocaleTimeString()}.`);
+    }
+    throw new Error('Access forbidden. The repository may be private.');
+  }
+
+  if (!response.ok) {
+    throw new Error(`GitHub API error: ${response.status} ${response.statusText}`);
+  }
+
+  return response.json();
+}
+
+/**
+ * Fetch all pages of a paginated GitHub API endpoint
+ */
+async function fetchAllPages(endpoint, token, maxPages = 10) {
+  const results = [];
+  let page = 1;
+
+  while (page <= maxPages) {
+    const separator = endpoint.includes('?') ? '&' : '?';
+    const data = await githubFetch(`${endpoint}${separator}per_page=100&page=${page}`, token);
+    
+    if (!Array.isArray(data) || data.length === 0) break;
+    
+    results.push(...data);
+    
+    if (data.length < 100) break;
+    page++;
+  }
+
+  return results;
+}
+
+/**
+ * Fetch detailed commit info including files changed and stats
+ * @param {string} owner - Repository owner
+ * @param {string} repo - Repository name
+ * @param {string} sha - Commit SHA
+ * @param {string} token - GitHub API token
+ * @returns {Promise<object>} Commit details with files and diff
+ */
+async function fetchCommitDetails(owner, repo, sha, token) {
+  try {
+    const data = await githubFetch(`/repos/${owner}/${repo}/commits/${sha}`, token);
+    
+    // Extract file changes with patches (diffs)
+    const files = (data.files || []).map(file => ({
+      filename: file.filename,
+      status: file.status, // added, modified, removed, renamed
+      additions: file.additions,
+      deletions: file.deletions,
+      changes: file.changes,
+      patch: file.patch || '' // The actual diff content
+    }));
+
+    // Truncate patches to avoid token limits (keep first 500 chars per file, max 5 files)
+    const truncatedFiles = files.slice(0, 5).map(f => ({
+      ...f,
+      patch: f.patch.substring(0, 500) + (f.patch.length > 500 ? '\n... (truncated)' : '')
+    }));
+
+    return {
+      filesChanged: files.map(f => f.filename),
+      additions: data.stats?.additions || 0,
+      deletions: data.stats?.deletions || 0,
+      files: truncatedFiles
+    };
+  } catch (error) {
+    console.warn(`Could not fetch commit details for ${sha}:`, error.message);
+    return {
+      filesChanged: [],
+      additions: 0,
+      deletions: 0,
+      files: []
+    };
+  }
+}
+
+/**
+ * Fetch commits from the last 7 days for a branch
+ */
+async function fetchRecentCommits(owner, repo, branch, token) {
+  const sevenDaysAgo = new Date();
+  sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+  const since = sevenDaysAgo.toISOString();
+
+  try {
+    const commits = await fetchAllPages(
+      `/repos/${owner}/${repo}/commits?sha=${branch}&since=${since}`,
+      token,
+      5
+    );
+
+    return commits.map(commit => ({
+      sha: commit.sha,
+      author: commit.author?.login || commit.commit.author?.name || 'unknown',
+      authorAvatar: commit.author?.avatar_url || null,
+      date: commit.commit.author?.date || commit.commit.committer?.date,
+      message: commit.commit.message.split('\n')[0], // First line only
+      branch
+    }));
+  } catch (error) {
+    // Branch might not exist or have no commits in the time range
+    console.warn(`Could not fetch commits for branch ${branch}:`, error.message);
+    return [];
+  }
+}
+
+/**
+ * Fetch all branches with their last commit info
+ */
+async function fetchBranches(owner, repo, token) {
+  const branches = await fetchAllPages(`/repos/${owner}/${repo}/branches`, token, 5);
+
+  return Promise.all(branches.map(async (branch) => {
+    // Get detailed commit info for the branch's last commit
+    let lastCommitDate = null;
+    let lastCommitAuthor = null;
+
+    try {
+      const commitData = await githubFetch(
+        `/repos/${owner}/${repo}/commits/${branch.commit.sha}`,
+        token
+      );
+      lastCommitDate = commitData.commit.author?.date || commitData.commit.committer?.date;
+      lastCommitAuthor = commitData.author?.login || commitData.commit.author?.name || 'unknown';
+    } catch (error) {
+      console.warn(`Could not fetch commit details for branch ${branch.name}`);
+    }
+
+    const daysSinceLastCommit = lastCommitDate
+      ? Math.floor((Date.now() - new Date(lastCommitDate).getTime()) / (1000 * 60 * 60 * 24))
+      : null;
+
+    return {
+      name: branch.name,
+      lastCommitDate,
+      lastCommitAuthor,
+      daysSinceLastCommit,
+      isStale: false // Will be calculated after we have PRs/issues
+    };
+  }));
+}
+
+/**
+ * Fetch open pull requests
+ */
+async function fetchPullRequests(owner, repo, token) {
+  const prs = await fetchAllPages(`/repos/${owner}/${repo}/pulls?state=open`, token, 3);
+
+  return prs.map(pr => ({
+    number: pr.number,
+    title: pr.title,
+    author: pr.user?.login || 'unknown',
+    authorAvatar: pr.user?.avatar_url || null,
+    state: pr.state,
+    createdAt: pr.created_at,
+    updatedAt: pr.updated_at,
+    mergedAt: pr.merged_at,
+    branch: pr.head?.ref || null,
+    baseBranch: pr.base?.ref || null,
+    isDraft: pr.draft || false
+  }));
+}
+
+/**
+ * Fetch open issues (excluding pull requests)
+ */
+async function fetchIssues(owner, repo, token) {
+  const issues = await fetchAllPages(`/repos/${owner}/${repo}/issues?state=open`, token, 3);
+
+  // Filter out pull requests (they show up in issues API too)
+  return issues
+    .filter(issue => !issue.pull_request)
+    .map(issue => ({
+      number: issue.number,
+      title: issue.title,
+      state: issue.state,
+      labels: issue.labels.map(label => ({
+        name: label.name,
+        color: label.color
+      })),
+      assignees: issue.assignees.map(assignee => ({
+        login: assignee.login,
+        avatarUrl: assignee.avatar_url
+      })),
+      createdAt: issue.created_at,
+      updatedAt: issue.updated_at,
+      author: issue.user?.login || 'unknown'
+    }));
+}
+
+/**
+ * Fetch repository metadata
+ */
+async function fetchRepoMetadata(owner, repo, token) {
+  const data = await githubFetch(`/repos/${owner}/${repo}`, token);
+
+  return {
+    name: data.name,
+    fullName: data.full_name,
+    description: data.description,
+    owner: data.owner?.login,
+    ownerAvatar: data.owner?.avatar_url,
+    defaultBranch: data.default_branch,
+    language: data.language,
+    stars: data.stargazers_count,
+    forks: data.forks_count,
+    openIssues: data.open_issues_count,
+    createdAt: data.created_at,
+    updatedAt: data.updated_at,
+    pushedAt: data.pushed_at,
+    htmlUrl: data.html_url
+  };
+}
+
+/**
+ * Fetch contributors with their commit counts
+ */
+async function fetchContributors(owner, repo, token) {
+  try {
+    const contributors = await fetchAllPages(`/repos/${owner}/${repo}/contributors`, token, 3);
+
+    return contributors.map(contributor => ({
+      login: contributor.login,
+      avatarUrl: contributor.avatar_url,
+      totalCommits: contributor.contributions,
+      commitsByDay: {} // Will be populated from commits data
+    }));
+  } catch (error) {
+    console.warn('Could not fetch contributors:', error.message);
+    return [];
+  }
+}
+
+/**
+ * Calculate contributor activity from commits
+ * Ensures all 7 days are present in commitsByDay (with 0 for missing days)
+ */
+function enrichContributorsWithActivity(contributors, commits) {
+  // Generate last 7 days array (oldest to newest)
+  const last7Days = [];
+  for (let i = 6; i >= 0; i--) {
+    const date = new Date();
+    date.setDate(date.getDate() - i);
+    last7Days.push(date.toISOString().split('T')[0]);
+  }
+
+  // Count commits per author per day
+  const activityByAuthor = {};
+  commits.forEach(commit => {
+    const author = commit.author;
+    if (!activityByAuthor[author]) {
+      activityByAuthor[author] = {};
+    }
+    const date = new Date(commit.date).toISOString().split('T')[0];
+    activityByAuthor[author][date] = (activityByAuthor[author][date] || 0) + 1;
+  });
+
+  // Build commitsByDay with all 7 days (0 for missing days)
+  return contributors.map(contributor => {
+    const authorActivity = activityByAuthor[contributor.login] || {};
+    const commitsByDay = {};
+    last7Days.forEach(day => {
+      commitsByDay[day] = authorActivity[day] || 0;
+    });
+    return {
+      ...contributor,
+      commitsByDay
+    };
+  });
+}
+
+/**
+ * Mark branches as stale based on inactivity and linked PRs/issues
+ */
+function markStaleBranches(branches, pullRequests, issues) {
+  const prBranches = new Set(pullRequests.map(pr => pr.branch).filter(Boolean));
+  
+  // A branch is stale if:
+  // 1. No commits in last 48 hours (2 days)
+  // 2. AND has open PRs or is linked to issues
+  return branches.map(branch => {
+    const hasOpenPR = prBranches.has(branch.name);
+    const isInactive = branch.daysSinceLastCommit !== null && branch.daysSinceLastCommit >= 2;
+    
+    return {
+      ...branch,
+      isStale: isInactive && hasOpenPR,
+      hasOpenPR
+    };
+  });
+}
+
+/**
+ * Detect potential blockers by cross-referencing branches, PRs, and issues
+ */
+function detectBlockers(branches, pullRequests, issues) {
+  const blockers = [];
+  const now = new Date();
+
+  // Type 1: STALE_PR — Non-draft PR's branch inactive 2+ days
+  pullRequests.forEach(pr => {
+    if (pr.isDraft) return;
+    const branch = branches.find(b => b.name === pr.branch);
+    if (!branch) return;
+    if (branch.daysSinceLastCommit >= 2) {
+      const daysSinceUpdate = Math.floor((now - new Date(pr.updatedAt)) / (1000 * 60 * 60 * 24));
+      blockers.push({
+        type: 'STALE_PR',
+        severity: daysSinceUpdate >= 7 ? 'high' : 'medium',
+        title: `PR #${pr.number} "${pr.title}" — branch inactive ${branch.daysSinceLastCommit} days`,
+        description: `Branch ${pr.branch} last had a commit ${branch.daysSinceLastCommit} days ago. PR was opened by ${pr.author}.`,
+        relatedBranch: pr.branch,
+        relatedPR: { number: pr.number, title: pr.title, author: pr.author },
+        relatedIssue: null,
+        staleDays: branch.daysSinceLastCommit,
+        suggestedAction: `Review or merge PR #${pr.number}, or close if work is abandoned.`
+      });
+    }
+  });
+
+  // Type 2: LONG_RUNNING_PR — PR open 7+ days with no update in 3+ days
+  pullRequests.forEach(pr => {
+    const daysSinceCreated = Math.floor((now - new Date(pr.createdAt)) / (1000 * 60 * 60 * 24));
+    const daysSinceUpdated = Math.floor((now - new Date(pr.updatedAt)) / (1000 * 60 * 60 * 24));
+    if (daysSinceCreated >= 7 && daysSinceUpdated >= 3) {
+      const alreadyCaught = blockers.some(b => b.relatedPR?.number === pr.number);
+      if (!alreadyCaught) {
+        blockers.push({
+          type: 'LONG_RUNNING_PR',
+          severity: daysSinceCreated >= 14 ? 'high' : 'medium',
+          title: `PR #${pr.number} open for ${daysSinceCreated} days with no recent activity`,
+          description: `"${pr.title}" by ${pr.author} was last updated ${daysSinceUpdated} days ago.`,
+          relatedBranch: pr.branch,
+          relatedPR: { number: pr.number, title: pr.title, author: pr.author },
+          relatedIssue: null,
+          staleDays: daysSinceUpdated,
+          suggestedAction: `Follow up with ${pr.author} on PR #${pr.number}.`
+        });
+      }
+    }
+  });
+
+  // Type 3: UNASSIGNED_OLD_ISSUE — Issue open 14+ days with no assignee
+  issues.forEach(issue => {
+    const daysSinceCreated = Math.floor((now - new Date(issue.createdAt)) / (1000 * 60 * 60 * 24));
+    if (daysSinceCreated >= 14 && issue.assignees.length === 0) {
+      blockers.push({
+        type: 'UNASSIGNED_OLD_ISSUE',
+        severity: daysSinceCreated >= 30 ? 'high' : 'low',
+        title: `Issue #${issue.number} unassigned for ${daysSinceCreated} days`,
+        description: `"${issue.title}" has been open with no assignee.`,
+        relatedBranch: null,
+        relatedPR: null,
+        relatedIssue: { number: issue.number, title: issue.title },
+        staleDays: daysSinceCreated,
+        suggestedAction: `Assign issue #${issue.number} or triage into the backlog.`
+      });
+    }
+  });
+
+  // Sort by severity (high first), then by staleDays descending
+  const severityOrder = { high: 0, medium: 1, low: 2 };
+  blockers.sort((a, b) => {
+    if (severityOrder[a.severity] !== severityOrder[b.severity]) {
+      return severityOrder[a.severity] - severityOrder[b.severity];
+    }
+    return b.staleDays - a.staleDays;
+  });
+
+  return blockers;
+}
+
+/**
+ * Main function to fetch all repository data in parallel
+ * @param {string} repoUrl - The GitHub repository URL or owner/repo
+ * @param {string} token - GitHub API token (optional but recommended)
+ * @returns {Promise<object>} Normalized repository data
+ */
+export async function fetchRepoData(repoUrl, token) {
+  const { owner, repo } = parseRepoUrl(repoUrl);
+
+  // Fetch metadata first to get default branch
+  const meta = await fetchRepoMetadata(owner, repo, token);
+
+  // Fetch all other data in parallel
+  const [branches, pullRequests, issues, contributors] = await Promise.all([
+    fetchBranches(owner, repo, token),
+    fetchPullRequests(owner, repo, token),
+    fetchIssues(owner, repo, token),
+    fetchContributors(owner, repo, token)
+  ]);
+
+  // Fetch commits from default branch and active PR branches
+  const branchesToFetch = new Set([meta.defaultBranch]);
+  pullRequests.forEach(pr => {
+    if (pr.branch) branchesToFetch.add(pr.branch);
+  });
+
+  // Limit to 5 branches to avoid too many API calls
+  const branchArray = Array.from(branchesToFetch).slice(0, 5);
+  
+  const commitArrays = await Promise.all(
+    branchArray.map(branch => fetchRecentCommits(owner, repo, branch, token))
+  );
+
+  // Flatten and dedupe commits by SHA
+  const commitMap = new Map();
+  commitArrays.flat().forEach(commit => {
+    if (!commitMap.has(commit.sha)) {
+      commitMap.set(commit.sha, commit);
+    }
+  });
+  const commits = Array.from(commitMap.values()).sort(
+    (a, b) => new Date(b.date) - new Date(a.date)
+  );
+
+  // Enrich data
+  const enrichedContributors = enrichContributorsWithActivity(contributors, commits);
+  const enrichedBranches = markStaleBranches(branches, pullRequests, issues);
+  const blockers = detectBlockers(enrichedBranches, pullRequests, issues);
+
+  return {
+    meta,
+    commits,
+    branches: enrichedBranches,
+    pullRequests,
+    issues,
+    contributors: enrichedContributors,
+    blockers,
+    fetchedAt: new Date().toISOString()
+  };
+}
+
+export { fetchCommitDetails };
+export default { fetchRepoData, parseRepoUrl, fetchCommitDetails };
