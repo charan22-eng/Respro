@@ -18,7 +18,12 @@ export function subscribeToUpdates(owner, repo, onEvent) {
     'new_event',
     'event_processed',
     'playbook_updated',
-    'event_error'
+    'event_error',
+    // Background analysis events
+    'background_analysis_started',
+    'commit_analyzed',
+    'background_analysis_completed',
+    'background_analysis_error'
   ];
 
   eventTypes.forEach(type => {
@@ -41,15 +46,16 @@ export function subscribeToUpdates(owner, repo, onEvent) {
 /**
  * Fetch repository pulse data
  * @param {string} repoUrl - GitHub repository URL or owner/repo format
+ * @param {boolean} forceRefresh - Skip cache and fetch fresh data
  * @returns {Promise<object>} Repository data
  */
-export async function fetchPulseData(repoUrl) {
+export async function fetchPulseData(repoUrl, forceRefresh = false) {
   const response = await fetch(`${API_BASE}/pulse`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ repoUrl }),
+    body: JSON.stringify({ repoUrl, forceRefresh }),
   });
 
   const data = await response.json();
@@ -184,6 +190,76 @@ export async function fetchPlaybook(owner, repo) {
 
   if (!response.ok) {
     throw new Error(data.error || 'Failed to fetch playbook');
+  }
+
+  return data;
+}
+
+/**
+ * Get commit summary from playbook (if already analyzed)
+ * @param {string} owner - Repository owner
+ * @param {string} repo - Repository name
+ * @param {string} sha - Commit SHA
+ * @returns {Promise<{found: boolean, commit: object|null}>}
+ */
+export async function getPlaybookCommit(owner, repo, sha) {
+  const response = await fetch(`${API_BASE}/playbook/${owner}/${repo}/commit/${sha}`);
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.error || 'Failed to fetch commit from playbook');
+  }
+
+  return data;
+}
+
+/**
+ * Get analysis status for all commits in playbook
+ * @param {string} owner - Repository owner
+ * @param {string} repo - Repository name
+ * @returns {Promise<{total, analyzed, pending, commits, isProcessing, analyzedCommits}>}
+ */
+export async function getCommitsAnalysisStatus(owner, repo) {
+  const response = await fetch(`${API_BASE}/playbook/${owner}/${repo}/commits/status`);
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.error || 'Failed to fetch commits status');
+  }
+
+  return data;
+}
+
+/**
+ * Start background analysis for unanalyzed commits
+ * @param {string} owner - Repository owner
+ * @param {string} repo - Repository name
+ * @returns {Promise<{status: string, message: string}>}
+ */
+export async function startBackgroundAnalysis(owner, repo) {
+  const response = await fetch(`${API_BASE}/playbook/${owner}/${repo}/analyze`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+  });
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.error || 'Failed to start background analysis');
+  }
+
+  return data;
+}
+
+/**
+ * Get the background analysis queue status
+ * @returns {Promise<{processing: Array, queued: Array, maxConcurrent: number}>}
+ */
+export async function getAnalysisQueueStatus() {
+  const response = await fetch(`${API_BASE}/playbook/analysis/queue`);
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.error || 'Failed to fetch queue status');
   }
 
   return data;

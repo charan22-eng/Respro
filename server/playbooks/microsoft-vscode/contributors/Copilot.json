@@ -1,0 +1,41 @@
+{
+  "login": "Copilot",
+  "avatarUrl": "https://avatars.githubusercontent.com/in/1143301?v=4",
+  "repoFullName": "microsoft/vscode",
+  "lastUpdated": "2026-02-20T23:13:49.909Z",
+  "totalCommits": 1,
+  "primaryAreas": [
+    "src"
+  ],
+  "contributorSummary": "",
+  "completionSignals": {
+    "velocityTrend": "unknown",
+    "commitSentiment": "neutral",
+    "churnSignal": "none",
+    "lastUpdated": "2026-02-20T23:13:49.909Z"
+  },
+  "commits": [
+    {
+      "commitId": "6955692b89755803beb8585b2a25f6126f3f8549",
+      "shortId": "6955692",
+      "author": "Copilot",
+      "timestamp": "2026-02-20T22:00:09Z",
+      "message": "Raise keybinding precedence for chat question carousel and confirmation focus actions (#296616)",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "src/vs/workbench/contrib/chat/browser/actions/chatAccessibilityActions.ts",
+        "src/vs/workbench/contrib/chat/browser/actions/chatActions.ts"
+      ],
+      "primaryArea": "src",
+      "before": "Chat shortcuts had lower binding precedence.",
+      "added": "Higher priority weight for navigation keys.",
+      "impact": "Reliable keyboard access to chat.",
+      "keywords": [
+        "keybindings",
+        "priority",
+        "chat"
+      ]
+    }
+  ]
+}

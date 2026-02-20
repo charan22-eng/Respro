@@ -1,0 +1,44 @@
+{
+  "login": "aviralg",
+  "avatarUrl": null,
+  "repoFullName": "llvm/llvm-project",
+  "lastUpdated": "2026-02-20T23:12:17.706Z",
+  "totalCommits": 1,
+  "primaryAreas": [
+    "clang"
+  ],
+  "contributorSummary": "",
+  "completionSignals": {
+    "velocityTrend": "unknown",
+    "commitSentiment": "neutral",
+    "churnSignal": "none",
+    "lastUpdated": "2026-02-20T22:53:45.174Z"
+  },
+  "commits": [
+    {
+      "commitId": "a8989c08a87ed5183c53f7292f62a0ce56fcf0c5",
+      "shortId": "a8989c0",
+      "author": "aviralg",
+      "timestamp": "2026-02-20T19:59:28Z",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "clang/unittests/Analysis/Scalable/CMakeLists.txt",
+        "clang/unittests/Analysis/Scalable/Serialization/JSONFormatTest/JSONFormatTest.h",
+        "clang/unittests/Analysis/Scalable/Serialization/JSONFormatTest/TUSummaryTest.cpp"
+      ],
+      "primaryArea": "clang",
+      "before": "All SSAF JSON serialization tests lived in a single monolithic file without shared fixtures.",
+      "added": "Dedicated JSONFormatTest directory with reusable fixture header for modular test organization.",
+      "impact": "Enables additional SSAF JSON tests to reuse common setup infrastructure.",
+      "keywords": [
+        "refactoring",
+        "testing",
+        "ssaf",
+        "clang"
+      ],
+      "message": "[clang][ssaf] Refactor `JSONFormatTest` into a directory with a shared fixture header (#182523)",
+      "analyzedAt": "2026-02-20T23:12:17.706Z"
+    }
+  ]
+}

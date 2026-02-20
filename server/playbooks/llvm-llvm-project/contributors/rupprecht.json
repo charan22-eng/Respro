@@ -1,0 +1,42 @@
+{
+  "login": "rupprecht",
+  "avatarUrl": "https://avatars.githubusercontent.com/u/663413?v=4",
+  "repoFullName": "llvm/llvm-project",
+  "lastUpdated": "2026-02-20T23:15:35.818Z",
+  "totalCommits": 1,
+  "primaryAreas": [
+    "utils"
+  ],
+  "contributorSummary": "",
+  "completionSignals": {
+    "velocityTrend": "unknown",
+    "commitSentiment": "neutral",
+    "churnSignal": "none",
+    "lastUpdated": "2026-02-20T22:53:45.187Z"
+  },
+  "commits": [
+    {
+      "commitId": "5c929816a32429246123c1d17e166d129f7a7c37",
+      "shortId": "5c92981",
+      "author": "rupprecht",
+      "timestamp": "2026-02-20T20:26:44Z",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "utils/bazel/llvm-project-overlay/mlir/BUILD.bazel"
+      ],
+      "primaryArea": "utils",
+      "before": "MathToNVVM conversion unavailable in Bazel builds.",
+      "added": "Added MathToNVVM library target and wired dependencies.",
+      "impact": "Enables Math-to-NVVM lowering for NVIDIA GPU compilation.",
+      "keywords": [
+        "bazel",
+        "mlir",
+        "nvvm",
+        "build"
+      ],
+      "message": "[bazel][NVVM][MLIR] Port 7d9b863bc39f690c6f7716dd27d24e6ccfcfae33 (#182588)",
+      "analyzedAt": "2026-02-20T23:15:35.818Z"
+    }
+  ]
+}

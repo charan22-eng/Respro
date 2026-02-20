@@ -1,0 +1,42 @@
+{
+  "login": "aemerson",
+  "avatarUrl": null,
+  "repoFullName": "llvm/llvm-project",
+  "lastUpdated": "2026-02-20T23:12:31.285Z",
+  "totalCommits": 1,
+  "primaryAreas": [
+    "llvm"
+  ],
+  "contributorSummary": "aemerson improves debug information accuracy in LLVM's code generation and outlining logic. They shipped a fix that clears debug locations from bundled instructions during function outlining, ensuring correct debugging for optimized code. Consistent activity across the compiler backend demonstrates steady momentum on reliability improvements.",
+  "completionSignals": {
+    "velocityTrend": "unknown",
+    "commitSentiment": "neutral",
+    "churnSignal": "none",
+    "lastUpdated": "2026-02-20T23:12:31.285Z"
+  },
+  "commits": [
+    {
+      "commitId": "a412d7372a2d5e2ef1ca56d517362d9d5dfdb68f",
+      "shortId": "a412d73",
+      "author": "aemerson",
+      "timestamp": "2026-02-20T23:11:58Z",
+      "message": "[AArch64][MachineOutliner] Clear debug locations on bundled instructions (#175655)",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "llvm/lib/CodeGen/MachineOutliner.cpp",
+        "llvm/test/CodeGen/AArch64/machine-outliner-bundle-debuginfo.mir"
+      ],
+      "primaryArea": "llvm",
+      "before": "Machine Outliner preserved debug locations on bundled AArch64 instructions when outlining.",
+      "added": "Logic to clear debug locations on bundled instructions during outlining.",
+      "impact": "Correct debug information for outlined functions with bundled instructions.",
+      "keywords": [
+        "AArch64",
+        "MachineOutliner",
+        "debug-info",
+        "bugfix"
+      ]
+    }
+  ]
+}

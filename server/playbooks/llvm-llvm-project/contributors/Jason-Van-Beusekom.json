@@ -1,0 +1,50 @@
+{
+  "login": "Jason-Van-Beusekom",
+  "avatarUrl": null,
+  "repoFullName": "llvm/llvm-project",
+  "lastUpdated": "2026-02-20T23:13:27.419Z",
+  "totalCommits": 1,
+  "primaryAreas": [
+    "mlir"
+  ],
+  "contributorSummary": "",
+  "completionSignals": {
+    "velocityTrend": "unknown",
+    "commitSentiment": "neutral",
+    "churnSignal": "none",
+    "lastUpdated": "2026-02-20T22:53:45.177Z"
+  },
+  "commits": [
+    {
+      "commitId": "7d9b863bc39f690c6f7716dd27d24e6ccfcfae33",
+      "shortId": "7d9b863",
+      "author": "Jason-Van-Beusekom",
+      "timestamp": "2026-02-20T20:02:08Z",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "mlir/include/mlir/Conversion/GPUToNVVM/GPUToNVVMPass.h",
+        "mlir/include/mlir/Conversion/MathToNVVM/MathToNVVM.h",
+        "mlir/include/mlir/Conversion/Passes.h",
+        "mlir/include/mlir/Conversion/Passes.td",
+        "mlir/lib/Conversion/CMakeLists.txt",
+        "mlir/lib/Conversion/GPUToNVVM/CMakeLists.txt",
+        "mlir/lib/Conversion/GPUToNVVM/LowerGpuOpsToNVVMOps.cpp",
+        "mlir/lib/Conversion/MathToNVVM/CMakeLists.txt",
+        "mlir/lib/Conversion/MathToNVVM/MathToNVVM.cpp"
+      ],
+      "primaryArea": "mlir",
+      "before": "Math-to-NVVM conversion logic was embedded within the GPUToNVVM pass infrastructure.",
+      "added": "New standalone MathToNVVM conversion pass separating math dialect lowering from GPU conversions.",
+      "impact": "Enables independent math-to-CUDA libdevice lowering without GPU dialect dependencies.",
+      "keywords": [
+        "refactoring",
+        "mlir",
+        "nvvm",
+        "math-dialect"
+      ],
+      "message": "[NVVM][MLIR] Refactor conversion of Math / Arith Operations seperate Passes (#180058)",
+      "analyzedAt": "2026-02-20T23:13:27.419Z"
+    }
+  ]
+}

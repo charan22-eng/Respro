@@ -1,0 +1,66 @@
+{
+  "login": "fhahn",
+  "avatarUrl": "https://avatars.githubusercontent.com/u/450489?v=4",
+  "repoFullName": "llvm/llvm-project",
+  "lastUpdated": "2026-02-20T23:14:22.502Z",
+  "totalCommits": 2,
+  "primaryAreas": [
+    "llvm"
+  ],
+  "contributorSummary": "",
+  "completionSignals": {
+    "velocityTrend": "unknown",
+    "commitSentiment": "neutral",
+    "churnSignal": "none",
+    "lastUpdated": "2026-02-20T22:53:45.182Z"
+  },
+  "commits": [
+    {
+      "commitId": "94724e80e92516db20c5e88ea4e056e92405545f",
+      "shortId": "94724e8",
+      "author": "fhahn",
+      "timestamp": "2026-02-20T20:12:30Z",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "llvm/test/Transforms/LoopVectorize/epilog-iv-select-cmp.ll"
+      ],
+      "primaryArea": "llvm",
+      "before": "FindLast epilogue vectorization with wrapping IV lacked test coverage.",
+      "added": "Added test for FindIV reduction epilogue behavior without sentinel values.",
+      "impact": "Documents unsupported paths to prevent invalid epilogue generation.",
+      "keywords": [
+        "loop-vectorize",
+        "test-coverage",
+        "findiv-reduction",
+        "epilogue"
+      ],
+      "message": "[LV] Add epilogue test with FindLast reduction of wrapping IV.",
+      "analyzedAt": "2026-02-20T23:14:22.502Z"
+    },
+    {
+      "commitId": "4ce49873814cd35bfe85c59e60fb7cb7b04e2441",
+      "shortId": "4ce4987",
+      "author": "fhahn",
+      "timestamp": "2026-02-20T21:48:35Z",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "llvm/lib/Transforms/Vectorize/LoopVectorize.cpp",
+        "llvm/lib/Transforms/Vectorize/VPlanTransforms.cpp",
+        "llvm/test/Transforms/LoopVectorize/epilog-iv-select-cmp.ll",
+        "llvm/test/Transforms/LoopVectorize/iv-select-cmp-decreasing.ll",
+        "llvm/test/Transforms/LoopVectorize/iv-select-cmp-no-wrap.ll",
+        "llvm/test/Transforms/LoopVectorize/iv-select-cmp-non-const-iv-start.ll",
+        "llvm/test/Transforms/LoopVectorize/iv-select-cmp.ll"
+      ],
+      "primaryArea": "llvm",
+      "before": "State unknown.",
+      "added": "[VPlan] Optimize FindLast of FindIV w/o sentinel. (#172569)",
+      "impact": "Impact could not be determined.",
+      "keywords": [
+        "commit"
+      ]
+    }
+  ]
+}

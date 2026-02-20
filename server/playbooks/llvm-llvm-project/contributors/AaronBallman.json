@@ -1,0 +1,40 @@
+{
+  "login": "AaronBallman",
+  "avatarUrl": "https://avatars.githubusercontent.com/u/4587626?v=4",
+  "repoFullName": "llvm/llvm-project",
+  "lastUpdated": "2026-02-20T23:11:02.193Z",
+  "totalCommits": 1,
+  "primaryAreas": [
+    "llvm"
+  ],
+  "contributorSummary": "",
+  "completionSignals": {
+    "velocityTrend": "unknown",
+    "commitSentiment": "neutral",
+    "churnSignal": "none",
+    "lastUpdated": "2026-02-20T23:11:02.193Z"
+  },
+  "commits": [
+    {
+      "commitId": "741b2cda32e17e21aa9b3188f971532ecda7c2d5",
+      "shortId": "741b2cd",
+      "author": "AaronBallman",
+      "timestamp": "2026-02-20T19:38:37Z",
+      "message": "Re-enable MSVC C4706 diagnostic; NFC (#182564)",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "llvm/cmake/modules/HandleLLVMOptions.cmake"
+      ],
+      "primaryArea": "llvm",
+      "before": "MSVC C4706 warning was suppressed globally",
+      "added": "Re-enabled assignment in conditional warnings",
+      "impact": "MSVC builds now catch assignment-in-conditional bugs",
+      "keywords": [
+        "MSVC",
+        "C4706",
+        "warnings"
+      ]
+    }
+  ]
+}

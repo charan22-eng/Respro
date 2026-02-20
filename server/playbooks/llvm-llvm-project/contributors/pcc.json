@@ -1,0 +1,213 @@
+{
+  "login": "pcc",
+  "avatarUrl": "https://avatars.githubusercontent.com/u/425024?v=4",
+  "repoFullName": "llvm/llvm-project",
+  "lastUpdated": "2026-02-20T23:11:02.190Z",
+  "totalCommits": 9,
+  "primaryAreas": [
+    "llvm"
+  ],
+  "contributorSummary": "",
+  "completionSignals": {
+    "velocityTrend": "unknown",
+    "commitSentiment": "neutral",
+    "churnSignal": "none",
+    "lastUpdated": "2026-02-20T23:11:02.166Z"
+  },
+  "commits": [
+    {
+      "commitId": "fef1c4334d83f0386af000b99f6ce20734fe4a39",
+      "shortId": "fef1c43",
+      "author": "pcc",
+      "timestamp": "2026-02-20T19:06:05Z",
+      "message": "[gn build] Port 32392468d7139",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "llvm/utils/gn/secondary/llvm/lib/CodeGen/BUILD.gn",
+        "llvm/utils/gn/secondary/llvm/unittests/CodeGen/BUILD.gn"
+      ],
+      "primaryArea": "llvm",
+      "before": "GN build lacked Rematerializer source files",
+      "added": "Rematerializer.cpp and test to GN build",
+      "impact": "GN build now includes Rematerializer component",
+      "keywords": [
+        "gn build",
+        "Rematerializer"
+      ]
+    },
+    {
+      "commitId": "847608cb92b62fb4cee69840c7e61517b02c2a22",
+      "shortId": "847608c",
+      "author": "pcc",
+      "timestamp": "2026-02-20T19:06:06Z",
+      "message": "[gn build] Port 41c6aa67a3430",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "llvm/utils/gn/secondary/clang/unittests/Analysis/Scalable/BUILD.gn"
+      ],
+      "primaryArea": "llvm",
+      "before": "GN build lacked EntityLinkageTest.cpp file",
+      "added": "Entity linkage test to GN build",
+      "impact": "Scalable analysis tests now build EntityLinkageTest",
+      "keywords": [
+        "gn build",
+        "EntityLinkageTest"
+      ]
+    },
+    {
+      "commitId": "13948d75aabb7786ee3038c207f0058177a437f0",
+      "shortId": "13948d7",
+      "author": "pcc",
+      "timestamp": "2026-02-20T19:06:07Z",
+      "message": "[gn build] Port 7c3c9c45f85da",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "llvm/utils/gn/secondary/clang/lib/Analysis/Scalable/BUILD.gn",
+        "llvm/utils/gn/secondary/clang/unittests/Analysis/Scalable/BUILD.gn"
+      ],
+      "primaryArea": "llvm",
+      "before": "GN build lacked JSONFormat source and registry test",
+      "added": "JSONFormat.cpp and serialization registry test",
+      "impact": "Scalable analysis JSON serialization now builds",
+      "keywords": [
+        "gn build",
+        "JSONFormat"
+      ]
+    },
+    {
+      "commitId": "ce1628c6a3af6a46f37edbe183d159997d19c122",
+      "shortId": "ce1628c",
+      "author": "pcc",
+      "timestamp": "2026-02-20T19:06:07Z",
+      "message": "[gn build] Port 8f378ea7e6fa3",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "llvm/utils/gn/secondary/clang-tools-extra/clang-tidy/bugprone/BUILD.gn"
+      ],
+      "primaryArea": "llvm",
+      "before": "GN build lacked UnsafeToAllowExceptions check",
+      "added": "UnsafeToAllowExceptions check to GN build",
+      "impact": "Bugprone exception safety check now builds",
+      "keywords": [
+        "gn build",
+        "UnsafeToAllowExceptions"
+      ]
+    },
+    {
+      "commitId": "fec29b3a585972cbd0c52292bf220693a5a47475",
+      "shortId": "fec29b3",
+      "author": "pcc",
+      "timestamp": "2026-02-20T19:06:08Z",
+      "message": "[gn build] Port 98c76d36432cc",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "llvm/utils/gn/secondary/clang/lib/Analysis/Scalable/BUILD.gn",
+        "llvm/utils/gn/secondary/clang/unittests/Analysis/Scalable/BUILD.gn"
+      ],
+      "primaryArea": "llvm",
+      "before": "GN build lacked TU summary components",
+      "added": "TU summary source and test files",
+      "impact": "Translation unit summary feature now builds",
+      "keywords": [
+        "gn build",
+        "TUSummary"
+      ]
+    },
+    {
+      "commitId": "a5fc887283a095f9c8045fc04388e61d0622483b",
+      "shortId": "a5fc887",
+      "author": "pcc",
+      "timestamp": "2026-02-20T19:06:09Z",
+      "message": "[gn build] Port d7a24d30f62bc",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "llvm/utils/gn/secondary/libcxx/include/BUILD.gn"
+      ],
+      "primaryArea": "llvm",
+      "before": "GN build lacked ranges_shift_left algorithm header",
+      "added": "ranges_shift_left algorithm header",
+      "impact": "C++ ranges shift_left algorithm now available",
+      "keywords": [
+        "gn build",
+        "ranges_shift_left"
+      ]
+    },
+    {
+      "commitId": "11ddeceb917a32e37ccc16248044c5ba0c63ccce",
+      "shortId": "11ddece",
+      "author": "pcc",
+      "timestamp": "2026-02-20T19:06:10Z",
+      "message": "[gn build] Port f6c86bd69d92e",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "llvm/utils/gn/secondary/llvm/lib/MC/BUILD.gn",
+        "llvm/utils/gn/secondary/llvm/lib/MC/MCParser/BUILD.gn"
+      ],
+      "primaryArea": "llvm",
+      "before": "GN build lacked LFI assembly components",
+      "added": "LFI parser and rewriter components",
+      "impact": "LFI assembly parsing now supported in GN",
+      "keywords": [
+        "gn build",
+        "LFI"
+      ]
+    },
+    {
+      "commitId": "ebe9c6eabd4caeb441ecf87d4d29789424b68833",
+      "shortId": "ebe9c6e",
+      "author": "pcc",
+      "timestamp": "2026-02-20T19:16:45Z",
+      "message": "CodeGen: Introduce MachineFunction::getPreferredAlignment().",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "llvm/include/llvm/CodeGen/MachineFunction.h",
+        "llvm/lib/CodeGen/AsmPrinter/AsmPrinter.cpp",
+        "llvm/lib/CodeGen/AsmPrinter/WinException.cpp",
+        "llvm/lib/CodeGen/MachineFunction.cpp",
+        "llvm/lib/Target/X86/X86AsmPrinter.cpp",
+        "llvm/test/CodeGen/PowerPC/alloca-crspill.ll"
+      ],
+      "primaryArea": "llvm",
+      "before": "No preferred alignment query method existed",
+      "added": "getPreferredAlignment() method to MachineFunction",
+      "impact": "Functions can specify preferred alignment attributes",
+      "keywords": [
+        "CodeGen",
+        "alignment",
+        "MachineFunction"
+      ]
+    },
+    {
+      "commitId": "6767bfeec5ede8a878792e39aedff053c36854b2",
+      "shortId": "6767bfe",
+      "author": "pcc",
+      "timestamp": "2026-02-20T19:22:51Z",
+      "message": "CodeGen: Emit .prefalign directives based on the prefalign attribute.",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "lld/test/ELF/lto/linker-script-symbols-ipo.ll",
+        "llvm/lib/CodeGen/AsmPrinter/AsmPrinter.cpp",
+        "llvm/test/CodeGen/X86/prefalign.ll",
+        "llvm/test/Transforms/SampleProfile/pseudo-probe-emit.ll"
+      ],
+      "primaryArea": "llvm",
+      "before": "prefalign attribute did not generate directives",
+      "added": ".prefalign directive emission support",
+      "impact": "Assembly output includes preferred alignment hints",
+      "keywords": [
+        "prefalign",
+        "AsmPrinter",
+        "directive"
+      ]
+    }
+  ]
+}

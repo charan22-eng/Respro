@@ -5,7 +5,7 @@
 
 import express from 'express';
 import { fetchRepoData, parseRepoUrl, fetchLatestCommitSha } from '../services/githubService.js';
-import { getCachedData, setCachedData } from '../services/cacheService.js';
+import { getCachedData, setCachedData, invalidateCache } from '../services/cacheService.js';
 import { generatePulseSummary } from '../services/ollamaService.js';
 import { streamChatResponse } from '../services/chatService.js';
 import { analyzeCommit } from '../services/commitAnalyzerService.js';
@@ -20,11 +20,11 @@ const router = express.Router();
  * Fetch repository health data with AI-generated summary
  * Uses version-based caching (invalidates when latest commit SHA changes)
  * Returns data immediately, processes AI summary in background
- * Body: { repoUrl: "https://github.com/owner/repo" }
+ * Body: { repoUrl: "https://github.com/owner/repo", forceRefresh?: boolean }
  */
 router.post('/pulse', async (req, res, next) => {
   try {
-    const { repoUrl } = req.body;
+    const { repoUrl, forceRefresh } = req.body;
 
     // Validate input
     if (!repoUrl || typeof repoUrl !== 'string') {
@@ -51,17 +51,23 @@ router.post('/pulse', async (req, res, next) => {
     // Fetch latest commit SHA (lightweight API call for version check)
     const latestSha = await fetchLatestCommitSha(owner, repo, token);
     
-    // Check cache with version validation
-    const cachedData = await getCachedData(repoUrl, latestSha);
-    if (cachedData) {
-      console.log(`Returning cached data for ${owner}/${repo} (version: ${latestSha?.substring(0, 7)})`);
-      // Set repo version for polling service to track
-      setRepoVersion(owner, repo, latestSha);
-      return res.json({
-        ...cachedData,
-        cached: true,
-        cacheVersion: latestSha?.substring(0, 7)
-      });
+    // Check cache with version validation (skip if forceRefresh)
+    if (!forceRefresh) {
+      const cachedData = await getCachedData(repoUrl, latestSha);
+      if (cachedData) {
+        console.log(`Returning cached data for ${owner}/${repo} (version: ${latestSha?.substring(0, 7)})`);
+        // Set repo version for polling service to track
+        setRepoVersion(owner, repo, latestSha);
+        return res.json({
+          ...cachedData,
+          cached: true,
+          cacheVersion: latestSha?.substring(0, 7)
+        });
+      }
+    } else {
+      // Force refresh - invalidate cache first
+      console.log(`Force refresh requested for ${owner}/${repo}`);
+      await invalidateCache(repoUrl);
     }
 
     // Cache miss or version changed - fetch fresh data

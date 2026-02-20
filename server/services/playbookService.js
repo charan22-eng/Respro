@@ -165,6 +165,7 @@ export async function updatePlaybookWithEvent(owner, repo, eventData) {
     shortId: (eventData.commitId || '').substring(0, 7),
     author: eventData.author,
     timestamp: eventData.timestamp,
+    message: eventData.message || '', // Store commit message for re-analysis
     branch: eventData.branch,
     eventType: eventData.eventType,
     filesChanged: eventData.filesChanged || [],
@@ -330,6 +331,7 @@ export async function initializeFromExistingCommits(owner, repo, commits, repoDa
       shortId: events[i].shortId,
       author: events[i].author,
       timestamp: events[i].timestamp,
+      message: events[i].message || '', // Store commit message for re-analysis
       branch: events[i].branch,
       eventType: events[i].eventType,
       filesChanged: events[i].filesChanged,

@@ -1,0 +1,605 @@
+{
+  "repoFullName": "microsoft/vscode",
+  "lastUpdated": "2026-02-20T23:14:26.542Z",
+  "totalCommitsTracked": 21,
+  "projectSummary": "This project builds a code editor with AI-assisted development features. Recent work improves keyboard navigation in chat panels, speeds up git branch switching, upgrades terminal image rendering, and fixes visual alignment bugs. Multiple contributors maintain steady progress across accessibility, core tools, and interface polish.",
+  "techAreas": [
+    "src",
+    "remote",
+    "extensions",
+    ".github",
+    "build",
+    "test"
+  ],
+  "overallVelocity": "steady",
+  "commits": [
+    {
+      "commitId": "bf4419c4c3459988c8d25d11f7fc6e9c4bc7cb2a",
+      "shortId": "bf4419c",
+      "author": "mjbvz",
+      "timestamp": "2026-02-20T20:35:48Z",
+      "message": "Merge pull request #296595 from mjbvz/dev/mjbvz/administrative-gecko",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "src/vs/workbench/contrib/chat/common/model/chatModelStore.ts"
+      ],
+      "primaryArea": "src",
+      "before": "Chat model store imported different disposable utilities.",
+      "added": "Updated disposable import pattern in storage module.",
+      "impact": "Improved resource cleanup in chat sessions.",
+      "keywords": [
+        "chat",
+        "disposable",
+        "refactor"
+      ]
+    },
+    {
+      "commitId": "35c9204ff3c19bc0e29e09999650b2efef9ccc2c",
+      "shortId": "35c9204",
+      "author": "pwang347",
+      "timestamp": "2026-02-20T20:53:02Z",
+      "message": "Fix configure tools code lens action in prompt files (#296584)",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "src/vs/workbench/contrib/chat/browser/promptSyntax/promptToolsCodeLensProvider.ts",
+        "src/vs/workbench/contrib/chat/test/browser/promptSyntax/promptFileRewriter.test.ts"
+      ],
+      "primaryArea": "src",
+      "before": "Configure tools code lens lacked test coverage.",
+      "added": "Unit tests for prompt tools code lens provider.",
+      "impact": "Reliable tool configuration in prompt files.",
+      "keywords": [
+        "testing",
+        "code lens",
+        "prompts"
+      ]
+    },
+    {
+      "commitId": "dea3ecf79ed5c5532d1993849b6eaba1ba99d707",
+      "shortId": "dea3ecf",
+      "author": "lszomoru",
+      "timestamp": "2026-02-20T20:58:45Z",
+      "message": "Sessions - select the active branch in the branch picker (#296606)",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "src/vs/sessions/contrib/chat/browser/branchPicker.ts",
+        "src/vs/workbench/api/browser/mainThreadGitExtensionService.ts",
+        "src/vs/workbench/api/common/extHostGitExtensionService.ts",
+        "src/vs/workbench/contrib/git/browser/gitService.ts",
+        "src/vs/workbench/contrib/git/common/gitService.ts"
+      ],
+      "primaryArea": "src",
+      "before": "Branch picker defaulted to main or master.",
+      "added": "Active branch pre-selection in git picker.",
+      "impact": "Faster branch switching for users.",
+      "keywords": [
+        "git",
+        "branch picker",
+        "ux"
+      ]
+    },
+    {
+      "commitId": "80eaba3b1caa83e5b9e20baa90a10a8e0153da1b",
+      "shortId": "80eaba3",
+      "author": "anthonykim1",
+      "timestamp": "2026-02-20T21:12:33Z",
+      "message": "Bump xterm for kitty image updates (#296577)",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "package-lock.json",
+        "package.json",
+        "remote/package-lock.json",
+        "remote/package.json",
+        "remote/web/package-lock.json",
+        "remote/web/package.json"
+      ],
+      "primaryArea": "remote",
+      "before": "Terminal used older xterm.js dependency version.",
+      "added": "Kitty image protocol support via xterm bump.",
+      "impact": "Enhanced image rendering in integrated terminal.",
+      "keywords": [
+        "terminal",
+        "xterm",
+        "images"
+      ]
+    },
+    {
+      "commitId": "7189facb11ba983038aea8b9d6ef486f99aba23e",
+      "shortId": "7189fac",
+      "author": "meganrogge",
+      "timestamp": "2026-02-20T21:25:16Z",
+      "message": "fix #296613",
+      "branch": "merogge/navigate",
+      "eventType": "commit",
+      "filesChanged": [
+        "src/vs/workbench/contrib/chat/browser/actions/chatAccessibilityHelp.ts",
+        "src/vs/workbench/contrib/chat/browser/actions/chatActions.ts",
+        "src/vs/workbench/contrib/chat/browser/chat.ts",
+        "src/vs/workbench/contrib/chat/browser/widget/chatContentParts/chatQuestionCarouselPart.ts",
+        "src/vs/workbench/contrib/chat/browser/widget/chatWidget.ts",
+        "src/vs/workbench/contrib/chat/browser/widget/input/chatInputPart.ts",
+        "src/vs/workbench/contrib/chat/common/actions/chatContextKeys.ts"
+      ],
+      "primaryArea": "src",
+      "before": "Chat lacked keyboard navigation for question carousels.",
+      "added": "Previous question carousel navigation action implemented.",
+      "impact": "Improved keyboard accessibility in chat panel.",
+      "keywords": [
+        "chat",
+        "accessibility",
+        "keyboard"
+      ]
+    },
+    {
+      "commitId": "a3dddab13f73e6c2db391fb3538bbb6301938449",
+      "shortId": "a3dddab",
+      "author": "daviddossett",
+      "timestamp": "2026-02-20T21:26:19Z",
+      "message": "Fix welcome view sessions grid layout after item height change (#296600)",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "src/vs/workbench/contrib/welcomeAgentSessions/browser/media/agentSessionsWelcome.css"
+      ],
+      "primaryArea": "src",
+      "before": "Welcome view grid used incorrect row height.",
+      "added": "Adjusted CSS calculations for row heights.",
+      "impact": "Proper visual alignment in sessions grid.",
+      "keywords": [
+        "css",
+        "layout",
+        "welcome"
+      ]
+    },
+    {
+      "commitId": "8801c3fac3b7b8758d88b1813ed0e41b6dab27bf",
+      "shortId": "8801c3f",
+      "author": "pwang347",
+      "timestamp": "2026-02-20T21:26:42Z",
+      "message": "Use markdown icons for prompt markdown files (#296602)",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "extensions/theme-seti/icons/vs-seti-icon-theme.json"
+      ],
+      "primaryArea": "extensions",
+      "before": "Prompt files displayed generic file icons.",
+      "added": "Markdown icons for prompt and instruction files.",
+      "impact": "Visual distinction for chat prompt files.",
+      "keywords": [
+        "icons",
+        "prompt files",
+        "ui"
+      ]
+    },
+    {
+      "commitId": "00f83754d5b81d0cc0cf9233f1d8bd31ff53fd99",
+      "shortId": "00f8375",
+      "author": "meganrogge",
+      "timestamp": "2026-02-20T21:28:15Z",
+      "message": "ensure kbs show in tooltip",
+      "branch": "merogge/navigate",
+      "eventType": "commit",
+      "filesChanged": [
+        "src/vs/workbench/contrib/chat/browser/widget/chatContentParts/chatQuestionCarouselPart.ts"
+      ],
+      "primaryArea": "src",
+      "before": "Question carousel lacked keyboard shortcut hints.",
+      "added": "Keybinding display in hover tooltips.",
+      "impact": "Better shortcut discoverability for users.",
+      "keywords": [
+        "tooltips",
+        "keybindings",
+        "ux"
+      ]
+    },
+    {
+      "commitId": "b9fa96f5d86867c00adb0f4cfbc5416b57f143ac",
+      "shortId": "b9fa96f",
+      "author": "meganrogge",
+      "timestamp": "2026-02-20T21:29:38Z",
+      "message": "add aria labels",
+      "branch": "merogge/navigate",
+      "eventType": "commit",
+      "filesChanged": [
+        "src/vs/workbench/contrib/chat/browser/widget/chatContentParts/chatQuestionCarouselPart.ts"
+      ],
+      "primaryArea": "src",
+      "before": "Carousel buttons lacked screen reader labels.",
+      "added": "Descriptive aria labels for navigation buttons.",
+      "impact": "Improved screen reader compatibility.",
+      "keywords": [
+        "accessibility",
+        "aria labels",
+        "a11y"
+      ]
+    },
+    {
+      "commitId": "dac39ff893cdc8b64a6e5a210a666e62308763e4",
+      "shortId": "dac39ff",
+      "author": "meganrogge",
+      "timestamp": "2026-02-20T21:32:37Z",
+      "message": "don't play chat request sounds on `/agents` entered in chat input (#296624)",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "src/vs/workbench/contrib/chat/browser/widget/chatWidget.ts"
+      ],
+      "primaryArea": "src",
+      "before": "Agent commands triggered notification sounds.",
+      "added": "Silence for slash agents command input.",
+      "impact": "Quieter agent invocation experience.",
+      "keywords": [
+        "chat",
+        "sound",
+        "agents"
+      ]
+    },
+    {
+      "commitId": "6955692b89755803beb8585b2a25f6126f3f8549",
+      "shortId": "6955692",
+      "author": "Copilot",
+      "timestamp": "2026-02-20T22:00:09Z",
+      "message": "Raise keybinding precedence for chat question carousel and confirmation focus actions (#296616)",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "src/vs/workbench/contrib/chat/browser/actions/chatAccessibilityActions.ts",
+        "src/vs/workbench/contrib/chat/browser/actions/chatActions.ts"
+      ],
+      "primaryArea": "src",
+      "before": "Chat shortcuts had lower binding precedence.",
+      "added": "Higher priority weight for navigation keys.",
+      "impact": "Reliable keyboard access to chat.",
+      "keywords": [
+        "keybindings",
+        "priority",
+        "chat"
+      ]
+    },
+    {
+      "commitId": "16c3ba0d240d8533f9e56d59683bcf89cf7c1d63",
+      "shortId": "16c3ba0",
+      "author": "meganrogge",
+      "timestamp": "2026-02-20T22:07:05Z",
+      "message": "Merge branch 'main' into merogge/navigate",
+      "branch": "merogge/navigate",
+      "eventType": "commit",
+      "filesChanged": [
+        "extensions/theme-seti/icons/vs-seti-icon-theme.json",
+        "src/vs/workbench/contrib/chat/browser/actions/chatAccessibilityActions.ts",
+        "src/vs/workbench/contrib/chat/browser/actions/chatActions.ts",
+        "src/vs/workbench/contrib/chat/browser/widget/chatWidget.ts",
+        "src/vs/workbench/contrib/welcomeAgentSessions/browser/media/agentSessionsWelcome.css"
+      ],
+      "primaryArea": "src",
+      "before": "Feature branch was behind main branch.",
+      "added": "Synchronized main branch changes.",
+      "impact": "Updated branch with latest fixes.",
+      "keywords": [
+        "merge",
+        "sync",
+        "branch"
+      ]
+    },
+    {
+      "commitId": "e865db28d8d89d810a9db203450b02ac69a82577",
+      "shortId": "e865db2",
+      "author": "daviddossett",
+      "timestamp": "2026-02-20T22:38:57Z",
+      "message": "Model picker search input styling and separator improvements",
+      "branch": "ddossett/fantastic-silkworm",
+      "eventType": "commit",
+      "filesChanged": [
+        "src/vs/platform/actionWidget/browser/actionList.ts",
+        "src/vs/platform/actionWidget/browser/actionWidget.css",
+        "src/vs/workbench/contrib/chat/browser/widget/input/chatModelPicker.ts"
+      ],
+      "primaryArea": "src",
+      "before": "Model picker showed separators under search input.",
+      "added": "Minimal styling with separators removed.",
+      "impact": "Cleaner model selection dropdown interface.",
+      "keywords": [
+        "model picker",
+        "styling",
+        "ui"
+      ]
+    },
+    {
+      "commitId": "95a14d7284273c0481c098a355455e0b1693b95e",
+      "shortId": "95a14d7",
+      "author": "daviddossett",
+      "timestamp": "2026-02-20T22:42:40Z",
+      "message": "Fix welcome sessions list scrolling and archived session flicker (#296637)",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "src/vs/workbench/contrib/welcomeAgentSessions/browser/agentSessionsWelcome.ts"
+      ],
+      "primaryArea": "src",
+      "before": "Welcome sessions list flickered during filtering.",
+      "added": "Proper filter configuration to prevent flicker.",
+      "impact": "Smooth scrolling without visual jitter.",
+      "keywords": [
+        "welcome",
+        "scrolling",
+        "perf"
+      ]
+    },
+    {
+      "commitId": "57d10d1b4d53adc176e268c73056c6616d4490f6",
+      "shortId": "57d10d1",
+      "author": "daviddossett",
+      "timestamp": "2026-02-20T22:44:16Z",
+      "message": "Remove filterPosition option, always place filter on top",
+      "branch": "ddossett/fantastic-silkworm",
+      "eventType": "commit",
+      "filesChanged": [
+        "src/vs/platform/actionWidget/browser/actionList.ts",
+        "src/vs/workbench/contrib/chat/browser/widget/input/chatModelPicker.ts"
+      ],
+      "primaryArea": "src",
+      "before": "Filter input position was configurable variable.",
+      "added": "Fixed filter placement at top always.",
+      "impact": "Consistent search UI placement.",
+      "keywords": [
+        "filter",
+        "ui",
+        "consistency"
+      ]
+    },
+    {
+      "commitId": "e1a2d6fcfa86c9659a74c0b36f197599b7c1a2a8",
+      "shortId": "e1a2d6f",
+      "author": "daviddossett",
+      "timestamp": "2026-02-20T22:46:52Z",
+      "message": "Merge branch 'main' into ddossett/fantastic-silkworm",
+      "branch": "ddossett/fantastic-silkworm",
+      "eventType": "commit",
+      "filesChanged": [
+        ".github/copilot-instructions.md",
+        ".github/skills/agent-sessions-layout/SKILL.md",
+        ".github/skills/sessions/SKILL.md",
+        ".github/skills/update-screenshots/SKILL.md",
+        ".github/workflows/screenshot-test.yml",
+        ".gitignore",
+        "build/vite/package-lock.json",
+        "build/vite/package.json",
+        "build/vite/vite.config.ts",
+        "extensions/debug-auto-launch/.vscodeignore",
+        "extensions/debug-auto-launch/esbuild.mts",
+        "extensions/debug-server-ready/.vscodeignore",
+        "extensions/debug-server-ready/esbuild.mts",
+        "extensions/git-base/.vscodeignore",
+        "extensions/git-base/esbuild.browser.mts",
+        "extensions/git-base/esbuild.mts",
+        "extensions/git-base/tsconfig.browser.json",
+        "extensions/ipynb/.vscodeignore",
+        "extensions/ipynb/esbuild.browser.mts",
+        "extensions/ipynb/esbuild.mts",
+        "extensions/ipynb/extension-browser.webpack.config.js",
+        "extensions/ipynb/extension.webpack.config.js",
+        "extensions/ipynb/tsconfig.browser.json",
+        "extensions/media-preview/package.json",
+        "extensions/mermaid-chat-features/package.json",
+        "extensions/microsoft-authentication/.vscodeignore",
+        "extensions/microsoft-authentication/esbuild.mts",
+        "extensions/microsoft-authentication/extension.webpack.config.js",
+        "extensions/theme-seti/icons/vs-seti-icon-theme.json",
+        "extensions/vscode-test-resolver/.vscodeignore",
+        "extensions/vscode-test-resolver/esbuild.browser.mts",
+        "extensions/vscode-test-resolver/esbuild.mts",
+        "extensions/vscode-test-resolver/extension-browser.webpack.config.js",
+        "extensions/vscode-test-resolver/tsconfig.browser.json",
+        "package-lock.json",
+        "package.json",
+        "remote/package-lock.json",
+        "remote/package.json",
+        "remote/web/package-lock.json",
+        "remote/web/package.json",
+        "src/vs/editor/common/viewModel/minimapTokensColorTracker.ts",
+        "src/vs/sessions/LAYOUT.md",
+        "src/vs/sessions/README.md",
+        "src/vs/sessions/browser/layoutActions.ts",
+        "src/vs/sessions/browser/parts/editorModal.ts",
+        "src/vs/sessions/browser/style.css",
+        "src/vs/sessions/browser/workbench.ts",
+        "src/vs/sessions/contrib/changesView/browser/changesView.ts",
+        "src/vs/sessions/contrib/chat/browser/branchPicker.ts",
+        "src/vs/sessions/contrib/chat/browser/chat.contribution.ts",
+        "src/vs/sessions/contrib/chat/browser/folderPicker.ts",
+        "src/vs/sessions/contrib/chat/browser/media/chatWelcomePart.css",
+        "src/vs/sessions/contrib/chat/browser/newChatViewPane.ts",
+        "src/vs/sessions/contrib/chat/browser/newSession.ts",
+        "src/vs/sessions/contrib/chat/browser/runScriptAction.ts",
+        "src/vs/sessions/contrib/chat/browser/sessionTargetPicker.ts",
+        "src/vs/sessions/contrib/configuration/browser/configuration.contribution.ts",
+        "src/vs/sessions/contrib/sessions/browser/sessionsManagementService.ts",
+        "src/vs/workbench/api/browser/mainThreadGitExtensionService.ts",
+        "src/vs/workbench/api/common/extHost.protocol.ts",
+        "src/vs/workbench/api/common/extHostGitExtensionService.ts",
+        "src/vs/workbench/browser/parts/editor/editorCommands.ts",
+        "src/vs/workbench/browser/workbench.contribution.ts",
+        "src/vs/workbench/contrib/browserView/electron-browser/media/browser.css",
+        "src/vs/workbench/contrib/chat/browser/actions/chatAccessibilityActions.ts",
+        "src/vs/workbench/contrib/chat/browser/actions/chatActions.ts",
+        "src/vs/workbench/contrib/chat/browser/promptSyntax/promptToolsCodeLensProvider.ts",
+        "src/vs/workbench/contrib/chat/browser/widget/chatWidget.ts",
+        "src/vs/workbench/contrib/chat/browser/widget/input/chatInputPart.ts",
+        "src/vs/workbench/contrib/chat/browser/widget/input/chatModelPicker.ts",
+        "src/vs/workbench/contrib/chat/common/model/chatModelStore.ts",
+        "src/vs/workbench/contrib/chat/test/browser/promptSyntax/promptFileRewriter.test.ts",
+        "src/vs/workbench/contrib/chat/test/browser/widget/input/chatModelPicker.test.ts",
+        "src/vs/workbench/contrib/git/browser/gitService.ts",
+        "src/vs/workbench/contrib/git/common/gitService.ts",
+        "src/vs/workbench/contrib/welcomeAgentSessions/browser/agentSessionsWelcome.ts",
+        "src/vs/workbench/contrib/welcomeAgentSessions/browser/media/agentSessionsWelcome.css",
+        "src/vs/workbench/services/accounts/browser/defaultAccount.ts",
+        "src/vs/workbench/services/editor/common/editorGroupFinder.ts",
+        "src/vs/workbench/services/editor/test/browser/modalEditorGroup.test.ts",
+        "src/vs/workbench/services/preferences/browser/preferencesService.ts",
+        "src/vs/workbench/test/browser/componentFixtures/aiStats.fixture.ts",
+        "src/vs/workbench/test/browser/componentFixtures/baseUI.fixture.ts",
+        "src/vs/workbench/test/browser/componentFixtures/codeEditor.fixture.ts",
+        "src/vs/workbench/test/browser/componentFixtures/fixtureUtils.ts",
+        "src/vs/workbench/test/browser/componentFixtures/inlineCompletions.fixture.ts",
+        "test/componentFixtures/.screenshots/baseline/aiStats/AiStatsHover/Dark.png",
+        "test/componentFixtures/.screenshots/baseline/aiStats/AiStatsHover/Light.png",
+        "test/componentFixtures/.screenshots/baseline/aiStats/AiStatsHoverNoData/Dark.png",
+        "test/componentFixtures/.screenshots/baseline/aiStats/AiStatsHoverNoData/Light.png",
+        "test/componentFixtures/.screenshots/baseline/baseUI/ActionBar/Dark.png",
+        "test/componentFixtures/.screenshots/baseline/baseUI/ActionBar/Light.png",
+        "test/componentFixtures/.screenshots/baseline/baseUI/ButtonBar/Dark.png",
+        "test/componentFixtures/.screenshots/baseline/baseUI/ButtonBar/Light.png",
+        "test/componentFixtures/.screenshots/baseline/baseUI/Buttons/Dark.png",
+        "test/componentFixtures/.screenshots/baseline/baseUI/Buttons/Light.png",
+        "test/componentFixtures/.screenshots/baseline/baseUI/CountBadges/Dark.png",
+        "test/componentFixtures/.screenshots/baseline/baseUI/CountBadges/Light.png",
+        "test/componentFixtures/.screenshots/baseline/baseUI/HighlightedLabels/Dark.png",
+        "test/componentFixtures/.screenshots/baseline/baseUI/HighlightedLabels/Light.png",
+        "test/componentFixtures/.screenshots/baseline/baseUI/InputBoxes/Dark.png",
+        "test/componentFixtures/.screenshots/baseline/baseUI/InputBoxes/Light.png",
+        "test/componentFixtures/.screenshots/baseline/baseUI/ProgressBars/Dark.png",
+        "test/componentFixtures/.screenshots/baseline/baseUI/ProgressBars/Light.png",
+        "test/componentFixtures/.screenshots/baseline/baseUI/Toggles/Dark.png",
+        "test/componentFixtures/.screenshots/baseline/baseUI/Toggles/Light.png",
+        "test/componentFixtures/.screenshots/baseline/codeEditor/CodeEditor/Dark.png",
+        "test/componentFixtures/.screenshots/baseline/codeEditor/CodeEditor/Light.png",
+        "test/componentFixtures/.screenshots/baseline/inlineCompletions/InsertionView/Dark.png",
+        "test/componentFixtures/.screenshots/baseline/inlineCompletions/InsertionView/Light.png",
+        "test/componentFixtures/.screenshots/baseline/inlineCompletions/SideBySideView/Dark.png",
+        "test/componentFixtures/.screenshots/baseline/inlineCompletions/SideBySideView/Light.png",
+        "test/componentFixtures/.screenshots/baseline/inlineCompletions/WordReplacementView/Dark.png",
+        "test/componentFixtures/.screenshots/baseline/inlineCompletions/WordReplacementView/Light.png",
+        "test/componentFixtures/component-explorer-diff.json",
+        "test/componentFixtures/component-explorer.json"
+      ],
+      "primaryArea": "src",
+      "before": "GitHub workflow skills documentation was outdated.",
+      "added": "Updated Copilot instructions and skill definitions.",
+      "impact": "Current contributor guidelines available.",
+      "keywords": [
+        "docs",
+        "merge",
+        "skills"
+      ]
+    },
+    {
+      "commitId": "9fb58f6d200e87a5d79ccba5d5b2f8d7e2669db8",
+      "shortId": "9fb58f6",
+      "author": "pwang347",
+      "timestamp": "2026-02-20T22:53:58Z",
+      "message": "fix",
+      "branch": "pawang/fixClaudeAgents",
+      "eventType": "commit",
+      "filesChanged": [
+        "src/vs/workbench/contrib/chat/browser/widget/input/modePickerActionItem.ts"
+      ],
+      "primaryArea": "src",
+      "before": "Mode picker used complex filtering logic.",
+      "added": "Simplified agent mode selection handling.",
+      "impact": "Reliable Claude agent mode switching.",
+      "keywords": [
+        "agents",
+        "mode picker",
+        "fix"
+      ]
+    },
+    {
+      "commitId": "53f5c0a4dd4fc397dc60dfa036efcf258d91e632",
+      "shortId": "53f5c0a",
+      "author": "daviddossett",
+      "timestamp": "2026-02-20T22:54:31Z",
+      "message": "Remove filterInputClassName option and font-size override",
+      "branch": "ddossett/fantastic-silkworm",
+      "eventType": "commit",
+      "filesChanged": [
+        "src/vs/platform/actionWidget/browser/actionList.ts",
+        "src/vs/platform/actionWidget/browser/actionWidget.css",
+        "src/vs/workbench/contrib/chat/browser/widget/input/chatModelPicker.ts"
+      ],
+      "primaryArea": "src",
+      "before": "Filter input used custom CSS classes.",
+      "added": "Standardized filter input styling defaults.",
+      "impact": "Consistent input appearance across widgets.",
+      "keywords": [
+        "css",
+        "filter input",
+        "cleanup"
+      ]
+    },
+    {
+      "commitId": "4f8f63604ec515148fb1ad9aaf7076ed96c582f9",
+      "shortId": "4f8f636",
+      "author": "meganrogge",
+      "timestamp": "2026-02-20T23:00:29Z",
+      "message": "ensure chat tip actions trigger chat setup (#296536)",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "src/vs/workbench/contrib/chat/browser/widget/chatContentParts/chatTipContentPart.ts"
+      ],
+      "primaryArea": "src",
+      "before": "Chat tip elements were non-interactive.",
+      "added": "Click handlers trigger chat setup flow.",
+      "impact": "Tips now launch onboarding dialog.",
+      "keywords": [
+        "chat",
+        "onboarding",
+        "ux"
+      ]
+    },
+    {
+      "commitId": "b21a3cc7a373843d318c280bfa4c690099d51abe",
+      "shortId": "b21a3cc",
+      "author": "lszomoru",
+      "timestamp": "2026-02-20T23:08:10Z",
+      "message": "GitService - add barrier for setting the delegate (#296631)",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "src/vs/workbench/contrib/git/browser/gitService.ts"
+      ],
+      "primaryArea": "src",
+      "before": "Git service initialized without synchronization barrier.",
+      "added": "Barrier pattern for delegate initialization.",
+      "impact": "Reliable git service startup sequence.",
+      "keywords": [
+        "git",
+        "initialization",
+        "sync"
+      ]
+    },
+    {
+      "commitId": "797e1c84ae009ecd9ea1a9299227c2e8989e0be5",
+      "shortId": "797e1c8",
+      "author": "meganrogge",
+      "timestamp": "2026-02-20T23:13:44Z",
+      "message": "add kb to navigate to next/previous question  (#296633)",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "src/vs/workbench/contrib/chat/browser/actions/chatAccessibilityHelp.ts",
+        "src/vs/workbench/contrib/chat/browser/actions/chatActions.ts",
+        "src/vs/workbench/contrib/chat/browser/chat.ts",
+        "src/vs/workbench/contrib/chat/browser/widget/chatContentParts/chatQuestionCarouselPart.ts",
+        "src/vs/workbench/contrib/chat/browser/widget/chatWidget.ts",
+        "src/vs/workbench/contrib/chat/browser/widget/input/chatInputPart.ts",
+        "src/vs/workbench/contrib/chat/common/actions/chatContextKeys.ts"
+      ],
+      "primaryArea": "src",
+      "before": "Chat question carousels lacked keyboard navigation between items.",
+      "added": "Keyboard shortcuts now navigate to previous and next carousel questions.",
+      "impact": "Enables accessible, mouse-free navigation between suggested questions.",
+      "keywords": [
+        "chat",
+        "accessibility",
+        "keyboard-navigation"
+      ]
+    }
+  ]
+}

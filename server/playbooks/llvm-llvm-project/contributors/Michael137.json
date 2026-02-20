@@ -1,0 +1,42 @@
+{
+  "login": "Michael137",
+  "avatarUrl": "https://avatars.githubusercontent.com/u/14071464?v=4",
+  "repoFullName": "llvm/llvm-project",
+  "lastUpdated": "2026-02-20T23:11:02.181Z",
+  "totalCommits": 1,
+  "primaryAreas": [
+    "llvm"
+  ],
+  "contributorSummary": "",
+  "completionSignals": {
+    "velocityTrend": "unknown",
+    "commitSentiment": "neutral",
+    "churnSignal": "none",
+    "lastUpdated": "2026-02-20T23:11:02.181Z"
+  },
+  "commits": [
+    {
+      "commitId": "763fbee264fe85182c4aefdc37c3a299c4dbcf98",
+      "shortId": "763fbee",
+      "author": "Michael137",
+      "timestamp": "2026-02-20T19:07:25Z",
+      "message": "[CI][lldb] Add a github workflow that runs pylint on LLDB API test changes (#182003)",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        ".github/workflows/lldb-pylint-action.yml",
+        "llvm/utils/git/requirements_pylint.txt",
+        "llvm/utils/git/requirements_pylint.txt.in"
+      ],
+      "primaryArea": "llvm",
+      "before": "No automated Python linting for LLDB tests",
+      "added": "GitHub workflow runs pylint on LLDB API tests",
+      "impact": "LLDB Python tests now automatically linted",
+      "keywords": [
+        "CI",
+        "pylint",
+        "LLDB"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,182 @@
+{
+  "login": "meganrogge",
+  "avatarUrl": "https://avatars.githubusercontent.com/u/29464607?v=4",
+  "repoFullName": "microsoft/vscode",
+  "lastUpdated": "2026-02-20T23:14:26.543Z",
+  "totalCommits": 7,
+  "primaryAreas": [
+    "src"
+  ],
+  "contributorSummary": "Meganrogge leads accessibility for the AI chat interface. She shipped keyboard navigation for question carousels, screen reader labels for navigation buttons, and visible keybinding hints in tooltips. Her steady momentum focuses on enabling complete mouse-free operation and assistive technology support.",
+  "completionSignals": {
+    "velocityTrend": "unknown",
+    "commitSentiment": "neutral",
+    "churnSignal": "none",
+    "lastUpdated": "2026-02-20T23:13:49.900Z"
+  },
+  "commits": [
+    {
+      "commitId": "7189facb11ba983038aea8b9d6ef486f99aba23e",
+      "shortId": "7189fac",
+      "author": "meganrogge",
+      "timestamp": "2026-02-20T21:25:16Z",
+      "message": "fix #296613",
+      "branch": "merogge/navigate",
+      "eventType": "commit",
+      "filesChanged": [
+        "src/vs/workbench/contrib/chat/browser/actions/chatAccessibilityHelp.ts",
+        "src/vs/workbench/contrib/chat/browser/actions/chatActions.ts",
+        "src/vs/workbench/contrib/chat/browser/chat.ts",
+        "src/vs/workbench/contrib/chat/browser/widget/chatContentParts/chatQuestionCarouselPart.ts",
+        "src/vs/workbench/contrib/chat/browser/widget/chatWidget.ts",
+        "src/vs/workbench/contrib/chat/browser/widget/input/chatInputPart.ts",
+        "src/vs/workbench/contrib/chat/common/actions/chatContextKeys.ts"
+      ],
+      "primaryArea": "src",
+      "before": "Chat lacked keyboard navigation for question carousels.",
+      "added": "Previous question carousel navigation action implemented.",
+      "impact": "Improved keyboard accessibility in chat panel.",
+      "keywords": [
+        "chat",
+        "accessibility",
+        "keyboard"
+      ]
+    },
+    {
+      "commitId": "00f83754d5b81d0cc0cf9233f1d8bd31ff53fd99",
+      "shortId": "00f8375",
+      "author": "meganrogge",
+      "timestamp": "2026-02-20T21:28:15Z",
+      "message": "ensure kbs show in tooltip",
+      "branch": "merogge/navigate",
+      "eventType": "commit",
+      "filesChanged": [
+        "src/vs/workbench/contrib/chat/browser/widget/chatContentParts/chatQuestionCarouselPart.ts"
+      ],
+      "primaryArea": "src",
+      "before": "Question carousel lacked keyboard shortcut hints.",
+      "added": "Keybinding display in hover tooltips.",
+      "impact": "Better shortcut discoverability for users.",
+      "keywords": [
+        "tooltips",
+        "keybindings",
+        "ux"
+      ]
+    },
+    {
+      "commitId": "b9fa96f5d86867c00adb0f4cfbc5416b57f143ac",
+      "shortId": "b9fa96f",
+      "author": "meganrogge",
+      "timestamp": "2026-02-20T21:29:38Z",
+      "message": "add aria labels",
+      "branch": "merogge/navigate",
+      "eventType": "commit",
+      "filesChanged": [
+        "src/vs/workbench/contrib/chat/browser/widget/chatContentParts/chatQuestionCarouselPart.ts"
+      ],
+      "primaryArea": "src",
+      "before": "Carousel buttons lacked screen reader labels.",
+      "added": "Descriptive aria labels for navigation buttons.",
+      "impact": "Improved screen reader compatibility.",
+      "keywords": [
+        "accessibility",
+        "aria labels",
+        "a11y"
+      ]
+    },
+    {
+      "commitId": "dac39ff893cdc8b64a6e5a210a666e62308763e4",
+      "shortId": "dac39ff",
+      "author": "meganrogge",
+      "timestamp": "2026-02-20T21:32:37Z",
+      "message": "don't play chat request sounds on `/agents` entered in chat input (#296624)",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "src/vs/workbench/contrib/chat/browser/widget/chatWidget.ts"
+      ],
+      "primaryArea": "src",
+      "before": "Agent commands triggered notification sounds.",
+      "added": "Silence for slash agents command input.",
+      "impact": "Quieter agent invocation experience.",
+      "keywords": [
+        "chat",
+        "sound",
+        "agents"
+      ]
+    },
+    {
+      "commitId": "16c3ba0d240d8533f9e56d59683bcf89cf7c1d63",
+      "shortId": "16c3ba0",
+      "author": "meganrogge",
+      "timestamp": "2026-02-20T22:07:05Z",
+      "message": "Merge branch 'main' into merogge/navigate",
+      "branch": "merogge/navigate",
+      "eventType": "commit",
+      "filesChanged": [
+        "extensions/theme-seti/icons/vs-seti-icon-theme.json",
+        "src/vs/workbench/contrib/chat/browser/actions/chatAccessibilityActions.ts",
+        "src/vs/workbench/contrib/chat/browser/actions/chatActions.ts",
+        "src/vs/workbench/contrib/chat/browser/widget/chatWidget.ts",
+        "src/vs/workbench/contrib/welcomeAgentSessions/browser/media/agentSessionsWelcome.css"
+      ],
+      "primaryArea": "src",
+      "before": "Feature branch was behind main branch.",
+      "added": "Synchronized main branch changes.",
+      "impact": "Updated branch with latest fixes.",
+      "keywords": [
+        "merge",
+        "sync",
+        "branch"
+      ]
+    },
+    {
+      "commitId": "4f8f63604ec515148fb1ad9aaf7076ed96c582f9",
+      "shortId": "4f8f636",
+      "author": "meganrogge",
+      "timestamp": "2026-02-20T23:00:29Z",
+      "message": "ensure chat tip actions trigger chat setup (#296536)",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "src/vs/workbench/contrib/chat/browser/widget/chatContentParts/chatTipContentPart.ts"
+      ],
+      "primaryArea": "src",
+      "before": "Chat tip elements were non-interactive.",
+      "added": "Click handlers trigger chat setup flow.",
+      "impact": "Tips now launch onboarding dialog.",
+      "keywords": [
+        "chat",
+        "onboarding",
+        "ux"
+      ]
+    },
+    {
+      "commitId": "797e1c84ae009ecd9ea1a9299227c2e8989e0be5",
+      "shortId": "797e1c8",
+      "author": "meganrogge",
+      "timestamp": "2026-02-20T23:13:44Z",
+      "message": "add kb to navigate to next/previous question  (#296633)",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "src/vs/workbench/contrib/chat/browser/actions/chatAccessibilityHelp.ts",
+        "src/vs/workbench/contrib/chat/browser/actions/chatActions.ts",
+        "src/vs/workbench/contrib/chat/browser/chat.ts",
+        "src/vs/workbench/contrib/chat/browser/widget/chatContentParts/chatQuestionCarouselPart.ts",
+        "src/vs/workbench/contrib/chat/browser/widget/chatWidget.ts",
+        "src/vs/workbench/contrib/chat/browser/widget/input/chatInputPart.ts",
+        "src/vs/workbench/contrib/chat/common/actions/chatContextKeys.ts"
+      ],
+      "primaryArea": "src",
+      "before": "Chat question carousels lacked keyboard navigation between items.",
+      "added": "Keyboard shortcuts now navigate to previous and next carousel questions.",
+      "impact": "Enables accessible, mouse-free navigation between suggested questions.",
+      "keywords": [
+        "chat",
+        "accessibility",
+        "keyboard-navigation"
+      ]
+    }
+  ]
+}

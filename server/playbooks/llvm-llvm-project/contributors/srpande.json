@@ -1,0 +1,39 @@
+{
+  "login": "srpande",
+  "avatarUrl": null,
+  "repoFullName": "llvm/llvm-project",
+  "lastUpdated": "2026-02-20T22:53:45.203Z",
+  "totalCommits": 1,
+  "primaryAreas": [
+    "llvm"
+  ],
+  "contributorSummary": "",
+  "completionSignals": {
+    "velocityTrend": "unknown",
+    "commitSentiment": "neutral",
+    "churnSignal": "none",
+    "lastUpdated": "2026-02-20T22:53:45.203Z"
+  },
+  "commits": [
+    {
+      "commitId": "67fcdc9016690688b7de8286efec4c18ea89d29d",
+      "shortId": "67fcdc9",
+      "author": "srpande",
+      "timestamp": "2026-02-20T20:52:17Z",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "llvm/lib/Target/AMDGPU/GCNSubtarget.cpp",
+        "llvm/lib/Target/AMDGPU/SIFrameLowering.cpp",
+        "llvm/lib/Target/AMDGPU/SIRegisterInfo.cpp"
+      ],
+      "primaryArea": "llvm",
+      "before": "State unknown.",
+      "added": "[AMDGPU] Efficient way to get NumArchVGPRs. (#182537)",
+      "impact": "Impact could not be determined.",
+      "keywords": [
+        "commit"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "login": "arsenm",
+  "avatarUrl": "https://avatars.githubusercontent.com/u/138339?v=4",
+  "repoFullName": "llvm/llvm-project",
+  "lastUpdated": "2026-02-20T23:11:02.203Z",
+  "totalCommits": 1,
+  "primaryAreas": [
+    "llvm"
+  ],
+  "contributorSummary": "",
+  "completionSignals": {
+    "velocityTrend": "unknown",
+    "commitSentiment": "neutral",
+    "churnSignal": "none",
+    "lastUpdated": "2026-02-20T23:11:02.203Z"
+  },
+  "commits": [
+    {
+      "commitId": "410c64eebfa55eed36c9a44531ca6c1938170a0c",
+      "shortId": "410c64e",
+      "author": "arsenm",
+      "timestamp": "2026-02-20T23:07:19Z",
+      "message": "AMDGPU: Try to fix leak in AMDGPULibFunc (#182583)",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "llvm/lib/Target/AMDGPU/AMDGPULibFunc.cpp"
+      ],
+      "primaryArea": "llvm",
+      "before": "AMDGPULibFunc leaked memory on copy assignment",
+      "added": "Destructor call prevents memory leak in assignment",
+      "impact": "AMDGPU library functions no longer leak memory",
+      "keywords": [
+        "AMDGPU",
+        "memory leak",
+        "AMDGPULibFunc"
+      ]
+    }
+  ]
+}

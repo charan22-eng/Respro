@@ -1,0 +1,39 @@
+{
+  "login": "kees",
+  "avatarUrl": null,
+  "repoFullName": "llvm/llvm-project",
+  "lastUpdated": "2026-02-20T22:53:45.208Z",
+  "totalCommits": 1,
+  "primaryAreas": [
+    "clang"
+  ],
+  "contributorSummary": "",
+  "completionSignals": {
+    "velocityTrend": "unknown",
+    "commitSentiment": "neutral",
+    "churnSignal": "none",
+    "lastUpdated": "2026-02-20T22:53:45.208Z"
+  },
+  "commits": [
+    {
+      "commitId": "09a3d830a888f15abca0ca51f68786e5517cd61f",
+      "shortId": "09a3d83",
+      "author": "kees",
+      "timestamp": "2026-02-20T21:34:17Z",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "clang/lib/CodeGen/CGExpr.cpp",
+        "clang/test/CodeGen/attr-counted-by-pr88931.c",
+        "clang/test/CodeGen/builtin-counted-by-ref.c"
+      ],
+      "primaryArea": "clang",
+      "before": "State unknown.",
+      "added": "[Clang][CodeGen] Fix __builtin_counted_by_ref for nested str",
+      "impact": "Impact could not be determined.",
+      "keywords": [
+        "commit"
+      ]
+    }
+  ]
+}

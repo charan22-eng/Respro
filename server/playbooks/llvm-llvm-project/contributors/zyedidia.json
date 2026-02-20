@@ -1,0 +1,40 @@
+{
+  "login": "zyedidia",
+  "avatarUrl": null,
+  "repoFullName": "llvm/llvm-project",
+  "lastUpdated": "2026-02-20T23:11:02.202Z",
+  "totalCommits": 1,
+  "primaryAreas": [
+    "llvm"
+  ],
+  "contributorSummary": "",
+  "completionSignals": {
+    "velocityTrend": "unknown",
+    "commitSentiment": "neutral",
+    "churnSignal": "none",
+    "lastUpdated": "2026-02-20T23:11:02.202Z"
+  },
+  "commits": [
+    {
+      "commitId": "580a3bb8ea1208873671b6e78986c5e253a64152",
+      "shortId": "580a3bb",
+      "author": "zyedidia",
+      "timestamp": "2026-02-20T22:56:41Z",
+      "message": "[NFC][MC] Add LLVM_ABI annotations to createAsmParser functions (#182393)",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "llvm/include/llvm/MC/MCParser/MCAsmParserExtension.h"
+      ],
+      "primaryArea": "llvm",
+      "before": "Asm parser factory functions lacked visibility annotations",
+      "added": "LLVM_ABI annotations to createAsmParser functions",
+      "impact": "Asm parser symbols properly exported for shared libs",
+      "keywords": [
+        "LLVM_ABI",
+        "MCAsmParser",
+        "visibility"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "login": "mjbvz",
+  "avatarUrl": "https://avatars.githubusercontent.com/u/12821956?v=4",
+  "repoFullName": "microsoft/vscode",
+  "lastUpdated": "2026-02-20T23:13:49.886Z",
+  "totalCommits": 1,
+  "primaryAreas": [
+    "src"
+  ],
+  "contributorSummary": "",
+  "completionSignals": {
+    "velocityTrend": "unknown",
+    "commitSentiment": "neutral",
+    "churnSignal": "none",
+    "lastUpdated": "2026-02-20T23:13:49.886Z"
+  },
+  "commits": [
+    {
+      "commitId": "bf4419c4c3459988c8d25d11f7fc6e9c4bc7cb2a",
+      "shortId": "bf4419c",
+      "author": "mjbvz",
+      "timestamp": "2026-02-20T20:35:48Z",
+      "message": "Merge pull request #296595 from mjbvz/dev/mjbvz/administrative-gecko",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "src/vs/workbench/contrib/chat/common/model/chatModelStore.ts"
+      ],
+      "primaryArea": "src",
+      "before": "Chat model store imported different disposable utilities.",
+      "added": "Updated disposable import pattern in storage module.",
+      "impact": "Improved resource cleanup in chat sessions.",
+      "keywords": [
+        "chat",
+        "disposable",
+        "refactor"
+      ]
+    }
+  ]
+}

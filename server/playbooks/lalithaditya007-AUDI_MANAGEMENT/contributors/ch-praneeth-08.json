@@ -1,0 +1,515 @@
+{
+  "login": "ch-praneeth-08",
+  "avatarUrl": "https://avatars.githubusercontent.com/u/196779126?v=4",
+  "repoFullName": "Lalithaditya007/AUDI_MANAGEMENT",
+  "lastUpdated": "2026-02-20T22:58:18.833Z",
+  "totalCommits": 20,
+  "primaryAreas": [
+    "client",
+    "root",
+    "server"
+  ],
+  "contributorSummary": "",
+  "completionSignals": {
+    "velocityTrend": "unknown",
+    "commitSentiment": "neutral",
+    "churnSignal": "none",
+    "lastUpdated": "2026-02-20T22:48:33.060Z"
+  },
+  "commits": [
+    {
+      "commitId": "a9ef0be1a72e40ae1b42758863a489265461c83f",
+      "shortId": "a9ef0be",
+      "author": "ch-praneeth-08",
+      "timestamp": "2025-08-17T12:16:12Z",
+      "branch": "aditya",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/App.jsx",
+        "client/src/admin/AdminDashboard.jsx",
+        "client/src/admin/ManageUsers.jsx"
+      ],
+      "primaryArea": "client",
+      "before": "No ManageUsers import; dashboard had extra button",
+      "added": "User management route and default profile image",
+      "impact": "User management feature integrated",
+      "keywords": [
+        "users",
+        "admin",
+        "merge"
+      ]
+    },
+    {
+      "commitId": "af3e9ab6cd9442ee0b6bc6c59cf6854250de8397",
+      "shortId": "af3e9ab",
+      "author": "ch-praneeth-08",
+      "timestamp": "2025-08-17T12:17:17Z",
+      "branch": "aditya",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/admin/AdminProfile.jsx",
+        "client/src/components/Navbar.jsx",
+        "client/src/components/profile/ProfileCard.jsx",
+        "client/src/pages/Homepage.jsx",
+        "server/uploads/profiles/profilePicture-1755428300440-446856553.jpg"
+      ],
+      "primaryArea": "client",
+      "before": "Plain white background; basic navbar structure",
+      "added": "Gradient backgrounds and profile image handling",
+      "impact": "Enhanced visual design and profile display",
+      "keywords": [
+        "homepage",
+        "styling",
+        "profile"
+      ]
+    },
+    {
+      "commitId": "243fac8e68dbdd594b3de80605860ddd86a10f4b",
+      "shortId": "243fac8",
+      "author": "ch-praneeth-08",
+      "timestamp": "2025-08-18T12:44:09Z",
+      "branch": "aditya",
+      "eventType": "commit",
+      "filesChanged": [
+        "FEEDBACK_REPORT_ADMIN_NOTIFICATIONS.md"
+      ],
+      "primaryArea": "root",
+      "before": "No documentation for admin notifications existed",
+      "added": "Documentation for feedback and report email notifications",
+      "impact": "Feature documentation added for admin alerts",
+      "keywords": [
+        "documentation",
+        "notifications",
+        "email"
+      ]
+    },
+    {
+      "commitId": "8639f7b00de6b3c0d36082d74ccf913de8ac3f64",
+      "shortId": "8639f7b",
+      "author": "ch-praneeth-08",
+      "timestamp": "2025-08-18T13:14:24Z",
+      "branch": "aditya",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/App.jsx",
+        "client/src/admin/AuditoriumPreviewModal.jsx",
+        "client/src/admin/EditAuditorium.jsx",
+        "client/src/admin/ManageAuditoriums.jsx",
+        "server/controllers/auditoriumController.js"
+      ],
+      "primaryArea": "client",
+      "before": "Amenities stored as string; carousel displayed images",
+      "added": "Array-based amenities input; removed carousel dependency",
+      "impact": "Improved amenities management and UI simplification",
+      "keywords": [
+        "amenities",
+        "carousel",
+        "auditorium"
+      ]
+    },
+    {
+      "commitId": "a9ef0be1a72e40ae1b42758863a489265461c83f",
+      "shortId": "a9ef0be",
+      "author": "ch-praneeth-08",
+      "timestamp": "2025-08-17T12:16:12Z",
+      "branch": "aditya",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/App.jsx",
+        "client/src/admin/AdminDashboard.jsx",
+        "client/src/admin/ManageUsers.jsx"
+      ],
+      "primaryArea": "client",
+      "before": "ManageUsers not imported; dashboard had extra button; no default profile.",
+      "added": "ManageUsers route import; removed create button; added default avatar constant.",
+      "impact": "User management accessible; streamlined admin actions.",
+      "keywords": [
+        "users",
+        "routing",
+        "admin"
+      ]
+    },
+    {
+      "commitId": "af3e9ab6cd9442ee0b6bc6c59cf6854250de8397",
+      "shortId": "af3e9ab",
+      "author": "ch-praneeth-08",
+      "timestamp": "2025-08-17T12:17:17Z",
+      "branch": "aditya",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/admin/AdminProfile.jsx",
+        "client/src/components/Navbar.jsx",
+        "client/src/components/profile/ProfileCard.jsx",
+        "client/src/pages/Homepage.jsx",
+        "server/uploads/profiles/profilePicture-1755428300440-446856553.jpg"
+      ],
+      "primaryArea": "client",
+      "before": "Admin profile had plain white background; navbar lacked profile image logic.",
+      "added": "Gradient background to admin profile; profile image fetch effect.",
+      "impact": "Enhanced visual design; dynamic profile images.",
+      "keywords": [
+        "styling",
+        "profile",
+        "homepage"
+      ]
+    },
+    {
+      "commitId": "243fac8e68dbdd594b3de80605860ddd86a10f4b",
+      "shortId": "243fac8",
+      "author": "ch-praneeth-08",
+      "timestamp": "2025-08-18T12:44:09Z",
+      "branch": "aditya",
+      "eventType": "commit",
+      "filesChanged": [
+        "FEEDBACK_REPORT_ADMIN_NOTIFICATIONS.md"
+      ],
+      "primaryArea": "root",
+      "before": "No documentation existed for feedback email notifications.",
+      "added": "172-line markdown specification for admin notification system.",
+      "impact": "Documents email notification architecture for feedback system.",
+      "keywords": [
+        "documentation",
+        "notifications",
+        "email"
+      ]
+    },
+    {
+      "commitId": "8639f7b00de6b3c0d36082d74ccf913de8ac3f64",
+      "shortId": "8639f7b",
+      "author": "ch-praneeth-08",
+      "timestamp": "2025-08-18T13:14:24Z",
+      "branch": "aditya",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/App.jsx",
+        "client/src/admin/AuditoriumPreviewModal.jsx",
+        "client/src/admin/EditAuditorium.jsx",
+        "client/src/admin/ManageAuditoriums.jsx",
+        "server/controllers/auditoriumController.js"
+      ],
+      "primaryArea": "client",
+      "before": "Amenities stored as single string; image carousel used react-slick.",
+      "added": "Amenities as array format; removed carousel dependencies.",
+      "impact": "Supports multiple amenities; simplifies image display.",
+      "keywords": [
+        "amenities",
+        "carousel",
+        "refactor"
+      ]
+    },
+    {
+      "commitId": "f6d2ac4246c9dfcbbea7b81648554109fb38164b",
+      "shortId": "f6d2ac4",
+      "author": "ch-praneeth-08",
+      "timestamp": "2025-08-17T07:53:13Z",
+      "branch": "aditya",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/vite.config.js"
+      ],
+      "primaryArea": "client",
+      "before": "Vite configuration file had inconsistent indentation formatting.",
+      "added": "Fixed whitespace and indentation in configuration file.",
+      "impact": "Code style improved with no functional changes made.",
+      "keywords": [
+        "vite",
+        "formatting",
+        "config"
+      ]
+    },
+    {
+      "commitId": "4475da99faa4ed6ec2f41890b19187df1e49d273",
+      "shortId": "4475da9",
+      "author": "ch-praneeth-08",
+      "timestamp": "2025-08-17T07:53:19Z",
+      "branch": "aditya",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/App.jsx",
+        "client/src/admin/AdminDashboard.jsx",
+        "client/src/admin/AdminProfile.jsx",
+        "client/src/admin/AuditoriumPreviewModal.jsx",
+        "client/src/admin/EditAuditorium.jsx",
+        "client/src/admin/ManageAuditoriums.jsx",
+        "client/src/components/AuthDebug.jsx",
+        "client/src/components/profile/EditProfileModal.jsx",
+        "client/src/components/profile/ProfileCard.jsx",
+        "client/src/pages/Audis/AddAuditorium.jsx",
+        "client/src/pages/Audis/AuditoriumDetails.jsx",
+        "client/src/pages/Audis/Auditoriums.jsx",
+        "client/src/pages/Homepage.jsx",
+        "client/src/services/profileAPI.js",
+        "client/src/user/BookingHistory.jsx",
+        "client/src/user/UserProfile.jsx",
+        "client/vite.config.js",
+        "needtobedone.txt",
+        "server/controllers/adminProfileController.js",
+        "server/controllers/auditoriumController.js",
+        "server/controllers/profileController.js",
+        "server/createAdmin.js",
+        "server/models/Feedback.js",
+        "server/models/Report.js",
+        "server/models/User.js",
+        "server/multerConfig.js",
+        "server/routes/adminProfileRoutes.js",
+        "server/routes/auditoriumRoutes.js",
+        "server/routes/profileRoutes.js",
+        "server/server.js",
+        "server/uploads/auditorium/images-1755364115828-59640942.jpg",
+        "server/uploads/auditorium/images-1755364115833-834084194.jpg",
+        "server/uploads/profiles/profilePicture-1755368094180-188572606.jpg",
+        "server/utils/emailService.js"
+      ],
+      "primaryArea": "client",
+      "before": "AdminProfile lacked toast notifications and useEffect hooks.",
+      "added": "Toast notification imports and React useEffect integration.",
+      "impact": "Enhanced admin profile with notification display capabilities.",
+      "keywords": [
+        "merge",
+        "toast",
+        "hooks"
+      ]
+    },
+    {
+      "commitId": "e0be94f820d68f308d2db855ea7ce5615f8b70fb",
+      "shortId": "e0be94f",
+      "author": "ch-praneeth-08",
+      "timestamp": "2025-08-17T08:42:06Z",
+      "branch": "aditya",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/App.jsx",
+        "client/src/admin/Adminnavbar.jsx",
+        "client/src/components/Footer.jsx",
+        "client/src/components/Navbar.jsx",
+        "client/src/components/ScrollToTop.jsx",
+        "client/src/pages/Audis/AuditoriumDetails.jsx",
+        "client/src/pages/Audis/Auditoriums.jsx",
+        "client/src/pages/Homepage.jsx",
+        "client/src/user/BookAuditorium.jsx",
+        "client/src/user/Usernavbar.jsx",
+        "needtobedone.txt"
+      ],
+      "primaryArea": "client",
+      "before": "Branch lacked glassmorphism navbar and footer updates.",
+      "added": "Merged translucent navigation styling and Snapchat footer link.",
+      "impact": "Synchronized UI improvements across development branches.",
+      "keywords": [
+        "merge",
+        "ui",
+        "styling"
+      ]
+    },
+    {
+      "commitId": "68e677dbbbe6cbc45103e7b12d1b8fb655b02646",
+      "shortId": "68e677d",
+      "author": "ch-praneeth-08",
+      "timestamp": "2025-08-17T08:47:18Z",
+      "branch": "aditya",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/components/Footer.jsx"
+      ],
+      "primaryArea": "client",
+      "before": "Footer contained Facebook, Twitter and other social links.",
+      "added": "Removed Facebook and Twitter icons from footer component.",
+      "impact": "Streamlined footer showing only selected social media platforms.",
+      "keywords": [
+        "footer",
+        "social",
+        "cleanup"
+      ]
+    },
+    {
+      "commitId": "8bf19f56c0d806f987481d507f7247de68ac1c31",
+      "shortId": "8bf19f5",
+      "author": "ch-praneeth-08",
+      "timestamp": "2025-08-17T09:33:28Z",
+      "branch": "aditya",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/admin/ManageBookings.jsx",
+        "server/controllers/bookingController.js",
+        "server/models/Booking.js",
+        "server/routes/bookingRoutes.js",
+        "server/utils/emailService.js"
+      ],
+      "primaryArea": "server",
+      "before": "Bookings only supported pending, approved and rejected statuses.",
+      "added": "Cancelled status with automatic email notification functionality.",
+      "impact": "Administrators can cancel bookings and notify users automatically.",
+      "keywords": [
+        "cancellation",
+        "bookings",
+        "email"
+      ]
+    },
+    {
+      "commitId": "52ee67f353c0af4256d2efa88a663258e03ac32c",
+      "shortId": "52ee67f",
+      "author": "ch-praneeth-08",
+      "timestamp": "2025-08-17T09:33:39Z",
+      "branch": "aditya",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/admin/AdminDashboard.jsx",
+        "client/src/admin/Adminnavbar.jsx",
+        "client/src/admin/AuditoriumPreviewModal.jsx",
+        "client/src/admin/ManageAuditoriums.jsx",
+        "client/src/admin/ManageUsers.jsx",
+        "needtobedone.txt",
+        "server/controllers/userController.js",
+        "server/routes/userRoutes.js",
+        "server/server.js",
+        "server/uploads/auditorium/images-1755422529755-558742824.jpg",
+        "server/uploads/auditorium/images-1755422597022-425145622.jpg",
+        "server/uploads/auditorium/images-1755422597024-453144144.jpg",
+        "server/uploads/auditorium/images-1755422622745-982630001.jpg",
+        "server/uploads/auditorium/images-1755422622765-659378905.jpg",
+        "server/uploads/profiles/profilePicture-1755422429986-82187744.jpg"
+      ],
+      "primaryArea": "server",
+      "before": "Branch lacked updated carousel timing and dashboard layout.",
+      "added": "Merged 500ms carousel speed and dashboard grid improvements.",
+      "impact": "Synchronized auditorium preview and dashboard enhancements across branches.",
+      "keywords": [
+        "merge",
+        "carousel",
+        "dashboard"
+      ]
+    },
+    {
+      "commitId": "06f6fed4012cdf52583d8fcd604c46574ba0745a",
+      "shortId": "06f6fed",
+      "author": "ch-praneeth-08",
+      "timestamp": "2025-08-17T09:56:11Z",
+      "branch": "aditya",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/admin/ManageBookings.jsx",
+        "server/uploads/auditorium/images-1755423582218-8704107.jpg"
+      ],
+      "primaryArea": "client",
+      "before": "Admin booking list displayed all records without pagination.",
+      "added": "Pagination controls and image upload capability for auditoriums.",
+      "impact": "Improved performance when managing large numbers of bookings.",
+      "keywords": [
+        "pagination",
+        "bookings",
+        "uploads"
+      ]
+    },
+    {
+      "commitId": "f91a6b3eb8ec383e89ec26f2b37e1bba65297cdd",
+      "shortId": "f91a6b3",
+      "author": "ch-praneeth-08",
+      "timestamp": "2025-08-17T10:00:07Z",
+      "branch": "aditya",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/user/BookingHistory.jsx"
+      ],
+      "primaryArea": "client",
+      "before": "User booking history showed all records on single page.",
+      "added": "Pagination logic for user booking history display.",
+      "impact": "Users navigate large booking histories with page controls.",
+      "keywords": [
+        "pagination",
+        "history",
+        "user"
+      ]
+    },
+    {
+      "commitId": "012be931f4df4ba26495a35087e6a637ead08b3c",
+      "shortId": "012be93",
+      "author": "ch-praneeth-08",
+      "timestamp": "2025-08-17T10:02:05Z",
+      "branch": "aditya",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/admin/EditAuditorium.jsx",
+        "client/src/components/profile/EditProfileModal.jsx"
+      ],
+      "primaryArea": "client",
+      "before": "Branch lacked automatic form synchronization for editing features.",
+      "added": "Merged useEffect hooks for form data synchronization.",
+      "impact": "Consistent form behavior across edit pages after merging.",
+      "keywords": [
+        "merge",
+        "forms",
+        "sync"
+      ]
+    },
+    {
+      "commitId": "e6ae371282718d601adf520113d8c9aab3f6f50b",
+      "shortId": "e6ae371",
+      "author": "ch-praneeth-08",
+      "timestamp": "2025-08-17T10:06:41Z",
+      "branch": "aditya",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/App.jsx",
+        "client/src/user/BookAuditorium.jsx"
+      ],
+      "primaryArea": "client",
+      "before": "BookAuditorium imported UserNavbar separately causing redundancy.",
+      "added": "Removed redundant UserNavbar import from booking component.",
+      "impact": "Cleaner component hierarchy eliminating duplicate navigation renders.",
+      "keywords": [
+        "ui",
+        "cleanup",
+        "imports"
+      ]
+    },
+    {
+      "commitId": "0eee55bb309acbb4fa58bca5abde35800becff53",
+      "shortId": "0eee55b",
+      "author": "ch-praneeth-08",
+      "timestamp": "2025-08-17T10:30:42Z",
+      "branch": "aditya",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/components/profile/ProfileActivity.jsx",
+        "client/src/components/profile/ProfileCard.jsx",
+        "client/src/components/profile/ProfileStats.jsx",
+        "client/src/user/UserProfile.jsx"
+      ],
+      "primaryArea": "client",
+      "before": "UserProfile lacked activity feeds and statistics displays.",
+      "added": "ProfileActivity timeline and ProfileStats dashboard components.",
+      "impact": "Enhanced profiles with booking history and activity statistics.",
+      "keywords": [
+        "profile",
+        "dashboard",
+        "components"
+      ]
+    },
+    {
+      "commitId": "0207e8da83501faff49fc9ef5e614c96dc877ae5",
+      "shortId": "0207e8d",
+      "author": "ch-praneeth-08",
+      "timestamp": "2025-08-17T10:54:55Z",
+      "branch": "aditya",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/components/profile/EditProfileModal.jsx",
+        "client/src/components/profile/FeedbackModal.jsx",
+        "client/src/components/profile/PasswordChangeModal.jsx",
+        "client/src/components/profile/ProfileCard.jsx",
+        "client/src/user/UserProfile.jsx",
+        "server/controllers/profileController.js",
+        "server/models/Feedback.js",
+        "server/utils/emailService.js"
+      ],
+      "primaryArea": "client",
+      "before": "Profile editing lacked async handling for form submissions.",
+      "added": "Async submit handling and cleaned icon imports.",
+      "impact": "Improved form submission reliability and profile editing experience.",
+      "keywords": [
+        "profile",
+        "async",
+        "forms"
+      ]
+    }
+  ]
+}

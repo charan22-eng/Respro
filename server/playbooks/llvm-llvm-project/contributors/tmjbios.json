@@ -1,0 +1,42 @@
+{
+  "login": "tmjbios",
+  "avatarUrl": null,
+  "repoFullName": "llvm/llvm-project",
+  "lastUpdated": "2026-02-20T23:15:04.170Z",
+  "totalCommits": 1,
+  "primaryAreas": [
+    "flang"
+  ],
+  "contributorSummary": "",
+  "completionSignals": {
+    "velocityTrend": "unknown",
+    "commitSentiment": "neutral",
+    "churnSignal": "none",
+    "lastUpdated": "2026-02-20T22:53:45.185Z"
+  },
+  "commits": [
+    {
+      "commitId": "8735e69f1e9fe196e6dd47449112235387c56e4c",
+      "shortId": "8735e69",
+      "author": "tmjbios",
+      "timestamp": "2026-02-20T20:22:18Z",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "flang/lib/Optimizer/CodeGen/CodeGen.cpp"
+      ],
+      "primaryArea": "flang",
+      "before": "Optional assumed-length character dummy arguments caused null pointer crashes during code generation.",
+      "added": "Added `isa_and_nonnull` null check for size values lacking defining operations in allocation lowering.",
+      "impact": "Enables crash-free compilation of Fortran with optional assumed-length character dummy arguments.",
+      "keywords": [
+        "flang",
+        "codegen",
+        "bugfix",
+        "optional-arguments"
+      ],
+      "message": "[flang] OPTIONAL char dummy has no defining op; add null check (#182582)",
+      "analyzedAt": "2026-02-20T23:15:04.170Z"
+    }
+  ]
+}

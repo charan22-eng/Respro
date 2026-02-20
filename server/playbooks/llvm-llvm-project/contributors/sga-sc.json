@@ -1,0 +1,40 @@
+{
+  "login": "sga-sc",
+  "avatarUrl": null,
+  "repoFullName": "llvm/llvm-project",
+  "lastUpdated": "2026-02-20T23:11:02.183Z",
+  "totalCommits": 1,
+  "primaryAreas": [
+    "lldb"
+  ],
+  "contributorSummary": "",
+  "completionSignals": {
+    "velocityTrend": "unknown",
+    "commitSentiment": "neutral",
+    "churnSignal": "none",
+    "lastUpdated": "2026-02-20T23:11:02.183Z"
+  },
+  "commits": [
+    {
+      "commitId": "47ad905d8d8d46e48b2a544009ca66f5c809cc95",
+      "shortId": "47ad905",
+      "author": "sga-sc",
+      "timestamp": "2026-02-20T19:14:31Z",
+      "message": "[lldb][RISCV] Make char an unsigned type for RISC-V by default (#182260)",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "lldb/source/Utility/ArchSpec.cpp"
+      ],
+      "primaryArea": "lldb",
+      "before": "RISC-V char signedness was undefined/default",
+      "added": "RISC-V char defaults to unsigned",
+      "impact": "RISC-V targets now use unsigned char",
+      "keywords": [
+        "RISC-V",
+        "char",
+        "LLDB"
+      ]
+    }
+  ]
+}

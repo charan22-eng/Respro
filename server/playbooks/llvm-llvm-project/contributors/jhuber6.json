@@ -1,0 +1,60 @@
+{
+  "login": "jhuber6",
+  "avatarUrl": "https://avatars.githubusercontent.com/u/35342157?v=4",
+  "repoFullName": "llvm/llvm-project",
+  "lastUpdated": "2026-02-20T22:53:45.202Z",
+  "totalCommits": 2,
+  "primaryAreas": [
+    "flang-rt",
+    "libc"
+  ],
+  "contributorSummary": "",
+  "completionSignals": {
+    "velocityTrend": "unknown",
+    "commitSentiment": "neutral",
+    "churnSignal": "none",
+    "lastUpdated": "2026-02-20T22:53:45.199Z"
+  },
+  "commits": [
+    {
+      "commitId": "70b5a1d0500bc587d749a93a4f03329ed9c33c94",
+      "shortId": "70b5a1d",
+      "author": "jhuber6",
+      "timestamp": "2026-02-20T20:43:06Z",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "flang-rt/lib/runtime/io-api-gpu.cpp",
+        "flang-rt/lib/runtime/io-api-gpu.h",
+        "flang-rt/lib/runtime/io-api-server.cpp",
+        "offload/test/offloading/fortran/formatted-io.f90"
+      ],
+      "primaryArea": "flang-rt",
+      "before": "State unknown.",
+      "added": "[flang-rt] Add support for formatted I/O on the GPU (#182580",
+      "impact": "Impact could not be determined.",
+      "keywords": [
+        "commit"
+      ]
+    },
+    {
+      "commitId": "e1feac36249c2aa964f9e198df7957868acb559a",
+      "shortId": "e1feac3",
+      "author": "jhuber6",
+      "timestamp": "2026-02-20T20:43:15Z",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "libc/shared/rpc_dispatch.h",
+        "libc/shared/rpc_util.h"
+      ],
+      "primaryArea": "libc",
+      "before": "State unknown.",
+      "added": "[libc] Properly handle null handles in rpc_dispatch.h",
+      "impact": "Impact could not be determined.",
+      "keywords": [
+        "commit"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "login": "topperc",
+  "avatarUrl": "https://avatars.githubusercontent.com/u/22566570?v=4",
+  "repoFullName": "llvm/llvm-project",
+  "lastUpdated": "2026-02-20T23:11:02.188Z",
+  "totalCommits": 2,
+  "primaryAreas": [
+    "llvm"
+  ],
+  "contributorSummary": "",
+  "completionSignals": {
+    "velocityTrend": "unknown",
+    "commitSentiment": "neutral",
+    "churnSignal": "none",
+    "lastUpdated": "2026-02-20T22:53:45.211Z"
+  },
+  "commits": [
+    {
+      "commitId": "2e88688ba7e048e25143117cd7b1e5697d9cec86",
+      "shortId": "2e88688",
+      "author": "topperc",
+      "timestamp": "2026-02-20T22:08:53Z",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "llvm/lib/Target/RISCV/RISCVInstrInfoVPseudos.td"
+      ],
+      "primaryArea": "llvm",
+      "before": "State unknown.",
+      "added": "[RISCV] Use bits<1> for AltFmt in RISCVVPseudo. (#182581)",
+      "impact": "Impact could not be determined.",
+      "keywords": [
+        "commit"
+      ]
+    },
+    {
+      "commitId": "3a3081250c1f464e0c297c41e0b67e88286e8722",
+      "shortId": "3a30812",
+      "author": "topperc",
+      "timestamp": "2026-02-20T19:17:44Z",
+      "message": "[RISCV] Pre-commit tests for #182389 (#182558)",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "llvm/test/CodeGen/RISCV/clmul.ll",
+        "llvm/test/CodeGen/RISCV/clmulh.ll",
+        "llvm/test/CodeGen/RISCV/clmulr.ll"
+      ],
+      "primaryArea": "llvm",
+      "before": "Carry-less multiply tests absent or incomplete",
+      "added": "Carry-less multiply instruction tests for RISC-V",
+      "impact": "RISC-V CLMUL instructions now have test coverage",
+      "keywords": [
+        "RISC-V",
+        "CLMUL",
+        "tests"
+      ]
+    }
+  ]
+}

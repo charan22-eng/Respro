@@ -1,0 +1,40 @@
+{
+  "login": "vsapsai",
+  "avatarUrl": null,
+  "repoFullName": "llvm/llvm-project",
+  "lastUpdated": "2026-02-20T23:11:02.195Z",
+  "totalCommits": 1,
+  "primaryAreas": [
+    "clang"
+  ],
+  "contributorSummary": "",
+  "completionSignals": {
+    "velocityTrend": "unknown",
+    "commitSentiment": "neutral",
+    "churnSignal": "none",
+    "lastUpdated": "2026-02-20T23:11:02.195Z"
+  },
+  "commits": [
+    {
+      "commitId": "11d7e13eba0e4fb91b5393c7983dd3bf750c45c2",
+      "shortId": "11d7e13",
+      "author": "vsapsai",
+      "timestamp": "2026-02-20T19:42:14Z",
+      "message": "[c-index-test] Avoid loading a module input file when we need a file name only. (#182426)",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "clang/tools/c-index-test/core_main.cpp"
+      ],
+      "primaryArea": "clang",
+      "before": "c-index-test loaded modules unnecessarily",
+      "added": "Filename extraction without full module load",
+      "impact": "c-index-test performance improved for module queries",
+      "keywords": [
+        "c-index-test",
+        "modules",
+        "performance"
+      ]
+    }
+  ]
+}

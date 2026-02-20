@@ -1,0 +1,137 @@
+{
+  "login": "fmayer",
+  "avatarUrl": "https://avatars.githubusercontent.com/u/19826?v=4",
+  "repoFullName": "llvm/llvm-project",
+  "lastUpdated": "2026-02-20T23:11:02.201Z",
+  "totalCommits": 6,
+  "primaryAreas": [
+    "clang"
+  ],
+  "contributorSummary": "",
+  "completionSignals": {
+    "velocityTrend": "unknown",
+    "commitSentiment": "neutral",
+    "churnSignal": "none",
+    "lastUpdated": "2026-02-20T22:53:45.213Z"
+  },
+  "commits": [
+    {
+      "commitId": "5e09590993a9eaf256df07c7aecafa26f1e81253",
+      "shortId": "5e09590",
+      "author": "fmayer",
+      "timestamp": "2026-02-20T22:33:12Z",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "clang/unittests/Analysis/FlowSensitive/MockHeaders.cpp"
+      ],
+      "primaryArea": "clang",
+      "before": "State unknown.",
+      "added": "[NFC] [FlowSensitive] Add mock header for coroutines",
+      "impact": "Impact could not be determined.",
+      "keywords": [
+        "commit"
+      ]
+    },
+    {
+      "commitId": "cedd736518bc07d70c166b8a0c7c0389a1df183e",
+      "shortId": "cedd736",
+      "author": "fmayer",
+      "timestamp": "2026-02-20T22:36:05Z",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "clang/unittests/Analysis/FlowSensitive/UncheckedStatusOrAccessModelTestFixture.h"
+      ],
+      "primaryArea": "clang",
+      "before": "State unknown.",
+      "added": "[NFCI] [FlowSensitive] [StatusOr] use c++20 for test",
+      "impact": "Impact could not be determined.",
+      "keywords": [
+        "commit"
+      ]
+    },
+    {
+      "commitId": "2f7df5cd2d64f24e33814ddddfc9cab56c909167",
+      "shortId": "2f7df5c",
+      "author": "fmayer",
+      "timestamp": "2026-02-20T22:44:52Z",
+      "branch": "users/fmayer/spr/flowsensitive-statusor-add-test-involving-co_return",
+      "eventType": "commit",
+      "filesChanged": [
+        "clang/unittests/Analysis/FlowSensitive/UncheckedStatusOrAccessModelTestFixture.cpp"
+      ],
+      "primaryArea": "clang",
+      "before": "State unknown.",
+      "added": "[𝘀𝗽𝗿] initial version",
+      "impact": "Impact could not be determined.",
+      "keywords": [
+        "commit"
+      ]
+    },
+    {
+      "commitId": "4ee6c541d3ab3fb2b16f2251d2fd01d7c86c2c0d",
+      "shortId": "4ee6c54",
+      "author": "fmayer",
+      "timestamp": "2026-02-20T22:51:23Z",
+      "message": "[𝘀𝗽𝗿] initial version",
+      "branch": "users/fmayer/spr/nfc-flowsensitive-add-mock-task-header-for-coroutines",
+      "eventType": "commit",
+      "filesChanged": [
+        "clang/unittests/Analysis/FlowSensitive/MockHeaders.cpp"
+      ],
+      "primaryArea": "clang",
+      "before": "Mock headers lacked coroutine Task definitions",
+      "added": "Task coroutine mock header for testing",
+      "impact": "Flow-sensitive analysis can test coroutine patterns",
+      "keywords": [
+        "coroutines",
+        "MockHeaders",
+        "Task"
+      ]
+    },
+    {
+      "commitId": "6e9900a85d8c78a139d61d32be940d258e6466af",
+      "shortId": "6e9900a",
+      "author": "fmayer",
+      "timestamp": "2026-02-20T22:51:31Z",
+      "message": "[𝘀𝗽𝗿] changes introduced through rebase",
+      "branch": "users/fmayer/spr/flowsensitive-statusor-add-test-involving-co_return",
+      "eventType": "commit",
+      "filesChanged": [
+        "clang/unittests/Analysis/FlowSensitive/MockHeaders.cpp"
+      ],
+      "primaryArea": "clang",
+      "before": "Mock headers lacked coroutine Task definitions",
+      "added": "Task coroutine mock header for testing",
+      "impact": "Flow-sensitive analysis can test coroutine patterns",
+      "keywords": [
+        "coroutines",
+        "MockHeaders",
+        "Task"
+      ]
+    },
+    {
+      "commitId": "c740e2165023fb7eb72348e11c4c1bb41f2f6a1f",
+      "shortId": "c740e21",
+      "author": "fmayer",
+      "timestamp": "2026-02-20T22:51:34Z",
+      "message": "reb",
+      "branch": "users/fmayer/spr/flowsensitive-statusor-add-test-involving-co_return",
+      "eventType": "commit",
+      "filesChanged": [
+        "clang/unittests/Analysis/FlowSensitive/MockHeaders.cpp",
+        "clang/unittests/Analysis/FlowSensitive/UncheckedStatusOrAccessModelTestFixture.cpp"
+      ],
+      "primaryArea": "clang",
+      "before": "Tests lacked coroutine StatusOr coverage",
+      "added": "Coroutine co_return test with StatusOr",
+      "impact": "Unchecked StatusOr analysis supports coroutines",
+      "keywords": [
+        "coroutines",
+        "StatusOr",
+        "testing"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "login": "SiliconA-Z",
+  "avatarUrl": null,
+  "repoFullName": "llvm/llvm-project",
+  "lastUpdated": "2026-02-20T23:11:02.192Z",
+  "totalCommits": 1,
+  "primaryAreas": [
+    "libc"
+  ],
+  "contributorSummary": "",
+  "completionSignals": {
+    "velocityTrend": "unknown",
+    "commitSentiment": "neutral",
+    "churnSignal": "none",
+    "lastUpdated": "2026-02-20T23:11:02.192Z"
+  },
+  "commits": [
+    {
+      "commitId": "2092145360ac8cf85e035cfda926ddb9aa909533",
+      "shortId": "2092145",
+      "author": "SiliconA-Z",
+      "timestamp": "2026-02-20T19:32:05Z",
+      "message": "[libc] Save one instruction on ARM (#181515)",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "libc/src/setjmp/arm/longjmp.cpp",
+        "libc/src/setjmp/arm/setjmp.cpp"
+      ],
+      "primaryArea": "libc",
+      "before": "ARM setjmp/longjmp used suboptimal instruction sequence",
+      "added": "Optimized ARM assembly paths save one instruction",
+      "impact": "ARM setjmp/longjmp performance improved",
+      "keywords": [
+        "libc",
+        "ARM",
+        "setjmp"
+      ]
+    }
+  ]
+}

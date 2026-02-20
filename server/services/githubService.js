@@ -116,6 +116,7 @@ async function fetchCommitDetails(owner, repo, sha, token) {
     }));
 
     return {
+      message: (data.commit?.message || '').split('\n')[0], // First line of commit message
       filesChanged: files.map(f => f.filename),
       additions: data.stats?.additions || 0,
       deletions: data.stats?.deletions || 0,
@@ -124,6 +125,7 @@ async function fetchCommitDetails(owner, repo, sha, token) {
   } catch (error) {
     console.warn(`Could not fetch commit details for ${sha}:`, error.message);
     return {
+      message: '',
       filesChanged: [],
       additions: 0,
       deletions: 0,
@@ -133,7 +135,7 @@ async function fetchCommitDetails(owner, repo, sha, token) {
 }
 
 /**
- * Fetch commits from the last 7 days for a branch
+ * Fetch commits from the last 7 days for a branch (used for activity metrics)
  */
 async function fetchRecentCommits(owner, repo, branch, token) {
   const sevenDaysAgo = new Date();
@@ -158,6 +160,36 @@ async function fetchRecentCommits(owner, repo, branch, token) {
   } catch (error) {
     // Branch might not exist or have no commits in the time range
     console.warn(`Could not fetch commits for branch ${branch}:`, error.message);
+    return [];
+  }
+}
+
+/**
+ * Fetch ALL commits for a branch (full history)
+ * @param {string} owner - Repository owner
+ * @param {string} repo - Repository name
+ * @param {string} branch - Branch name
+ * @param {string} token - GitHub API token
+ * @param {number} maxPages - Maximum pages to fetch (default 20 = up to 2000 commits)
+ */
+async function fetchAllCommits(owner, repo, branch, token, maxPages = 20) {
+  try {
+    const commits = await fetchAllPages(
+      `/repos/${owner}/${repo}/commits?sha=${branch}`,
+      token,
+      maxPages
+    );
+
+    return commits.map(commit => ({
+      sha: commit.sha,
+      author: commit.author?.login || commit.commit.author?.name || 'unknown',
+      authorAvatar: commit.author?.avatar_url || null,
+      date: commit.commit.author?.date || commit.commit.committer?.date,
+      message: commit.commit.message.split('\n')[0], // First line only
+      branch
+    }));
+  } catch (error) {
+    console.warn(`Could not fetch all commits for branch ${branch}:`, error.message);
     return [];
   }
 }
@@ -448,7 +480,7 @@ export async function fetchRepoData(repoUrl, token) {
     fetchContributors(owner, repo, token)
   ]);
 
-  // Fetch commits from default branch and active PR branches
+  // Fetch FULL commit history from default branch and active PR branches
   const branchesToFetch = new Set([meta.defaultBranch]);
   pullRequests.forEach(pr => {
     if (pr.branch) branchesToFetch.add(pr.branch);
@@ -457,8 +489,9 @@ export async function fetchRepoData(repoUrl, token) {
   // Limit to 5 branches to avoid too many API calls
   const branchArray = Array.from(branchesToFetch).slice(0, 5);
   
+  // Fetch ALL commits (not just 7 days)
   const commitArrays = await Promise.all(
-    branchArray.map(branch => fetchRecentCommits(owner, repo, branch, token))
+    branchArray.map(branch => fetchAllCommits(owner, repo, branch, token))
   );
 
   // Flatten and dedupe commits by SHA
@@ -468,18 +501,26 @@ export async function fetchRepoData(repoUrl, token) {
       commitMap.set(commit.sha, commit);
     }
   });
+  
+  // Sort by date (newest first for display)
   const commits = Array.from(commitMap.values()).sort(
     (a, b) => new Date(b.date) - new Date(a.date)
   );
 
-  // Enrich data
-  const enrichedContributors = enrichContributorsWithActivity(contributors, commits);
+  // For contributor activity, we still use recent commits (last 7 days)
+  const recentCommitArrays = await Promise.all(
+    branchArray.map(branch => fetchRecentCommits(owner, repo, branch, token))
+  );
+  const recentCommits = recentCommitArrays.flat();
+
+  // Enrich data using recent commits for activity metrics
+  const enrichedContributors = enrichContributorsWithActivity(contributors, recentCommits);
   const enrichedBranches = markStaleBranches(branches, pullRequests, issues);
   const blockers = detectBlockers(enrichedBranches, pullRequests, issues);
 
   return {
     meta,
-    commits,
+    commits,  // Full history
     branches: enrichedBranches,
     pullRequests,
     issues,
@@ -548,5 +589,5 @@ async function fetchFullCommitInfo(owner, repo, sha, token) {
   }
 }
 
-export { fetchCommitDetails, fetchLatestCommitSha, fetchFullCommitInfo };
-export default { fetchRepoData, parseRepoUrl, fetchCommitDetails, fetchLatestCommitSha, fetchFullCommitInfo };
+export { fetchCommitDetails, fetchLatestCommitSha, fetchFullCommitInfo, fetchAllCommits };
+export default { fetchRepoData, parseRepoUrl, fetchCommitDetails, fetchLatestCommitSha, fetchFullCommitInfo, fetchAllCommits };

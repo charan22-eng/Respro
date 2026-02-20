@@ -1,0 +1,65 @@
+{
+  "login": "lszomoru",
+  "avatarUrl": "https://avatars.githubusercontent.com/u/3372902?v=4",
+  "repoFullName": "microsoft/vscode",
+  "lastUpdated": "2026-02-20T23:13:49.924Z",
+  "totalCommits": 2,
+  "primaryAreas": [
+    "src"
+  ],
+  "contributorSummary": "",
+  "completionSignals": {
+    "velocityTrend": "unknown",
+    "commitSentiment": "neutral",
+    "churnSignal": "none",
+    "lastUpdated": "2026-02-20T23:13:49.890Z"
+  },
+  "commits": [
+    {
+      "commitId": "dea3ecf79ed5c5532d1993849b6eaba1ba99d707",
+      "shortId": "dea3ecf",
+      "author": "lszomoru",
+      "timestamp": "2026-02-20T20:58:45Z",
+      "message": "Sessions - select the active branch in the branch picker (#296606)",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "src/vs/sessions/contrib/chat/browser/branchPicker.ts",
+        "src/vs/workbench/api/browser/mainThreadGitExtensionService.ts",
+        "src/vs/workbench/api/common/extHostGitExtensionService.ts",
+        "src/vs/workbench/contrib/git/browser/gitService.ts",
+        "src/vs/workbench/contrib/git/common/gitService.ts"
+      ],
+      "primaryArea": "src",
+      "before": "Branch picker defaulted to main or master.",
+      "added": "Active branch pre-selection in git picker.",
+      "impact": "Faster branch switching for users.",
+      "keywords": [
+        "git",
+        "branch picker",
+        "ux"
+      ]
+    },
+    {
+      "commitId": "b21a3cc7a373843d318c280bfa4c690099d51abe",
+      "shortId": "b21a3cc",
+      "author": "lszomoru",
+      "timestamp": "2026-02-20T23:08:10Z",
+      "message": "GitService - add barrier for setting the delegate (#296631)",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "src/vs/workbench/contrib/git/browser/gitService.ts"
+      ],
+      "primaryArea": "src",
+      "before": "Git service initialized without synchronization barrier.",
+      "added": "Barrier pattern for delegate initialization.",
+      "impact": "Reliable git service startup sequence.",
+      "keywords": [
+        "git",
+        "initialization",
+        "sync"
+      ]
+    }
+  ]
+}

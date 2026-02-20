@@ -1,0 +1,43 @@
+{
+  "login": "banach-space",
+  "avatarUrl": "https://avatars.githubusercontent.com/u/2990321?v=4",
+  "repoFullName": "llvm/llvm-project",
+  "lastUpdated": "2026-02-20T23:11:24.755Z",
+  "totalCommits": 1,
+  "primaryAreas": [
+    "clang"
+  ],
+  "contributorSummary": "",
+  "completionSignals": {
+    "velocityTrend": "unknown",
+    "commitSentiment": "neutral",
+    "churnSignal": "none",
+    "lastUpdated": "2026-02-20T22:53:45.172Z"
+  },
+  "commits": [
+    {
+      "commitId": "0dd1cb015e8b1439e70c152eb134abb01e1af831",
+      "shortId": "0dd1cb0",
+      "author": "banach-space",
+      "timestamp": "2026-02-20T19:44:38Z",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "clang/lib/CodeGen/TargetBuiltins/ARM.cpp",
+        "clang/lib/Sema/SemaARM.cpp"
+      ],
+      "primaryArea": "clang",
+      "before": "AArch64 builtin argument handling required redundant manual immediate extraction steps.",
+      "added": "Refactored ARM NEON immediate argument processing into unified validation paths.",
+      "impact": "Reduced complexity for future ARM builtin maintenance and extensions.",
+      "keywords": [
+        "clang",
+        "ARM",
+        "refactoring",
+        "NFC"
+      ],
+      "message": "[clang][ARM] Refactor argument handling in `EmitAArch64BuiltinExpr` (2/2) (NFC) (#181974)",
+      "analyzedAt": "2026-02-20T23:11:24.755Z"
+    }
+  ]
+}

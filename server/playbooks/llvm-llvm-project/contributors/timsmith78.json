@@ -1,0 +1,45 @@
+{
+  "login": "timsmith78",
+  "avatarUrl": null,
+  "repoFullName": "llvm/llvm-project",
+  "lastUpdated": "2026-02-20T22:53:45.206Z",
+  "totalCommits": 1,
+  "primaryAreas": [
+    "flang"
+  ],
+  "contributorSummary": "",
+  "completionSignals": {
+    "velocityTrend": "unknown",
+    "commitSentiment": "neutral",
+    "churnSignal": "none",
+    "lastUpdated": "2026-02-20T22:53:45.206Z"
+  },
+  "commits": [
+    {
+      "commitId": "603e5c832a5508e789316475cc0b8228de876f7c",
+      "shortId": "603e5c8",
+      "author": "timsmith78",
+      "timestamp": "2026-02-20T21:23:01Z",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "flang/include/flang/Optimizer/Dialect/FIRAttr.td",
+        "flang/lib/Lower/CallInterface.cpp",
+        "flang/lib/Optimizer/Transforms/AddDebugInfo.cpp",
+        "flang/test/Lower/HLFIR/recursive-user-procedure.f90",
+        "flang/test/Lower/OpenMP/declare-target-func-and-subr.f90",
+        "flang/test/Lower/OpenMP/declare-target-implicit-func-and-subr-cap-enter.f90",
+        "flang/test/Lower/OpenMP/declare-target-implicit-func-and-subr-cap.f90",
+        "flang/test/Lower/OpenMP/declare-target-implicit-tarop-cap.f90",
+        "flang/test/Transforms/debug-fn-attr.fir"
+      ],
+      "primaryArea": "flang",
+      "before": "State unknown.",
+      "added": "[flang][debug] Supply missing subprogram attributes (#181425",
+      "impact": "Impact could not be determined.",
+      "keywords": [
+        "commit"
+      ]
+    }
+  ]
+}

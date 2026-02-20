@@ -1,0 +1,453 @@
+{
+  "repoFullName": "llvm/llvm-project",
+  "lastUpdated": "2026-02-20T23:16:01.520Z",
+  "totalCommitsTracked": 20,
+  "projectSummary": "A multi-language compiler framework actively supporting C/C++, Fortran, and GPU computing across diverse architectures. Recent changes include Fortran runtime hardening, CUDA integration improvements, and vectorization optimizations, balanced with backend maintenance for ARM and RISCV. Development maintains steady velocity across all system layers.",
+  "techAreas": [
+    "clang",
+    "mlir",
+    "llvm",
+    "flang",
+    "utils",
+    "flang-rt",
+    "offload",
+    "libc"
+  ],
+  "overallVelocity": "steady",
+  "commits": [
+    {
+      "commitId": "0dd1cb015e8b1439e70c152eb134abb01e1af831",
+      "shortId": "0dd1cb0",
+      "author": "banach-space",
+      "timestamp": "2026-02-20T19:44:38Z",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "clang/lib/CodeGen/TargetBuiltins/ARM.cpp",
+        "clang/lib/Sema/SemaARM.cpp"
+      ],
+      "primaryArea": "clang",
+      "before": "AArch64 builtin argument handling required redundant manual immediate extraction steps.",
+      "added": "Refactored ARM NEON immediate argument processing into unified validation paths.",
+      "impact": "Reduced complexity for future ARM builtin maintenance and extensions.",
+      "keywords": [
+        "clang",
+        "ARM",
+        "refactoring",
+        "NFC"
+      ],
+      "message": "[clang][ARM] Refactor argument handling in `EmitAArch64BuiltinExpr` (2/2) (NFC) (#181974)",
+      "analyzedAt": "2026-02-20T23:11:24.754Z"
+    },
+    {
+      "commitId": "a8989c08a87ed5183c53f7292f62a0ce56fcf0c5",
+      "shortId": "a8989c0",
+      "author": "aviralg",
+      "timestamp": "2026-02-20T19:59:28Z",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "clang/unittests/Analysis/Scalable/CMakeLists.txt",
+        "clang/unittests/Analysis/Scalable/Serialization/JSONFormatTest/JSONFormatTest.h",
+        "clang/unittests/Analysis/Scalable/Serialization/JSONFormatTest/TUSummaryTest.cpp"
+      ],
+      "primaryArea": "clang",
+      "before": "All SSAF JSON serialization tests lived in a single monolithic file without shared fixtures.",
+      "added": "Dedicated JSONFormatTest directory with reusable fixture header for modular test organization.",
+      "impact": "Enables additional SSAF JSON tests to reuse common setup infrastructure.",
+      "keywords": [
+        "refactoring",
+        "testing",
+        "ssaf",
+        "clang"
+      ],
+      "message": "[clang][ssaf] Refactor `JSONFormatTest` into a directory with a shared fixture header (#182523)",
+      "analyzedAt": "2026-02-20T23:12:17.706Z"
+    },
+    {
+      "commitId": "7d9b863bc39f690c6f7716dd27d24e6ccfcfae33",
+      "shortId": "7d9b863",
+      "author": "Jason-Van-Beusekom",
+      "timestamp": "2026-02-20T20:02:08Z",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "mlir/include/mlir/Conversion/GPUToNVVM/GPUToNVVMPass.h",
+        "mlir/include/mlir/Conversion/MathToNVVM/MathToNVVM.h",
+        "mlir/include/mlir/Conversion/Passes.h",
+        "mlir/include/mlir/Conversion/Passes.td",
+        "mlir/lib/Conversion/CMakeLists.txt",
+        "mlir/lib/Conversion/GPUToNVVM/CMakeLists.txt",
+        "mlir/lib/Conversion/GPUToNVVM/LowerGpuOpsToNVVMOps.cpp",
+        "mlir/lib/Conversion/MathToNVVM/CMakeLists.txt",
+        "mlir/lib/Conversion/MathToNVVM/MathToNVVM.cpp"
+      ],
+      "primaryArea": "mlir",
+      "before": "Math-to-NVVM conversion logic was embedded within the GPUToNVVM pass infrastructure.",
+      "added": "New standalone MathToNVVM conversion pass separating math dialect lowering from GPU conversions.",
+      "impact": "Enables independent math-to-CUDA libdevice lowering without GPU dialect dependencies.",
+      "keywords": [
+        "refactoring",
+        "mlir",
+        "nvvm",
+        "math-dialect"
+      ],
+      "message": "[NVVM][MLIR] Refactor conversion of Math / Arith Operations seperate Passes (#180058)",
+      "analyzedAt": "2026-02-20T23:13:27.419Z"
+    },
+    {
+      "commitId": "94724e80e92516db20c5e88ea4e056e92405545f",
+      "shortId": "94724e8",
+      "author": "fhahn",
+      "timestamp": "2026-02-20T20:12:30Z",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "llvm/test/Transforms/LoopVectorize/epilog-iv-select-cmp.ll"
+      ],
+      "primaryArea": "llvm",
+      "before": "FindLast epilogue vectorization with wrapping IV lacked test coverage.",
+      "added": "Added test for FindIV reduction epilogue behavior without sentinel values.",
+      "impact": "Documents unsupported paths to prevent invalid epilogue generation.",
+      "keywords": [
+        "loop-vectorize",
+        "test-coverage",
+        "findiv-reduction",
+        "epilogue"
+      ],
+      "message": "[LV] Add epilogue test with FindLast reduction of wrapping IV.",
+      "analyzedAt": "2026-02-20T23:14:22.501Z"
+    },
+    {
+      "commitId": "8735e69f1e9fe196e6dd47449112235387c56e4c",
+      "shortId": "8735e69",
+      "author": "tmjbios",
+      "timestamp": "2026-02-20T20:22:18Z",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "flang/lib/Optimizer/CodeGen/CodeGen.cpp"
+      ],
+      "primaryArea": "flang",
+      "before": "Optional assumed-length character dummy arguments caused null pointer crashes during code generation.",
+      "added": "Added `isa_and_nonnull` null check for size values lacking defining operations in allocation lowering.",
+      "impact": "Enables crash-free compilation of Fortran with optional assumed-length character dummy arguments.",
+      "keywords": [
+        "flang",
+        "codegen",
+        "bugfix",
+        "optional-arguments"
+      ],
+      "message": "[flang] OPTIONAL char dummy has no defining op; add null check (#182582)",
+      "analyzedAt": "2026-02-20T23:15:04.168Z"
+    },
+    {
+      "commitId": "5c929816a32429246123c1d17e166d129f7a7c37",
+      "shortId": "5c92981",
+      "author": "rupprecht",
+      "timestamp": "2026-02-20T20:26:44Z",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "utils/bazel/llvm-project-overlay/mlir/BUILD.bazel"
+      ],
+      "primaryArea": "utils",
+      "before": "MathToNVVM conversion unavailable in Bazel builds.",
+      "added": "Added MathToNVVM library target and wired dependencies.",
+      "impact": "Enables Math-to-NVVM lowering for NVIDIA GPU compilation.",
+      "keywords": [
+        "bazel",
+        "mlir",
+        "nvvm",
+        "build"
+      ],
+      "message": "[bazel][NVVM][MLIR] Port 7d9b863bc39f690c6f7716dd27d24e6ccfcfae33 (#182588)",
+      "analyzedAt": "2026-02-20T23:15:35.817Z"
+    },
+    {
+      "commitId": "2f47bbf7bbd2bac2d308fd1b701c49d92693e2bb",
+      "shortId": "2f47bbf",
+      "author": "RiverDave",
+      "timestamp": "2026-02-20T20:30:36Z",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "clang/include/clang/CIR/Dialect/IR/CIRAttrs.td",
+        "clang/include/clang/CIR/Dialect/IR/CIRCUDAAttrs.td",
+        "clang/lib/CIR/CodeGen/CIRGenCall.cpp",
+        "clang/test/CIR/CodeGenCUDA/kernel-stub-name.cu"
+      ],
+      "primaryArea": "clang",
+      "before": "CUDA device stubs in CIR lacked kernel name metadata for host compilation.",
+      "added": "New CUDAKernelNameAttr attaches kernel names to CUDA device stubs in CIR.",
+      "impact": "Enables kernel name propagation through CIR for CUDA runtime launch.",
+      "keywords": [
+        "CIR",
+        "CUDA",
+        "kernel",
+        "attribute"
+      ],
+      "message": "[CIR][CUDA] Add CUDAKernelNameAttr for device stubs (#180051)",
+      "analyzedAt": "2026-02-20T23:16:01.520Z"
+    },
+    {
+      "commitId": "fafaaa165ba3982f0a3456cfebf3a07e1d18564a",
+      "shortId": "fafaaa1",
+      "author": "amehsan",
+      "timestamp": "2026-02-20T20:32:34Z",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "llvm/lib/Transforms/Scalar/LoopFuse.cpp"
+      ],
+      "primaryArea": "llvm",
+      "before": "State unknown.",
+      "added": "[LoopFusion] Improve collectFusionCandidates() (#182571)",
+      "impact": "Impact could not be determined.",
+      "keywords": [
+        "commit"
+      ]
+    },
+    {
+      "commitId": "2b074823e478a07bf40a4b9d71f0aaa2f1902f15",
+      "shortId": "2b07482",
+      "author": "SusanTan",
+      "timestamp": "2026-02-20T20:33:26Z",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "flang/lib/Optimizer/Transforms/FIRToMemRef.cpp",
+        "flang/test/Transforms/FIRToMemRef/array-coor-block-arg.mlir",
+        "flang/test/Transforms/FIRToMemRef/no-declare.mlir"
+      ],
+      "primaryArea": "flang",
+      "before": "State unknown.",
+      "added": "Reapply \"[flang] Lowering a ArrayCoorOp to arithmetic comput",
+      "impact": "Impact could not be determined.",
+      "keywords": [
+        "commit"
+      ]
+    },
+    {
+      "commitId": "70b5a1d0500bc587d749a93a4f03329ed9c33c94",
+      "shortId": "70b5a1d",
+      "author": "jhuber6",
+      "timestamp": "2026-02-20T20:43:06Z",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "flang-rt/lib/runtime/io-api-gpu.cpp",
+        "flang-rt/lib/runtime/io-api-gpu.h",
+        "flang-rt/lib/runtime/io-api-server.cpp",
+        "offload/test/offloading/fortran/formatted-io.f90"
+      ],
+      "primaryArea": "flang-rt",
+      "before": "State unknown.",
+      "added": "[flang-rt] Add support for formatted I/O on the GPU (#182580",
+      "impact": "Impact could not be determined.",
+      "keywords": [
+        "commit"
+      ]
+    },
+    {
+      "commitId": "e1feac36249c2aa964f9e198df7957868acb559a",
+      "shortId": "e1feac3",
+      "author": "jhuber6",
+      "timestamp": "2026-02-20T20:43:15Z",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "libc/shared/rpc_dispatch.h",
+        "libc/shared/rpc_util.h"
+      ],
+      "primaryArea": "libc",
+      "before": "State unknown.",
+      "added": "[libc] Properly handle null handles in rpc_dispatch.h",
+      "impact": "Impact could not be determined.",
+      "keywords": [
+        "commit"
+      ]
+    },
+    {
+      "commitId": "67fcdc9016690688b7de8286efec4c18ea89d29d",
+      "shortId": "67fcdc9",
+      "author": "srpande",
+      "timestamp": "2026-02-20T20:52:17Z",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "llvm/lib/Target/AMDGPU/GCNSubtarget.cpp",
+        "llvm/lib/Target/AMDGPU/SIFrameLowering.cpp",
+        "llvm/lib/Target/AMDGPU/SIRegisterInfo.cpp"
+      ],
+      "primaryArea": "llvm",
+      "before": "State unknown.",
+      "added": "[AMDGPU] Efficient way to get NumArchVGPRs. (#182537)",
+      "impact": "Impact could not be determined.",
+      "keywords": [
+        "commit"
+      ]
+    },
+    {
+      "commitId": "fd4dec9b1e9ff9b5f4d1896ac4ae0405070eccc7",
+      "shortId": "fd4dec9",
+      "author": "AmrDeveloper",
+      "timestamp": "2026-02-20T21:04:07Z",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "mlir/lib/Dialect/Complex/IR/ComplexOps.cpp",
+        "mlir/test/Dialect/Complex/canonicalize.mlir"
+      ],
+      "primaryArea": "mlir",
+      "before": "State unknown.",
+      "added": " [MLIR][Complex] Check for FastMathFlag in DivOp folder (#17",
+      "impact": "Impact could not be determined.",
+      "keywords": [
+        "commit"
+      ]
+    },
+    {
+      "commitId": "603e5c832a5508e789316475cc0b8228de876f7c",
+      "shortId": "603e5c8",
+      "author": "timsmith78",
+      "timestamp": "2026-02-20T21:23:01Z",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "flang/include/flang/Optimizer/Dialect/FIRAttr.td",
+        "flang/lib/Lower/CallInterface.cpp",
+        "flang/lib/Optimizer/Transforms/AddDebugInfo.cpp",
+        "flang/test/Lower/HLFIR/recursive-user-procedure.f90",
+        "flang/test/Lower/OpenMP/declare-target-func-and-subr.f90",
+        "flang/test/Lower/OpenMP/declare-target-implicit-func-and-subr-cap-enter.f90",
+        "flang/test/Lower/OpenMP/declare-target-implicit-func-and-subr-cap.f90",
+        "flang/test/Lower/OpenMP/declare-target-implicit-tarop-cap.f90",
+        "flang/test/Transforms/debug-fn-attr.fir"
+      ],
+      "primaryArea": "flang",
+      "before": "State unknown.",
+      "added": "[flang][debug] Supply missing subprogram attributes (#181425",
+      "impact": "Impact could not be determined.",
+      "keywords": [
+        "commit"
+      ]
+    },
+    {
+      "commitId": "09a3d830a888f15abca0ca51f68786e5517cd61f",
+      "shortId": "09a3d83",
+      "author": "kees",
+      "timestamp": "2026-02-20T21:34:17Z",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "clang/lib/CodeGen/CGExpr.cpp",
+        "clang/test/CodeGen/attr-counted-by-pr88931.c",
+        "clang/test/CodeGen/builtin-counted-by-ref.c"
+      ],
+      "primaryArea": "clang",
+      "before": "State unknown.",
+      "added": "[Clang][CodeGen] Fix __builtin_counted_by_ref for nested str",
+      "impact": "Impact could not be determined.",
+      "keywords": [
+        "commit"
+      ]
+    },
+    {
+      "commitId": "4ce49873814cd35bfe85c59e60fb7cb7b04e2441",
+      "shortId": "4ce4987",
+      "author": "fhahn",
+      "timestamp": "2026-02-20T21:48:35Z",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "llvm/lib/Transforms/Vectorize/LoopVectorize.cpp",
+        "llvm/lib/Transforms/Vectorize/VPlanTransforms.cpp",
+        "llvm/test/Transforms/LoopVectorize/epilog-iv-select-cmp.ll",
+        "llvm/test/Transforms/LoopVectorize/iv-select-cmp-decreasing.ll",
+        "llvm/test/Transforms/LoopVectorize/iv-select-cmp-no-wrap.ll",
+        "llvm/test/Transforms/LoopVectorize/iv-select-cmp-non-const-iv-start.ll",
+        "llvm/test/Transforms/LoopVectorize/iv-select-cmp.ll"
+      ],
+      "primaryArea": "llvm",
+      "before": "State unknown.",
+      "added": "[VPlan] Optimize FindLast of FindIV w/o sentinel. (#172569)",
+      "impact": "Impact could not be determined.",
+      "keywords": [
+        "commit"
+      ]
+    },
+    {
+      "commitId": "2e88688ba7e048e25143117cd7b1e5697d9cec86",
+      "shortId": "2e88688",
+      "author": "topperc",
+      "timestamp": "2026-02-20T22:08:53Z",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "llvm/lib/Target/RISCV/RISCVInstrInfoVPseudos.td"
+      ],
+      "primaryArea": "llvm",
+      "before": "State unknown.",
+      "added": "[RISCV] Use bits<1> for AltFmt in RISCVVPseudo. (#182581)",
+      "impact": "Impact could not be determined.",
+      "keywords": [
+        "commit"
+      ]
+    },
+    {
+      "commitId": "5e09590993a9eaf256df07c7aecafa26f1e81253",
+      "shortId": "5e09590",
+      "author": "fmayer",
+      "timestamp": "2026-02-20T22:33:12Z",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "clang/unittests/Analysis/FlowSensitive/MockHeaders.cpp"
+      ],
+      "primaryArea": "clang",
+      "before": "State unknown.",
+      "added": "[NFC] [FlowSensitive] Add mock header for coroutines",
+      "impact": "Impact could not be determined.",
+      "keywords": [
+        "commit"
+      ]
+    },
+    {
+      "commitId": "cedd736518bc07d70c166b8a0c7c0389a1df183e",
+      "shortId": "cedd736",
+      "author": "fmayer",
+      "timestamp": "2026-02-20T22:36:05Z",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "clang/unittests/Analysis/FlowSensitive/UncheckedStatusOrAccessModelTestFixture.h"
+      ],
+      "primaryArea": "clang",
+      "before": "State unknown.",
+      "added": "[NFCI] [FlowSensitive] [StatusOr] use c++20 for test",
+      "impact": "Impact could not be determined.",
+      "keywords": [
+        "commit"
+      ]
+    },
+    {
+      "commitId": "2f7df5cd2d64f24e33814ddddfc9cab56c909167",
+      "shortId": "2f7df5c",
+      "author": "fmayer",
+      "timestamp": "2026-02-20T22:44:52Z",
+      "branch": "users/fmayer/spr/flowsensitive-statusor-add-test-involving-co_return",
+      "eventType": "commit",
+      "filesChanged": [
+        "clang/unittests/Analysis/FlowSensitive/UncheckedStatusOrAccessModelTestFixture.cpp"
+      ],
+      "primaryArea": "clang",
+      "before": "State unknown.",
+      "added": "[𝘀𝗽𝗿] initial version",
+      "impact": "Impact could not be determined.",
+      "keywords": [
+        "commit"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "login": "RiverDave",
+  "avatarUrl": null,
+  "repoFullName": "llvm/llvm-project",
+  "lastUpdated": "2026-02-20T23:16:01.521Z",
+  "totalCommits": 1,
+  "primaryAreas": [
+    "clang"
+  ],
+  "contributorSummary": "",
+  "completionSignals": {
+    "velocityTrend": "unknown",
+    "commitSentiment": "neutral",
+    "churnSignal": "none",
+    "lastUpdated": "2026-02-20T22:53:45.190Z"
+  },
+  "commits": [
+    {
+      "commitId": "2f47bbf7bbd2bac2d308fd1b701c49d92693e2bb",
+      "shortId": "2f47bbf",
+      "author": "RiverDave",
+      "timestamp": "2026-02-20T20:30:36Z",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "clang/include/clang/CIR/Dialect/IR/CIRAttrs.td",
+        "clang/include/clang/CIR/Dialect/IR/CIRCUDAAttrs.td",
+        "clang/lib/CIR/CodeGen/CIRGenCall.cpp",
+        "clang/test/CIR/CodeGenCUDA/kernel-stub-name.cu"
+      ],
+      "primaryArea": "clang",
+      "before": "CUDA device stubs in CIR lacked kernel name metadata for host compilation.",
+      "added": "New CUDAKernelNameAttr attaches kernel names to CUDA device stubs in CIR.",
+      "impact": "Enables kernel name propagation through CIR for CUDA runtime launch.",
+      "keywords": [
+        "CIR",
+        "CUDA",
+        "kernel",
+        "attribute"
+      ],
+      "message": "[CIR][CUDA] Add CUDAKernelNameAttr for device stubs (#180051)",
+      "analyzedAt": "2026-02-20T23:16:01.521Z"
+    }
+  ]
+}

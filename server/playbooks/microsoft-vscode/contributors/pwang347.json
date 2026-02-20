@@ -1,0 +1,84 @@
+{
+  "login": "pwang347",
+  "avatarUrl": "https://avatars.githubusercontent.com/u/8560030?v=4",
+  "repoFullName": "microsoft/vscode",
+  "lastUpdated": "2026-02-20T23:13:49.919Z",
+  "totalCommits": 3,
+  "primaryAreas": [
+    "src",
+    "extensions"
+  ],
+  "contributorSummary": "",
+  "completionSignals": {
+    "velocityTrend": "unknown",
+    "commitSentiment": "neutral",
+    "churnSignal": "none",
+    "lastUpdated": "2026-02-20T23:13:49.888Z"
+  },
+  "commits": [
+    {
+      "commitId": "35c9204ff3c19bc0e29e09999650b2efef9ccc2c",
+      "shortId": "35c9204",
+      "author": "pwang347",
+      "timestamp": "2026-02-20T20:53:02Z",
+      "message": "Fix configure tools code lens action in prompt files (#296584)",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "src/vs/workbench/contrib/chat/browser/promptSyntax/promptToolsCodeLensProvider.ts",
+        "src/vs/workbench/contrib/chat/test/browser/promptSyntax/promptFileRewriter.test.ts"
+      ],
+      "primaryArea": "src",
+      "before": "Configure tools code lens lacked test coverage.",
+      "added": "Unit tests for prompt tools code lens provider.",
+      "impact": "Reliable tool configuration in prompt files.",
+      "keywords": [
+        "testing",
+        "code lens",
+        "prompts"
+      ]
+    },
+    {
+      "commitId": "8801c3fac3b7b8758d88b1813ed0e41b6dab27bf",
+      "shortId": "8801c3f",
+      "author": "pwang347",
+      "timestamp": "2026-02-20T21:26:42Z",
+      "message": "Use markdown icons for prompt markdown files (#296602)",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "extensions/theme-seti/icons/vs-seti-icon-theme.json"
+      ],
+      "primaryArea": "extensions",
+      "before": "Prompt files displayed generic file icons.",
+      "added": "Markdown icons for prompt and instruction files.",
+      "impact": "Visual distinction for chat prompt files.",
+      "keywords": [
+        "icons",
+        "prompt files",
+        "ui"
+      ]
+    },
+    {
+      "commitId": "9fb58f6d200e87a5d79ccba5d5b2f8d7e2669db8",
+      "shortId": "9fb58f6",
+      "author": "pwang347",
+      "timestamp": "2026-02-20T22:53:58Z",
+      "message": "fix",
+      "branch": "pawang/fixClaudeAgents",
+      "eventType": "commit",
+      "filesChanged": [
+        "src/vs/workbench/contrib/chat/browser/widget/input/modePickerActionItem.ts"
+      ],
+      "primaryArea": "src",
+      "before": "Mode picker used complex filtering logic.",
+      "added": "Simplified agent mode selection handling.",
+      "impact": "Reliable Claude agent mode switching.",
+      "keywords": [
+        "agents",
+        "mode picker",
+        "fix"
+      ]
+    }
+  ]
+}

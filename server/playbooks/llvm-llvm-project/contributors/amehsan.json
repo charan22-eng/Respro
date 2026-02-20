@@ -1,0 +1,37 @@
+{
+  "login": "amehsan",
+  "avatarUrl": null,
+  "repoFullName": "llvm/llvm-project",
+  "lastUpdated": "2026-02-20T22:53:45.193Z",
+  "totalCommits": 1,
+  "primaryAreas": [
+    "llvm"
+  ],
+  "contributorSummary": "",
+  "completionSignals": {
+    "velocityTrend": "unknown",
+    "commitSentiment": "neutral",
+    "churnSignal": "none",
+    "lastUpdated": "2026-02-20T22:53:45.193Z"
+  },
+  "commits": [
+    {
+      "commitId": "fafaaa165ba3982f0a3456cfebf3a07e1d18564a",
+      "shortId": "fafaaa1",
+      "author": "amehsan",
+      "timestamp": "2026-02-20T20:32:34Z",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "llvm/lib/Transforms/Scalar/LoopFuse.cpp"
+      ],
+      "primaryArea": "llvm",
+      "before": "State unknown.",
+      "added": "[LoopFusion] Improve collectFusionCandidates() (#182571)",
+      "impact": "Impact could not be determined.",
+      "keywords": [
+        "commit"
+      ]
+    }
+  ]
+}

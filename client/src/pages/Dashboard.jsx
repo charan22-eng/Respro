@@ -13,6 +13,7 @@ import ChatPanel from '../components/ChatPanel';
 import CommitAnalyzer from '../components/CommitAnalyzer';
 import PlaybookPanel from '../components/PlaybookPanel';
 import LiveEventToast from '../components/LiveEventToast';
+import GitGraphPanel from '../components/GitGraphPanel';
 import { fetchPulseData, getAuthUser, subscribeToUpdates } from '../utils/api';
 
 function Dashboard() {
@@ -24,6 +25,7 @@ function Dashboard() {
   const [aiPending, setAiPending] = useState(false);
   const [liveEvents, setLiveEvents] = useState([]);
   const [playbookRefreshKey, setPlaybookRefreshKey] = useState(0);
+  const [showGitGraph, setShowGitGraph] = useState(false);
   const commitAnalyzerRef = useRef(null);
   const sseCleanupRef = useRef(null);
 
@@ -119,7 +121,7 @@ function Dashboard() {
   }, []);
 
   const pulseMutation = useMutation({
-    mutationFn: fetchPulseData,
+    mutationFn: ({ repoUrl, forceRefresh }) => fetchPulseData(repoUrl, forceRefresh),
     onSuccess: (data) => {
       setPulseData(data);
       if (data.aiPending) {
@@ -129,7 +131,14 @@ function Dashboard() {
   });
 
   const handleSubmit = (repoUrl) => {
-    pulseMutation.mutate(repoUrl);
+    pulseMutation.mutate({ repoUrl, forceRefresh: false });
+  };
+
+  const handleForceRefresh = () => {
+    const repoUrl = repoData?.meta?.fullName || repoData?.meta?.htmlUrl;
+    if (repoUrl) {
+      pulseMutation.mutate({ repoUrl, forceRefresh: true });
+    }
   };
 
   const handleReset = () => {
@@ -172,16 +181,58 @@ function Dashboard() {
             </div>
             <div className="flex items-center space-x-4">
               {repoData && (
-                <button
-                  onClick={handleReset}
-                  className="text-sm text-gray-600 hover:text-gray-900 flex items-center space-x-1"
-                >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
-                      d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-                  </svg>
-                  <span>New repo</span>
-                </button>
+                <>
+                  {/* Git Graph Button */}
+                  <button
+                    onClick={() => setShowGitGraph(true)}
+                    className="p-2 hover:bg-gray-100 rounded-lg transition-colors group relative"
+                    title="View Git Graph"
+                  >
+                    <svg 
+                      className="w-5 h-5 text-gray-600 group-hover:text-pulse-600" 
+                      fill="none" 
+                      stroke="currentColor" 
+                      viewBox="0 0 24 24"
+                    >
+                      {/* Tree/branch icon similar to VS Code Git Graph */}
+                      <circle cx="6" cy="6" r="2" strokeWidth={2} />
+                      <circle cx="18" cy="6" r="2" strokeWidth={2} />
+                      <circle cx="6" cy="18" r="2" strokeWidth={2} />
+                      <circle cx="18" cy="18" r="2" strokeWidth={2} />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 8v2c0 2 2 4 6 4s6-2 6-4V8" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 16v-2" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18 16v-2" />
+                    </svg>
+                  </button>
+
+                  {/* Force Refresh Button */}
+                  <button
+                    onClick={handleForceRefresh}
+                    disabled={pulseMutation.isPending}
+                    className="p-2 hover:bg-gray-100 rounded-lg transition-colors group relative disabled:opacity-50"
+                    title="Refresh data (fetch full commit history)"
+                  >
+                    <svg 
+                      className={`w-5 h-5 text-gray-600 group-hover:text-pulse-600 ${pulseMutation.isPending ? 'animate-spin' : ''}`}
+                      fill="none" 
+                      stroke="currentColor" 
+                      viewBox="0 0 24 24"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                    </svg>
+                  </button>
+
+                  <button
+                    onClick={handleReset}
+                    className="text-sm text-gray-600 hover:text-gray-900 flex items-center space-x-1"
+                  >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
+                        d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                    </svg>
+                    <span>New repo</span>
+                  </button>
+                </>
               )}
               {authChecked && <AuthButton user={user} onLogout={handleLogout} />}
             </div>
@@ -287,6 +338,14 @@ function Dashboard() {
 
       {/* Live Event Toast Notifications */}
       <LiveEventToast events={liveEvents} onDismiss={dismissLiveEvent} />
+
+      {/* Git Graph Panel Modal */}
+      {showGitGraph && repoData && (
+        <GitGraphPanel
+          repoData={repoData}
+          onClose={() => setShowGitGraph(false)}
+        />
+      )}
     </div>
   );
 }

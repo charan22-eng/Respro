@@ -1,0 +1,39 @@
+{
+  "login": "SusanTan",
+  "avatarUrl": null,
+  "repoFullName": "llvm/llvm-project",
+  "lastUpdated": "2026-02-20T22:53:45.196Z",
+  "totalCommits": 1,
+  "primaryAreas": [
+    "flang"
+  ],
+  "contributorSummary": "",
+  "completionSignals": {
+    "velocityTrend": "unknown",
+    "commitSentiment": "neutral",
+    "churnSignal": "none",
+    "lastUpdated": "2026-02-20T22:53:45.196Z"
+  },
+  "commits": [
+    {
+      "commitId": "2b074823e478a07bf40a4b9d71f0aaa2f1902f15",
+      "shortId": "2b07482",
+      "author": "SusanTan",
+      "timestamp": "2026-02-20T20:33:26Z",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "flang/lib/Optimizer/Transforms/FIRToMemRef.cpp",
+        "flang/test/Transforms/FIRToMemRef/array-coor-block-arg.mlir",
+        "flang/test/Transforms/FIRToMemRef/no-declare.mlir"
+      ],
+      "primaryArea": "flang",
+      "before": "State unknown.",
+      "added": "Reapply \"[flang] Lowering a ArrayCoorOp to arithmetic comput",
+      "impact": "Impact could not be determined.",
+      "keywords": [
+        "commit"
+      ]
+    }
+  ]
+}

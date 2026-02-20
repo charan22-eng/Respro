@@ -1,0 +1,45 @@
+{
+  "login": "anthonykim1",
+  "avatarUrl": "https://avatars.githubusercontent.com/u/62267334?v=4",
+  "repoFullName": "microsoft/vscode",
+  "lastUpdated": "2026-02-20T23:13:49.898Z",
+  "totalCommits": 1,
+  "primaryAreas": [
+    "remote"
+  ],
+  "contributorSummary": "",
+  "completionSignals": {
+    "velocityTrend": "unknown",
+    "commitSentiment": "neutral",
+    "churnSignal": "none",
+    "lastUpdated": "2026-02-20T23:13:49.898Z"
+  },
+  "commits": [
+    {
+      "commitId": "80eaba3b1caa83e5b9e20baa90a10a8e0153da1b",
+      "shortId": "80eaba3",
+      "author": "anthonykim1",
+      "timestamp": "2026-02-20T21:12:33Z",
+      "message": "Bump xterm for kitty image updates (#296577)",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "package-lock.json",
+        "package.json",
+        "remote/package-lock.json",
+        "remote/package.json",
+        "remote/web/package-lock.json",
+        "remote/web/package.json"
+      ],
+      "primaryArea": "remote",
+      "before": "Terminal used older xterm.js dependency version.",
+      "added": "Kitty image protocol support via xterm bump.",
+      "impact": "Enhanced image rendering in integrated terminal.",
+      "keywords": [
+        "terminal",
+        "xterm",
+        "images"
+      ]
+    }
+  ]
+}
