@@ -22,7 +22,7 @@ const eventBadge = {
   branch_create: 'bg-yellow-100 text-yellow-700',
 };
 
-function PlaybookPanel({ owner, repo }) {
+function PlaybookPanel({ owner, repo, refreshKey = 0 }) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -49,6 +49,13 @@ function PlaybookPanel({ owner, repo }) {
       loadPlaybook();
     }
   }, [isExpanded, data, loading, loadPlaybook]);
+
+  // Refresh when refreshKey changes (triggered by SSE playbook_updated events)
+  useEffect(() => {
+    if (refreshKey > 0 && isExpanded) {
+      loadPlaybook();
+    }
+  }, [refreshKey, isExpanded, loadPlaybook]);
 
   // Auto-refresh every 60 seconds when expanded
   useEffect(() => {
@@ -261,6 +268,7 @@ function PlaybookPanel({ owner, repo }) {
 PlaybookPanel.propTypes = {
   owner: PropTypes.string.isRequired,
   repo: PropTypes.string.isRequired,
+  refreshKey: PropTypes.number,
 };
 
 export default PlaybookPanel;

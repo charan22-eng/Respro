@@ -5,8 +5,10 @@
 
 import express from 'express';
 import crypto from 'crypto';
-import { updatePlaybookWithEvent } from '../services/playbookService.js';
+import { updatePlaybookWithEvent, getProjectPlaybook } from '../services/playbookService.js';
 import { fetchCommitDetails } from '../services/githubService.js';
+import { broadcast } from '../services/sseService.js';
+import { invalidateCache } from '../services/cacheService.js';
 
 const router = express.Router();
 
@@ -160,12 +162,33 @@ router.post('/webhook/:owner/:repo', express.raw({ type: 'application/json' }), 
   }
 
   // Process each event (async, after response already sent)
-  // Fetch actual commit diffs for accurate AI summaries
   const token = process.env.GITHUB_TOKEN;
+  
+  // Invalidate cache so next request gets fresh data
+  await invalidateCache(`${owner}/${repo}`);
+  
+  // Broadcast that new events are incoming
+  broadcast(owner, repo, 'webhook_received', { 
+    type: eventType, 
+    count: events.length,
+    timestamp: new Date().toISOString()
+  });
   
   for (const eventData of events) {
     try {
       console.log(`Processing webhook event: ${eventData.eventType} by ${eventData.author} on ${owner}/${repo}`);
+      
+      // Broadcast immediate event (before AI processing)
+      broadcast(owner, repo, 'new_event', {
+        type: eventData.eventType,
+        commitId: eventData.commitId,
+        shortId: eventData.commitId?.substring(0, 7),
+        author: eventData.author,
+        message: eventData.message,
+        branch: eventData.branch,
+        timestamp: eventData.timestamp,
+        processing: true
+      });
       
       // Fetch commit details including diff if we have a commit ID and token
       if (token && eventData.commitId && eventData.eventType === 'commit') {
@@ -174,15 +197,46 @@ router.post('/webhook/:owner/:repo', express.raw({ type: 'application/json' }), 
           eventData.filesChanged = details.filesChanged;
           eventData.additions = details.additions;
           eventData.deletions = details.deletions;
-          eventData.files = details.files; // Include actual diff patches
+          eventData.files = details.files;
         } catch (fetchError) {
           console.warn(`Could not fetch commit details for ${eventData.commitId}:`, fetchError.message);
         }
       }
       
-      await updatePlaybookWithEvent(owner, repo, eventData);
+      // Update playbook (includes AI summarization)
+      const result = await updatePlaybookWithEvent(owner, repo, eventData);
+      
+      // Broadcast completed event with AI summary
+      if (result.updated) {
+        const latestCommit = result.projectPlaybook?.commits?.slice(-1)[0];
+        broadcast(owner, repo, 'event_processed', {
+          type: eventData.eventType,
+          commitId: eventData.commitId,
+          shortId: eventData.commitId?.substring(0, 7),
+          author: eventData.author,
+          message: eventData.message,
+          branch: eventData.branch,
+          timestamp: eventData.timestamp,
+          before: latestCommit?.before,
+          added: latestCommit?.added,
+          impact: latestCommit?.impact,
+          keywords: latestCommit?.keywords,
+          processing: false
+        });
+        
+        // Also broadcast updated playbook summary
+        broadcast(owner, repo, 'playbook_updated', {
+          projectSummary: result.projectPlaybook?.projectSummary,
+          overallVelocity: result.projectPlaybook?.overallVelocity,
+          totalCommits: result.projectPlaybook?.totalCommitsTracked
+        });
+      }
     } catch (error) {
       console.error(`Failed to process webhook event ${eventData.commitId}:`, error.message);
+      broadcast(owner, repo, 'event_error', {
+        commitId: eventData.commitId,
+        error: error.message
+      });
     }
   }
 });

@@ -12,7 +12,8 @@ import BlockerPanel from '../components/BlockerPanel';
 import ChatPanel from '../components/ChatPanel';
 import CommitAnalyzer from '../components/CommitAnalyzer';
 import PlaybookPanel from '../components/PlaybookPanel';
-import { fetchPulseData, getAuthUser } from '../utils/api';
+import LiveEventToast from '../components/LiveEventToast';
+import { fetchPulseData, getAuthUser, subscribeToUpdates } from '../utils/api';
 
 function Dashboard() {
   const [pulseData, setPulseData] = useState(null);
@@ -20,7 +21,85 @@ function Dashboard() {
   const [user, setUser] = useState(null);
   const [authChecked, setAuthChecked] = useState(false);
   const [useManualInput, setUseManualInput] = useState(false);
+  const [aiPending, setAiPending] = useState(false);
+  const [liveEvents, setLiveEvents] = useState([]);
+  const [playbookRefreshKey, setPlaybookRefreshKey] = useState(0);
   const commitAnalyzerRef = useRef(null);
+  const sseCleanupRef = useRef(null);
+
+  // Setup SSE subscription when we have repo data
+  useEffect(() => {
+    const repoData = pulseData?.repoData;
+    if (!repoData?.meta) return;
+
+    const { owner, name } = repoData.meta;
+    
+    // Cleanup previous subscription
+    if (sseCleanupRef.current) sseCleanupRef.current();
+    
+    sseCleanupRef.current = subscribeToUpdates(owner, name, (eventType, eventData) => {
+      switch (eventType) {
+        case 'summary':
+          setPulseData(prev => ({
+            ...prev,
+            summary: eventData.summary,
+            summaryError: eventData.summaryError,
+            playbookAvailable: eventData.playbookAvailable
+          }));
+          setAiPending(false);
+          break;
+          
+        case 'new_event':
+          // Show toast for incoming event
+          setLiveEvents(prev => [...prev, { ...eventData, id: Date.now() }]);
+          break;
+          
+        case 'event_processed':
+          // Update toast with processed data and add to commits
+          setLiveEvents(prev => 
+            prev.map(e => e.commitId === eventData.commitId ? { ...eventData, id: e.id } : e)
+          );
+          // Add new commit to repoData
+          setPulseData(prev => {
+            if (!prev?.repoData?.commits) return prev;
+            const newCommit = {
+              sha: eventData.commitId,
+              author: eventData.author,
+              message: eventData.message,
+              date: eventData.timestamp,
+              branch: eventData.branch
+            };
+            // Check if commit already exists
+            if (prev.repoData.commits.some(c => c.sha === newCommit.sha)) return prev;
+            return {
+              ...prev,
+              repoData: {
+                ...prev.repoData,
+                commits: [newCommit, ...prev.repoData.commits]
+              }
+            };
+          });
+          break;
+          
+        case 'playbook_updated':
+          // Trigger playbook panel refresh
+          setPlaybookRefreshKey(k => k + 1);
+          break;
+          
+        case 'playbook':
+          setPulseData(prev => ({
+            ...prev,
+            playbookAvailable: eventData.available
+          }));
+          setPlaybookRefreshKey(k => k + 1);
+          break;
+      }
+    });
+
+    return () => {
+      if (sseCleanupRef.current) sseCleanupRef.current();
+    };
+  }, [pulseData?.repoData?.meta?.owner, pulseData?.repoData?.meta?.name]);
 
   // Check auth state on mount
   useEffect(() => {
@@ -43,6 +122,9 @@ function Dashboard() {
     mutationFn: fetchPulseData,
     onSuccess: (data) => {
       setPulseData(data);
+      if (data.aiPending) {
+        setAiPending(true);
+      }
     },
   });
 
@@ -51,10 +133,17 @@ function Dashboard() {
   };
 
   const handleReset = () => {
+    if (sseCleanupRef.current) sseCleanupRef.current();
     setPulseData(null);
     pulseMutation.reset();
     setUseManualInput(false);
+    setAiPending(false);
+    setLiveEvents([]);
   };
+
+  const dismissLiveEvent = useCallback((id) => {
+    setLiveEvents(prev => prev.filter(e => e.id !== id));
+  }, []);
 
   const handleLogout = () => {
     setUser(null);
@@ -164,13 +253,17 @@ function Dashboard() {
             </div>
 
             {/* AI-Generated Pulse Summary */}
-            <PulseSummary summary={summary} summaryError={summaryError} />
+            <PulseSummary summary={summary} summaryError={summaryError} aiPending={aiPending} />
 
             {/* Blocker Detection Panel */}
             <BlockerPanel blockers={repoData.blockers} />
 
             {/* Project Playbook */}
-            <PlaybookPanel owner={repoData.meta.owner} repo={repoData.meta.name} />
+            <PlaybookPanel 
+              owner={repoData.meta.owner} 
+              repo={repoData.meta.name} 
+              refreshKey={playbookRefreshKey}
+            />
 
             {/* Contributor Activity Heatmap */}
             <ContributorHeatmap contributors={repoData.contributors} />
@@ -191,6 +284,9 @@ function Dashboard() {
 
       {/* Floating Chat Panel */}
       {repoData && <ChatPanel repoData={repoData} />}
+
+      {/* Live Event Toast Notifications */}
+      <LiveEventToast events={liveEvents} onDismiss={dismissLiveEvent} />
     </div>
   );
 }

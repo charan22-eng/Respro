@@ -1,6 +1,44 @@
 const API_BASE = '/api';
 
 /**
+ * Subscribe to real-time updates for a repository via SSE
+ * @param {string} owner - Repository owner
+ * @param {string} repo - Repository name
+ * @param {function} onEvent - Callback for events: (eventType, data) => void
+ * @returns {function} Cleanup function to close connection
+ */
+export function subscribeToUpdates(owner, repo, onEvent) {
+  const eventSource = new EventSource(`${API_BASE}/events/${owner}/${repo}`);
+
+  const eventTypes = [
+    'connected',
+    'summary',
+    'playbook',
+    'webhook_received',
+    'new_event',
+    'event_processed',
+    'playbook_updated',
+    'event_error'
+  ];
+
+  eventTypes.forEach(type => {
+    eventSource.addEventListener(type, (e) => {
+      try {
+        onEvent(type, JSON.parse(e.data));
+      } catch (err) {
+        console.error(`Failed to parse SSE event ${type}:`, err);
+      }
+    });
+  });
+
+  eventSource.onerror = () => {
+    onEvent('error', { message: 'Connection lost' });
+  };
+
+  return () => eventSource.close();
+}
+
+/**
  * Fetch repository pulse data
  * @param {string} repoUrl - GitHub repository URL or owner/repo format
  * @returns {Promise<object>} Repository data

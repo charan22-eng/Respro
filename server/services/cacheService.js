@@ -1,108 +1,189 @@
 /**
- * Cache Service
- * In-memory cache with TTL for repository data
+ * Version-Based Cache Service
+ * Cache invalidates when commit SHA changes, not by TTL
+ * This enables real-time updates via webhooks while still caching for performance
  */
 
-import NodeCache from 'node-cache';
+import fs from 'fs/promises';
+import path from 'path';
 
-// 5 minute TTL for repo data
-const CACHE_TTL_SECONDS = 5 * 60;
+const CACHE_DIR = process.env.CACHE_DIR || path.join(process.cwd(), '.cache');
+const MAX_CACHE_AGE_MS = 24 * 60 * 60 * 1000; // 24 hours max (safety cleanup)
 
-// Create cache instance
-const cache = new NodeCache({
-  stdTTL: CACHE_TTL_SECONDS,
-  checkperiod: 60, // Check for expired keys every 60 seconds
-  useClones: true  // Return cloned copies to prevent mutation
-});
+// In-memory cache backed by disk
+let memoryCache = {};
+let cacheLoaded = false;
+
+function getCacheFilePath() {
+  return path.join(CACHE_DIR, 'pulse-cache.json');
+}
 
 /**
- * Generate a cache key from a repo URL
- * Normalizes different URL formats to the same key
+ * Load cache from disk on startup
+ */
+async function loadCache() {
+  if (cacheLoaded) return;
+  try {
+    await fs.mkdir(CACHE_DIR, { recursive: true });
+    const data = await fs.readFile(getCacheFilePath(), 'utf-8');
+    memoryCache = JSON.parse(data);
+    
+    // Clean very old entries (safety net)
+    const now = Date.now();
+    for (const key of Object.keys(memoryCache)) {
+      const entry = memoryCache[key];
+      if (entry.cachedAt && (now - new Date(entry.cachedAt).getTime()) > MAX_CACHE_AGE_MS) {
+        delete memoryCache[key];
+      }
+    }
+    console.log(`Loaded ${Object.keys(memoryCache).length} cached entries from disk`);
+  } catch {
+    memoryCache = {};
+  }
+  cacheLoaded = true;
+}
+
+/**
+ * Save cache to disk (debounced)
+ */
+let saveTimeout = null;
+async function saveCache() {
+  if (saveTimeout) clearTimeout(saveTimeout);
+  saveTimeout = setTimeout(async () => {
+    try {
+      await fs.mkdir(CACHE_DIR, { recursive: true });
+      await fs.writeFile(getCacheFilePath(), JSON.stringify(memoryCache, null, 2));
+    } catch (err) {
+      console.error('Failed to save cache:', err.message);
+    }
+  }, 1000);
+}
+
+/**
+ * Generate cache key from repo URL
  */
 function getCacheKey(repoUrl) {
-  // Extract owner/repo from various formats
   const urlPattern = /github\.com\/([^\/]+)\/([^\/]+)/;
   const shortPattern = /^([^\/]+)\/([^\/]+)$/;
-
-  let owner, repo;
-
   let match = repoUrl.match(urlPattern);
-  if (match) {
-    owner = match[1].toLowerCase();
-    repo = match[2].replace(/\.git$/, '').toLowerCase();
-  } else {
-    match = repoUrl.trim().match(shortPattern);
-    if (match) {
-      owner = match[1].toLowerCase();
-      repo = match[2].replace(/\.git$/, '').toLowerCase();
+  if (match) return `repo:${match[1].toLowerCase()}/${match[2].replace(/\.git$/, '').toLowerCase()}`;
+  match = repoUrl.trim().match(shortPattern);
+  if (match) return `repo:${match[1].toLowerCase()}/${match[2].replace(/\.git$/, '').toLowerCase()}`;
+  return repoUrl;
+}
+
+/**
+ * Get cached data - validates against current version (SHA)
+ * @param {string} repoUrl - Repository URL or key
+ * @param {string} currentVersion - Current latest commit SHA (optional)
+ * @returns {object|null} Cached data if version matches, null otherwise
+ */
+export async function getCachedData(repoUrl, currentVersion = null) {
+  await loadCache();
+  const key = typeof repoUrl === 'string' && repoUrl.includes(':') ? repoUrl : getCacheKey(repoUrl);
+  const entry = memoryCache[key];
+  
+  if (!entry) {
+    return null;
+  }
+  
+  // If currentVersion provided, check if cache is still valid
+  if (currentVersion && entry.version && entry.version !== currentVersion) {
+    console.log(`Cache stale: ${key} (cached: ${entry.version?.substring(0, 7)}, current: ${currentVersion.substring(0, 7)})`);
+    delete memoryCache[key];
+    return null;
+  }
+  
+  console.log(`Cache hit: ${key}${entry.version ? ` (version: ${entry.version.substring(0, 7)})` : ''}`);
+  return entry.data;
+}
+
+/**
+ * Store data in cache with version
+ * @param {string} repoUrl - Repository URL or key
+ * @param {object} data - Data to cache
+ * @param {string} version - Version identifier (typically latest commit SHA)
+ */
+export async function setCachedData(repoUrl, data, version = null) {
+  await loadCache();
+  const key = typeof repoUrl === 'string' && repoUrl.includes(':') ? repoUrl : getCacheKey(repoUrl);
+  memoryCache[key] = {
+    data,
+    version,
+    cachedAt: new Date().toISOString()
+  };
+  console.log(`Cached: ${key}${version ? ` (version: ${version.substring(0, 7)})` : ''}`);
+  saveCache();
+}
+
+/**
+ * Update just the version for an entry (without changing data)
+ * Useful for marking cache as stale without deleting it
+ */
+export async function updateCacheVersion(repoUrl, newVersion) {
+  await loadCache();
+  const key = typeof repoUrl === 'string' && repoUrl.includes(':') ? repoUrl : getCacheKey(repoUrl);
+  if (memoryCache[key]) {
+    memoryCache[key].version = newVersion;
+    saveCache();
+  }
+}
+
+/**
+ * Invalidate cache entry (or entries matching a pattern)
+ */
+export async function invalidateCache(repoUrl) {
+  await loadCache();
+  const key = typeof repoUrl === 'string' && repoUrl.includes(':') ? repoUrl : getCacheKey(repoUrl);
+  
+  // Delete exact match
+  if (memoryCache[key]) {
+    delete memoryCache[key];
+    console.log(`Cache invalidated: ${key}`);
+  }
+  
+  // Also delete any keys containing this repo (for partial invalidation like "owner/repo")
+  const repoPattern = repoUrl.toLowerCase().replace(/^repo:/, '');
+  for (const k of Object.keys(memoryCache)) {
+    if (k.includes(repoPattern)) {
+      delete memoryCache[k];
+      console.log(`Cache invalidated (pattern match): ${k}`);
     }
   }
-
-  if (!owner || !repo) {
-    return repoUrl; // Fallback to raw URL
-  }
-
-  return `repo:${owner}/${repo}`;
-}
-
-/**
- * Get cached data for a repository
- * @param {string} repoUrl 
- * @returns {object|null}
- */
-export function getCachedData(repoUrl) {
-  const key = getCacheKey(repoUrl);
-  const data = cache.get(key);
   
-  if (data) {
-    console.log(`Cache hit for ${key}`);
-    return data;
-  }
-  
-  console.log(`Cache miss for ${key}`);
-  return null;
+  saveCache();
 }
 
 /**
- * Store data in cache
- * @param {string} repoUrl 
- * @param {object} data 
+ * Get the cached version (SHA) for a repo
  */
-export function setCachedData(repoUrl, data) {
-  const key = getCacheKey(repoUrl);
-  cache.set(key, data);
-  console.log(`Cached data for ${key} (TTL: ${CACHE_TTL_SECONDS}s)`);
+export async function getCachedVersion(repoUrl) {
+  await loadCache();
+  const key = typeof repoUrl === 'string' && repoUrl.includes(':') ? repoUrl : getCacheKey(repoUrl);
+  return memoryCache[key]?.version || null;
 }
 
 /**
- * Invalidate cache for a repository
- * @param {string} repoUrl 
- */
-export function invalidateCache(repoUrl) {
-  const key = getCacheKey(repoUrl);
-  cache.del(key);
-  console.log(`Invalidated cache for ${key}`);
-}
-
-/**
- * Get cache statistics
+ * Get cache stats
  */
 export function getCacheStats() {
-  return cache.getStats();
+  return { keys: Object.keys(memoryCache).length };
 }
 
 /**
- * Clear entire cache
+ * Clear all cache
  */
-export function clearCache() {
-  cache.flushAll();
-  console.log('Cache cleared');
+export async function clearCache() {
+  memoryCache = {};
+  saveCache();
 }
 
-export default {
-  getCachedData,
-  setCachedData,
-  invalidateCache,
-  getCacheStats,
-  clearCache
+export default { 
+  getCachedData, 
+  setCachedData, 
+  invalidateCache, 
+  getCachedVersion,
+  updateCacheVersion,
+  getCacheStats, 
+  clearCache 
 };

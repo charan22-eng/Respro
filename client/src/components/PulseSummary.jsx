@@ -4,7 +4,20 @@ import PropTypes from 'prop-types';
  * PulseSummary Component
  * Displays the AI-generated health summary for a repository
  */
-function PulseSummary({ summary, summaryError }) {
+function PulseSummary({ summary, summaryError, aiPending }) {
+  // Show loading state when AI is processing in background
+  if (aiPending && !summary) {
+    return (
+      <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+        <div className="flex items-center space-x-3">
+          <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-pulse-600"></div>
+          <span className="text-gray-600">Generating AI analysis...</span>
+        </div>
+        <p className="mt-2 text-sm text-gray-400">Repository data loaded. AI summary will appear automatically.</p>
+      </div>
+    );
+  }
+
   // Show error state if summary is null but we have an error
   if (!summary && summaryError) {
     return (
@@ -193,7 +206,8 @@ PulseSummary.propTypes = {
     blockers: PropTypes.arrayOf(PropTypes.string),
     recommendation: PropTypes.string
   }),
-  summaryError: PropTypes.string
+  summaryError: PropTypes.string,
+  aiPending: PropTypes.bool
 };
 
 export default PulseSummary;

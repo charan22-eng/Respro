@@ -4,18 +4,22 @@
  */
 
 import express from 'express';
-import { fetchRepoData, parseRepoUrl } from '../services/githubService.js';
+import { fetchRepoData, parseRepoUrl, fetchLatestCommitSha } from '../services/githubService.js';
 import { getCachedData, setCachedData } from '../services/cacheService.js';
 import { generatePulseSummary } from '../services/ollamaService.js';
 import { streamChatResponse } from '../services/chatService.js';
 import { analyzeCommit } from '../services/commitAnalyzerService.js';
 import { getProjectPlaybook, buildContextFromPlaybook, syncCommitsToPlaybook } from '../services/playbookService.js';
+import { broadcast, addConnection, removeConnection } from '../services/sseService.js';
+import { setRepoVersion } from '../services/pollingService.js';
 
 const router = express.Router();
 
 /**
  * POST /api/pulse
  * Fetch repository health data with AI-generated summary
+ * Uses version-based caching (invalidates when latest commit SHA changes)
+ * Returns data immediately, processes AI summary in background
  * Body: { repoUrl: "https://github.com/owner/repo" }
  */
 router.post('/pulse', async (req, res, next) => {
@@ -31,8 +35,9 @@ router.post('/pulse', async (req, res, next) => {
     }
 
     // Validate URL format
+    let owner, repo;
     try {
-      parseRepoUrl(repoUrl);
+      ({ owner, repo } = parseRepoUrl(repoUrl));
     } catch (error) {
       return res.status(400).json({
         error: error.message,
@@ -40,104 +45,121 @@ router.post('/pulse', async (req, res, next) => {
       });
     }
 
-    // Check cache first (includes both repoData and summary)
-    const cachedData = getCachedData(repoUrl);
+    // Get auth token
+    const token = req.session?.githubToken || process.env.GITHUB_TOKEN;
+
+    // Fetch latest commit SHA (lightweight API call for version check)
+    const latestSha = await fetchLatestCommitSha(owner, repo, token);
+    
+    // Check cache with version validation
+    const cachedData = await getCachedData(repoUrl, latestSha);
     if (cachedData) {
+      console.log(`Returning cached data for ${owner}/${repo} (version: ${latestSha?.substring(0, 7)})`);
+      // Set repo version for polling service to track
+      setRepoVersion(owner, repo, latestSha);
       return res.json({
         ...cachedData,
-        cached: true
+        cached: true,
+        cacheVersion: latestSha?.substring(0, 7)
       });
     }
 
-    // Fetch fresh data from GitHub (use authenticated token if available)
-    const token = req.session?.githubToken || process.env.GITHUB_TOKEN;
+    // Cache miss or version changed - fetch fresh data
+    console.log(`Fetching fresh data for ${owner}/${repo} (new version: ${latestSha?.substring(0, 7)})`);
     const repoData = await fetchRepoData(repoUrl, token);
+    
+    // Set repo version for polling service to track
+    setRepoVersion(owner, repo, latestSha);
 
-    // Sync commits to playbook (creates playbook on first run, syncs new commits on subsequent runs)
-    const { owner, repo } = parseRepoUrl(repoUrl);
-    let playbookContext = null;
-    let playbookAvailable = false;
-
-    try {
-      // Sync new commits into playbook (non-blocking on first init — batch summarize runs)
-      // Pass token to fetch actual commit diffs for accurate AI summaries
-      await syncCommitsToPlaybook(owner, repo, repoData.commits, repoData, token);
-      playbookContext = await buildContextFromPlaybook(owner, repo);
-      playbookAvailable = !!(playbookContext && playbookContext.projectSummary);
-      if (playbookAvailable) {
-        console.log(`Playbook context loaded for ${owner}/${repo} (${playbookContext.totalCommitsTracked} entries)`);
-      }
-    } catch (pbError) {
-      console.warn('Playbook sync/load failed (falling back to raw data):', pbError.message);
-    }
-
-    // Generate AI summary (with playbook context if available)
-    let summary = null;
-    let summaryError = null;
-
-    try {
-      console.log(`Generating AI summary with Ollama...${playbookAvailable ? ' (playbook-enriched)' : ''}`);
-      const startTime = Date.now();
-      summary = await generatePulseSummary(repoData, playbookContext);
-      const duration = ((Date.now() - startTime) / 1000).toFixed(1);
-
-      if (summary) {
-        console.log(`AI summary generated successfully in ${duration}s`);
-      } else {
-        console.log('AI returned malformed response, summary will be null');
-        summaryError = 'AI returned malformed response';
-      }
-    } catch (aiError) {
-      console.error('AI summary generation failed:', aiError.message);
-      summaryError = aiError.message;
-    }
-
-    // Prepare response
-    const responseData = {
+    // Return GitHub data immediately with pending AI status
+    const initialResponse = {
       repoData,
-      summary,
-      summaryError,
-      playbookAvailable
+      summary: null,
+      summaryError: null,
+      playbookAvailable: false,
+      aiPending: true,
+      cached: false
     };
 
-    // Cache the full response (repoData + summary) with 5-minute TTL
-    setCachedData(repoUrl, responseData);
+    res.json(initialResponse);
 
-    // Return the data
-    res.json({
-      ...responseData,
-      cached: false
-    });
+    // Process AI in background (non-blocking)
+    processAIInBackground(owner, repo, repoUrl, repoData, token, latestSha);
 
   } catch (error) {
     console.error('Error in /api/pulse:', error);
 
-    // Handle specific error types
     if (error.message.includes('not found')) {
-      return res.status(404).json({
-        error: error.message,
-        code: 'REPO_NOT_FOUND'
-      });
+      return res.status(404).json({ error: error.message, code: 'REPO_NOT_FOUND' });
     }
-
     if (error.message.includes('rate limit')) {
-      return res.status(429).json({
-        error: error.message,
-        code: 'RATE_LIMITED'
-      });
+      return res.status(429).json({ error: error.message, code: 'RATE_LIMITED' });
     }
-
     if (error.message.includes('private') || error.message.includes('forbidden')) {
-      return res.status(403).json({
-        error: error.message,
-        code: 'ACCESS_DENIED'
-      });
+      return res.status(403).json({ error: error.message, code: 'ACCESS_DENIED' });
     }
-
-    // Generic error
     next(error);
   }
 });
+
+/**
+ * Background AI processing - runs after response is sent
+ * @param {string} owner - Repo owner
+ * @param {string} repo - Repo name
+ * @param {string} repoUrl - Full repo URL for caching
+ * @param {object} repoData - GitHub data
+ * @param {string} token - GitHub token
+ * @param {string} version - Latest commit SHA for cache versioning
+ */
+async function processAIInBackground(owner, repo, repoUrl, repoData, token, version) {
+  let playbookContext = null;
+  let playbookAvailable = false;
+  let summary = null;
+  let summaryError = null;
+
+  try {
+    // Sync commits to playbook
+    await syncCommitsToPlaybook(owner, repo, repoData.commits, repoData, token);
+    playbookContext = await buildContextFromPlaybook(owner, repo);
+    playbookAvailable = !!(playbookContext && playbookContext.projectSummary);
+    
+    // Broadcast playbook update
+    broadcast(owner, repo, 'playbook', { 
+      available: playbookAvailable,
+      context: playbookContext 
+    });
+  } catch (pbError) {
+    console.warn('Playbook sync failed:', pbError.message);
+  }
+
+  try {
+    console.log(`Generating AI summary for ${owner}/${repo}...`);
+    const startTime = Date.now();
+    summary = await generatePulseSummary(repoData, playbookContext);
+    const duration = ((Date.now() - startTime) / 1000).toFixed(1);
+
+    if (summary) {
+      console.log(`AI summary generated in ${duration}s`);
+    } else {
+      summaryError = 'AI returned malformed response';
+    }
+  } catch (aiError) {
+    console.error('AI summary failed:', aiError.message);
+    summaryError = aiError.message;
+  }
+
+  // Cache the complete response with version (SHA)
+  const completeData = {
+    repoData,
+    summary,
+    summaryError,
+    playbookAvailable
+  };
+  await setCachedData(repoUrl, completeData, version);
+
+  // Broadcast AI completion to connected clients
+  broadcast(owner, repo, 'summary', { summary, summaryError, playbookAvailable });
+}
 
 /**
  * POST /api/chat
@@ -227,7 +249,7 @@ router.post('/commit/analyze', async (req, res, next) => {
 
     // Cache check — commit SHAs are immutable so caching is safe
     const cacheKey = `commit:${owner.toLowerCase()}/${repo.toLowerCase()}/${sha.toLowerCase()}`;
-    const cached = getCachedData(cacheKey);
+    const cached = await getCachedData(cacheKey);
     if (cached) {
       return res.json({ ...cached, cached: true });
     }
@@ -235,7 +257,7 @@ router.post('/commit/analyze', async (req, res, next) => {
     const token = process.env.GITHUB_TOKEN;
     const result = await analyzeCommit(owner, repo, sha.trim(), token);
 
-    setCachedData(cacheKey, result);
+    await setCachedData(cacheKey, result);
 
     res.json({ ...result, cached: false });
 
@@ -264,7 +286,7 @@ router.get('/repos/:owner/:repo/contributors/:username/commits', async (req, res
     const { owner, repo, username } = req.params;
 
     const cacheKey = `contributor-commits:${owner.toLowerCase()}/${repo.toLowerCase()}/${username.toLowerCase()}`;
-    const cached = getCachedData(cacheKey);
+    const cached = await getCachedData(cacheKey);
     if (cached) {
       return res.json(cached);
     }
@@ -297,13 +319,45 @@ router.get('/repos/:owner/:repo/contributors/:username/commits', async (req, res
       author: c.author?.login || c.commit.author?.name || username
     }));
 
-    setCachedData(cacheKey, commits);
+    await setCachedData(cacheKey, commits);
     res.json(commits);
 
   } catch (error) {
     console.error('Error fetching contributor commits:', error.message);
     next(error);
   }
+});
+
+/**
+ * GET /api/events/:owner/:repo
+ * SSE endpoint for real-time updates
+ */
+router.get('/events/:owner/:repo', (req, res) => {
+  const { owner, repo } = req.params;
+
+  res.writeHead(200, {
+    'Content-Type': 'text/event-stream',
+    'Cache-Control': 'no-cache',
+    'Connection': 'keep-alive',
+    'X-Accel-Buffering': 'no'
+  });
+
+  // Send initial connection confirmation
+  res.write(`event: connected\ndata: {"repo":"${owner}/${repo}"}\n\n`);
+
+  // Register connection
+  addConnection(owner, repo, res);
+
+  // Keep-alive ping every 30 seconds
+  const pingInterval = setInterval(() => {
+    res.write(`: ping\n\n`);
+  }, 30000);
+
+  // Cleanup on disconnect
+  req.on('close', () => {
+    clearInterval(pingInterval);
+    removeConnection(owner, repo, res);
+  });
 });
 
 export default router;

@@ -489,5 +489,64 @@ export async function fetchRepoData(repoUrl, token) {
   };
 }
 
-export { fetchCommitDetails };
-export default { fetchRepoData, parseRepoUrl, fetchCommitDetails };
+/**
+ * Fetch just the latest commit SHA for a repo (lightweight version check)
+ * @param {string} owner - Repository owner
+ * @param {string} repo - Repository name
+ * @param {string} token - GitHub API token
+ * @returns {Promise<string|null>} Latest commit SHA or null
+ */
+async function fetchLatestCommitSha(owner, repo, token) {
+  try {
+    // Fetch just 1 commit to get the latest SHA
+    const commits = await githubFetch(`/repos/${owner}/${repo}/commits?per_page=1`, token);
+    return commits?.[0]?.sha || null;
+  } catch (error) {
+    console.warn(`Could not fetch latest commit SHA: ${error.message}`);
+    return null;
+  }
+}
+
+/**
+ * Fetch full details for a specific commit (including author, message, and diff)
+ * Used by polling service when a new commit is detected
+ */
+async function fetchFullCommitInfo(owner, repo, sha, token) {
+  try {
+    const data = await githubFetch(`/repos/${owner}/${repo}/commits/${sha}`, token);
+    
+    // Extract file changes with patches (diffs)
+    const files = (data.files || []).map(file => ({
+      filename: file.filename,
+      status: file.status,
+      additions: file.additions,
+      deletions: file.deletions,
+      changes: file.changes,
+      patch: file.patch || ''
+    }));
+
+    // Truncate patches to avoid token limits
+    const truncatedFiles = files.slice(0, 5).map(f => ({
+      ...f,
+      patch: f.patch.substring(0, 500) + (f.patch.length > 500 ? '\n... (truncated)' : '')
+    }));
+
+    return {
+      sha: data.sha,
+      author: data.author?.login || data.commit?.author?.name || 'unknown',
+      message: (data.commit?.message || '').split('\n')[0],
+      timestamp: data.commit?.author?.date || data.commit?.committer?.date || new Date().toISOString(),
+      branch: 'main', // GitHub commit API doesn't include branch info directly
+      filesChanged: files.map(f => f.filename),
+      additions: data.stats?.additions || 0,
+      deletions: data.stats?.deletions || 0,
+      files: truncatedFiles
+    };
+  } catch (error) {
+    console.warn(`Could not fetch full commit info for ${sha}:`, error.message);
+    return null;
+  }
+}
+
+export { fetchCommitDetails, fetchLatestCommitSha, fetchFullCommitInfo };
+export default { fetchRepoData, parseRepoUrl, fetchCommitDetails, fetchLatestCommitSha, fetchFullCommitInfo };

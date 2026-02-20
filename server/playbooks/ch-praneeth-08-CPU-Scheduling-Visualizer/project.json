@@ -1,0 +1,93 @@
+{
+  "repoFullName": "ch-praneeth-08/CPU-Scheduling-Visualizer",
+  "lastUpdated": "2026-02-20T21:11:59.458Z",
+  "totalCommitsTracked": 4,
+  "projectSummary": "The project provides data visualization tools including Gantt charts and performance metrics. Current work removes debug code and legacy routing infrastructure to streamline the codebase. Recent activity shows steady maintenance momentum focused on cleanup and deployment readiness.",
+  "techAreas": [
+    "src"
+  ],
+  "overallVelocity": "steady",
+  "commits": [
+    {
+      "commitId": "b8b3fa8e73be535faf0db58d8720a8052c250308",
+      "shortId": "b8b3fa8",
+      "author": "ch-praneeth-08",
+      "timestamp": "2026-02-20T20:46:24Z",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "vercel.json"
+      ],
+      "primaryArea": "root",
+      "before": "Deployment config managed asset caching and SPA fallback through custom routing rules.",
+      "added": "Deleted custom routes including long-term asset caches and filesystem handlers.",
+      "impact": "Switches routing to framework defaults or prepares for modern rewrite configuration.",
+      "keywords": [
+        "deployment",
+        "configuration",
+        "routing",
+        "cleanup"
+      ]
+    },
+    {
+      "commitId": "dc3026d5f23bf995602e85c8f8471dc2a7f5719e",
+      "shortId": "dc3026d",
+      "author": "ch-praneeth-08",
+      "timestamp": "2026-02-20T20:56:09Z",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "src/components/AlgorithmSelector.jsx"
+      ],
+      "primaryArea": "src",
+      "before": "AlgorithmSelector logged internal process data to browser console during visualization.",
+      "added": "Removed debug console statements from algorithm visualization trigger.",
+      "impact": "Eliminates console noise and potential data exposure in production builds.",
+      "keywords": [
+        "cleanup",
+        "frontend",
+        "ui"
+      ]
+    },
+    {
+      "commitId": "386c6d867763f8a44e1dc2f5b9edae2fa817f326",
+      "shortId": "386c6d8",
+      "author": "ch-praneeth-08",
+      "timestamp": "2026-02-20T21:07:32Z",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "src/components/GanttChart.jsx"
+      ],
+      "primaryArea": "src",
+      "before": "Gantt chart printed debug warnings when process color lookups failed.",
+      "added": "Removed debug console warning from Gantt chart color error handler.",
+      "impact": "Cleans production console output during Gantt chart rendering.",
+      "keywords": [
+        "cleanup",
+        "gantt-chart",
+        "debug-removal"
+      ]
+    },
+    {
+      "commitId": "934876ba948b12417198931967ed5ff15419cf97",
+      "shortId": "934876b",
+      "author": "ch-praneeth-08",
+      "timestamp": "2026-02-20T21:10:23Z",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "src/utils/schedulingAlgorithms.js"
+      ],
+      "primaryArea": "src",
+      "before": "Scheduling algorithms contained commented-out debug warnings for invalid completion times.",
+      "added": "Removed two inactive console logging statements from metrics calculation logic.",
+      "impact": "Cleans production code of debugging artifacts to improve maintainability.",
+      "keywords": [
+        "cleanup",
+        "scheduling",
+        "dead-code"
+      ]
+    }
+  ]
+}

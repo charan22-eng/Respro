@@ -6,6 +6,7 @@ import pulseRoutes from './routes/pulse.js';
 import playbookRoutes from './routes/playbook.js';
 import webhookRoutes from './routes/webhook.js';
 import authRoutes from './routes/auth.js';
+import { startPolling } from './services/pollingService.js';
 
 dotenv.config();
 
@@ -56,6 +57,9 @@ app.use((err, req, res, next) => {
 
 const server = app.listen(PORT, () => {
   console.log(`ProjectPulse server running on http://localhost:${PORT}`);
+  
+  // Start background polling for real-time updates
+  startPolling();
 });
 
 server.on('error', (err) => {
