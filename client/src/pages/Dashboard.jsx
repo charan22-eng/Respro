@@ -14,6 +14,7 @@ import CommitAnalyzer from '../components/CommitAnalyzer';
 import PlaybookPanel from '../components/PlaybookPanel';
 import LiveEventToast from '../components/LiveEventToast';
 import GitGraphPanel from '../components/GitGraphPanel';
+import CollisionRadarPanel from '../components/CollisionRadarPanel';
 import { fetchPulseData, getAuthUser, subscribeToUpdates } from '../utils/api';
 
 function Dashboard() {
@@ -26,6 +27,7 @@ function Dashboard() {
   const [liveEvents, setLiveEvents] = useState([]);
   const [playbookRefreshKey, setPlaybookRefreshKey] = useState(0);
   const [showGitGraph, setShowGitGraph] = useState(false);
+  const [showCollisionRadar, setShowCollisionRadar] = useState(false);
   const commitAnalyzerRef = useRef(null);
   const sseCleanupRef = useRef(null);
 
@@ -205,6 +207,26 @@ function Dashboard() {
                     </svg>
                   </button>
 
+                  {/* Collision Radar Button */}
+                  <button
+                    onClick={() => setShowCollisionRadar(true)}
+                    className="p-2 hover:bg-gray-100 rounded-lg transition-colors group relative"
+                    title="View Collision Radar"
+                  >
+                    <svg 
+                      className="w-5 h-5 text-gray-600 group-hover:text-pulse-600" 
+                      fill="none" 
+                      stroke="currentColor" 
+                      viewBox="0 0 24 24"
+                    >
+                      {/* Radar/target icon */}
+                      <circle cx="12" cy="12" r="10" strokeWidth={2} />
+                      <circle cx="12" cy="12" r="6" strokeWidth={2} />
+                      <circle cx="12" cy="12" r="2" strokeWidth={2} />
+                      <path strokeLinecap="round" strokeWidth={2} d="M12 2v4M12 18v4M2 12h4M18 12h4" />
+                    </svg>
+                  </button>
+
                   {/* Force Refresh Button */}
                   <button
                     onClick={handleForceRefresh}
@@ -344,6 +366,15 @@ function Dashboard() {
         <GitGraphPanel
           repoData={repoData}
           onClose={() => setShowGitGraph(false)}
+        />
+      )}
+
+      {/* Collision Radar Panel Modal */}
+      {showCollisionRadar && repoData && (
+        <CollisionRadarPanel
+          owner={repoData.meta.owner}
+          repo={repoData.meta.name}
+          onClose={() => setShowCollisionRadar(false)}
         />
       )}
     </div>

@@ -2,10 +2,11 @@
   "login": "ch-praneeth-08",
   "avatarUrl": "https://avatars.githubusercontent.com/u/196779126?v=4",
   "repoFullName": "ch-praneeth-08/Digital-Library",
-  "lastUpdated": "2026-02-20T20:04:40.472Z",
-  "totalCommits": 1,
+  "lastUpdated": "2026-02-20T23:34:14.976Z",
+  "totalCommits": 8,
   "primaryAreas": [
-    "client"
+    "client",
+    "server"
   ],
   "contributorSummary": "ch-praneeth-08 manages code organization by inserting structural placeholders between import groups to flag areas for upcoming updates. They shipped organizational housekeeping changes that keep the codebase stable during the current maintenance period. Activity has slowed to preparation work while the team awaits the next implementation cycle.",
   "completionSignals": {
@@ -33,6 +34,215 @@
         "client",
         "documentation",
         "placeholder"
+      ]
+    },
+    {
+      "commitId": "5f78ff20f89832b7b83e568e5a536390fa23509f",
+      "shortId": "5f78ff2",
+      "author": "ch-praneeth-08",
+      "timestamp": "2025-04-05T17:06:59Z",
+      "message": "first commit",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "server/.gitignore",
+        "server/config/db.js",
+        "server/controllers/materialController.js",
+        "server/controllers/requestController.js",
+        "server/controllers/userController.js",
+        "server/middleware/authMiddleware.js",
+        "server/middleware/uploadMiddleware.js",
+        "server/middleware/validateRequest.js",
+        "server/models/Material.js",
+        "server/models/Request.js",
+        "server/models/User.js",
+        "server/package-lock.json",
+        "server/package.json",
+        "server/routes/materialRoutes.js",
+        "server/routes/requestRoutes.js",
+        "server/routes/userRoutes.js",
+        "server/server.js",
+        "server/validations/materialValidation.js",
+        "server/validations/requestValidation.js",
+        "server/validations/userValidation.js"
+      ],
+      "primaryArea": "server",
+      "before": "Empty repository without backend code.",
+      "added": "Backend server with database config and material controller.",
+      "impact": "Establishes foundation for material management system.",
+      "keywords": [
+        "backend",
+        "database",
+        "initialization"
+      ]
+    },
+    {
+      "commitId": "01bedab7905ed5438993998f72b81d9405bde7fc",
+      "shortId": "01bedab",
+      "author": "ch-praneeth-08",
+      "timestamp": "2025-04-05T17:31:08Z",
+      "message": "frontend",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/.env",
+        "client/.gitignore",
+        "client/README.md",
+        "client/package-lock.json",
+        "client/package.json",
+        "client/public/favicon.ico",
+        "client/public/index.html",
+        "client/public/logo192.png",
+        "client/public/logo512.png",
+        "client/public/manifest.json",
+        "client/public/robots.txt",
+        "client/src/App.css",
+        "client/src/App.js",
+        "client/src/index.css",
+        "client/src/index.js",
+        "client/src/pages/DashboardPage.js",
+        "client/src/pages/FormStyles.css",
+        "client/src/pages/Homepage.js",
+        "client/src/pages/LoginPage.js",
+        "client/src/pages/RegisterPage.js"
+      ],
+      "primaryArea": "client",
+      "before": "No frontend application code existed.",
+      "added": "React frontend app with environment configuration.",
+      "impact": "Enables client-side interface for library users.",
+      "keywords": [
+        "frontend",
+        "React",
+        "setup"
+      ]
+    },
+    {
+      "commitId": "91ca841cceaefc1240d10b4e5f9acc7937d1a9c6",
+      "shortId": "91ca841",
+      "author": "ch-praneeth-08",
+      "timestamp": "2025-04-05T17:42:02Z",
+      "message": "hello",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "server/routes/materialRoutes.js"
+      ],
+      "primaryArea": "server",
+      "before": "Material routes file ended without comments.",
+      "added": "Comment line containing text 'hello'.",
+      "impact": "No functional change to application behavior.",
+      "keywords": [
+        "comment",
+        "documentation"
+      ]
+    },
+    {
+      "commitId": "b57d8494b60e4c12ae2662cbb5bf626208232d31",
+      "shortId": "b57d849",
+      "author": "ch-praneeth-08",
+      "timestamp": "2025-04-05T20:41:38Z",
+      "message": "basic forum functionality",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "server/controllers/forumCategoryController.js",
+        "server/controllers/materialController.js",
+        "server/middleware/uploadMiddleware.js",
+        "server/models/ForumCategory.js",
+        "server/routes/forumCategoryRoutes.js",
+        "server/routes/materialRoutes.js",
+        "server/server.js"
+      ],
+      "primaryArea": "server",
+      "before": "No forum category system existed.",
+      "added": "Forum category model, controller, and routes.",
+      "impact": "Enables discussion forum organization and management.",
+      "keywords": [
+        "forum",
+        "backend",
+        "categories"
+      ]
+    },
+    {
+      "commitId": "8d488fe2221940d15f71fae6308d87fe4089a469",
+      "shortId": "8d488fe",
+      "author": "ch-praneeth-08",
+      "timestamp": "2025-04-06T00:28:56Z",
+      "message": "added the accept and reject of requests",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/App.js",
+        "client/src/components/Navbar.js",
+        "client/src/index.css",
+        "client/src/pages/AdminRequestListPage.js",
+        "client/src/pages/DiscussionHomePage.css",
+        "client/src/pages/DiscussionHomePage.js",
+        "server/controllers/bookingController.js",
+        "server/controllers/forumPostController.js",
+        "server/controllers/forumThreadController.js",
+        "server/controllers/materialController.js",
+        "server/models/Booking.js",
+        "server/models/ForumPost.js",
+        "server/models/ForumThread.js",
+        "server/routes/bookingRoutes.js",
+        "server/routes/forumPostRoutes.js",
+        "server/routes/forumThreadRoutes.js",
+        "server/routes/materialRoutes.js",
+        "server/server.js"
+      ],
+      "primaryArea": "server",
+      "before": "Admin could view but not act on requests.",
+      "added": "Accept and reject buttons for request processing.",
+      "impact": "Enables request approval workflow for administrators.",
+      "keywords": [
+        "approval",
+        "workflow",
+        "admin"
+      ]
+    },
+    {
+      "commitId": "b94ba78b1061d17a4cb49d41864d4630faaa06df",
+      "shortId": "b94ba78",
+      "author": "ch-praneeth-08",
+      "timestamp": "2025-04-06T01:26:40Z",
+      "message": "added",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "server/server.js"
+      ],
+      "primaryArea": "server",
+      "before": "Server configuration lacked static file serving.",
+      "added": "Static file serving for uploads directory.",
+      "impact": "Enables direct access to uploaded material files.",
+      "keywords": [
+        "static",
+        "files",
+        "server"
+      ]
+    },
+    {
+      "commitId": "ce7a3de0375191893dd33062e234e11c1323dd3c",
+      "shortId": "ce7a3de",
+      "author": "ch-praneeth-08",
+      "timestamp": "2026-02-20T20:30:04Z",
+      "message": "added nothing",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/index.css",
+        "client/src/pages/PhysicalBooksPage.css",
+        "client/src/pages/PhysicalBooksPage.js"
+      ],
+      "primaryArea": "client",
+      "before": "Physical books page without search capability.",
+      "added": "Search input and styling for book listings.",
+      "impact": "Users can now search physical book inventory.",
+      "keywords": [
+        "search",
+        "physical",
+        "books"
       ]
     }
   ]

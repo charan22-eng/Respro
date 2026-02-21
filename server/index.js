@@ -6,6 +6,7 @@ import pulseRoutes from './routes/pulse.js';
 import playbookRoutes from './routes/playbook.js';
 import webhookRoutes from './routes/webhook.js';
 import authRoutes from './routes/auth.js';
+import collisionRoutes from './routes/collision.js';
 import { startPolling } from './services/pollingService.js';
 
 dotenv.config();
@@ -40,6 +41,7 @@ app.use('/api', authRoutes);
 app.use('/api', pulseRoutes);
 app.use('/api', playbookRoutes);
 app.use('/api', webhookRoutes);
+app.use('/api', collisionRoutes);
 
 // Health check
 app.get('/api/health', (req, res) => {

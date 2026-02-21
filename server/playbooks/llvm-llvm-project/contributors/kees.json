@@ -2,7 +2,7 @@
   "login": "kees",
   "avatarUrl": null,
   "repoFullName": "llvm/llvm-project",
-  "lastUpdated": "2026-02-20T22:53:45.208Z",
+  "lastUpdated": "2026-02-20T23:23:40.129Z",
   "totalCommits": 1,
   "primaryAreas": [
     "clang"
@@ -28,12 +28,17 @@
         "clang/test/CodeGen/builtin-counted-by-ref.c"
       ],
       "primaryArea": "clang",
-      "before": "State unknown.",
-      "added": "[Clang][CodeGen] Fix __builtin_counted_by_ref for nested str",
-      "impact": "Impact could not be determined.",
+      "before": "`__builtin_counted_by_ref` incorrectly resolved count fields to outer lexical scope for nested structs.",
+      "added": "Corrected record traversal to stop at named structs while walking through anonymous nesting contexts.",
+      "impact": "Fixes bounds checking for flexible array members inside nested named struct definitions.",
       "keywords": [
-        "commit"
-      ]
+        "bugfix",
+        "clang",
+        "codegen",
+        "flexible-array-member"
+      ],
+      "message": "[Clang][CodeGen] Fix __builtin_counted_by_ref for nested struct FAMs (#182575) (#182590)",
+      "analyzedAt": "2026-02-20T23:23:40.129Z"
     }
   ]
 }

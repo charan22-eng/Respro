@@ -1,12 +1,13 @@
 {
   "repoFullName": "ch-praneeth-08/Digital-Library",
-  "lastUpdated": "2026-02-20T20:04:40.472Z",
-  "totalCommitsTracked": 1,
-  "projectSummary": "This software project is currently in maintenance mode with no functional changes recently shipped. The team inserted a structural placeholder between import groups to prepare for future development, indicating the codebase is stable but awaiting the next implementation cycle. Recent activity has slowed to organizational housekeeping while the team positions for upcoming updates.",
+  "lastUpdated": "2026-02-20T23:34:14.977Z",
+  "totalCommitsTracked": 14,
+  "projectSummary": "The project is a library material management system with community discussion forums, spanning React frontend and Node.js backend. Recent commits established database configuration and REST controllers while delivering production features including search filtering, request approval workflows, admin dashboards, and authentication-protected routes. Development continues across UI styling, forum organization, and static file serving capabilities.",
   "techAreas": [
-    "client"
+    "client",
+    "server"
   ],
-  "overallVelocity": "slowing",
+  "overallVelocity": "steady",
   "commits": [
     {
       "commitId": "0060f2d6c1aad8acd3e24c99092f66df14332e4d",
@@ -26,6 +27,373 @@
         "client",
         "documentation",
         "placeholder"
+      ]
+    },
+    {
+      "commitId": "5f78ff20f89832b7b83e568e5a536390fa23509f",
+      "shortId": "5f78ff2",
+      "author": "ch-praneeth-08",
+      "timestamp": "2025-04-05T17:06:59Z",
+      "message": "first commit",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "server/.gitignore",
+        "server/config/db.js",
+        "server/controllers/materialController.js",
+        "server/controllers/requestController.js",
+        "server/controllers/userController.js",
+        "server/middleware/authMiddleware.js",
+        "server/middleware/uploadMiddleware.js",
+        "server/middleware/validateRequest.js",
+        "server/models/Material.js",
+        "server/models/Request.js",
+        "server/models/User.js",
+        "server/package-lock.json",
+        "server/package.json",
+        "server/routes/materialRoutes.js",
+        "server/routes/requestRoutes.js",
+        "server/routes/userRoutes.js",
+        "server/server.js",
+        "server/validations/materialValidation.js",
+        "server/validations/requestValidation.js",
+        "server/validations/userValidation.js"
+      ],
+      "primaryArea": "server",
+      "before": "Empty repository without backend code.",
+      "added": "Backend server with database config and material controller.",
+      "impact": "Establishes foundation for material management system.",
+      "keywords": [
+        "backend",
+        "database",
+        "initialization"
+      ]
+    },
+    {
+      "commitId": "01bedab7905ed5438993998f72b81d9405bde7fc",
+      "shortId": "01bedab",
+      "author": "ch-praneeth-08",
+      "timestamp": "2025-04-05T17:31:08Z",
+      "message": "frontend",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/.env",
+        "client/.gitignore",
+        "client/README.md",
+        "client/package-lock.json",
+        "client/package.json",
+        "client/public/favicon.ico",
+        "client/public/index.html",
+        "client/public/logo192.png",
+        "client/public/logo512.png",
+        "client/public/manifest.json",
+        "client/public/robots.txt",
+        "client/src/App.css",
+        "client/src/App.js",
+        "client/src/index.css",
+        "client/src/index.js",
+        "client/src/pages/DashboardPage.js",
+        "client/src/pages/FormStyles.css",
+        "client/src/pages/Homepage.js",
+        "client/src/pages/LoginPage.js",
+        "client/src/pages/RegisterPage.js"
+      ],
+      "primaryArea": "client",
+      "before": "No frontend application code existed.",
+      "added": "React frontend app with environment configuration.",
+      "impact": "Enables client-side interface for library users.",
+      "keywords": [
+        "frontend",
+        "React",
+        "setup"
+      ]
+    },
+    {
+      "commitId": "91ca841cceaefc1240d10b4e5f9acc7937d1a9c6",
+      "shortId": "91ca841",
+      "author": "ch-praneeth-08",
+      "timestamp": "2025-04-05T17:42:02Z",
+      "message": "hello",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "server/routes/materialRoutes.js"
+      ],
+      "primaryArea": "server",
+      "before": "Material routes file ended without comments.",
+      "added": "Comment line containing text 'hello'.",
+      "impact": "No functional change to application behavior.",
+      "keywords": [
+        "comment",
+        "documentation"
+      ]
+    },
+    {
+      "commitId": "54f2b8db902b527918741a0cbc6af6e75a8a21e5",
+      "shortId": "54f2b8d",
+      "author": "Sri sharan",
+      "timestamp": "2025-04-05T18:53:35Z",
+      "message": "materialcontroller",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/App.css",
+        "client/src/App.js",
+        "client/src/components/Navbar.css",
+        "client/src/components/Navbar.js",
+        "client/src/components/ProtectedRoute.js",
+        "client/src/context/AuthContext.js",
+        "client/src/index.js",
+        "client/src/pages/DashboardPage.css",
+        "client/src/pages/DashboardPage.js",
+        "client/src/pages/LoginPage.js",
+        "server/controllers/materialController.js"
+      ],
+      "primaryArea": "client",
+      "before": "Application lacked navigation and access control.",
+      "added": "Navigation bar component with protected route wrapper.",
+      "impact": "Enables user navigation and authenticated access control.",
+      "keywords": [
+        "navigation",
+        "routing",
+        "authentication"
+      ]
+    },
+    {
+      "commitId": "4587ceb619c5ef374dc5ada535cc4ebebe093659",
+      "shortId": "4587ceb",
+      "author": "Sri sharan",
+      "timestamp": "2025-04-05T19:31:11Z",
+      "message": "searchfunctionality",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "server/controllers/materialController.js"
+      ],
+      "primaryArea": "server",
+      "before": "Basic material listing without advanced filtering.",
+      "added": "Enhanced search and filter logic for materials.",
+      "impact": "Improves material discovery with query parameters.",
+      "keywords": [
+        "search",
+        "filter",
+        "API"
+      ]
+    },
+    {
+      "commitId": "d1c9f94670454038da1968445f04abed36ea30cb",
+      "shortId": "d1c9f94",
+      "author": "Sri sharan",
+      "timestamp": "2025-04-05T20:40:47Z",
+      "message": "request Materail functionalliy completed",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/App.js",
+        "client/src/components/Navbar.js",
+        "client/src/pages/AdminRequestListPage.css",
+        "client/src/pages/AdminRequestListPage.js",
+        "client/src/pages/DashboardPage.css",
+        "client/src/pages/DashboardPage.js",
+        "client/src/pages/RequestPage.js",
+        "client/src/pages/UploadPage.js"
+      ],
+      "primaryArea": "client",
+      "before": "No admin interface for request management.",
+      "added": "Admin request list page with styling.",
+      "impact": "Administrators can view and manage material requests.",
+      "keywords": [
+        "admin",
+        "requests",
+        "management"
+      ]
+    },
+    {
+      "commitId": "b57d8494b60e4c12ae2662cbb5bf626208232d31",
+      "shortId": "b57d849",
+      "author": "ch-praneeth-08",
+      "timestamp": "2025-04-05T20:41:38Z",
+      "message": "basic forum functionality",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "server/controllers/forumCategoryController.js",
+        "server/controllers/materialController.js",
+        "server/middleware/uploadMiddleware.js",
+        "server/models/ForumCategory.js",
+        "server/routes/forumCategoryRoutes.js",
+        "server/routes/materialRoutes.js",
+        "server/server.js"
+      ],
+      "primaryArea": "server",
+      "before": "No forum category system existed.",
+      "added": "Forum category model, controller, and routes.",
+      "impact": "Enables discussion forum organization and management.",
+      "keywords": [
+        "forum",
+        "backend",
+        "categories"
+      ]
+    },
+    {
+      "commitId": "9ebab5bb4303941263aa3422f3bc92444a091212",
+      "shortId": "9ebab5b",
+      "author": "Sri sharan",
+      "timestamp": "2025-04-05T21:47:32Z",
+      "message": "forums",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "server/controllers/materialController.js"
+      ],
+      "primaryArea": "server",
+      "before": "Material controller missing query library import.",
+      "added": "Restored api-query-params import statement.",
+      "impact": "Re-enables advanced filtering for material queries.",
+      "keywords": [
+        "import",
+        "fix",
+        "query"
+      ]
+    },
+    {
+      "commitId": "db30262de5cdd9b58b1a7e7031a716e9fd4dbec5",
+      "shortId": "db30262",
+      "author": "Sri sharan",
+      "timestamp": "2025-04-05T21:49:02Z",
+      "message": "f",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/App.js",
+        "client/src/components/Navbar.js",
+        "client/src/pages/AdminBookingListPage.css",
+        "client/src/pages/AdminBookingListPage.js",
+        "client/src/pages/DiscussionHomePage.css",
+        "client/src/pages/DiscussionHomePage.js",
+        "client/src/pages/PhysicalBooksPage.css",
+        "client/src/pages/PhysicalBooksPage.js",
+        "client/src/pages/TopicListPage.css",
+        "client/src/pages/TopicListPage.js"
+      ],
+      "primaryArea": "client",
+      "before": "No booking management or discussion pages.",
+      "added": "Admin booking list and discussion home pages.",
+      "impact": "Expands admin tools and forum interface.",
+      "keywords": [
+        "bookings",
+        "forum",
+        "pages"
+      ]
+    },
+    {
+      "commitId": "76260c7cb7c8edac0ae6c5cac6a98d770b69081f",
+      "shortId": "76260c7",
+      "author": "Sri sharan",
+      "timestamp": "2025-04-05T23:03:20Z",
+      "message": "added styles",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/App.css",
+        "client/src/components/Navbar.css",
+        "client/src/components/Navbar.js",
+        "client/src/pages/Homepage.css",
+        "client/src/pages/Homepage.js",
+        "client/src/pages/LoginPage.css",
+        "client/src/pages/LoginPage.js"
+      ],
+      "primaryArea": "client",
+      "before": "Unstyled navigation and homepage components.",
+      "added": "CSS styling for navbar and homepage.",
+      "impact": "Improves visual design and user experience.",
+      "keywords": [
+        "styling",
+        "CSS",
+        "UI"
+      ]
+    },
+    {
+      "commitId": "8d488fe2221940d15f71fae6308d87fe4089a469",
+      "shortId": "8d488fe",
+      "author": "ch-praneeth-08",
+      "timestamp": "2025-04-06T00:28:56Z",
+      "message": "added the accept and reject of requests",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/App.js",
+        "client/src/components/Navbar.js",
+        "client/src/index.css",
+        "client/src/pages/AdminRequestListPage.js",
+        "client/src/pages/DiscussionHomePage.css",
+        "client/src/pages/DiscussionHomePage.js",
+        "server/controllers/bookingController.js",
+        "server/controllers/forumPostController.js",
+        "server/controllers/forumThreadController.js",
+        "server/controllers/materialController.js",
+        "server/models/Booking.js",
+        "server/models/ForumPost.js",
+        "server/models/ForumThread.js",
+        "server/routes/bookingRoutes.js",
+        "server/routes/forumPostRoutes.js",
+        "server/routes/forumThreadRoutes.js",
+        "server/routes/materialRoutes.js",
+        "server/server.js"
+      ],
+      "primaryArea": "server",
+      "before": "Admin could view but not act on requests.",
+      "added": "Accept and reject buttons for request processing.",
+      "impact": "Enables request approval workflow for administrators.",
+      "keywords": [
+        "approval",
+        "workflow",
+        "admin"
+      ]
+    },
+    {
+      "commitId": "b94ba78b1061d17a4cb49d41864d4630faaa06df",
+      "shortId": "b94ba78",
+      "author": "ch-praneeth-08",
+      "timestamp": "2025-04-06T01:26:40Z",
+      "message": "added",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "server/server.js"
+      ],
+      "primaryArea": "server",
+      "before": "Server configuration lacked static file serving.",
+      "added": "Static file serving for uploads directory.",
+      "impact": "Enables direct access to uploaded material files.",
+      "keywords": [
+        "static",
+        "files",
+        "server"
+      ]
+    },
+    {
+      "commitId": "ce7a3de0375191893dd33062e234e11c1323dd3c",
+      "shortId": "ce7a3de",
+      "author": "ch-praneeth-08",
+      "timestamp": "2026-02-20T20:30:04Z",
+      "message": "added nothing",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/index.css",
+        "client/src/pages/PhysicalBooksPage.css",
+        "client/src/pages/PhysicalBooksPage.js"
+      ],
+      "primaryArea": "client",
+      "before": "Physical books page without search capability.",
+      "added": "Search input and styling for book listings.",
+      "impact": "Users can now search physical book inventory.",
+      "keywords": [
+        "search",
+        "physical",
+        "books"
       ]
     }
   ]

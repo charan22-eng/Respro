@@ -2,10 +2,11 @@
   "login": "mjbvz",
   "avatarUrl": "https://avatars.githubusercontent.com/u/12821956?v=4",
   "repoFullName": "microsoft/vscode",
-  "lastUpdated": "2026-02-20T23:13:49.886Z",
-  "totalCommits": 1,
+  "lastUpdated": "2026-02-20T23:18:07.547Z",
+  "totalCommits": 3,
   "primaryAreas": [
-    "src"
+    "src",
+    "extensions"
   ],
   "contributorSummary": "",
   "completionSignals": {
@@ -34,6 +35,71 @@
         "chat",
         "disposable",
         "refactor"
+      ]
+    },
+    {
+      "commitId": "0057411b903ae20ff1740d9ac934ba1fd942c20c",
+      "shortId": "0057411",
+      "author": "mjbvz",
+      "timestamp": "2026-02-20T19:39:14Z",
+      "message": "Hide ChatModelStore.acquire()",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "src/vs/workbench/contrib/chat/common/model/chatModelStore.ts"
+      ],
+      "primaryArea": "src",
+      "before": "ChatModelStore.acquire() method was publicly accessible externally.",
+      "added": "Restricted visibility to hide internal store acquisition method.",
+      "impact": "Improved encapsulation of chat model store internal operations.",
+      "keywords": [
+        "chat",
+        "API",
+        "encapsulation"
+      ]
+    },
+    {
+      "commitId": "f4e07fde242a6663986aae295ec6320c6e32130f",
+      "shortId": "f4e07fd",
+      "author": "mjbvz",
+      "timestamp": "2026-02-20T20:18:25Z",
+      "message": "Merge pull request #296340 from microsoft/dev/mjbvz/esbuild-most-remaining",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "extensions/debug-auto-launch/.vscodeignore",
+        "extensions/debug-auto-launch/esbuild.mts",
+        "extensions/debug-server-ready/.vscodeignore",
+        "extensions/debug-server-ready/esbuild.mts",
+        "extensions/git-base/.vscodeignore",
+        "extensions/git-base/esbuild.browser.mts",
+        "extensions/git-base/esbuild.mts",
+        "extensions/git-base/tsconfig.browser.json",
+        "extensions/ipynb/.vscodeignore",
+        "extensions/ipynb/esbuild.browser.mts",
+        "extensions/ipynb/esbuild.mts",
+        "extensions/ipynb/extension-browser.webpack.config.js",
+        "extensions/ipynb/extension.webpack.config.js",
+        "extensions/ipynb/tsconfig.browser.json",
+        "extensions/media-preview/package.json",
+        "extensions/mermaid-chat-features/package.json",
+        "extensions/microsoft-authentication/.vscodeignore",
+        "extensions/microsoft-authentication/esbuild.mts",
+        "extensions/microsoft-authentication/extension.webpack.config.js",
+        "extensions/vscode-test-resolver/.vscodeignore",
+        "extensions/vscode-test-resolver/esbuild.browser.mts",
+        "extensions/vscode-test-resolver/esbuild.mts",
+        "extensions/vscode-test-resolver/extension-browser.webpack.config.js",
+        "extensions/vscode-test-resolver/tsconfig.browser.json"
+      ],
+      "primaryArea": "extensions",
+      "before": "Extensions used webpack configuration for build process.",
+      "added": "Migrated extension builds from webpack to esbuild system.",
+      "impact": "Faster build times and simpler configuration for extensions.",
+      "keywords": [
+        "build",
+        "esbuild",
+        "extensions"
       ]
     }
   ]

@@ -128,7 +128,7 @@ export async function getAllContributorPlaybooks(owner, repo) {
 /**
  * Write project playbook to disk
  */
-async function writeProjectPlaybook(owner, repo, playbook) {
+export async function writeProjectPlaybook(owner, repo, playbook) {
   await fs.mkdir(getRepoDir(owner, repo), { recursive: true });
   await fs.writeFile(getProjectPath(owner, repo), JSON.stringify(playbook, null, 2));
 }
@@ -456,5 +456,6 @@ export default {
   updatePlaybookWithEvent,
   buildContextFromPlaybook,
   initializeFromExistingCommits,
-  syncCommitsToPlaybook
+  syncCommitsToPlaybook,
+  writeProjectPlaybook
 };

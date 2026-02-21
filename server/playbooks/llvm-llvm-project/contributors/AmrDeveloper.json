@@ -2,7 +2,7 @@
   "login": "AmrDeveloper",
   "avatarUrl": "https://avatars.githubusercontent.com/u/23631699?v=4",
   "repoFullName": "llvm/llvm-project",
-  "lastUpdated": "2026-02-20T22:53:45.205Z",
+  "lastUpdated": "2026-02-20T23:21:54.033Z",
   "totalCommits": 1,
   "primaryAreas": [
     "mlir"
@@ -27,12 +27,17 @@
         "mlir/test/Dialect/Complex/canonicalize.mlir"
       ],
       "primaryArea": "mlir",
-      "before": "State unknown.",
-      "added": " [MLIR][Complex] Check for FastMathFlag in DivOp folder (#17",
-      "impact": "Impact could not be determined.",
+      "before": "Complex DivOp folding proceeded without verifying FastMath flag constraints.",
+      "added": "Complex DivOp folding now checks FastMath flags before optimizing NaN divisions.",
+      "impact": "Ensures NaN optimizations respect strict floating-point compilation settings.",
       "keywords": [
-        "commit"
-      ]
+        "MLIR",
+        "Complex",
+        "constant-folding",
+        "FastMath"
+      ],
+      "message": " [MLIR][Complex] Check for FastMathFlag in DivOp folder (#176249)",
+      "analyzedAt": "2026-02-20T23:21:54.033Z"
     }
   ]
 }

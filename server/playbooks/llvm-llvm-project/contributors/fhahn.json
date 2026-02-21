@@ -2,7 +2,7 @@
   "login": "fhahn",
   "avatarUrl": "https://avatars.githubusercontent.com/u/450489?v=4",
   "repoFullName": "llvm/llvm-project",
-  "lastUpdated": "2026-02-20T23:14:22.502Z",
+  "lastUpdated": "2026-02-20T23:24:16.444Z",
   "totalCommits": 2,
   "primaryAreas": [
     "llvm"
@@ -55,12 +55,17 @@
         "llvm/test/Transforms/LoopVectorize/iv-select-cmp.ll"
       ],
       "primaryArea": "llvm",
-      "before": "State unknown.",
-      "added": "[VPlan] Optimize FindLast of FindIV w/o sentinel. (#172569)",
-      "impact": "Impact could not be determined.",
+      "before": "FindLast IV optimizations were limited to loops with sentinel values.",
+      "added": "Optimization for FindLast induction variables without sentinel values.",
+      "impact": "Enables vectorization of additional last-match search patterns.",
       "keywords": [
-        "commit"
-      ]
+        "VPlan",
+        "vectorization",
+        "FindLast",
+        "optimization"
+      ],
+      "message": "[VPlan] Optimize FindLast of FindIV w/o sentinel. (#172569)",
+      "analyzedAt": "2026-02-20T23:24:16.444Z"
     }
   ]
 }

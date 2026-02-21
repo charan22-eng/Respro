@@ -2,7 +2,7 @@
   "login": "topperc",
   "avatarUrl": "https://avatars.githubusercontent.com/u/22566570?v=4",
   "repoFullName": "llvm/llvm-project",
-  "lastUpdated": "2026-02-20T23:11:02.188Z",
+  "lastUpdated": "2026-02-20T23:25:02.473Z",
   "totalCommits": 2,
   "primaryAreas": [
     "llvm"
@@ -26,12 +26,17 @@
         "llvm/lib/Target/RISCV/RISCVInstrInfoVPseudos.td"
       ],
       "primaryArea": "llvm",
-      "before": "State unknown.",
-      "added": "[RISCV] Use bits<1> for AltFmt in RISCVVPseudo. (#182581)",
-      "impact": "Impact could not be determined.",
+      "before": "IsAltFmt field used scalar bit type.",
+      "added": "Converted IsAltFmt declaration to bits<1> type.",
+      "impact": "Standardizes bit-field encoding in RISC-V pseudo-instructions.",
       "keywords": [
-        "commit"
-      ]
+        "cleanup",
+        "riscv",
+        "backend",
+        "tablegen"
+      ],
+      "message": "[RISCV] Use bits<1> for AltFmt in RISCVVPseudo. (#182581)",
+      "analyzedAt": "2026-02-20T23:25:02.473Z"
     },
     {
       "commitId": "3a3081250c1f464e0c297c41e0b67e88286e8722",

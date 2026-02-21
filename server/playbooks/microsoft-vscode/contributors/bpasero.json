@@ -1,0 +1,77 @@
+{
+  "login": "bpasero",
+  "avatarUrl": "https://avatars.githubusercontent.com/u/900690?v=4",
+  "repoFullName": "microsoft/vscode",
+  "lastUpdated": "2026-02-20T23:18:07.543Z",
+  "totalCommits": 2,
+  "primaryAreas": [
+    "src"
+  ],
+  "contributorSummary": "",
+  "completionSignals": {
+    "velocityTrend": "unknown",
+    "commitSentiment": "neutral",
+    "churnSignal": "none",
+    "lastUpdated": "2026-02-20T23:18:07.542Z"
+  },
+  "commits": [
+    {
+      "commitId": "73e3dbe7a29cce18b9a549e240086b2b527ee433",
+      "shortId": "73e3dbe",
+      "author": "bpasero",
+      "timestamp": "2026-02-20T19:47:52Z",
+      "message": "sessions - adopt modal editor support from core (#296585)",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        ".github/copilot-instructions.md",
+        ".github/skills/agent-sessions-layout/SKILL.md",
+        ".github/skills/sessions/SKILL.md",
+        "src/vs/sessions/LAYOUT.md",
+        "src/vs/sessions/README.md",
+        "src/vs/sessions/browser/parts/editorModal.ts",
+        "src/vs/sessions/browser/style.css",
+        "src/vs/sessions/browser/workbench.ts",
+        "src/vs/sessions/contrib/changesView/browser/changesView.ts",
+        "src/vs/sessions/contrib/configuration/browser/configuration.contribution.ts",
+        "src/vs/workbench/browser/parts/editor/editorCommands.ts",
+        "src/vs/workbench/browser/workbench.contribution.ts",
+        "src/vs/workbench/services/editor/common/editorGroupFinder.ts",
+        "src/vs/workbench/services/editor/test/browser/modalEditorGroup.test.ts",
+        "src/vs/workbench/services/preferences/browser/preferencesService.ts"
+      ],
+      "primaryArea": "src",
+      "before": "Sessions implemented custom editor handling separately from core.",
+      "added": "Adopted standard modal editor support from core platform.",
+      "impact": "Consistent editor behavior across all session management features.",
+      "keywords": [
+        "sessions",
+        "editor",
+        "refactoring"
+      ]
+    },
+    {
+      "commitId": "15914a34df9254c28334acf281a68b4d78064eab",
+      "shortId": "15914a3",
+      "author": "bpasero",
+      "timestamp": "2026-02-20T19:55:18Z",
+      "message": "sessions - show title actions only in main window (#296592)",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "src/vs/sessions/browser/layoutActions.ts",
+        "src/vs/sessions/contrib/chat/browser/chat.contribution.ts",
+        "src/vs/sessions/contrib/chat/browser/runScriptAction.ts"
+      ],
+      "primaryArea": "src",
+      "before": "Title actions appeared in both main and secondary windows.",
+      "added": "Restricted title actions to display only in main window.",
+      "impact": "Cleaner interface in secondary windows without duplicate actions.",
+      "keywords": [
+        "sessions",
+        "UI",
+        "window management"
+      ]
+    }
+  ]
+}

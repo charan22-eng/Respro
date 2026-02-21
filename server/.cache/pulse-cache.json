@@ -1307,13 +1307,21 @@
           "language": "TypeScript",
           "stars": 181947,
           "forks": 38058,
-          "openIssues": 14047,
+          "openIssues": 14045,
           "createdAt": "2015-09-03T20:23:38Z",
-          "updatedAt": "2026-02-20T23:08:21Z",
-          "pushedAt": "2026-02-20T23:09:56Z",
+          "updatedAt": "2026-02-20T23:13:55Z",
+          "pushedAt": "2026-02-20T23:13:46Z",
           "htmlUrl": "https://github.com/microsoft/vscode"
         },
         "commits": [
+          {
+            "sha": "797e1c84ae009ecd9ea1a9299227c2e8989e0be5",
+            "author": "meganrogge",
+            "authorAvatar": "https://avatars.githubusercontent.com/u/29464607?v=4",
+            "date": "2026-02-20T23:13:44Z",
+            "message": "add kb to navigate to next/previous question  (#296633)",
+            "branch": "main"
+          },
           {
             "sha": "b21a3cc7a373843d318c280bfa4c690099d51abe",
             "author": "lszomoru",
@@ -1379,12 +1387,20 @@
             "branch": "ddossett/fantastic-silkworm"
           },
           {
-            "sha": "16c3ba0d240d8533f9e56d59683bcf89cf7c1d63",
-            "author": "meganrogge",
-            "authorAvatar": "https://avatars.githubusercontent.com/u/29464607?v=4",
-            "date": "2026-02-20T22:07:05Z",
-            "message": "Merge branch 'main' into merogge/navigate",
-            "branch": "merogge/navigate"
+            "sha": "b856e1a713e4033830a3fd2726c3da61c1704aac",
+            "author": "daviddossett",
+            "authorAvatar": "https://avatars.githubusercontent.com/u/25163139?v=4",
+            "date": "2026-02-20T22:19:43Z",
+            "message": "Merge branch 'main' into ddossett/scientific-catshark",
+            "branch": "ddossett/scientific-catshark"
+          },
+          {
+            "sha": "344711c18fdad914961e151323c80b4b6582c65d",
+            "author": "daviddossett",
+            "authorAvatar": "https://avatars.githubusercontent.com/u/25163139?v=4",
+            "date": "2026-02-20T22:10:02Z",
+            "message": "Fix keyboard focus for implicit context attachments",
+            "branch": "ddossett/scientific-catshark"
           },
           {
             "sha": "6955692b89755803beb8585b2a25f6126f3f8549",
@@ -1403,22 +1419,6 @@
             "branch": "main"
           },
           {
-            "sha": "b9fa96f5d86867c00adb0f4cfbc5416b57f143ac",
-            "author": "meganrogge",
-            "authorAvatar": "https://avatars.githubusercontent.com/u/29464607?v=4",
-            "date": "2026-02-20T21:29:38Z",
-            "message": "add aria labels",
-            "branch": "merogge/navigate"
-          },
-          {
-            "sha": "00f83754d5b81d0cc0cf9233f1d8bd31ff53fd99",
-            "author": "meganrogge",
-            "authorAvatar": "https://avatars.githubusercontent.com/u/29464607?v=4",
-            "date": "2026-02-20T21:28:15Z",
-            "message": "ensure kbs show in tooltip",
-            "branch": "merogge/navigate"
-          },
-          {
             "sha": "8801c3fac3b7b8758d88b1813ed0e41b6dab27bf",
             "author": "pwang347",
             "authorAvatar": "https://avatars.githubusercontent.com/u/8560030?v=4",
@@ -1435,12 +1435,12 @@
             "branch": "main"
           },
           {
-            "sha": "7189facb11ba983038aea8b9d6ef486f99aba23e",
-            "author": "meganrogge",
-            "authorAvatar": "https://avatars.githubusercontent.com/u/29464607?v=4",
-            "date": "2026-02-20T21:25:16Z",
-            "message": "fix #296613",
-            "branch": "merogge/navigate"
+            "sha": "1a7e8c790a28d770db964bf2fe30c9bd753a4b7b",
+            "author": "daviddossett",
+            "authorAvatar": "https://avatars.githubusercontent.com/u/25163139?v=4",
+            "date": "2026-02-20T21:13:11Z",
+            "message": "Show attachments toolbar for implicit context in Ask mode and selections",
+            "branch": "ddossett/scientific-catshark"
           },
           {
             "sha": "80eaba3b1caa83e5b9e20baa90a10a8e0153da1b",
@@ -17384,7 +17384,7 @@
             "authorAvatar": "https://avatars.githubusercontent.com/u/26030610?v=4",
             "date": "2026-01-25T02:21:05Z",
             "message": "feature: Add dropdown for InlineChatDefaultModel setting selection",
-            "branch": "main"
+            "branch": "pawang/fixClaudeAgents"
           },
           {
             "sha": "41d219f6c3da0c1b5155463c5f18303a97f34438",
@@ -21470,30 +21470,17 @@
             "isDraft": false
           },
           {
-            "number": 296633,
-            "title": "add kb to navigate to next/previous question ",
-            "author": "meganrogge",
-            "authorAvatar": "https://avatars.githubusercontent.com/u/29464607?v=4",
-            "state": "open",
-            "createdAt": "2026-02-20T21:26:10Z",
-            "updatedAt": "2026-02-20T22:07:07Z",
-            "mergedAt": null,
-            "branch": "merogge/navigate",
-            "baseBranch": "main",
-            "isDraft": false
-          },
-          {
             "number": 296630,
             "title": "Show attachments toolbar for implicit context in Ask mode and selections",
             "author": "daviddossett",
             "authorAvatar": "https://avatars.githubusercontent.com/u/25163139?v=4",
             "state": "open",
             "createdAt": "2026-02-20T21:13:31Z",
-            "updatedAt": "2026-02-20T22:19:45Z",
+            "updatedAt": "2026-02-20T23:14:53Z",
             "mergedAt": null,
             "branch": "ddossett/scientific-catshark",
             "baseBranch": "main",
-            "isDraft": true
+            "isDraft": false
           },
           {
             "number": 296628,
@@ -25329,6 +25316,19 @@
             "branch": "ben/peculiar-cow",
             "baseBranch": "main",
             "isDraft": true
+          },
+          {
+            "number": 288540,
+            "title": "JTCombs95-commits",
+            "author": "JTCombs95-commits",
+            "authorAvatar": "https://avatars.githubusercontent.com/u/253403312?v=4",
+            "state": "open",
+            "createdAt": "2026-01-17T03:46:03Z",
+            "updatedAt": "2026-01-20T10:13:35Z",
+            "mergedAt": null,
+            "branch": "patch-1",
+            "baseBranch": "main",
+            "isDraft": false
           }
         ],
         "issues": [
@@ -25506,25 +25506,6 @@
             "createdAt": "2026-02-20T20:16:24Z",
             "updatedAt": "2026-02-20T20:16:24Z",
             "author": "connor4312"
-          },
-          {
-            "number": 296613,
-            "title": "Consider `Alt+N` / `Alt+P` for next/previous question navigation when Question Widget is focused",
-            "state": "open",
-            "labels": [
-              {
-                "name": "feature-request",
-                "color": "dcdcdc"
-              },
-              {
-                "name": "accessibility",
-                "color": "d93f0b"
-              }
-            ],
-            "assignees": [],
-            "createdAt": "2026-02-20T20:15:33Z",
-            "updatedAt": "2026-02-20T20:17:31Z",
-            "author": "meganrogge"
           },
           {
             "number": 296612,
@@ -30324,6 +30305,50 @@
             "createdAt": "2026-02-18T15:30:22Z",
             "updatedAt": "2026-02-18T17:19:23Z",
             "author": "robatwilliams"
+          },
+          {
+            "number": 296025,
+            "title": "Bad Unicode escape in JSON at position 49 (line 1 column 50)",
+            "state": "open",
+            "labels": [
+              {
+                "name": "triage-needed",
+                "color": "D4C5F9"
+              },
+              {
+                "name": "new release",
+                "color": "006b75"
+              }
+            ],
+            "assignees": [
+              {
+                "login": "chrmarti",
+                "avatarUrl": "https://avatars.githubusercontent.com/u/9205389?v=4"
+              }
+            ],
+            "createdAt": "2026-02-18T15:30:00Z",
+            "updatedAt": "2026-02-18T16:31:22Z",
+            "author": "Habook2456"
+          },
+          {
+            "number": 296020,
+            "title": "Reason: Request Failed: 400",
+            "state": "open",
+            "labels": [
+              {
+                "name": "new release",
+                "color": "006b75"
+              }
+            ],
+            "assignees": [
+              {
+                "login": "chrmarti",
+                "avatarUrl": "https://avatars.githubusercontent.com/u/9205389?v=4"
+              }
+            ],
+            "createdAt": "2026-02-18T14:51:51Z",
+            "updatedAt": "2026-02-18T14:53:30Z",
+            "author": "QuantumBuddha"
           }
         ],
         "contributors": [
@@ -30492,7 +30517,7 @@
               "2026-02-17": 35,
               "2026-02-18": 20,
               "2026-02-19": 50,
-              "2026-02-20": 25
+              "2026-02-20": 22
             }
           },
           {
@@ -30828,7 +30853,7 @@
               "2026-02-17": 20,
               "2026-02-18": 35,
               "2026-02-19": 10,
-              "2026-02-20": 27
+              "2026-02-20": 30
             }
           },
           {
@@ -34637,6 +34662,21 @@
           {
             "type": "LONG_RUNNING_PR",
             "severity": "high",
+            "title": "PR #288540 open for 34 days with no recent activity",
+            "description": "\"JTCombs95-commits\" by JTCombs95-commits was last updated 31 days ago.",
+            "relatedBranch": "patch-1",
+            "relatedPR": {
+              "number": 288540,
+              "title": "JTCombs95-commits",
+              "author": "JTCombs95-commits"
+            },
+            "relatedIssue": null,
+            "staleDays": 31,
+            "suggestedAction": "Follow up with JTCombs95-commits on PR #288540."
+          },
+          {
+            "type": "LONG_RUNNING_PR",
+            "severity": "high",
             "title": "PR #289447 open for 30 days with no recent activity",
             "description": "\"Contribution/fix implicit activation\" by bodhisilberling was last updated 30 days ago.",
             "relatedBranch": "contribution/fix-implicit-activation",
@@ -37515,33 +37555,379 @@
             "suggestedAction": "Follow up with Copilot on PR #294792."
           }
         ],
-        "fetchedAt": "2026-02-20T23:12:43.097Z"
+        "fetchedAt": "2026-02-20T23:15:50.151Z"
       },
       "summary": {
         "overallHealth": "At Risk",
-        "headline": "544 commits this week but 300 PRs stuck in review backlog",
-        "summary": "The team shipped 544 commits across 52 contributors this week, with mjbvz, osortega, and bpasero driving the bulk of the work. However, a critical review bottleneck has emerged: 300 open PRs include multiple long-running submissions stagnant for 30+ days without activity, specifically PRs #288817, #289163, and #291618. This backlog risks demotivating contributors and delaying releases despite strong development momentum. Immediate triage is needed to distinguish abandoned work from blocked dependencies.",
+        "headline": "High commit velocity overshadowed by 300 open PRs and review backlog.",
+        "summary": "The repository maintains strong activity with 544 commits from 52 contributors this week, led by mjbvz (55), osortega (53), and bpasero (47). Core AI chat development continues steadily—daviddossett advances attachment toolbar and model picker UX while meganrogge drives accessibility improvements—but momentum is threatened by severe review bottlenecks. Over 300 open PRs include high-severity blockers stalled for 30+ days without activity, risking code rot and contributor fatigue.",
         "highlights": [
-          "544 commits from 52 active contributors demonstrates strong development velocity",
-          "Consistent UI polish and accessibility improvements continuing from daviddossett and meganrogge",
-          "Healthy core maintainer engagement with top 3 contributors each delivering 45+ commits"
+          "544 commits from 52 contributors demonstrates sustained high velocity across the codebase",
+          "daviddossett and sandy081 shipping improvements to chat attachments and session management",
+          "mjbvz completed major infrastructure migration from webpack to esbuild for faster builds"
         ],
         "concerns": [
-          "300 open PRs with many stagnant over 30 days indicates severe review bottleneck",
-          "Multiple stale branches from 2021-2024 suggest repository hygiene debt",
-          "Long-running external contributor PRs risk abandonment without maintainer feedback"
+          "300 open PRs indicate critical review capacity constraints",
+          "Multiple PRs from external contributors stalled 30+ days without maintainer feedback",
+          "High volume of long-running Copilot-generated PRs may be overwhelming human review bandwidth"
         ],
         "blockers": [
-          "PR #288817 by Milad93R has been open 32 days with no recent activity, blocking merge due to lack of review",
-          "PR #289163 by murataslan1 has been open 31 days with no recent activity, blocking merge due to lack of review",
-          "PR #291618 has branch inactive for 22 days on agent sessions feature, blocking profile state fallback implementation"
+          "PR #289163 open for 31 days with no recent activity from author murataslan1, blocking feature integration",
+          "PR #291618 branch inactive for 22 days regarding agent sessions state fallback, requiring review or closure decision",
+          "PR #294073 stalled for 10 days fixing Windows context evaluation, blocking platform-specific bug resolution"
         ],
-        "recommendation": "Triage all PRs older than 30 days today—close abandoned ones or assign reviewers immediately to unblock the pipeline."
+        "recommendation": "Schedule an immediate team-wide PR triage session today to clear PRs older than 30 days by merging viable contributions and closing abandoned drafts."
       },
       "summaryError": null,
       "playbookAvailable": true
     },
-    "version": "b21a3cc7a373843d318c280bfa4c690099d51abe",
-    "cachedAt": "2026-02-20T23:14:14.086Z"
+    "version": "797e1c84ae009ecd9ea1a9299227c2e8989e0be5",
+    "cachedAt": "2026-02-20T23:19:55.974Z"
+  },
+  "repo:ch-praneeth-08/digital-library": {
+    "data": {
+      "repoData": {
+        "meta": {
+          "name": "Digital-Library",
+          "fullName": "ch-praneeth-08/Digital-Library",
+          "description": null,
+          "owner": "ch-praneeth-08",
+          "ownerAvatar": "https://avatars.githubusercontent.com/u/196779126?v=4",
+          "defaultBranch": "main",
+          "language": "JavaScript",
+          "stars": 0,
+          "forks": 2,
+          "openIssues": 0,
+          "createdAt": "2025-04-05T17:04:37Z",
+          "updatedAt": "2026-02-20T20:30:13Z",
+          "pushedAt": "2026-02-20T20:30:10Z",
+          "htmlUrl": "https://github.com/ch-praneeth-08/Digital-Library"
+        },
+        "commits": [
+          {
+            "sha": "ce7a3de0375191893dd33062e234e11c1323dd3c",
+            "author": "ch-praneeth-08",
+            "authorAvatar": "https://avatars.githubusercontent.com/u/196779126?v=4",
+            "date": "2026-02-20T20:30:04Z",
+            "message": "added nothing",
+            "branch": "main"
+          },
+          {
+            "sha": "0060f2d6c1aad8acd3e24c99092f66df14332e4d",
+            "author": "ch-praneeth-08",
+            "authorAvatar": "https://avatars.githubusercontent.com/u/196779126?v=4",
+            "date": "2026-02-20T20:02:38Z",
+            "message": "one two three",
+            "branch": "main"
+          },
+          {
+            "sha": "b94ba78b1061d17a4cb49d41864d4630faaa06df",
+            "author": "ch-praneeth-08",
+            "authorAvatar": null,
+            "date": "2025-04-06T01:26:40Z",
+            "message": "added",
+            "branch": "main"
+          },
+          {
+            "sha": "8d488fe2221940d15f71fae6308d87fe4089a469",
+            "author": "ch-praneeth-08",
+            "authorAvatar": null,
+            "date": "2025-04-06T00:28:56Z",
+            "message": "added the accept and reject of requests",
+            "branch": "main"
+          },
+          {
+            "sha": "76260c7cb7c8edac0ae6c5cac6a98d770b69081f",
+            "author": "Sri sharan",
+            "authorAvatar": null,
+            "date": "2025-04-05T23:03:20Z",
+            "message": "added styles",
+            "branch": "main"
+          },
+          {
+            "sha": "db30262de5cdd9b58b1a7e7031a716e9fd4dbec5",
+            "author": "Sri sharan",
+            "authorAvatar": null,
+            "date": "2025-04-05T21:49:02Z",
+            "message": "f",
+            "branch": "main"
+          },
+          {
+            "sha": "9ebab5bb4303941263aa3422f3bc92444a091212",
+            "author": "Sri sharan",
+            "authorAvatar": null,
+            "date": "2025-04-05T21:47:32Z",
+            "message": "forums",
+            "branch": "main"
+          },
+          {
+            "sha": "b57d8494b60e4c12ae2662cbb5bf626208232d31",
+            "author": "ch-praneeth-08",
+            "authorAvatar": null,
+            "date": "2025-04-05T20:41:38Z",
+            "message": "basic forum functionality",
+            "branch": "main"
+          },
+          {
+            "sha": "d1c9f94670454038da1968445f04abed36ea30cb",
+            "author": "Sri sharan",
+            "authorAvatar": null,
+            "date": "2025-04-05T20:40:47Z",
+            "message": "request Materail functionalliy completed",
+            "branch": "main"
+          },
+          {
+            "sha": "4587ceb619c5ef374dc5ada535cc4ebebe093659",
+            "author": "Sri sharan",
+            "authorAvatar": null,
+            "date": "2025-04-05T19:31:11Z",
+            "message": "searchfunctionality",
+            "branch": "main"
+          },
+          {
+            "sha": "54f2b8db902b527918741a0cbc6af6e75a8a21e5",
+            "author": "Sri sharan",
+            "authorAvatar": null,
+            "date": "2025-04-05T18:53:35Z",
+            "message": "materialcontroller",
+            "branch": "main"
+          },
+          {
+            "sha": "91ca841cceaefc1240d10b4e5f9acc7937d1a9c6",
+            "author": "ch-praneeth-08",
+            "authorAvatar": null,
+            "date": "2025-04-05T17:42:02Z",
+            "message": "hello",
+            "branch": "main"
+          },
+          {
+            "sha": "01bedab7905ed5438993998f72b81d9405bde7fc",
+            "author": "ch-praneeth-08",
+            "authorAvatar": null,
+            "date": "2025-04-05T17:31:08Z",
+            "message": "frontend",
+            "branch": "main"
+          },
+          {
+            "sha": "5f78ff20f89832b7b83e568e5a536390fa23509f",
+            "author": "ch-praneeth-08",
+            "authorAvatar": null,
+            "date": "2025-04-05T17:06:59Z",
+            "message": "first commit",
+            "branch": "main"
+          }
+        ],
+        "branches": [
+          {
+            "name": "main",
+            "lastCommitDate": "2026-02-20T20:30:04Z",
+            "lastCommitAuthor": "ch-praneeth-08",
+            "daysSinceLastCommit": 0,
+            "isStale": false,
+            "hasOpenPR": false
+          }
+        ],
+        "pullRequests": [],
+        "issues": [],
+        "contributors": [
+          {
+            "login": "ch-praneeth-08",
+            "avatarUrl": "https://avatars.githubusercontent.com/u/196779126?v=4",
+            "totalCommits": 2,
+            "commitsByDay": {
+              "2026-02-14": 0,
+              "2026-02-15": 0,
+              "2026-02-16": 0,
+              "2026-02-17": 0,
+              "2026-02-18": 0,
+              "2026-02-19": 0,
+              "2026-02-20": 2
+            }
+          }
+        ],
+        "blockers": [],
+        "fetchedAt": "2026-02-20T23:32:36.070Z"
+      },
+      "summary": {
+        "overallHealth": "At Risk",
+        "headline": "Solo contributor limping forward as feature driver Sri sharan drops out",
+        "summary": "Velocity has collapsed from steady to just two commits this week, with ch-praneeth-08 now the only active contributor maintaining structural placeholders. Sri sharan, who shipped the recent navigation, search filters, and admin dashboards, has vanished entirely from the commit log. The repository shows zero blockers and a current main branch, but the loss of the primary feature developer stalls momentum.",
+        "highlights": [
+          "Zero blockers and no stale branches keeps the codebase stable",
+          "ch-praneeth-08 maintains organizational hygiene with recent commits",
+          "Clean issue and PR queue indicates no technical debt accumulation"
+        ],
+        "concerns": [
+          "Sri sharan has zero commits this week after driving all recent UI features",
+          "Velocity dropped to 2 commits in 7 days from previous steady state",
+          "Single contributor bus factor threatens delivery timeline"
+        ],
+        "blockers": [],
+        "recommendation": "Contact Sri sharan today to confirm availability and align on the next sprint priorities"
+      },
+      "summaryError": null,
+      "playbookAvailable": true
+    },
+    "version": "ce7a3de0375191893dd33062e234e11c1323dd3c",
+    "cachedAt": "2026-02-20T23:36:16.458Z"
+  },
+  "repo:ch-praneeth-08/project_pulse": {
+    "data": {
+      "repoData": {
+        "meta": {
+          "name": "Project_Pulse",
+          "fullName": "ch-praneeth-08/Project_Pulse",
+          "description": null,
+          "owner": "ch-praneeth-08",
+          "ownerAvatar": "https://avatars.githubusercontent.com/u/196779126?v=4",
+          "defaultBranch": "main",
+          "language": "JavaScript",
+          "stars": 0,
+          "forks": 0,
+          "openIssues": 0,
+          "createdAt": "2026-02-20T07:23:06Z",
+          "updatedAt": "2026-02-20T17:03:39Z",
+          "pushedAt": "2026-02-20T17:03:36Z",
+          "htmlUrl": "https://github.com/ch-praneeth-08/Project_Pulse"
+        },
+        "commits": [
+          {
+            "sha": "5e75dc6b3d1935b2f519e4a3f0ef75adc2fa22f2",
+            "author": "v-jishnu",
+            "authorAvatar": "https://avatars.githubusercontent.com/u/153854411?v=4",
+            "date": "2026-02-20T17:03:32Z",
+            "message": "Dynamic contributors commit analyzer",
+            "branch": "main"
+          },
+          {
+            "sha": "326a965e7140cba06096d21ae0d4030c88ac6f51",
+            "author": "v-jishnu",
+            "authorAvatar": "https://avatars.githubusercontent.com/u/153854411?v=4",
+            "date": "2026-02-20T14:38:43Z",
+            "message": "commit-analyser-0.1",
+            "branch": "main"
+          },
+          {
+            "sha": "23768b9442b9d082cd0142f4710440c5f9f86ee3",
+            "author": "v-jishnu",
+            "authorAvatar": "https://avatars.githubusercontent.com/u/153854411?v=4",
+            "date": "2026-02-20T13:40:02Z",
+            "message": "version1.0",
+            "branch": "main"
+          },
+          {
+            "sha": "9db7a89c56dd2a97879771fd47d5a80c899b40f9",
+            "author": "v-jishnu",
+            "authorAvatar": "https://avatars.githubusercontent.com/u/153854411?v=4",
+            "date": "2026-02-20T13:16:39Z",
+            "message": "version v-1",
+            "branch": "main"
+          },
+          {
+            "sha": "53001b1b8123c76c1ebbb03a513d9055a7fd808a",
+            "author": "ch-praneeth-08",
+            "authorAvatar": "https://avatars.githubusercontent.com/u/196779126?v=4",
+            "date": "2026-02-20T11:53:19Z",
+            "message": "made changes",
+            "branch": "main"
+          },
+          {
+            "sha": "28739b67be954c98d87f6ad941c32d20aa38ddb5",
+            "author": "ch-praneeth-08",
+            "authorAvatar": "https://avatars.githubusercontent.com/u/196779126?v=4",
+            "date": "2026-02-20T09:38:04Z",
+            "message": "added the github stats and AI summary",
+            "branch": "main"
+          }
+        ],
+        "branches": [
+          {
+            "name": "main",
+            "lastCommitDate": "2026-02-20T17:03:32Z",
+            "lastCommitAuthor": "v-jishnu",
+            "daysSinceLastCommit": 0,
+            "isStale": false,
+            "hasOpenPR": false
+          }
+        ],
+        "pullRequests": [],
+        "issues": [],
+        "contributors": [
+          {
+            "login": "v-jishnu",
+            "avatarUrl": "https://avatars.githubusercontent.com/u/153854411?v=4",
+            "totalCommits": 4,
+            "commitsByDay": {
+              "2026-02-15": 0,
+              "2026-02-16": 0,
+              "2026-02-17": 0,
+              "2026-02-18": 0,
+              "2026-02-19": 0,
+              "2026-02-20": 4,
+              "2026-02-21": 0
+            }
+          },
+          {
+            "login": "ch-praneeth-08",
+            "avatarUrl": "https://avatars.githubusercontent.com/u/196779126?v=4",
+            "totalCommits": 2,
+            "commitsByDay": {
+              "2026-02-15": 0,
+              "2026-02-16": 0,
+              "2026-02-17": 0,
+              "2026-02-18": 0,
+              "2026-02-19": 0,
+              "2026-02-20": 2,
+              "2026-02-21": 0
+            }
+          }
+        ],
+        "blockers": [],
+        "fetchedAt": "2026-02-21T00:02:55.869Z"
+      },
+      "summary": {
+        "overallHealth": "Healthy",
+        "headline": "Two contributors shipping AI dashboard features at accelerating velocity.",
+        "summary": "The team landed 6 commits in the past week with v-jishnu driving four implementations including the AI chat service and commit analyzer, while ch-praneeth-08 delivered the foundational environment and heatmap components. All work shipped directly to main with zero open pull requests, indicating rapid iteration but bypassing formal code review. The project maintains accelerating momentum transitioning from setup to intelligent analytics with no stale branches or accumulated blockers.",
+        "highlights": [
+          "v-jishnu delivered four features including AI chat service and automated blocker detection",
+          "ch-praneeth-08 established development environment and contributor heatmap visualization",
+          "Zero blockers and fresh main branch with commits as recent as today"
+        ],
+        "concerns": [
+          "All 6 commits landed directly on main with zero pull requests, bypassing code review"
+        ],
+        "blockers": [],
+        "recommendation": "Require pull requests for all future commits to establish code review before mainline merges."
+      },
+      "summaryError": null,
+      "playbookAvailable": true
+    },
+    "version": "5e75dc6b3d1935b2f519e4a3f0ef75adc2fa22f2",
+    "cachedAt": "2026-02-21T00:03:18.794Z"
+  },
+  "commit:lalithaditya007/audi_management/05cb9717a4d462c3294e291af6bfdefe61d37e76": {
+    "data": {
+      "headline": "Updates footer address to include country and modifies copyright punctuation",
+      "type": "minor",
+      "changeImpact": "low",
+      "fileChanges": [
+        {
+          "file": "Footer.jsx",
+          "action": "Adds India to address and changes copyright separator to pipe symbol"
+        }
+      ],
+      "keyInsight": "Minor UI text updates for geographic specificity and copyright formatting consistency; no functional logic changed.",
+      "filesAnalyzed": 1,
+      "filesSkipped": 0,
+      "commitMeta": {
+        "sha": "05cb9717a4d462c3294e291af6bfdefe61d37e76",
+        "message": "one two three",
+        "author": "Lalithaditya007",
+        "date": "2026-02-20T18:47:08Z"
+      }
+    },
+    "version": null,
+    "cachedAt": "2026-02-21T00:03:41.943Z"
   }
 }

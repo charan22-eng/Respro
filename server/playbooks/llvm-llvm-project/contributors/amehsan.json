@@ -2,7 +2,7 @@
   "login": "amehsan",
   "avatarUrl": null,
   "repoFullName": "llvm/llvm-project",
-  "lastUpdated": "2026-02-20T22:53:45.193Z",
+  "lastUpdated": "2026-02-20T23:17:09.110Z",
   "totalCommits": 1,
   "primaryAreas": [
     "llvm"
@@ -26,12 +26,17 @@
         "llvm/lib/Transforms/Scalar/LoopFuse.cpp"
       ],
       "primaryArea": "llvm",
-      "before": "State unknown.",
-      "added": "[LoopFusion] Improve collectFusionCandidates() (#182571)",
-      "impact": "Impact could not be determined.",
+      "before": "collectFusionCandidates carried verbose debug instrumentation in its adjacency check loop.",
+      "added": "Removed debug logging from loop fusion candidate collection to simplify control flow.",
+      "impact": "Enables cleaner code maintenance and faster debug builds.",
       "keywords": [
-        "commit"
-      ]
+        "cleanup",
+        "loop-fusion",
+        "scalar-opt",
+        "debug"
+      ],
+      "message": "[LoopFusion] Improve collectFusionCandidates() (#182571)",
+      "analyzedAt": "2026-02-20T23:17:09.110Z"
     }
   ]
 }

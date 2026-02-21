@@ -2,7 +2,7 @@
   "login": "srpande",
   "avatarUrl": null,
   "repoFullName": "llvm/llvm-project",
-  "lastUpdated": "2026-02-20T22:53:45.203Z",
+  "lastUpdated": "2026-02-20T23:20:57.238Z",
   "totalCommits": 1,
   "primaryAreas": [
     "llvm"
@@ -28,12 +28,16 @@
         "llvm/lib/Target/AMDGPU/SIRegisterInfo.cpp"
       ],
       "primaryArea": "llvm",
-      "before": "State unknown.",
-      "added": "[AMDGPU] Efficient way to get NumArchVGPRs. (#182537)",
-      "impact": "Impact could not be determined.",
+      "before": "AMDGPU components used inline ternary checks to determine architectural VGPR counts.",
+      "added": "New `getAddressableNumArchVGPRs()` method centralizes architectural VGPR count retrieval.",
+      "impact": "Removes FIXME comments and reduces duplication in AMDGPU register handling.",
       "keywords": [
-        "commit"
-      ]
+        "AMDGPU",
+        "refactoring",
+        "codegen"
+      ],
+      "message": "[AMDGPU] Efficient way to get NumArchVGPRs. (#182537)",
+      "analyzedAt": "2026-02-20T23:20:57.238Z"
     }
   ]
 }

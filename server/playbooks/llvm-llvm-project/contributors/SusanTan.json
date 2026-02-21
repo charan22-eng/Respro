@@ -2,7 +2,7 @@
   "login": "SusanTan",
   "avatarUrl": null,
   "repoFullName": "llvm/llvm-project",
-  "lastUpdated": "2026-02-20T22:53:45.196Z",
+  "lastUpdated": "2026-02-20T23:18:01.092Z",
   "totalCommits": 1,
   "primaryAreas": [
     "flang"
@@ -28,12 +28,17 @@
         "flang/test/Transforms/FIRToMemRef/no-declare.mlir"
       ],
       "primaryArea": "flang",
-      "before": "State unknown.",
-      "added": "Reapply \"[flang] Lowering a ArrayCoorOp to arithmetic comput",
-      "impact": "Impact could not be determined.",
+      "before": "ArrayCoorOp with block argument bases survived via shortcut conversion.",
+      "added": "Arithmetic index computation replaces shortcut for block argument ArrayCoorOp.",
+      "impact": "Enables erasure of ArrayCoorOp when used only by load/store operations.",
       "keywords": [
-        "commit"
-      ]
+        "flang",
+        "FIR",
+        "lowering",
+        "optimization"
+      ],
+      "message": "Reapply \"[flang] Lowering a ArrayCoorOp to arithmetic computations\" (#182585)",
+      "analyzedAt": "2026-02-20T23:18:01.092Z"
     }
   ]
 }

@@ -1,8 +1,8 @@
 {
   "repoFullName": "microsoft/vscode",
-  "lastUpdated": "2026-02-20T23:14:26.542Z",
-  "totalCommitsTracked": 21,
-  "projectSummary": "This project builds a code editor with AI-assisted development features. Recent work improves keyboard navigation in chat panels, speeds up git branch switching, upgrades terminal image rendering, and fixes visual alignment bugs. Multiple contributors maintain steady progress across accessibility, core tools, and interface polish.",
+  "lastUpdated": "2026-02-20T23:18:07.555Z",
+  "totalCommitsTracked": 41,
+  "projectSummary": "An AI-assisted coding environment integrating chat functionality with git workflows. Work centers on refining the chat interface—adding branch selection, fixing model pickers, and streamlining attachments—alongside migrating extension builds to esbuild and tightening GitHub permissions. Momentum remains steady with consistent progress across UI polish, accessibility, and infrastructure.",
   "techAreas": [
     "src",
     "remote",
@@ -599,6 +599,503 @@
         "chat",
         "accessibility",
         "keyboard-navigation"
+      ]
+    },
+    {
+      "commitId": "9a3a7aaa1330e315606897b76b842ae78052827d",
+      "shortId": "9a3a7aa",
+      "author": "daviddossett",
+      "timestamp": "2026-02-20T18:14:24Z",
+      "message": "Move mode badge and timestamp to bottom row in session list items (#296560)",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "src/vs/workbench/contrib/chat/browser/agentSessions/agentSessionsViewer.ts",
+        "src/vs/workbench/contrib/chat/browser/agentSessions/media/agentsessionsviewer.css"
+      ],
+      "primaryArea": "src",
+      "before": "Mode badge and timestamp appeared in the title row.",
+      "added": "Moved both elements to the bottom row instead.",
+      "impact": "Cleaner visual layout for agent session listings.",
+      "keywords": [
+        "UI",
+        "layout",
+        "agent sessions"
+      ]
+    },
+    {
+      "commitId": "e8f4c461f1441bab17f8b44bd2b167b3adf69854",
+      "shortId": "e8f4c46",
+      "author": "hediet",
+      "timestamp": "2026-02-20T18:14:25Z",
+      "message": "updates screenshot-test.yml",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        ".github/workflows/screenshot-test.yml"
+      ],
+      "primaryArea": ".github",
+      "before": "Screenshot workflow lacked pull request write permissions.",
+      "added": "Granted write access for pull requests and statuses.",
+      "impact": "Workflow can now update pull request status checks.",
+      "keywords": [
+        "CI/CD",
+        "permissions",
+        "automation"
+      ]
+    },
+    {
+      "commitId": "4eb8f169e584e5aa74e430b630484d7ee3215b8f",
+      "shortId": "4eb8f16",
+      "author": "daviddossett",
+      "timestamp": "2026-02-20T18:23:22Z",
+      "message": "Update chat input: hide attachments bar, move/restyle context window hint (#296390)",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "extensions/theme-2026/themes/styles.css",
+        "src/vs/workbench/contrib/chat/browser/actions/chatContextActions.ts",
+        "src/vs/workbench/contrib/chat/browser/widget/input/chatInputPart.ts",
+        "src/vs/workbench/contrib/chat/browser/widget/media/chat.css",
+        "src/vs/workbench/contrib/chat/browser/widgetHosts/viewPane/chatContextUsageWidget.ts",
+        "src/vs/workbench/contrib/chat/browser/widgetHosts/viewPane/media/chatContextUsageWidget.css"
+      ],
+      "primaryArea": "src",
+      "before": "Chat input displayed attachments bar and context hints separately.",
+      "added": "Hidden attachments bar with restyled context window hints.",
+      "impact": "Streamlined chat input interface reduces visual clutter.",
+      "keywords": [
+        "chat",
+        "UI",
+        "attachments"
+      ]
+    },
+    {
+      "commitId": "f433494e5e8d82817ed7cc801fe9a7215fd86e9b",
+      "shortId": "f433494",
+      "author": "dileepyavan",
+      "timestamp": "2026-02-20T18:24:38Z",
+      "message": "Refer to ripgrep thats already included in the node modules. (#296335)",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "src/vs/workbench/contrib/terminalContrib/chatAgentTools/common/terminalChatAgentToolsConfiguration.ts",
+        "src/vs/workbench/contrib/terminalContrib/chatAgentTools/common/terminalSandboxService.ts",
+        "src/vs/workbench/contrib/terminalContrib/chatAgentTools/test/browser/terminalSandboxService.test.ts"
+      ],
+      "primaryArea": "src",
+      "before": "Terminal tools referenced external ripgrep binary location.",
+      "added": "Uses ripgrep package already included in node modules.",
+      "impact": "Ensures consistent search tool dependencies across installations.",
+      "keywords": [
+        "terminal",
+        "ripgrep",
+        "dependencies"
+      ]
+    },
+    {
+      "commitId": "a9c01a08a394df3c4141754ccef46fed875bb43a",
+      "shortId": "a9c01a0",
+      "author": "hediet",
+      "timestamp": "2026-02-20T18:30:08Z",
+      "message": "updates github action check",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        ".github/workflows/screenshot-test.yml"
+      ],
+      "primaryArea": ".github",
+      "before": "Workflow had status write permission configured incorrectly.",
+      "added": "Changed permission from statuses to checks write access.",
+      "impact": "Correctly permits GitHub Checks API updates now.",
+      "keywords": [
+        "CI/CD",
+        "permissions",
+        "checks"
+      ]
+    },
+    {
+      "commitId": "7e93a14a643f547526405c46bdf6bfaae83644e6",
+      "shortId": "7e93a14",
+      "author": "daviddossett",
+      "timestamp": "2026-02-20T18:34:30Z",
+      "message": "Refine chat model picker menu behavior",
+      "branch": "ddossett/fantastic-silkworm",
+      "eventType": "commit",
+      "filesChanged": [
+        "src/vs/platform/actionWidget/browser/actionList.ts",
+        "src/vs/platform/actionWidget/browser/actionWidgetDropdown.ts",
+        "src/vs/workbench/contrib/chat/browser/widget/input/chatModelPicker.ts"
+      ],
+      "primaryArea": "src",
+      "before": "Model picker menu had no minimum width constraint.",
+      "added": "Added minimum width and improved dropdown action handling.",
+      "impact": "Better usability for selecting chat models from dropdown.",
+      "keywords": [
+        "chat",
+        "model picker",
+        "UI"
+      ]
+    },
+    {
+      "commitId": "7c127d91a54c89dcaf84fe62e3173c3e8b737855",
+      "shortId": "7c127d9",
+      "author": "lszomoru",
+      "timestamp": "2026-02-20T18:48:01Z",
+      "message": "Git - wire-up git repository state (#296563)",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "src/vs/workbench/api/browser/mainThreadGitExtensionService.ts",
+        "src/vs/workbench/api/common/extHost.protocol.ts",
+        "src/vs/workbench/api/common/extHostGitExtensionService.ts",
+        "src/vs/workbench/contrib/git/browser/gitService.ts",
+        "src/vs/workbench/contrib/git/common/gitService.ts"
+      ],
+      "primaryArea": "src",
+      "before": "Git repository state changes were not broadcast to extensions.",
+      "added": "Wired repository state change events through extension host protocol.",
+      "impact": "Extensions now receive notifications when git repository updates occur.",
+      "keywords": [
+        "git",
+        "API",
+        "repository state"
+      ]
+    },
+    {
+      "commitId": "f186967cb88a4806fab1e4a82f37a312a23865d0",
+      "shortId": "f186967",
+      "author": "jruales",
+      "timestamp": "2026-02-20T19:13:09Z",
+      "message": "Browser: Make toolbar icons align (#296454)",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "src/vs/workbench/contrib/browserView/electron-browser/media/browser.css"
+      ],
+      "primaryArea": "src",
+      "before": "Browser toolbar icons lacked proper spacing between elements.",
+      "added": "Added four pixel right margin to actions container.",
+      "impact": "Toolbar icons now align correctly with consistent spacing.",
+      "keywords": [
+        "browser",
+        "toolbar",
+        "UI"
+      ]
+    },
+    {
+      "commitId": "daddf4fcaee2dd30ee8d170d480b7b0ff6353a1f",
+      "shortId": "daddf4f",
+      "author": "sandy081",
+      "timestamp": "2026-02-20T19:30:59Z",
+      "message": "Feat: Show branch picker in core (#296559)",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "src/vs/sessions/contrib/chat/browser/branchPicker.ts",
+        "src/vs/sessions/contrib/chat/browser/folderPicker.ts",
+        "src/vs/sessions/contrib/chat/browser/media/chatWelcomePart.css",
+        "src/vs/sessions/contrib/chat/browser/newChatViewPane.ts",
+        "src/vs/sessions/contrib/chat/browser/newSession.ts",
+        "src/vs/sessions/contrib/chat/browser/sessionTargetPicker.ts",
+        "src/vs/sessions/contrib/sessions/browser/sessionsManagementService.ts"
+      ],
+      "primaryArea": "src",
+      "before": "No branch selection interface existed in core sessions.",
+      "added": "New branch picker component integrated into chat sessions.",
+      "impact": "Users can select git branches directly within chat interface.",
+      "keywords": [
+        "branch picker",
+        "sessions",
+        "git"
+      ]
+    },
+    {
+      "commitId": "3458c3225bdead3d02405878884ccf722875ffc8",
+      "shortId": "3458c32",
+      "author": "osortega",
+      "timestamp": "2026-02-20T19:35:33Z",
+      "message": "Fix model picker in welcome view",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "src/vs/workbench/contrib/chat/browser/widget/input/chatInputPart.ts"
+      ],
+      "primaryArea": "src",
+      "before": "Model picker failed to initialize in welcome view.",
+      "added": "Fixed initialization logic for chat model picker component.",
+      "impact": "Model selection now works correctly on welcome screen.",
+      "keywords": [
+        "chat",
+        "model picker",
+        "fix"
+      ]
+    },
+    {
+      "commitId": "0057411b903ae20ff1740d9ac934ba1fd942c20c",
+      "shortId": "0057411",
+      "author": "mjbvz",
+      "timestamp": "2026-02-20T19:39:14Z",
+      "message": "Hide ChatModelStore.acquire()",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "src/vs/workbench/contrib/chat/common/model/chatModelStore.ts"
+      ],
+      "primaryArea": "src",
+      "before": "ChatModelStore.acquire() method was publicly accessible externally.",
+      "added": "Restricted visibility to hide internal store acquisition method.",
+      "impact": "Improved encapsulation of chat model store internal operations.",
+      "keywords": [
+        "chat",
+        "API",
+        "encapsulation"
+      ]
+    },
+    {
+      "commitId": "73e3dbe7a29cce18b9a549e240086b2b527ee433",
+      "shortId": "73e3dbe",
+      "author": "bpasero",
+      "timestamp": "2026-02-20T19:47:52Z",
+      "message": "sessions - adopt modal editor support from core (#296585)",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        ".github/copilot-instructions.md",
+        ".github/skills/agent-sessions-layout/SKILL.md",
+        ".github/skills/sessions/SKILL.md",
+        "src/vs/sessions/LAYOUT.md",
+        "src/vs/sessions/README.md",
+        "src/vs/sessions/browser/parts/editorModal.ts",
+        "src/vs/sessions/browser/style.css",
+        "src/vs/sessions/browser/workbench.ts",
+        "src/vs/sessions/contrib/changesView/browser/changesView.ts",
+        "src/vs/sessions/contrib/configuration/browser/configuration.contribution.ts",
+        "src/vs/workbench/browser/parts/editor/editorCommands.ts",
+        "src/vs/workbench/browser/workbench.contribution.ts",
+        "src/vs/workbench/services/editor/common/editorGroupFinder.ts",
+        "src/vs/workbench/services/editor/test/browser/modalEditorGroup.test.ts",
+        "src/vs/workbench/services/preferences/browser/preferencesService.ts"
+      ],
+      "primaryArea": "src",
+      "before": "Sessions implemented custom editor handling separately from core.",
+      "added": "Adopted standard modal editor support from core platform.",
+      "impact": "Consistent editor behavior across all session management features.",
+      "keywords": [
+        "sessions",
+        "editor",
+        "refactoring"
+      ]
+    },
+    {
+      "commitId": "15914a34df9254c28334acf281a68b4d78064eab",
+      "shortId": "15914a3",
+      "author": "bpasero",
+      "timestamp": "2026-02-20T19:55:18Z",
+      "message": "sessions - show title actions only in main window (#296592)",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "src/vs/sessions/browser/layoutActions.ts",
+        "src/vs/sessions/contrib/chat/browser/chat.contribution.ts",
+        "src/vs/sessions/contrib/chat/browser/runScriptAction.ts"
+      ],
+      "primaryArea": "src",
+      "before": "Title actions appeared in both main and secondary windows.",
+      "added": "Restricted title actions to display only in main window.",
+      "impact": "Cleaner interface in secondary windows without duplicate actions.",
+      "keywords": [
+        "sessions",
+        "UI",
+        "window management"
+      ]
+    },
+    {
+      "commitId": "4b6f79808398bca9e0f77b83ee640b76bfb47e38",
+      "shortId": "4b6f798",
+      "author": "osortega",
+      "timestamp": "2026-02-20T20:11:22Z",
+      "message": "Merge pull request #296593 from microsoft/osortega/level-earwig",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "src/vs/workbench/contrib/chat/browser/widget/input/chatInputPart.ts"
+      ],
+      "primaryArea": "src",
+      "before": "Model picker fix existed on feature branch only.",
+      "added": "Merged model picker fixes into main branch.",
+      "impact": "Integrated welcome view model picker fix into production.",
+      "keywords": [
+        "merge",
+        "chat",
+        "model picker"
+      ]
+    },
+    {
+      "commitId": "f4e07fde242a6663986aae295ec6320c6e32130f",
+      "shortId": "f4e07fd",
+      "author": "mjbvz",
+      "timestamp": "2026-02-20T20:18:25Z",
+      "message": "Merge pull request #296340 from microsoft/dev/mjbvz/esbuild-most-remaining",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "extensions/debug-auto-launch/.vscodeignore",
+        "extensions/debug-auto-launch/esbuild.mts",
+        "extensions/debug-server-ready/.vscodeignore",
+        "extensions/debug-server-ready/esbuild.mts",
+        "extensions/git-base/.vscodeignore",
+        "extensions/git-base/esbuild.browser.mts",
+        "extensions/git-base/esbuild.mts",
+        "extensions/git-base/tsconfig.browser.json",
+        "extensions/ipynb/.vscodeignore",
+        "extensions/ipynb/esbuild.browser.mts",
+        "extensions/ipynb/esbuild.mts",
+        "extensions/ipynb/extension-browser.webpack.config.js",
+        "extensions/ipynb/extension.webpack.config.js",
+        "extensions/ipynb/tsconfig.browser.json",
+        "extensions/media-preview/package.json",
+        "extensions/mermaid-chat-features/package.json",
+        "extensions/microsoft-authentication/.vscodeignore",
+        "extensions/microsoft-authentication/esbuild.mts",
+        "extensions/microsoft-authentication/extension.webpack.config.js",
+        "extensions/vscode-test-resolver/.vscodeignore",
+        "extensions/vscode-test-resolver/esbuild.browser.mts",
+        "extensions/vscode-test-resolver/esbuild.mts",
+        "extensions/vscode-test-resolver/extension-browser.webpack.config.js",
+        "extensions/vscode-test-resolver/tsconfig.browser.json"
+      ],
+      "primaryArea": "extensions",
+      "before": "Extensions used webpack configuration for build process.",
+      "added": "Migrated extension builds from webpack to esbuild system.",
+      "impact": "Faster build times and simpler configuration for extensions.",
+      "keywords": [
+        "build",
+        "esbuild",
+        "extensions"
+      ]
+    },
+    {
+      "commitId": "2df0c0ee056d68e83b9ec2a07b53e012506824e6",
+      "shortId": "2df0c0e",
+      "author": "sandy081",
+      "timestamp": "2026-02-20T20:19:35Z",
+      "message": "do not show add models and handle anonymous users (#296603)",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "src/vs/workbench/contrib/chat/browser/widget/input/chatModelPicker.ts",
+        "src/vs/workbench/contrib/chat/test/browser/widget/input/chatModelPicker.test.ts",
+        "src/vs/workbench/services/accounts/browser/defaultAccount.ts"
+      ],
+      "primaryArea": "src",
+      "before": "Model picker showed add options to anonymous users.",
+      "added": "Hidden add model options for unauthenticated anonymous users.",
+      "impact": "Appropriate interface shown based on user authentication status.",
+      "keywords": [
+        "chat",
+        "authentication",
+        "model picker"
+      ]
+    },
+    {
+      "commitId": "3b0aee319fbebbc68d878d66b0dbd567544bf4ae",
+      "shortId": "3b0aee3",
+      "author": "sandy081",
+      "timestamp": "2026-02-20T20:27:24Z",
+      "message": "remove creating session in beginning",
+      "branch": "sandy081/smiling-tortoise",
+      "eventType": "commit",
+      "filesChanged": [
+        "src/vs/sessions/contrib/chat/browser/newSession.ts",
+        "src/vs/sessions/contrib/sessions/browser/sessionsManagementService.ts"
+      ],
+      "primaryArea": "src",
+      "before": "Sessions automatically created on initialization without user action.",
+      "added": "Removed automatic session creation from startup sequence.",
+      "impact": "Users control when to create new sessions manually.",
+      "keywords": [
+        "sessions",
+        "initialization",
+        "cleanup"
+      ]
+    },
+    {
+      "commitId": "1a7e8c790a28d770db964bf2fe30c9bd753a4b7b",
+      "shortId": "1a7e8c7",
+      "author": "daviddossett",
+      "timestamp": "2026-02-20T21:13:11Z",
+      "message": "Show attachments toolbar for implicit context in Ask mode and selections",
+      "branch": "ddossett/scientific-catshark",
+      "eventType": "commit",
+      "filesChanged": [
+        "src/vs/workbench/contrib/chat/browser/widget/input/chatInputPart.ts"
+      ],
+      "primaryArea": "src",
+      "before": "Attachments toolbar hidden for implicit context in Ask mode.",
+      "added": "Made attachments toolbar visible for implicit context selections.",
+      "impact": "Easier management of file attachments and context in chat.",
+      "keywords": [
+        "chat",
+        "attachments",
+        "UI"
+      ]
+    },
+    {
+      "commitId": "344711c18fdad914961e151323c80b4b6582c65d",
+      "shortId": "344711c",
+      "author": "daviddossett",
+      "timestamp": "2026-02-20T22:10:02Z",
+      "message": "Fix keyboard focus for implicit context attachments",
+      "branch": "ddossett/scientific-catshark",
+      "eventType": "commit",
+      "filesChanged": [
+        "src/vs/workbench/contrib/chat/browser/attachments/implicitContextAttachment.ts"
+      ],
+      "primaryArea": "src",
+      "before": "Keyboard navigation failed on implicit context attachment elements.",
+      "added": "Added proper focus handling for attachment keyboard navigation.",
+      "impact": "Screen readers and keyboards can access attachment controls properly.",
+      "keywords": [
+        "accessibility",
+        "keyboard",
+        "chat"
+      ]
+    },
+    {
+      "commitId": "b856e1a713e4033830a3fd2726c3da61c1704aac",
+      "shortId": "b856e1a",
+      "author": "daviddossett",
+      "timestamp": "2026-02-20T22:19:43Z",
+      "message": "Merge branch 'main' into ddossett/scientific-catshark",
+      "branch": "ddossett/scientific-catshark",
+      "eventType": "commit",
+      "filesChanged": [
+        "extensions/theme-seti/icons/vs-seti-icon-theme.json",
+        "package-lock.json",
+        "package.json",
+        "remote/package-lock.json",
+        "remote/package.json",
+        "remote/web/package-lock.json",
+        "remote/web/package.json",
+        "src/vs/sessions/contrib/chat/browser/branchPicker.ts",
+        "src/vs/workbench/api/browser/mainThreadGitExtensionService.ts",
+        "src/vs/workbench/api/common/extHostGitExtensionService.ts",
+        "src/vs/workbench/contrib/chat/browser/actions/chatAccessibilityActions.ts",
+        "src/vs/workbench/contrib/chat/browser/actions/chatActions.ts",
+        "src/vs/workbench/contrib/chat/browser/widget/chatWidget.ts",
+        "src/vs/workbench/contrib/git/browser/gitService.ts",
+        "src/vs/workbench/contrib/git/common/gitService.ts",
+        "src/vs/workbench/contrib/welcomeAgentSessions/browser/media/agentSessionsWelcome.css"
+      ],
+      "primaryArea": "src",
+      "before": "Branch lacked latest file icon updates from main.",
+      "added": "Synchronized main branch with new file type icons.",
+      "impact": "Updated dependencies and icons for prompt and instruction files.",
+      "keywords": [
+        "merge",
+        "icons",
+        "dependencies"
       ]
     }
   ]

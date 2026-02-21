@@ -1,0 +1,61 @@
+{
+  "login": "osortega",
+  "avatarUrl": "https://avatars.githubusercontent.com/u/48293249?v=4",
+  "repoFullName": "microsoft/vscode",
+  "lastUpdated": "2026-02-20T23:18:07.545Z",
+  "totalCommits": 2,
+  "primaryAreas": [
+    "src"
+  ],
+  "contributorSummary": "",
+  "completionSignals": {
+    "velocityTrend": "unknown",
+    "commitSentiment": "neutral",
+    "churnSignal": "none",
+    "lastUpdated": "2026-02-20T23:18:07.539Z"
+  },
+  "commits": [
+    {
+      "commitId": "3458c3225bdead3d02405878884ccf722875ffc8",
+      "shortId": "3458c32",
+      "author": "osortega",
+      "timestamp": "2026-02-20T19:35:33Z",
+      "message": "Fix model picker in welcome view",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "src/vs/workbench/contrib/chat/browser/widget/input/chatInputPart.ts"
+      ],
+      "primaryArea": "src",
+      "before": "Model picker failed to initialize in welcome view.",
+      "added": "Fixed initialization logic for chat model picker component.",
+      "impact": "Model selection now works correctly on welcome screen.",
+      "keywords": [
+        "chat",
+        "model picker",
+        "fix"
+      ]
+    },
+    {
+      "commitId": "4b6f79808398bca9e0f77b83ee640b76bfb47e38",
+      "shortId": "4b6f798",
+      "author": "osortega",
+      "timestamp": "2026-02-20T20:11:22Z",
+      "message": "Merge pull request #296593 from microsoft/osortega/level-earwig",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "src/vs/workbench/contrib/chat/browser/widget/input/chatInputPart.ts"
+      ],
+      "primaryArea": "src",
+      "before": "Model picker fix existed on feature branch only.",
+      "added": "Merged model picker fixes into main branch.",
+      "impact": "Integrated welcome view model picker fix into production.",
+      "keywords": [
+        "merge",
+        "chat",
+        "model picker"
+      ]
+    }
+  ]
+}

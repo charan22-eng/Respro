@@ -2,8 +2,8 @@
   "login": "lszomoru",
   "avatarUrl": "https://avatars.githubusercontent.com/u/3372902?v=4",
   "repoFullName": "microsoft/vscode",
-  "lastUpdated": "2026-02-20T23:13:49.924Z",
-  "totalCommits": 2,
+  "lastUpdated": "2026-02-20T23:18:07.535Z",
+  "totalCommits": 3,
   "primaryAreas": [
     "src"
   ],
@@ -59,6 +59,31 @@
         "git",
         "initialization",
         "sync"
+      ]
+    },
+    {
+      "commitId": "7c127d91a54c89dcaf84fe62e3173c3e8b737855",
+      "shortId": "7c127d9",
+      "author": "lszomoru",
+      "timestamp": "2026-02-20T18:48:01Z",
+      "message": "Git - wire-up git repository state (#296563)",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "src/vs/workbench/api/browser/mainThreadGitExtensionService.ts",
+        "src/vs/workbench/api/common/extHost.protocol.ts",
+        "src/vs/workbench/api/common/extHostGitExtensionService.ts",
+        "src/vs/workbench/contrib/git/browser/gitService.ts",
+        "src/vs/workbench/contrib/git/common/gitService.ts"
+      ],
+      "primaryArea": "src",
+      "before": "Git repository state changes were not broadcast to extensions.",
+      "added": "Wired repository state change events through extension host protocol.",
+      "impact": "Extensions now receive notifications when git repository updates occur.",
+      "keywords": [
+        "git",
+        "API",
+        "repository state"
       ]
     }
   ]

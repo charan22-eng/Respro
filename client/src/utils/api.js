@@ -321,3 +321,81 @@ export async function checkHealth() {
   const response = await fetch(`${API_BASE}/health`);
   return response.json();
 }
+
+/**
+ * Get collision detection report for a repository
+ * @param {string} owner - Repository owner
+ * @param {string} repo - Repository name
+ * @returns {Promise<{collisions, hotZones, stats}>}
+ */
+export async function getCollisions(owner, repo) {
+  const response = await fetch(`${API_BASE}/collisions/${owner}/${repo}`);
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.error || 'Failed to fetch collisions');
+  }
+
+  return data;
+}
+
+/**
+ * Get collision summary for dashboard
+ * @param {string} owner - Repository owner
+ * @param {string} repo - Repository name
+ * @returns {Promise<{hasCollisions, topCollisions, topHotZones, stats}>}
+ */
+export async function getCollisionSummary(owner, repo) {
+  const response = await fetch(`${API_BASE}/collisions/${owner}/${repo}/summary`);
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.error || 'Failed to fetch collision summary');
+  }
+
+  return data;
+}
+
+/**
+ * Resolve (dismiss) a collision
+ * @param {string} owner - Repository owner
+ * @param {string} repo - Repository name
+ * @param {string} collisionId - Unique collision identifier
+ * @returns {Promise<{success, collisionId}>}
+ */
+export async function resolveCollision(owner, repo, collisionId) {
+  const response = await fetch(`${API_BASE}/collisions/${owner}/${repo}/resolve`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ collisionId })
+  });
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.error || 'Failed to resolve collision');
+  }
+
+  return data;
+}
+
+/**
+ * Unresolve (bring back) a collision
+ * @param {string} owner - Repository owner
+ * @param {string} repo - Repository name
+ * @param {string} collisionId - Unique collision identifier
+ * @returns {Promise<{success, collisionId}>}
+ */
+export async function unresolveCollision(owner, repo, collisionId) {
+  const response = await fetch(`${API_BASE}/collisions/${owner}/${repo}/unresolve`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ collisionId })
+  });
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.error || 'Failed to unresolve collision');
+  }
+
+  return data;
+}

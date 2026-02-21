@@ -1,0 +1,91 @@
+{
+  "login": "sandy081",
+  "avatarUrl": "https://avatars.githubusercontent.com/u/10746682?v=4",
+  "repoFullName": "microsoft/vscode",
+  "lastUpdated": "2026-02-20T23:18:07.551Z",
+  "totalCommits": 3,
+  "primaryAreas": [
+    "src"
+  ],
+  "contributorSummary": "",
+  "completionSignals": {
+    "velocityTrend": "unknown",
+    "commitSentiment": "neutral",
+    "churnSignal": "none",
+    "lastUpdated": "2026-02-20T23:18:07.537Z"
+  },
+  "commits": [
+    {
+      "commitId": "daddf4fcaee2dd30ee8d170d480b7b0ff6353a1f",
+      "shortId": "daddf4f",
+      "author": "sandy081",
+      "timestamp": "2026-02-20T19:30:59Z",
+      "message": "Feat: Show branch picker in core (#296559)",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "src/vs/sessions/contrib/chat/browser/branchPicker.ts",
+        "src/vs/sessions/contrib/chat/browser/folderPicker.ts",
+        "src/vs/sessions/contrib/chat/browser/media/chatWelcomePart.css",
+        "src/vs/sessions/contrib/chat/browser/newChatViewPane.ts",
+        "src/vs/sessions/contrib/chat/browser/newSession.ts",
+        "src/vs/sessions/contrib/chat/browser/sessionTargetPicker.ts",
+        "src/vs/sessions/contrib/sessions/browser/sessionsManagementService.ts"
+      ],
+      "primaryArea": "src",
+      "before": "No branch selection interface existed in core sessions.",
+      "added": "New branch picker component integrated into chat sessions.",
+      "impact": "Users can select git branches directly within chat interface.",
+      "keywords": [
+        "branch picker",
+        "sessions",
+        "git"
+      ]
+    },
+    {
+      "commitId": "2df0c0ee056d68e83b9ec2a07b53e012506824e6",
+      "shortId": "2df0c0e",
+      "author": "sandy081",
+      "timestamp": "2026-02-20T20:19:35Z",
+      "message": "do not show add models and handle anonymous users (#296603)",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "src/vs/workbench/contrib/chat/browser/widget/input/chatModelPicker.ts",
+        "src/vs/workbench/contrib/chat/test/browser/widget/input/chatModelPicker.test.ts",
+        "src/vs/workbench/services/accounts/browser/defaultAccount.ts"
+      ],
+      "primaryArea": "src",
+      "before": "Model picker showed add options to anonymous users.",
+      "added": "Hidden add model options for unauthenticated anonymous users.",
+      "impact": "Appropriate interface shown based on user authentication status.",
+      "keywords": [
+        "chat",
+        "authentication",
+        "model picker"
+      ]
+    },
+    {
+      "commitId": "3b0aee319fbebbc68d878d66b0dbd567544bf4ae",
+      "shortId": "3b0aee3",
+      "author": "sandy081",
+      "timestamp": "2026-02-20T20:27:24Z",
+      "message": "remove creating session in beginning",
+      "branch": "sandy081/smiling-tortoise",
+      "eventType": "commit",
+      "filesChanged": [
+        "src/vs/sessions/contrib/chat/browser/newSession.ts",
+        "src/vs/sessions/contrib/sessions/browser/sessionsManagementService.ts"
+      ],
+      "primaryArea": "src",
+      "before": "Sessions automatically created on initialization without user action.",
+      "added": "Removed automatic session creation from startup sequence.",
+      "impact": "Users control when to create new sessions manually.",
+      "keywords": [
+        "sessions",
+        "initialization",
+        "cleanup"
+      ]
+    }
+  ]
+}

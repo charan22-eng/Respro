@@ -1,0 +1,178 @@
+{
+  "login": "Sri sharan",
+  "avatarUrl": null,
+  "repoFullName": "ch-praneeth-08/Digital-Library",
+  "lastUpdated": "2026-02-20T23:34:14.972Z",
+  "totalCommits": 6,
+  "primaryAreas": [
+    "client",
+    "server"
+  ],
+  "contributorSummary": "",
+  "completionSignals": {
+    "velocityTrend": "unknown",
+    "commitSentiment": "neutral",
+    "churnSignal": "none",
+    "lastUpdated": "2026-02-20T23:34:14.965Z"
+  },
+  "commits": [
+    {
+      "commitId": "54f2b8db902b527918741a0cbc6af6e75a8a21e5",
+      "shortId": "54f2b8d",
+      "author": "Sri sharan",
+      "timestamp": "2025-04-05T18:53:35Z",
+      "message": "materialcontroller",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/App.css",
+        "client/src/App.js",
+        "client/src/components/Navbar.css",
+        "client/src/components/Navbar.js",
+        "client/src/components/ProtectedRoute.js",
+        "client/src/context/AuthContext.js",
+        "client/src/index.js",
+        "client/src/pages/DashboardPage.css",
+        "client/src/pages/DashboardPage.js",
+        "client/src/pages/LoginPage.js",
+        "server/controllers/materialController.js"
+      ],
+      "primaryArea": "client",
+      "before": "Application lacked navigation and access control.",
+      "added": "Navigation bar component with protected route wrapper.",
+      "impact": "Enables user navigation and authenticated access control.",
+      "keywords": [
+        "navigation",
+        "routing",
+        "authentication"
+      ]
+    },
+    {
+      "commitId": "4587ceb619c5ef374dc5ada535cc4ebebe093659",
+      "shortId": "4587ceb",
+      "author": "Sri sharan",
+      "timestamp": "2025-04-05T19:31:11Z",
+      "message": "searchfunctionality",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "server/controllers/materialController.js"
+      ],
+      "primaryArea": "server",
+      "before": "Basic material listing without advanced filtering.",
+      "added": "Enhanced search and filter logic for materials.",
+      "impact": "Improves material discovery with query parameters.",
+      "keywords": [
+        "search",
+        "filter",
+        "API"
+      ]
+    },
+    {
+      "commitId": "d1c9f94670454038da1968445f04abed36ea30cb",
+      "shortId": "d1c9f94",
+      "author": "Sri sharan",
+      "timestamp": "2025-04-05T20:40:47Z",
+      "message": "request Materail functionalliy completed",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/App.js",
+        "client/src/components/Navbar.js",
+        "client/src/pages/AdminRequestListPage.css",
+        "client/src/pages/AdminRequestListPage.js",
+        "client/src/pages/DashboardPage.css",
+        "client/src/pages/DashboardPage.js",
+        "client/src/pages/RequestPage.js",
+        "client/src/pages/UploadPage.js"
+      ],
+      "primaryArea": "client",
+      "before": "No admin interface for request management.",
+      "added": "Admin request list page with styling.",
+      "impact": "Administrators can view and manage material requests.",
+      "keywords": [
+        "admin",
+        "requests",
+        "management"
+      ]
+    },
+    {
+      "commitId": "9ebab5bb4303941263aa3422f3bc92444a091212",
+      "shortId": "9ebab5b",
+      "author": "Sri sharan",
+      "timestamp": "2025-04-05T21:47:32Z",
+      "message": "forums",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "server/controllers/materialController.js"
+      ],
+      "primaryArea": "server",
+      "before": "Material controller missing query library import.",
+      "added": "Restored api-query-params import statement.",
+      "impact": "Re-enables advanced filtering for material queries.",
+      "keywords": [
+        "import",
+        "fix",
+        "query"
+      ]
+    },
+    {
+      "commitId": "db30262de5cdd9b58b1a7e7031a716e9fd4dbec5",
+      "shortId": "db30262",
+      "author": "Sri sharan",
+      "timestamp": "2025-04-05T21:49:02Z",
+      "message": "f",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/App.js",
+        "client/src/components/Navbar.js",
+        "client/src/pages/AdminBookingListPage.css",
+        "client/src/pages/AdminBookingListPage.js",
+        "client/src/pages/DiscussionHomePage.css",
+        "client/src/pages/DiscussionHomePage.js",
+        "client/src/pages/PhysicalBooksPage.css",
+        "client/src/pages/PhysicalBooksPage.js",
+        "client/src/pages/TopicListPage.css",
+        "client/src/pages/TopicListPage.js"
+      ],
+      "primaryArea": "client",
+      "before": "No booking management or discussion pages.",
+      "added": "Admin booking list and discussion home pages.",
+      "impact": "Expands admin tools and forum interface.",
+      "keywords": [
+        "bookings",
+        "forum",
+        "pages"
+      ]
+    },
+    {
+      "commitId": "76260c7cb7c8edac0ae6c5cac6a98d770b69081f",
+      "shortId": "76260c7",
+      "author": "Sri sharan",
+      "timestamp": "2025-04-05T23:03:20Z",
+      "message": "added styles",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/App.css",
+        "client/src/components/Navbar.css",
+        "client/src/components/Navbar.js",
+        "client/src/pages/Homepage.css",
+        "client/src/pages/Homepage.js",
+        "client/src/pages/LoginPage.css",
+        "client/src/pages/LoginPage.js"
+      ],
+      "primaryArea": "client",
+      "before": "Unstyled navigation and homepage components.",
+      "added": "CSS styling for navbar and homepage.",
+      "impact": "Improves visual design and user experience.",
+      "keywords": [
+        "styling",
+        "CSS",
+        "UI"
+      ]
+    }
+  ]
+}

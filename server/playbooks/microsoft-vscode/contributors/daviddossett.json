@@ -2,8 +2,8 @@
   "login": "daviddossett",
   "avatarUrl": "https://avatars.githubusercontent.com/u/25163139?v=4",
   "repoFullName": "microsoft/vscode",
-  "lastUpdated": "2026-02-20T23:13:49.921Z",
-  "totalCommits": 6,
+  "lastUpdated": "2026-02-20T23:18:07.555Z",
+  "totalCommits": 12,
   "primaryAreas": [
     "src"
   ],
@@ -259,6 +259,155 @@
         "css",
         "filter input",
         "cleanup"
+      ]
+    },
+    {
+      "commitId": "9a3a7aaa1330e315606897b76b842ae78052827d",
+      "shortId": "9a3a7aa",
+      "author": "daviddossett",
+      "timestamp": "2026-02-20T18:14:24Z",
+      "message": "Move mode badge and timestamp to bottom row in session list items (#296560)",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "src/vs/workbench/contrib/chat/browser/agentSessions/agentSessionsViewer.ts",
+        "src/vs/workbench/contrib/chat/browser/agentSessions/media/agentsessionsviewer.css"
+      ],
+      "primaryArea": "src",
+      "before": "Mode badge and timestamp appeared in the title row.",
+      "added": "Moved both elements to the bottom row instead.",
+      "impact": "Cleaner visual layout for agent session listings.",
+      "keywords": [
+        "UI",
+        "layout",
+        "agent sessions"
+      ]
+    },
+    {
+      "commitId": "4eb8f169e584e5aa74e430b630484d7ee3215b8f",
+      "shortId": "4eb8f16",
+      "author": "daviddossett",
+      "timestamp": "2026-02-20T18:23:22Z",
+      "message": "Update chat input: hide attachments bar, move/restyle context window hint (#296390)",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "extensions/theme-2026/themes/styles.css",
+        "src/vs/workbench/contrib/chat/browser/actions/chatContextActions.ts",
+        "src/vs/workbench/contrib/chat/browser/widget/input/chatInputPart.ts",
+        "src/vs/workbench/contrib/chat/browser/widget/media/chat.css",
+        "src/vs/workbench/contrib/chat/browser/widgetHosts/viewPane/chatContextUsageWidget.ts",
+        "src/vs/workbench/contrib/chat/browser/widgetHosts/viewPane/media/chatContextUsageWidget.css"
+      ],
+      "primaryArea": "src",
+      "before": "Chat input displayed attachments bar and context hints separately.",
+      "added": "Hidden attachments bar with restyled context window hints.",
+      "impact": "Streamlined chat input interface reduces visual clutter.",
+      "keywords": [
+        "chat",
+        "UI",
+        "attachments"
+      ]
+    },
+    {
+      "commitId": "7e93a14a643f547526405c46bdf6bfaae83644e6",
+      "shortId": "7e93a14",
+      "author": "daviddossett",
+      "timestamp": "2026-02-20T18:34:30Z",
+      "message": "Refine chat model picker menu behavior",
+      "branch": "ddossett/fantastic-silkworm",
+      "eventType": "commit",
+      "filesChanged": [
+        "src/vs/platform/actionWidget/browser/actionList.ts",
+        "src/vs/platform/actionWidget/browser/actionWidgetDropdown.ts",
+        "src/vs/workbench/contrib/chat/browser/widget/input/chatModelPicker.ts"
+      ],
+      "primaryArea": "src",
+      "before": "Model picker menu had no minimum width constraint.",
+      "added": "Added minimum width and improved dropdown action handling.",
+      "impact": "Better usability for selecting chat models from dropdown.",
+      "keywords": [
+        "chat",
+        "model picker",
+        "UI"
+      ]
+    },
+    {
+      "commitId": "1a7e8c790a28d770db964bf2fe30c9bd753a4b7b",
+      "shortId": "1a7e8c7",
+      "author": "daviddossett",
+      "timestamp": "2026-02-20T21:13:11Z",
+      "message": "Show attachments toolbar for implicit context in Ask mode and selections",
+      "branch": "ddossett/scientific-catshark",
+      "eventType": "commit",
+      "filesChanged": [
+        "src/vs/workbench/contrib/chat/browser/widget/input/chatInputPart.ts"
+      ],
+      "primaryArea": "src",
+      "before": "Attachments toolbar hidden for implicit context in Ask mode.",
+      "added": "Made attachments toolbar visible for implicit context selections.",
+      "impact": "Easier management of file attachments and context in chat.",
+      "keywords": [
+        "chat",
+        "attachments",
+        "UI"
+      ]
+    },
+    {
+      "commitId": "344711c18fdad914961e151323c80b4b6582c65d",
+      "shortId": "344711c",
+      "author": "daviddossett",
+      "timestamp": "2026-02-20T22:10:02Z",
+      "message": "Fix keyboard focus for implicit context attachments",
+      "branch": "ddossett/scientific-catshark",
+      "eventType": "commit",
+      "filesChanged": [
+        "src/vs/workbench/contrib/chat/browser/attachments/implicitContextAttachment.ts"
+      ],
+      "primaryArea": "src",
+      "before": "Keyboard navigation failed on implicit context attachment elements.",
+      "added": "Added proper focus handling for attachment keyboard navigation.",
+      "impact": "Screen readers and keyboards can access attachment controls properly.",
+      "keywords": [
+        "accessibility",
+        "keyboard",
+        "chat"
+      ]
+    },
+    {
+      "commitId": "b856e1a713e4033830a3fd2726c3da61c1704aac",
+      "shortId": "b856e1a",
+      "author": "daviddossett",
+      "timestamp": "2026-02-20T22:19:43Z",
+      "message": "Merge branch 'main' into ddossett/scientific-catshark",
+      "branch": "ddossett/scientific-catshark",
+      "eventType": "commit",
+      "filesChanged": [
+        "extensions/theme-seti/icons/vs-seti-icon-theme.json",
+        "package-lock.json",
+        "package.json",
+        "remote/package-lock.json",
+        "remote/package.json",
+        "remote/web/package-lock.json",
+        "remote/web/package.json",
+        "src/vs/sessions/contrib/chat/browser/branchPicker.ts",
+        "src/vs/workbench/api/browser/mainThreadGitExtensionService.ts",
+        "src/vs/workbench/api/common/extHostGitExtensionService.ts",
+        "src/vs/workbench/contrib/chat/browser/actions/chatAccessibilityActions.ts",
+        "src/vs/workbench/contrib/chat/browser/actions/chatActions.ts",
+        "src/vs/workbench/contrib/chat/browser/widget/chatWidget.ts",
+        "src/vs/workbench/contrib/git/browser/gitService.ts",
+        "src/vs/workbench/contrib/git/common/gitService.ts",
+        "src/vs/workbench/contrib/welcomeAgentSessions/browser/media/agentSessionsWelcome.css"
+      ],
+      "primaryArea": "src",
+      "before": "Branch lacked latest file icon updates from main.",
+      "added": "Synchronized main branch with new file type icons.",
+      "impact": "Updated dependencies and icons for prompt and instruction files.",
+      "keywords": [
+        "merge",
+        "icons",
+        "dependencies"
       ]
     }
   ]

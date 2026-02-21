@@ -2,7 +2,7 @@
   "login": "jhuber6",
   "avatarUrl": "https://avatars.githubusercontent.com/u/35342157?v=4",
   "repoFullName": "llvm/llvm-project",
-  "lastUpdated": "2026-02-20T22:53:45.202Z",
+  "lastUpdated": "2026-02-20T23:20:09.170Z",
   "totalCommits": 2,
   "primaryAreas": [
     "flang-rt",
@@ -30,12 +30,17 @@
         "offload/test/offloading/fortran/formatted-io.f90"
       ],
       "primaryArea": "flang-rt",
-      "before": "State unknown.",
-      "added": "[flang-rt] Add support for formatted I/O on the GPU (#182580",
-      "impact": "Impact could not be determined.",
+      "before": "GPU runtime only supported list-directed output without format specifiers.",
+      "added": "Formatted I/O support for GPU offloading via RPC interface.",
+      "impact": "Enables formatted WRITE statements in OpenMP target regions.",
       "keywords": [
-        "commit"
-      ]
+        "flang-rt",
+        "gpu",
+        "formatted-io",
+        "offloading"
+      ],
+      "message": "[flang-rt] Add support for formatted I/O on the GPU (#182580)",
+      "analyzedAt": "2026-02-20T23:19:00.305Z"
     },
     {
       "commitId": "e1feac36249c2aa964f9e198df7957868acb559a",
@@ -49,12 +54,17 @@
         "libc/shared/rpc_util.h"
       ],
       "primaryArea": "libc",
-      "before": "State unknown.",
-      "added": "[libc] Properly handle null handles in rpc_dispatch.h",
-      "impact": "Impact could not be determined.",
+      "before": "RPC string and memory operations lacked validation for null inputs.",
+      "added": "Null pointer guards in RPC dispatch and conditional memory copy execution.",
+      "impact": "Enables safe processing of null handles and zero-length buffers in RPC.",
       "keywords": [
-        "commit"
-      ]
+        "libc",
+        "rpc",
+        "bugfix",
+        "null-safety"
+      ],
+      "message": "[libc] Properly handle null handles in rpc_dispatch.h",
+      "analyzedAt": "2026-02-20T23:20:09.170Z"
     }
   ]
 }

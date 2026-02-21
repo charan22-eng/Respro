@@ -1,0 +1,42 @@
+{
+  "login": "dileepyavan",
+  "avatarUrl": "https://avatars.githubusercontent.com/u/52841896?v=4",
+  "repoFullName": "microsoft/vscode",
+  "lastUpdated": "2026-02-20T23:18:07.529Z",
+  "totalCommits": 1,
+  "primaryAreas": [
+    "src"
+  ],
+  "contributorSummary": "",
+  "completionSignals": {
+    "velocityTrend": "unknown",
+    "commitSentiment": "neutral",
+    "churnSignal": "none",
+    "lastUpdated": "2026-02-20T23:18:07.529Z"
+  },
+  "commits": [
+    {
+      "commitId": "f433494e5e8d82817ed7cc801fe9a7215fd86e9b",
+      "shortId": "f433494",
+      "author": "dileepyavan",
+      "timestamp": "2026-02-20T18:24:38Z",
+      "message": "Refer to ripgrep thats already included in the node modules. (#296335)",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "src/vs/workbench/contrib/terminalContrib/chatAgentTools/common/terminalChatAgentToolsConfiguration.ts",
+        "src/vs/workbench/contrib/terminalContrib/chatAgentTools/common/terminalSandboxService.ts",
+        "src/vs/workbench/contrib/terminalContrib/chatAgentTools/test/browser/terminalSandboxService.test.ts"
+      ],
+      "primaryArea": "src",
+      "before": "Terminal tools referenced external ripgrep binary location.",
+      "added": "Uses ripgrep package already included in node modules.",
+      "impact": "Ensures consistent search tool dependencies across installations.",
+      "keywords": [
+        "terminal",
+        "ripgrep",
+        "dependencies"
+      ]
+    }
+  ]
+}

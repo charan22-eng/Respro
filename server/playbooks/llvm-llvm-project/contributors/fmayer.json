@@ -2,7 +2,7 @@
   "login": "fmayer",
   "avatarUrl": "https://avatars.githubusercontent.com/u/19826?v=4",
   "repoFullName": "llvm/llvm-project",
-  "lastUpdated": "2026-02-20T23:11:02.201Z",
+  "lastUpdated": "2026-02-20T23:26:25.699Z",
   "totalCommits": 6,
   "primaryAreas": [
     "clang"
@@ -26,12 +26,17 @@
         "clang/unittests/Analysis/FlowSensitive/MockHeaders.cpp"
       ],
       "primaryArea": "clang",
-      "before": "State unknown.",
-      "added": "[NFC] [FlowSensitive] Add mock header for coroutines",
-      "impact": "Impact could not be determined.",
+      "before": "FlowSensitive analysis tests lacked mock headers for C++20 coroutines.",
+      "added": "Added StdCoroutineHeader string and __void_t template alias.",
+      "impact": "Enables unit testing of FlowSensitive analysis on coroutine-using code.",
       "keywords": [
-        "commit"
-      ]
+        "testing",
+        "flow-sensitive",
+        "coroutines",
+        "nfc"
+      ],
+      "message": "[NFC] [FlowSensitive] Add mock header for coroutines",
+      "analyzedAt": "2026-02-20T23:25:29.770Z"
     },
     {
       "commitId": "cedd736518bc07d70c166b8a0c7c0389a1df183e",
@@ -44,12 +49,17 @@
         "clang/unittests/Analysis/FlowSensitive/UncheckedStatusOrAccessModelTestFixture.h"
       ],
       "primaryArea": "clang",
-      "before": "State unknown.",
-      "added": "[NFCI] [FlowSensitive] [StatusOr] use c++20 for test",
-      "impact": "Impact could not be determined.",
+      "before": "FlowSensitive StatusOr tests used C++17 compilation standard.",
+      "added": "Upgraded FlowSensitive StatusOr test suite to C++20 standard.",
+      "impact": "Enables testing C++20 constructs in StatusOr analysis.",
       "keywords": [
-        "commit"
-      ]
+        "NFCI",
+        "FlowSensitive",
+        "StatusOr",
+        "c++20"
+      ],
+      "message": "[NFCI] [FlowSensitive] [StatusOr] use c++20 for test",
+      "analyzedAt": "2026-02-20T23:26:02.709Z"
     },
     {
       "commitId": "2f7df5cd2d64f24e33814ddddfc9cab56c909167",
@@ -62,12 +72,16 @@
         "clang/unittests/Analysis/FlowSensitive/UncheckedStatusOrAccessModelTestFixture.cpp"
       ],
       "primaryArea": "clang",
-      "before": "State unknown.",
-      "added": "[𝘀𝗽𝗿] initial version",
-      "impact": "Impact could not be determined.",
+      "before": "FlowSensitive StatusOr analysis lacked test coverage for coroutine co_return scenarios.",
+      "added": "Test case detecting unchecked StatusOr access within C++20 coroutine co_return control flow.",
+      "impact": "Validates safety analysis works correctly with coroutine-based asynchronous code patterns.",
       "keywords": [
-        "commit"
-      ]
+        "testing",
+        "coroutines",
+        "flow-sensitive-analysis"
+      ],
+      "message": "[𝘀𝗽𝗿] initial version",
+      "analyzedAt": "2026-02-20T23:26:25.699Z"
     },
     {
       "commitId": "4ee6c541d3ab3fb2b16f2251d2fd01d7c86c2c0d",

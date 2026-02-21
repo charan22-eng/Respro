@@ -2,7 +2,7 @@
   "login": "timsmith78",
   "avatarUrl": null,
   "repoFullName": "llvm/llvm-project",
-  "lastUpdated": "2026-02-20T22:53:45.206Z",
+  "lastUpdated": "2026-02-20T23:22:52.826Z",
   "totalCommits": 1,
   "primaryAreas": [
     "flang"
@@ -34,12 +34,16 @@
         "flang/test/Transforms/debug-fn-attr.fir"
       ],
       "primaryArea": "flang",
-      "before": "State unknown.",
-      "added": "[flang][debug] Supply missing subprogram attributes (#181425",
-      "impact": "Impact could not be determined.",
+      "before": "Debug metadata omitted pure, elemental, and recursive Fortran procedure attributes.",
+      "added": "Fortran compiler now emits pure, elemental, and recursive flags in debug info.",
+      "impact": "Debuggers can distinguish pure, elemental, and recursive functions in Fortran programs.",
       "keywords": [
-        "commit"
-      ]
+        "flang",
+        "debug-info",
+        "lowering"
+      ],
+      "message": "[flang][debug] Supply missing subprogram attributes (#181425)",
+      "analyzedAt": "2026-02-20T23:22:52.826Z"
     }
   ]
 }
