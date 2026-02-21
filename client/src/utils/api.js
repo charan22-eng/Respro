@@ -399,3 +399,22 @@ export async function unresolveCollision(owner, repo, collisionId) {
 
   return data;
 }
+
+/**
+ * Get repository health checkup
+ * @param {string} owner - Repository owner
+ * @param {string} repo - Repository name
+ * @returns {Promise<object>} Health checkup data with overall score and category breakdowns
+ */
+export async function getHealthCheckup(owner, repo) {
+  const response = await fetch(`${API_BASE}/health/${owner}/${repo}`, {
+    credentials: 'include'
+  });
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.error || 'Failed to get health checkup');
+  }
+
+  return data;
+}

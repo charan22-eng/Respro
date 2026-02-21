@@ -15,6 +15,7 @@ import PlaybookPanel from '../components/PlaybookPanel';
 import LiveEventToast from '../components/LiveEventToast';
 import GitGraphPanel from '../components/GitGraphPanel';
 import CollisionRadarPanel from '../components/CollisionRadarPanel';
+import HealthCheckupPanel from '../components/HealthCheckupPanel';
 import { fetchPulseData, getAuthUser, subscribeToUpdates } from '../utils/api';
 
 function Dashboard() {
@@ -28,6 +29,7 @@ function Dashboard() {
   const [playbookRefreshKey, setPlaybookRefreshKey] = useState(0);
   const [showGitGraph, setShowGitGraph] = useState(false);
   const [showCollisionRadar, setShowCollisionRadar] = useState(false);
+  const [showHealthCheckup, setShowHealthCheckup] = useState(false);
   const commitAnalyzerRef = useRef(null);
   const sseCleanupRef = useRef(null);
 
@@ -227,6 +229,23 @@ function Dashboard() {
                     </svg>
                   </button>
 
+                  {/* Health Checkup Button */}
+                  <button
+                    onClick={() => setShowHealthCheckup(true)}
+                    className="p-2 hover:bg-gray-100 rounded-lg transition-colors group relative"
+                    title="Health Checkup"
+                  >
+                    <svg 
+                      className="w-5 h-5 text-gray-600 group-hover:text-green-600" 
+                      fill="none" 
+                      stroke="currentColor" 
+                      viewBox="0 0 24 24"
+                    >
+                      {/* Heart/health icon */}
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                    </svg>
+                  </button>
+
                   {/* Force Refresh Button */}
                   <button
                     onClick={handleForceRefresh}
@@ -378,6 +397,15 @@ function Dashboard() {
           owner={repoData.meta.owner}
           repo={repoData.meta.name}
           onClose={() => setShowCollisionRadar(false)}
+        />
+      )}
+
+      {/* Health Checkup Panel Modal */}
+      {showHealthCheckup && repoData && (
+        <HealthCheckupPanel
+          owner={repoData.meta.owner}
+          repo={repoData.meta.name}
+          onClose={() => setShowHealthCheckup(false)}
         />
       )}
     </div>
