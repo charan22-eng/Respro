@@ -1136,5 +1136,46 @@
       ]
     }
   ],
-  "resolvedCollisions": {}
+  "resolvedCollisions": {
+    "server/utils/emailService.js::Lalithaditya007|Shashipreetham1|ch-praneeth-08": {
+      "resolvedAt": "2026-02-21T01:37:42.985Z",
+      "resolvedBy": "ch-praneeth-08"
+    },
+    "client/src/user/BookingHistory.jsx::Lalithaditya007|Shashipreetham1|ch-praneeth-08": {
+      "resolvedAt": "2026-02-21T01:37:48.564Z",
+      "resolvedBy": "ch-praneeth-08"
+    },
+    "client/src/App.jsx::Lalithaditya007|Shashipreetham1|ch-praneeth-08": {
+      "resolvedAt": "2026-02-21T01:38:09.349Z",
+      "resolvedBy": "ch-praneeth-08"
+    },
+    "client/src/admin/Adminnavbar.jsx::Lalithaditya007|Shashipreetham1|ch-praneeth-08": {
+      "resolvedAt": "2026-02-21T01:38:11.714Z",
+      "resolvedBy": "ch-praneeth-08"
+    },
+    "client/src/components/Navbar.jsx::Lalithaditya007|Shashipreetham1|ch-praneeth-08": {
+      "resolvedAt": "2026-02-21T01:38:13.940Z",
+      "resolvedBy": "ch-praneeth-08"
+    },
+    "client/src/components/profile/ProfileCard.jsx::Lalithaditya007|Shashipreetham1|ch-praneeth-08": {
+      "resolvedAt": "2026-02-21T01:38:16.574Z",
+      "resolvedBy": "ch-praneeth-08"
+    },
+    "client/src/components/profile/EditProfileModal.jsx::Lalithaditya007|Shashipreetham1|ch-praneeth-08": {
+      "resolvedAt": "2026-02-21T01:38:24.357Z",
+      "resolvedBy": "ch-praneeth-08"
+    },
+    "client/src/admin/AuditoriumPreviewModal.jsx::Lalithaditya007|Shashipreetham1|ch-praneeth-08": {
+      "resolvedAt": "2026-02-21T01:38:28.808Z",
+      "resolvedBy": "ch-praneeth-08"
+    },
+    "client/src/admin/ManageBookings.jsx::Lalithaditya007|Shashipreetham1|ch-praneeth-08": {
+      "resolvedAt": "2026-02-21T01:38:31.608Z",
+      "resolvedBy": "ch-praneeth-08"
+    },
+    "client/src/user/UserProfile.jsx::Lalithaditya007|Shashipreetham1|ch-praneeth-08": {
+      "resolvedAt": "2026-02-21T01:38:36.173Z",
+      "resolvedBy": "ch-praneeth-08"
+    }
+  }
 }

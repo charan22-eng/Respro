@@ -1,0 +1,182 @@
+{
+  "login": "Copilot",
+  "avatarUrl": "https://avatars.githubusercontent.com/in/1143301?v=4",
+  "repoFullName": "github/gh-aw-firewall",
+  "lastUpdated": "2026-02-21T01:52:13.227Z",
+  "totalCommits": 5,
+  "primaryAreas": [
+    "src",
+    "docs",
+    ".github",
+    "containers",
+    "root"
+  ],
+  "contributorSummary": "",
+  "completionSignals": {
+    "velocityTrend": "unknown",
+    "commitSentiment": "neutral",
+    "churnSignal": "none",
+    "lastUpdated": "2026-02-21T01:52:13.189Z"
+  },
+  "commits": [
+    {
+      "commitId": "132609bb2d8914f89b72f76fb61b06f7643ededd",
+      "shortId": "132609b",
+      "author": "Copilot",
+      "timestamp": "2026-02-17T23:41:11Z",
+      "message": "feat: add github copilot api proxy support (#945)",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        ".github/workflows/smoke-copilot.lock.yml",
+        "containers/agent/api-proxy-health-check.sh",
+        "containers/api-proxy/server.js",
+        "examples/github-copilot.sh",
+        "src/cli.ts",
+        "src/docker-manager.ts",
+        "src/types.ts",
+        "tests/integration/api-proxy.test.ts"
+      ],
+      "primaryArea": "src",
+      "before": "No GitHub Copilot API proxy support existed",
+      "added": "GitHub Copilot API proxy configuration and health checks",
+      "impact": "Users route Copilot API calls through sidecar proxy",
+      "keywords": [
+        "copilot",
+        "api-proxy",
+        "credentials"
+      ]
+    },
+    {
+      "commitId": "7c8da85a2099b262d8d4ef1f4b144fab4028d481",
+      "shortId": "7c8da85",
+      "author": "Copilot",
+      "timestamp": "2026-02-18T18:25:24Z",
+      "message": "docs: add api-proxy image publishing details to release guide (#954)",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "docs/releasing.md"
+      ],
+      "primaryArea": "docs",
+      "before": "Release guide omitted api-proxy Docker image",
+      "added": "Documentation for api-proxy image publishing added",
+      "impact": "Release managers verify api-proxy image availability",
+      "keywords": [
+        "documentation",
+        "release",
+        "docker"
+      ]
+    },
+    {
+      "commitId": "678c2fe8181d416e4b4ca7d25f3e66b2eec00c35",
+      "shortId": "678c2fe",
+      "author": "Copilot",
+      "timestamp": "2026-02-19T22:11:38Z",
+      "message": "feat: update agentic workflows to v0.47.0 and add smoke-gemini (#974)",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        ".github/agents/agentic-workflows.agent.md",
+        ".github/workflows/agentics-maintenance.yml",
+        ".github/workflows/build-test-bun.lock.yml",
+        ".github/workflows/build-test-bun.md",
+        ".github/workflows/build-test-cpp.lock.yml",
+        ".github/workflows/build-test-cpp.md",
+        ".github/workflows/build-test-deno.lock.yml",
+        ".github/workflows/build-test-deno.md",
+        ".github/workflows/build-test-dotnet.lock.yml",
+        ".github/workflows/build-test-dotnet.md",
+        ".github/workflows/build-test-go.lock.yml",
+        ".github/workflows/build-test-go.md",
+        ".github/workflows/build-test-java.lock.yml",
+        ".github/workflows/build-test-java.md",
+        ".github/workflows/build-test-node.lock.yml",
+        ".github/workflows/build-test-node.md",
+        ".github/workflows/build-test-rust.lock.yml",
+        ".github/workflows/build-test-rust.md",
+        ".github/workflows/ci-cd-gaps-assessment.lock.yml",
+        ".github/workflows/ci-doctor.lock.yml",
+        ".github/workflows/cli-flag-consistency-checker.lock.yml",
+        ".github/workflows/dependency-security-monitor.lock.yml",
+        ".github/workflows/doc-maintainer.lock.yml",
+        ".github/workflows/issue-duplication-detector.lock.yml",
+        ".github/workflows/issue-monster.lock.yml",
+        ".github/workflows/pelis-agent-factory-advisor.lock.yml",
+        ".github/workflows/plan.lock.yml",
+        ".github/workflows/plan.md",
+        ".github/workflows/secret-digger-claude.lock.yml",
+        ".github/workflows/secret-digger-codex.lock.yml",
+        ".github/workflows/secret-digger-copilot.lock.yml",
+        ".github/workflows/security-guard.lock.yml",
+        ".github/workflows/security-guard.md",
+        ".github/workflows/security-review.lock.yml",
+        ".github/workflows/smoke-chroot.lock.yml",
+        ".github/workflows/smoke-chroot.md",
+        ".github/workflows/smoke-claude.lock.yml",
+        ".github/workflows/smoke-claude.md",
+        ".github/workflows/smoke-codex.lock.yml",
+        ".github/workflows/smoke-codex.md",
+        ".github/workflows/smoke-copilot.lock.yml",
+        ".github/workflows/smoke-copilot.md",
+        ".github/workflows/smoke-gemini.lock.yml",
+        ".github/workflows/smoke-gemini.md",
+        ".github/workflows/test-coverage-improver.lock.yml",
+        ".github/workflows/update-release-notes.lock.yml",
+        "scripts/ci/postprocess-smoke-workflows.ts"
+      ],
+      "primaryArea": ".github",
+      "before": "Workflows used agentic framework v0.42.17",
+      "added": "Updated to v0.47.0 with Gemini smoke tests",
+      "impact": "CI uses latest agentic framework version",
+      "keywords": [
+        "workflows",
+        "agentic",
+        "gemini"
+      ]
+    },
+    {
+      "commitId": "bd5683692e9e948645851f4ffd6424d70dbc5603",
+      "shortId": "bd56836",
+      "author": "Copilot",
+      "timestamp": "2026-02-19T23:31:44Z",
+      "message": "fix: add iptables bypass for container self-traffic (#977)",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "containers/agent/setup-iptables.sh"
+      ],
+      "primaryArea": "containers",
+      "before": "Container self-traffic routed through Squid proxy",
+      "added": "Iptables bypass for container self-traffic",
+      "impact": "Fixes test framework connectivity issues",
+      "keywords": [
+        "iptables",
+        "networking",
+        "proxy"
+      ]
+    },
+    {
+      "commitId": "41131fdb03972b0dceb8839dae1eded0a2f09ed9",
+      "shortId": "41131fd",
+      "author": "Copilot",
+      "timestamp": "2026-02-19T23:31:58Z",
+      "message": "chore: remove _codeql_detected_source_root (#975)",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        ".gitignore",
+        "_codeql_detected_source_root"
+      ],
+      "primaryArea": "root",
+      "before": "CodeQL symlink tracked in repository",
+      "added": "Removed auto-generated symlink, added gitignore entry",
+      "impact": "Repository cleaned of generated CodeQL files",
+      "keywords": [
+        "codeql",
+        "cleanup",
+        "gitignore"
+      ]
+    }
+  ]
+}

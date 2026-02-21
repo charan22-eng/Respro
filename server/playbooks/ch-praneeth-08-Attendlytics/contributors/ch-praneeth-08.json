@@ -1,13 +1,20 @@
 {
+  "login": "ch-praneeth-08",
+  "avatarUrl": "https://avatars.githubusercontent.com/u/196779126?v=4",
   "repoFullName": "ch-praneeth-08/Attendlytics",
-  "lastUpdated": "2026-02-21T01:42:02.980Z",
-  "totalCommitsTracked": 4,
-  "projectSummary": "Attendlytics is an Android attendance tracking application that uses facial recognition for user verification. The project has rapidly evolved from initial scaffolding to active feature development, with core workflows for face enrollment, login, and results now implemented alongside Google Services integration. Recent commits demonstrate steady momentum, balancing functional code delivery with documentation and proper version control setup.",
-  "techAreas": [
-    "app",
-    "gradle"
+  "lastUpdated": "2026-02-21T01:42:02.978Z",
+  "totalCommits": 4,
+  "primaryAreas": [
+    "root",
+    "app"
   ],
-  "overallVelocity": "steady",
+  "contributorSummary": "",
+  "completionSignals": {
+    "velocityTrend": "unknown",
+    "commitSentiment": "neutral",
+    "churnSignal": "none",
+    "lastUpdated": "2026-02-21T01:42:02.966Z"
+  },
   "commits": [
     {
       "commitId": "a687a09d8feb42075f1c9044bdb462b6c94ad6d2",

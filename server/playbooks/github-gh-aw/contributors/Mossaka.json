@@ -1,0 +1,63 @@
+{
+  "login": "Mossaka",
+  "avatarUrl": "https://avatars.githubusercontent.com/u/5447827?v=4",
+  "repoFullName": "github/gh-aw",
+  "lastUpdated": "2026-02-21T01:47:54.076Z",
+  "totalCommits": 2,
+  "primaryAreas": [
+    ".github",
+    "docs"
+  ],
+  "contributorSummary": "",
+  "completionSignals": {
+    "velocityTrend": "unknown",
+    "commitSentiment": "neutral",
+    "churnSignal": "none",
+    "lastUpdated": "2026-02-21T01:47:54.057Z"
+  },
+  "commits": [
+    {
+      "commitId": "1a3f15b25b5176411f5cc5120f90ca2c9c15f16d",
+      "shortId": "1a3f15b",
+      "author": "Mossaka",
+      "timestamp": "2026-02-21T00:55:26Z",
+      "message": "feat: add Copilot ARM64 smoke test on ubuntu-24.04-arm (#17331)",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        ".github/workflows/smoke-copilot-arm.lock.yml",
+        ".github/workflows/smoke-copilot-arm.md"
+      ],
+      "primaryArea": ".github",
+      "before": "No ARM64 smoke test existed",
+      "added": "ARM64 smoke test workflow files",
+      "impact": "Enables ARM64 architecture testing",
+      "keywords": [
+        "ARM64",
+        "smoke-test",
+        "workflow"
+      ]
+    },
+    {
+      "commitId": "3b52a2b244c853a4b66e0cdcf72abc1890948c39",
+      "shortId": "3b52a2b",
+      "author": "Mossaka",
+      "timestamp": "2026-02-21T01:13:17Z",
+      "message": "docs: add supported runners table to frontmatter reference",
+      "branch": "docs/runner-support",
+      "eventType": "commit",
+      "filesChanged": [
+        "docs/src/content/docs/reference/frontmatter.md"
+      ],
+      "primaryArea": "docs",
+      "before": "Runner documentation incomplete",
+      "added": "Supported runners table",
+      "impact": "Documents runner compatibility",
+      "keywords": [
+        "documentation",
+        "runners",
+        "frontmatter"
+      ]
+    }
+  ]
+}

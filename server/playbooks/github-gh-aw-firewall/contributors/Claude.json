@@ -1,0 +1,44 @@
+{
+  "login": "Claude",
+  "avatarUrl": "https://avatars.githubusercontent.com/in/2246796?v=4",
+  "repoFullName": "github/gh-aw-firewall",
+  "lastUpdated": "2026-02-21T01:52:13.193Z",
+  "totalCommits": 1,
+  "primaryAreas": [
+    "src"
+  ],
+  "contributorSummary": "",
+  "completionSignals": {
+    "velocityTrend": "unknown",
+    "commitSentiment": "neutral",
+    "churnSignal": "none",
+    "lastUpdated": "2026-02-21T01:52:13.193Z"
+  },
+  "commits": [
+    {
+      "commitId": "6b827150a7ed31eb5a95afb38ee1983a8cac5cef",
+      "shortId": "6b82715",
+      "author": "Claude",
+      "timestamp": "2026-02-18T17:05:41Z",
+      "message": "feat(api-proxy): centralize port configuration in types.ts (#955)",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "containers/api-proxy/Dockerfile",
+        "docs/api-proxy-sidecar.md",
+        "src/docker-manager.ts",
+        "src/host-iptables.ts",
+        "src/types.ts"
+      ],
+      "primaryArea": "src",
+      "before": "Port configuration scattered across multiple files",
+      "added": "Centralized port configuration in types.ts file",
+      "impact": "Port settings maintained in single location",
+      "keywords": [
+        "configuration",
+        "refactoring",
+        "ports"
+      ]
+    }
+  ]
+}

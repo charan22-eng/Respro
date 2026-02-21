@@ -1,6 +1,7 @@
 /**
  * Chat Service
  * Handles conversational AI about repository data using Ollama cloud models
+ * Enhanced with playbook context and collision detection data
  */
 
 const OLLAMA_BASE_URL = process.env.OLLAMA_BASE_URL || 'http://localhost:11434';
@@ -8,58 +9,170 @@ const CHAT_MODEL = process.env.OLLAMA_CHAT_MODEL || 'kimi-k2.5:cloud';
 const CHAT_TIMEOUT = 180000; // 3 minutes for cloud model
 
 /**
- * Build the system prompt with repo context
+ * Format relative time from date
+ */
+function formatRelativeTime(dateStr) {
+  if (!dateStr) return 'unknown';
+  const now = new Date();
+  const date = new Date(dateStr);
+  const diffMs = now - date;
+  const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+  
+  if (diffDays === 0) return 'today';
+  if (diffDays === 1) return 'yesterday';
+  if (diffDays < 7) return `${diffDays} days ago`;
+  if (diffDays < 30) return `${Math.floor(diffDays / 7)} weeks ago`;
+  return `${Math.floor(diffDays / 30)} months ago`;
+}
+
+/**
+ * Build the enhanced system prompt with all available data
  */
 function buildSystemPrompt(repoContext) {
-  const { meta, commits, branches, pullRequests, issues, contributors, blockers } = repoContext;
+  const { 
+    meta, 
+    commits = [], 
+    branches = [], 
+    pullRequests = [], 
+    issues = [], 
+    contributors = [], 
+    blockers = [],
+    playbook,
+    collisions
+  } = repoContext;
 
+  // Get active contributors from recent commits
   const recentCommitters = [...new Set(commits.slice(0, 20).map(c => c.author))];
+  
+  // Build contributor activity summary
+  const contributorStats = contributors.slice(0, 10).map(c => {
+    const recentCommits = commits.filter(commit => commit.author === c.login).length;
+    return `• ${c.login}: ${c.totalCommits} total, ${recentCommits} recent`;
+  }).join('\n');
 
-  return `You are ProjectPulse AI, an expert assistant for the GitHub repository "${meta.fullName}".
-You have access to live data about this repository. Answer questions specifically using this data.
-Be direct, specific, and mention actual names/numbers. Do not hedge or use filler phrases.
+  // Build playbook context if available
+  let playbookContext = '';
+  if (playbook) {
+    playbookContext = `
+=== PROJECT PLAYBOOK (AI-analyzed history) ===
+Project Summary: ${playbook.projectSummary || 'Not yet generated'}
+Velocity: ${playbook.overallVelocity || 'unknown'}
+Tech Areas: ${(playbook.techAreas || []).join(', ') || 'Not analyzed'}
+Total Commits Tracked: ${playbook.totalCommitsTracked || 0}
 
-=== REPOSITORY CONTEXT ===
-Repository: ${meta.fullName} (${meta.language || 'Unknown language'})
+Recent Commit Analysis:
+${(playbook.recentEntries || playbook.commits?.slice(-10) || []).map(c => 
+  `• [${c.shortId}] ${c.author}: ${c.added || c.message?.substring(0, 60) || 'No description'}`
+).join('\n') || 'No recent entries'}
+
+Contributor Insights:
+${(playbook.contributorSummaries || []).slice(0, 5).map(cs => 
+  `• ${cs.login}: ${cs.summary || 'No summary'} (Areas: ${(cs.primaryAreas || []).join(', ') || 'various'})`
+).join('\n') || 'No contributor insights yet'}
+`;
+  }
+
+  // Build collision context if available
+  let collisionContext = '';
+  if (collisions) {
+    const activeCollisions = (collisions.collisions || []).filter(c => c.status === 'active');
+    const hotZones = (collisions.hotZones || []).slice(0, 5);
+    
+    if (activeCollisions.length > 0 || hotZones.length > 0) {
+      collisionContext = `
+=== COLLISION RADAR (Work Overlap Detection) ===
+Active Collisions: ${activeCollisions.length}
+${activeCollisions.slice(0, 5).map(c => 
+  `• ${c.contributor1} ↔ ${c.contributor2}: ${c.type} in ${c.file} [${c.severity}]`
+).join('\n') || 'No active collisions'}
+
+Hot Zones (frequently modified files):
+${hotZones.map(hz => 
+  `• ${hz.file}: ${hz.contributors?.length || 0} contributors, ${hz.totalModifications || 0} modifications`
+).join('\n') || 'No hot zones detected'}
+`;
+    }
+  }
+
+  // Build PR summary
+  const prSummary = pullRequests.slice(0, 8).map(pr => {
+    const age = formatRelativeTime(pr.createdAt);
+    const status = pr.isDraft ? 'DRAFT' : (pr.reviewDecision || 'pending');
+    return `• PR #${pr.number}: "${pr.title}" by ${pr.author} (${age}) [${status}]`;
+  }).join('\n') || 'No open PRs';
+
+  // Build issue summary
+  const issueSummary = issues.slice(0, 8).map(issue => {
+    const labels = issue.labels?.map(l => l.name).join(', ') || 'no labels';
+    const age = formatRelativeTime(issue.createdAt);
+    return `• Issue #${issue.number}: "${issue.title}" [${labels}] (${age})`;
+  }).join('\n') || 'No open issues';
+
+  // Build branch summary
+  const branchSummary = branches.slice(0, 10).map(b => {
+    const status = [];
+    if (b.isStale) status.push('STALE');
+    if (b.hasOpenPR) status.push('HAS PR');
+    if (b.behindDefault > 0) status.push(`${b.behindDefault} behind`);
+    const statusStr = status.length > 0 ? ` [${status.join(', ')}]` : '';
+    return `• ${b.name}: last commit ${b.daysSinceLastCommit ?? '?'} days ago by ${b.lastCommitAuthor || 'unknown'}${statusStr}`;
+  }).join('\n') || 'No branches';
+
+  // Build blockers summary
+  const blockerSummary = (blockers || []).length === 0 
+    ? 'No blockers detected - development flow is healthy!'
+    : blockers.map(b => `• [${b.severity.toUpperCase()}] ${b.title}: ${b.description}`).join('\n');
+
+  return `You are ProjectPulse AI, an intelligent assistant for analyzing the GitHub repository "${meta.fullName}".
+
+You have comprehensive access to:
+- Real-time repository metrics and activity
+- AI-analyzed commit history (Project Playbook)
+- Collision detection (overlapping work between contributors)
+- PR/Issue status and contributor statistics
+
+RESPONSE GUIDELINES:
+1. Be direct and specific - cite actual data, names, numbers, and dates
+2. Use structured formatting when helpful (lists, sections)
+3. For recommendations, explain the reasoning based on data
+4. If data is missing or unclear, say so explicitly
+5. Keep responses focused and actionable (2-4 paragraphs unless detail requested)
+6. When discussing contributors, reference their actual activity patterns
+
+=== REPOSITORY OVERVIEW ===
+Repository: ${meta.fullName}
 Description: ${meta.description || 'No description'}
-Stars: ${meta.stars} | Forks: ${meta.forks}
+Language: ${meta.language || 'Not specified'}
+Stars: ${meta.stars} | Forks: ${meta.forks} | Watchers: ${meta.watchers || 0}
 Default Branch: ${meta.defaultBranch}
+Created: ${formatRelativeTime(meta.createdAt)}
+Last Push: ${formatRelativeTime(meta.pushedAt)}
 
---- Recent Activity (last 7 days) ---
-Total commits: ${commits.length}
-Active committers: ${recentCommitters.join(', ') || 'None'}
+=== ACTIVITY SUMMARY ===
+Recent Commits: ${commits.length}
+Active Contributors: ${recentCommitters.length} (${recentCommitters.slice(0, 5).join(', ')}${recentCommitters.length > 5 ? '...' : ''})
+Open PRs: ${pullRequests.length}
+Open Issues: ${issues.length}
+Active Branches: ${branches.length}
 
---- Branches (${branches.length} total) ---
-${branches.slice(0, 15).map(b =>
-    `- ${b.name}: last commit ${b.daysSinceLastCommit ?? '?'} days ago by ${b.lastCommitAuthor || 'unknown'}${b.isStale ? ' [STALE]' : ''}${b.hasOpenPR ? ' [HAS PR]' : ''}`
-  ).join('\n')}
+=== CONTRIBUTOR STATS ===
+${contributorStats || 'No contributor data'}
 
---- Open Pull Requests (${pullRequests.length} total) ---
-${pullRequests.slice(0, 10).map(pr =>
-    `- PR #${pr.number}: "${pr.title}" by ${pr.author} (opened ${pr.createdAt}${pr.isDraft ? ', DRAFT' : ''})`
-  ).join('\n') || 'None'}
+=== BRANCHES ===
+${branchSummary}
 
---- Open Issues (${issues.length} total) ---
-${issues.slice(0, 10).map(issue =>
-    `- Issue #${issue.number}: "${issue.title}" [${issue.labels.map(l => l.name).join(', ')}] by ${issue.author} (opened ${issue.createdAt})`
-  ).join('\n') || 'None'}
+=== PULL REQUESTS ===
+${prSummary}
 
---- Contributors ---
-${contributors.slice(0, 10).map(c =>
-    `- ${c.login}: ${c.totalCommits} total commits`
-  ).join('\n')}
+=== ISSUES ===
+${issueSummary}
 
---- Detected Blockers ---
-${(blockers || []).length === 0 ? 'No blockers detected.' :
-    blockers.map(b => `- [${b.severity.toUpperCase()}] ${b.title}: ${b.description}`).join('\n')}
-
+=== BLOCKERS ===
+${blockerSummary}
+${playbookContext}${collisionContext}
 === END CONTEXT ===
 
-Rules:
-- Always ground your answers in the data above.
-- If asked about something not in the data, say so clearly.
-- When recommending people for tasks, base it on their recent activity and PR/commit history.
-- Keep responses concise (2-4 paragraphs max) unless the user asks for detail.`;
+Now respond to the user's question using the data above. Be helpful, specific, and data-driven.`;
 }
 
 /**
@@ -72,7 +185,7 @@ function cleanResponse(text) {
 /**
  * Send a chat message and stream the response
  * @param {Array} messages - [{role: 'user'|'assistant', content: string}]
- * @param {object} repoContext - Full repoData object
+ * @param {object} repoContext - Full repoData object with optional playbook/collision data
  * @param {function} onChunk - Callback for each streamed chunk
  * @returns {Promise<string>} Complete response text
  */

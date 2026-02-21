@@ -9,7 +9,8 @@ import { getCachedData, setCachedData, invalidateCache } from '../services/cache
 import { generatePulseSummary } from '../services/ollamaService.js';
 import { streamChatResponse } from '../services/chatService.js';
 import { analyzeCommit } from '../services/commitAnalyzerService.js';
-import { getProjectPlaybook, buildContextFromPlaybook, syncCommitsToPlaybook } from '../services/playbookService.js';
+import { getProjectPlaybook, buildContextFromPlaybook, syncCommitsToPlaybook, getAllContributorPlaybooks } from '../services/playbookService.js';
+import { detectCollisions } from '../services/collisionService.js';
 import { broadcast, addConnection, removeConnection } from '../services/sseService.js';
 import { setRepoVersion } from '../services/pollingService.js';
 
@@ -193,6 +194,27 @@ router.post('/chat', async (req, res) => {
     // Limit conversation to last 20 messages
     const trimmedMessages = messages.slice(-20);
 
+    // Enrich context with playbook and collision data (server-side fetch)
+    const { owner, name: repo } = repoContext.meta;
+    let enrichedContext = { ...repoContext };
+    
+    try {
+      // Fetch playbook context
+      const playbookContext = await buildContextFromPlaybook(owner, repo);
+      if (playbookContext) {
+        enrichedContext.playbook = playbookContext;
+      }
+      
+      // Fetch collision data
+      const collisionData = await detectCollisions(owner, repo);
+      if (collisionData) {
+        enrichedContext.collisions = collisionData;
+      }
+    } catch (enrichError) {
+      console.warn('Failed to enrich chat context:', enrichError.message);
+      // Continue without enriched data
+    }
+
     // Set up SSE headers
     res.writeHead(200, {
       'Content-Type': 'text/event-stream',
@@ -206,7 +228,7 @@ router.post('/chat', async (req, res) => {
     try {
       fullResponse = await streamChatResponse(
         trimmedMessages,
-        repoContext,
+        enrichedContext,
         (chunk) => {
           res.write(`data: ${JSON.stringify({ chunk })}\n\n`);
         }

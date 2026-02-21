@@ -1,0 +1,539 @@
+{
+  "repoFullName": "github/gh-aw-firewall",
+  "lastUpdated": "2026-02-21T01:52:13.232Z",
+  "totalCommitsTracked": 20,
+  "projectSummary": "This sidecar proxy routes GitHub Copilot API calls through configurable endpoints, recently shipping version 0.20.2 with expanded ARM64 Linux and macOS support alongside container compatibility fixes. The team addresses Java build configurations, network routing issues, and release automation while maintaining steady momentum through security patches and platform expansion.",
+  "techAreas": [
+    "docs",
+    ".github",
+    "containers",
+    "examples",
+    "src",
+    "tests",
+    "docs-site",
+    "scripts"
+  ],
+  "overallVelocity": "steady",
+  "commits": [
+    {
+      "commitId": "09563308ad54980e33261f4ae39ee70b36db953c",
+      "shortId": "0956330",
+      "author": "Mossaka",
+      "timestamp": "2026-02-17T02:09:08Z",
+      "message": "docs: convert API proxy docs to Starlight format (#941)",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "docs/api-proxy-sidecar.md",
+        "docs/authentication-architecture.md"
+      ],
+      "primaryArea": "docs",
+      "before": "Documentation used standard markdown headers",
+      "added": "Starlight frontmatter format with metadata fields",
+      "impact": "Documentation now compatible with Starlight site generator",
+      "keywords": [
+        "documentation",
+        "starlight",
+        "markdown"
+      ]
+    },
+    {
+      "commitId": "132609bb2d8914f89b72f76fb61b06f7643ededd",
+      "shortId": "132609b",
+      "author": "Copilot",
+      "timestamp": "2026-02-17T23:41:11Z",
+      "message": "feat: add github copilot api proxy support (#945)",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        ".github/workflows/smoke-copilot.lock.yml",
+        "containers/agent/api-proxy-health-check.sh",
+        "containers/api-proxy/server.js",
+        "examples/github-copilot.sh",
+        "src/cli.ts",
+        "src/docker-manager.ts",
+        "src/types.ts",
+        "tests/integration/api-proxy.test.ts"
+      ],
+      "primaryArea": "src",
+      "before": "No GitHub Copilot API proxy support existed",
+      "added": "GitHub Copilot API proxy configuration and health checks",
+      "impact": "Users route Copilot API calls through sidecar proxy",
+      "keywords": [
+        "copilot",
+        "api-proxy",
+        "credentials"
+      ]
+    },
+    {
+      "commitId": "c419d692685159da4fcbb56a98bbe129152314dc",
+      "shortId": "c419d69",
+      "author": "Mossaka",
+      "timestamp": "2026-02-18T00:00:47Z",
+      "message": "0.20.0",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "package-lock.json",
+        "package.json"
+      ],
+      "primaryArea": "root",
+      "before": "Package version was 0.19.1",
+      "added": "Version bumped to 0.20.0",
+      "impact": "Release version 0.20.0 now available",
+      "keywords": [
+        "version",
+        "release"
+      ]
+    },
+    {
+      "commitId": "6b827150a7ed31eb5a95afb38ee1983a8cac5cef",
+      "shortId": "6b82715",
+      "author": "Claude",
+      "timestamp": "2026-02-18T17:05:41Z",
+      "message": "feat(api-proxy): centralize port configuration in types.ts (#955)",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "containers/api-proxy/Dockerfile",
+        "docs/api-proxy-sidecar.md",
+        "src/docker-manager.ts",
+        "src/host-iptables.ts",
+        "src/types.ts"
+      ],
+      "primaryArea": "src",
+      "before": "Port configuration scattered across multiple files",
+      "added": "Centralized port configuration in types.ts file",
+      "impact": "Port settings maintained in single location",
+      "keywords": [
+        "configuration",
+        "refactoring",
+        "ports"
+      ]
+    },
+    {
+      "commitId": "7c8da85a2099b262d8d4ef1f4b144fab4028d481",
+      "shortId": "7c8da85",
+      "author": "Copilot",
+      "timestamp": "2026-02-18T18:25:24Z",
+      "message": "docs: add api-proxy image publishing details to release guide (#954)",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "docs/releasing.md"
+      ],
+      "primaryArea": "docs",
+      "before": "Release guide omitted api-proxy Docker image",
+      "added": "Documentation for api-proxy image publishing added",
+      "impact": "Release managers verify api-proxy image availability",
+      "keywords": [
+        "documentation",
+        "release",
+        "docker"
+      ]
+    },
+    {
+      "commitId": "a2f424bd81818af3a20f16efa67f12d63ee5816f",
+      "shortId": "a2f424b",
+      "author": "Mossaka",
+      "timestamp": "2026-02-19T04:12:24Z",
+      "message": "feat: add ARM64 binary support for awf CLI (#965)",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        ".github/workflows/release.yml",
+        "docs/RELEASE_TEMPLATE.md",
+        "install.sh",
+        "package-lock.json",
+        "package.json"
+      ],
+      "primaryArea": "root",
+      "before": "Only x64 Linux binaries available",
+      "added": "ARM64 architecture support for Linux binaries",
+      "impact": "ARM64 Linux users install native binaries",
+      "keywords": [
+        "arm64",
+        "linux",
+        "binaries"
+      ]
+    },
+    {
+      "commitId": "9b891c4c6d0eca70d44edb87f4493577314a2010",
+      "shortId": "9b891c4",
+      "author": "Mossaka",
+      "timestamp": "2026-02-19T04:13:09Z",
+      "message": "0.20.1",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "package-lock.json",
+        "package.json"
+      ],
+      "primaryArea": "root",
+      "before": "Package version was 0.20.0",
+      "added": "Version bumped to 0.20.1",
+      "impact": "Patch release 0.20.1 now available",
+      "keywords": [
+        "version",
+        "release"
+      ]
+    },
+    {
+      "commitId": "e656d488db11da284697236afbbe88539100d52a",
+      "shortId": "e656d48",
+      "author": "Mossaka",
+      "timestamp": "2026-02-19T20:10:00Z",
+      "message": "feat: simplify release to workflow_dispatch only (#968)",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        ".github/workflows/release.yml",
+        "docs/releasing.md"
+      ],
+      "primaryArea": ".github",
+      "before": "Releases triggered automatically by git tags",
+      "added": "Manual workflow_dispatch triggers only",
+      "impact": "Releases require explicit manual initiation",
+      "keywords": [
+        "release",
+        "workflow",
+        "automation"
+      ]
+    },
+    {
+      "commitId": "7916aa8e97ee611da88cbbef9d7b80796edfe665",
+      "shortId": "7916aa8",
+      "author": "Mossaka",
+      "timestamp": "2026-02-19T21:38:38Z",
+      "message": "fix: add writable tmpfs for /host/dev/shm (POSIX semaphores) (#972)",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "src/docker-manager.test.ts",
+        "src/docker-manager.ts"
+      ],
+      "primaryArea": "src",
+      "before": "/host/dev/shm lacked writable tmpfs mount",
+      "added": "Writable tmpfs mount for POSIX shared memory",
+      "impact": "Fixes POSIX semaphore issues in containers",
+      "keywords": [
+        "docker",
+        "posix",
+        "tmpfs"
+      ]
+    },
+    {
+      "commitId": "475f7fc18e2b98b6ca0d9e9d9a5d0268302015af",
+      "shortId": "475f7fc",
+      "author": "Mossaka",
+      "timestamp": "2026-02-19T21:38:51Z",
+      "message": "Add macOS (Darwin) binary support for x64 and arm64 (#973)",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        ".github/workflows/release.yml",
+        "docs/RELEASE_TEMPLATE.md",
+        "install.sh",
+        "package.json"
+      ],
+      "primaryArea": "root",
+      "before": "Only Linux binaries supported",
+      "added": "macOS x64 and ARM64 binary support",
+      "impact": "macOS users install native binaries",
+      "keywords": [
+        "macos",
+        "darwin",
+        "binaries"
+      ]
+    },
+    {
+      "commitId": "6a20334a80fa433aab780e0b5b9482628bc39c44",
+      "shortId": "6a20334",
+      "author": "Mossaka",
+      "timestamp": "2026-02-19T21:39:21Z",
+      "message": "feat: set NO_COLOR=1 in agent container environment (#971)",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "src/docker-manager.test.ts",
+        "src/docker-manager.ts"
+      ],
+      "primaryArea": "src",
+      "before": "Agent containers showed ANSI color codes",
+      "added": "NO_COLOR=1 disables colored CLI output",
+      "impact": "Cleaner logs without ANSI escape sequences",
+      "keywords": [
+        "environment",
+        "logging",
+        "color"
+      ]
+    },
+    {
+      "commitId": "11f9052ad5d7778f0606e69cc27270c5b9d9a3b6",
+      "shortId": "11f9052",
+      "author": "dependabot[bot]",
+      "timestamp": "2026-02-19T21:39:57Z",
+      "message": "chore(deps): bump devalue from 5.6.2 to 5.6.3 in /docs-site",
+      "branch": "dependabot/npm_and_yarn/docs-site/devalue-5.6.3",
+      "eventType": "commit",
+      "filesChanged": [
+        "docs-site/package-lock.json"
+      ],
+      "primaryArea": "docs-site",
+      "before": "devalue dependency version 5.6.2 in docs-site",
+      "added": "Updated devalue to version 5.6.3",
+      "impact": "Security patch applied to documentation dependency",
+      "keywords": [
+        "dependencies",
+        "security",
+        "docs-site"
+      ]
+    },
+    {
+      "commitId": "9fe10f2c865c5a0dcdfb20a97135667e5ec84e06",
+      "shortId": "9fe10f2",
+      "author": "github-actions[bot]",
+      "timestamp": "2026-02-19T21:41:08Z",
+      "message": "0.20.2",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "package-lock.json",
+        "package.json"
+      ],
+      "primaryArea": "root",
+      "before": "Package version was 0.20.1",
+      "added": "Version bumped to 0.20.2",
+      "impact": "Patch release 0.20.2 now available",
+      "keywords": [
+        "version",
+        "release"
+      ]
+    },
+    {
+      "commitId": "678c2fe8181d416e4b4ca7d25f3e66b2eec00c35",
+      "shortId": "678c2fe",
+      "author": "Copilot",
+      "timestamp": "2026-02-19T22:11:38Z",
+      "message": "feat: update agentic workflows to v0.47.0 and add smoke-gemini (#974)",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        ".github/agents/agentic-workflows.agent.md",
+        ".github/workflows/agentics-maintenance.yml",
+        ".github/workflows/build-test-bun.lock.yml",
+        ".github/workflows/build-test-bun.md",
+        ".github/workflows/build-test-cpp.lock.yml",
+        ".github/workflows/build-test-cpp.md",
+        ".github/workflows/build-test-deno.lock.yml",
+        ".github/workflows/build-test-deno.md",
+        ".github/workflows/build-test-dotnet.lock.yml",
+        ".github/workflows/build-test-dotnet.md",
+        ".github/workflows/build-test-go.lock.yml",
+        ".github/workflows/build-test-go.md",
+        ".github/workflows/build-test-java.lock.yml",
+        ".github/workflows/build-test-java.md",
+        ".github/workflows/build-test-node.lock.yml",
+        ".github/workflows/build-test-node.md",
+        ".github/workflows/build-test-rust.lock.yml",
+        ".github/workflows/build-test-rust.md",
+        ".github/workflows/ci-cd-gaps-assessment.lock.yml",
+        ".github/workflows/ci-doctor.lock.yml",
+        ".github/workflows/cli-flag-consistency-checker.lock.yml",
+        ".github/workflows/dependency-security-monitor.lock.yml",
+        ".github/workflows/doc-maintainer.lock.yml",
+        ".github/workflows/issue-duplication-detector.lock.yml",
+        ".github/workflows/issue-monster.lock.yml",
+        ".github/workflows/pelis-agent-factory-advisor.lock.yml",
+        ".github/workflows/plan.lock.yml",
+        ".github/workflows/plan.md",
+        ".github/workflows/secret-digger-claude.lock.yml",
+        ".github/workflows/secret-digger-codex.lock.yml",
+        ".github/workflows/secret-digger-copilot.lock.yml",
+        ".github/workflows/security-guard.lock.yml",
+        ".github/workflows/security-guard.md",
+        ".github/workflows/security-review.lock.yml",
+        ".github/workflows/smoke-chroot.lock.yml",
+        ".github/workflows/smoke-chroot.md",
+        ".github/workflows/smoke-claude.lock.yml",
+        ".github/workflows/smoke-claude.md",
+        ".github/workflows/smoke-codex.lock.yml",
+        ".github/workflows/smoke-codex.md",
+        ".github/workflows/smoke-copilot.lock.yml",
+        ".github/workflows/smoke-copilot.md",
+        ".github/workflows/smoke-gemini.lock.yml",
+        ".github/workflows/smoke-gemini.md",
+        ".github/workflows/test-coverage-improver.lock.yml",
+        ".github/workflows/update-release-notes.lock.yml",
+        "scripts/ci/postprocess-smoke-workflows.ts"
+      ],
+      "primaryArea": ".github",
+      "before": "Workflows used agentic framework v0.42.17",
+      "added": "Updated to v0.47.0 with Gemini smoke tests",
+      "impact": "CI uses latest agentic framework version",
+      "keywords": [
+        "workflows",
+        "agentic",
+        "gemini"
+      ]
+    },
+    {
+      "commitId": "03b473168768040dc32956d8f965059e2a79bd10",
+      "shortId": "03b4731",
+      "author": "dependabot[bot]",
+      "timestamp": "2026-02-19T22:26:08Z",
+      "message": "chore(deps): bump the all-github-actions group across 1 directory with 12 updates",
+      "branch": "dependabot/github_actions/all-github-actions-507e4dcaa9",
+      "eventType": "commit",
+      "filesChanged": [
+        ".github/workflows/build-test-bun.lock.yml",
+        ".github/workflows/build-test-cpp.lock.yml",
+        ".github/workflows/build-test-deno.lock.yml",
+        ".github/workflows/build-test-dotnet.lock.yml",
+        ".github/workflows/build-test-go.lock.yml",
+        ".github/workflows/build-test-java.lock.yml",
+        ".github/workflows/build-test-node.lock.yml",
+        ".github/workflows/build-test-rust.lock.yml",
+        ".github/workflows/ci-cd-gaps-assessment.lock.yml",
+        ".github/workflows/ci-doctor.lock.yml",
+        ".github/workflows/cli-flag-consistency-checker.lock.yml",
+        ".github/workflows/container-scan.yml",
+        ".github/workflows/dependency-security-monitor.lock.yml",
+        ".github/workflows/doc-maintainer.lock.yml",
+        ".github/workflows/issue-duplication-detector.lock.yml",
+        ".github/workflows/issue-monster.lock.yml",
+        ".github/workflows/pelis-agent-factory-advisor.lock.yml",
+        ".github/workflows/plan.lock.yml",
+        ".github/workflows/pr-title.yml",
+        ".github/workflows/release.yml",
+        ".github/workflows/secret-digger-claude.lock.yml",
+        ".github/workflows/secret-digger-codex.lock.yml",
+        ".github/workflows/secret-digger-copilot.lock.yml",
+        ".github/workflows/security-guard.lock.yml",
+        ".github/workflows/security-review.lock.yml",
+        ".github/workflows/smoke-chroot.lock.yml",
+        ".github/workflows/smoke-claude.lock.yml",
+        ".github/workflows/smoke-codex.lock.yml",
+        ".github/workflows/smoke-copilot.lock.yml",
+        ".github/workflows/smoke-gemini.lock.yml",
+        ".github/workflows/test-coverage-improver.lock.yml",
+        ".github/workflows/update-release-notes.lock.yml"
+      ],
+      "primaryArea": ".github",
+      "before": "Workflow actions used older versions",
+      "added": "Updated GitHub Actions to latest versions",
+      "impact": "CI pipelines use current action versions",
+      "keywords": [
+        "github-actions",
+        "dependencies",
+        "ci"
+      ]
+    },
+    {
+      "commitId": "4fb57be70627f343dc7f188a7e18ac0cffc97de4",
+      "shortId": "4fb57be",
+      "author": "Mossaka",
+      "timestamp": "2026-02-19T23:08:04Z",
+      "message": "docs: add releasing.md link to CLAUDE.md documentation section (#981)",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "CLAUDE.md"
+      ],
+      "primaryArea": "root",
+      "before": "CLAUDE.md lacked release documentation link",
+      "added": "Reference to releasing.md in documentation index",
+      "impact": "Developers find release procedures easily",
+      "keywords": [
+        "documentation",
+        "claude",
+        "releasing"
+      ]
+    },
+    {
+      "commitId": "bd5683692e9e948645851f4ffd6424d70dbc5603",
+      "shortId": "bd56836",
+      "author": "Copilot",
+      "timestamp": "2026-02-19T23:31:44Z",
+      "message": "fix: add iptables bypass for container self-traffic (#977)",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "containers/agent/setup-iptables.sh"
+      ],
+      "primaryArea": "containers",
+      "before": "Container self-traffic routed through Squid proxy",
+      "added": "Iptables bypass for container self-traffic",
+      "impact": "Fixes test framework connectivity issues",
+      "keywords": [
+        "iptables",
+        "networking",
+        "proxy"
+      ]
+    },
+    {
+      "commitId": "41131fdb03972b0dceb8839dae1eded0a2f09ed9",
+      "shortId": "41131fd",
+      "author": "Copilot",
+      "timestamp": "2026-02-19T23:31:58Z",
+      "message": "chore: remove _codeql_detected_source_root (#975)",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        ".gitignore",
+        "_codeql_detected_source_root"
+      ],
+      "primaryArea": "root",
+      "before": "CodeQL symlink tracked in repository",
+      "added": "Removed auto-generated symlink, added gitignore entry",
+      "impact": "Repository cleaned of generated CodeQL files",
+      "keywords": [
+        "codeql",
+        "cleanup",
+        "gitignore"
+      ]
+    },
+    {
+      "commitId": "207b63c79a87e40427950d881c221acc623d9fb6",
+      "shortId": "207b63c",
+      "author": "Mossaka",
+      "timestamp": "2026-02-21T01:00:51Z",
+      "message": "Pre-seed Maven/Gradle/sbt proxy config in agent container",
+      "branch": "jvm-proxy-config",
+      "eventType": "commit",
+      "filesChanged": [
+        "containers/agent/entrypoint.sh"
+      ],
+      "primaryArea": "containers",
+      "before": "JVM build tools lacked proxy configuration",
+      "added": "Pre-configured proxy settings for Maven/Gradle/sbt",
+      "impact": "Java builds work behind corporate proxies",
+      "keywords": [
+        "java",
+        "proxy",
+        "maven"
+      ]
+    },
+    {
+      "commitId": "74de5efbf7cf2133912c881f27f5fb104de72af7",
+      "shortId": "74de5ef",
+      "author": "Mossaka",
+      "timestamp": "2026-02-21T01:12:37Z",
+      "message": "docs: update runner and architecture compatibility",
+      "branch": "docs/runner-compatibility",
+      "eventType": "commit",
+      "filesChanged": [
+        "docs/compatibility.md"
+      ],
+      "primaryArea": "docs",
+      "before": "Compatibility documentation lacked runner details",
+      "added": "GitHub Actions runner compatibility matrix",
+      "impact": "Users know which runners support firewall",
+      "keywords": [
+        "documentation",
+        "compatibility",
+        "runners"
+      ]
+    }
+  ]
+}

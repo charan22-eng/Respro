@@ -1,0 +1,39 @@
+{
+  "login": "Smoke Test Runner",
+  "avatarUrl": null,
+  "repoFullName": "github/gh-aw",
+  "lastUpdated": "2026-02-21T01:47:54.078Z",
+  "totalCommits": 1,
+  "primaryAreas": [
+    ".github"
+  ],
+  "contributorSummary": "",
+  "completionSignals": {
+    "velocityTrend": "unknown",
+    "commitSentiment": "neutral",
+    "churnSignal": "none",
+    "lastUpdated": "2026-02-21T01:47:54.078Z"
+  },
+  "commits": [
+    {
+      "commitId": "41f45d81fc910433b85e9db61c3e8953b0115d56",
+      "shortId": "41f45d8",
+      "author": "Smoke Test Runner",
+      "timestamp": "2026-02-21T01:14:14Z",
+      "message": "test: Add smoke test file for run 22247251475",
+      "branch": "copilot/implement-global-object-shim",
+      "eventType": "commit",
+      "filesChanged": [
+        ".github/smoke-test-push-22247251475.md"
+      ],
+      "primaryArea": ".github",
+      "before": "No smoke test for this run",
+      "added": "Smoke test run file",
+      "impact": "Records test run instance",
+      "keywords": [
+        "smoke-test",
+        "test-run"
+      ]
+    }
+  ]
+}

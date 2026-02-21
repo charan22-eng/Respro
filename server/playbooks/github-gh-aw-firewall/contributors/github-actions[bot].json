@@ -1,0 +1,40 @@
+{
+  "login": "github-actions[bot]",
+  "avatarUrl": "https://avatars.githubusercontent.com/in/15368?v=4",
+  "repoFullName": "github/gh-aw-firewall",
+  "lastUpdated": "2026-02-21T01:52:13.217Z",
+  "totalCommits": 1,
+  "primaryAreas": [
+    "root"
+  ],
+  "contributorSummary": "",
+  "completionSignals": {
+    "velocityTrend": "unknown",
+    "commitSentiment": "neutral",
+    "churnSignal": "none",
+    "lastUpdated": "2026-02-21T01:52:13.217Z"
+  },
+  "commits": [
+    {
+      "commitId": "9fe10f2c865c5a0dcdfb20a97135667e5ec84e06",
+      "shortId": "9fe10f2",
+      "author": "github-actions[bot]",
+      "timestamp": "2026-02-19T21:41:08Z",
+      "message": "0.20.2",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "package-lock.json",
+        "package.json"
+      ],
+      "primaryArea": "root",
+      "before": "Package version was 0.20.1",
+      "added": "Version bumped to 0.20.2",
+      "impact": "Patch release 0.20.2 now available",
+      "keywords": [
+        "version",
+        "release"
+      ]
+    }
+  ]
+}
