@@ -16,6 +16,7 @@ import LiveEventToast from '../components/LiveEventToast';
 import GitGraphPanel from '../components/GitGraphPanel';
 import CollisionRadarPanel from '../components/CollisionRadarPanel';
 import HealthCheckupPanel from '../components/HealthCheckupPanel';
+import KanbanBoard from '../components/KanbanBoard';
 import { fetchPulseData, getAuthUser, subscribeToUpdates } from '../utils/api';
 
 function Dashboard() {
@@ -27,9 +28,10 @@ function Dashboard() {
   const [aiPending, setAiPending] = useState(false);
   const [liveEvents, setLiveEvents] = useState([]);
   const [playbookRefreshKey, setPlaybookRefreshKey] = useState(0);
-  const [showGitGraph, setShowGitGraph] = useState(false);
+const [showGitGraph, setShowGitGraph] = useState(false);
   const [showCollisionRadar, setShowCollisionRadar] = useState(false);
   const [showHealthCheckup, setShowHealthCheckup] = useState(false);
+  const [showKanbanBoard, setShowKanbanBoard] = useState(false);
   const commitAnalyzerRef = useRef(null);
   const sseCleanupRef = useRef(null);
 
@@ -229,7 +231,7 @@ function Dashboard() {
                     </svg>
                   </button>
 
-                  {/* Health Checkup Button */}
+{/* Health Checkup Button */}
                   <button
                     onClick={() => setShowHealthCheckup(true)}
                     className="p-2 hover:bg-gray-100 rounded-lg transition-colors group relative"
@@ -245,6 +247,25 @@ function Dashboard() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                     </svg>
                   </button>
+
+                  {/* Kanban Board Button */}
+                  {user && (
+                    <button
+                      onClick={() => setShowKanbanBoard(true)}
+                      className="p-2 hover:bg-gray-100 rounded-lg transition-colors group relative"
+                      title="Task Board"
+                    >
+                      <svg 
+                        className="w-5 h-5 text-gray-600 group-hover:text-pulse-600" 
+                        fill="none" 
+                        stroke="currentColor" 
+                        viewBox="0 0 24 24"
+                      >
+                        {/* Kanban/board icon */}
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                      </svg>
+                    </button>
+                  )}
 
                   {/* Force Refresh Button */}
                   <button
@@ -400,12 +421,22 @@ function Dashboard() {
         />
       )}
 
-      {/* Health Checkup Panel Modal */}
+{/* Health Checkup Panel Modal */}
       {showHealthCheckup && repoData && (
         <HealthCheckupPanel
           owner={repoData.meta.owner}
           repo={repoData.meta.name}
           onClose={() => setShowHealthCheckup(false)}
+        />
+      )}
+
+      {/* Kanban Board Panel */}
+      {showKanbanBoard && repoData && user && (
+        <KanbanBoard
+          owner={repoData.meta.owner}
+          repo={repoData.meta.name}
+          currentUser={user.login}
+          onClose={() => setShowKanbanBoard(false)}
         />
       )}
     </div>

@@ -1,0 +1,33 @@
+{
+  "repoFullName": "Lalithaditya007/AUDI_MANAGEMENT",
+  "lastUpdated": "2026-02-21T02:52:16.847Z",
+  "columns": [
+    "todo",
+    "in_progress",
+    "in_review",
+    "done"
+  ],
+  "tasks": [
+    {
+      "id": "72a1c598-5409-444b-8b3b-19228924e5a1",
+      "title": "NavBar",
+      "description": "NavBar feature addition",
+      "column": "in_progress",
+      "priority": "medium",
+      "deadline": "2026-02-22",
+      "assignee": "ch-praneeth-08",
+      "createdBy": "ch-praneeth-08",
+      "createdAt": "2026-02-21T02:36:53.633Z",
+      "updatedAt": "2026-02-21T02:52:16.846Z",
+      "labels": [
+        "frontend",
+        "NavBar"
+      ],
+      "linkedPR": null,
+      "linkedCommits": [],
+      "deadlineStatus": "approaching",
+      "flagged": false
+    }
+  ],
+  "flags": []
+}

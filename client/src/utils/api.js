@@ -418,3 +418,176 @@ export async function getHealthCheckup(owner, repo) {
 
   return data;
 }
+
+// ============================================================
+// Board/Kanban API
+// ============================================================
+
+/**
+ * Get full board with warnings
+ * @param {string} owner - Repository owner
+ * @param {string} repo - Repository name
+ * @returns {Promise<{board: object, warnings: Array}>}
+ */
+export async function getBoard(owner, repo) {
+  const response = await fetch(`${API_BASE}/board/${owner}/${repo}`, {
+    credentials: 'include'
+  });
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.error || 'Failed to load board');
+  }
+
+  return data;
+}
+
+/**
+ * Get approaching and overdue tasks
+ * @param {string} owner - Repository owner
+ * @param {string} repo - Repository name
+ * @returns {Promise<{warnings: Array}>}
+ */
+export async function getBoardWarnings(owner, repo) {
+  const response = await fetch(`${API_BASE}/board/${owner}/${repo}/warnings`, {
+    credentials: 'include'
+  });
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.error || 'Failed to load warnings');
+  }
+
+  return data;
+}
+
+/**
+ * Get all flags (overdue task history)
+ * @param {string} owner - Repository owner
+ * @param {string} repo - Repository name
+ * @returns {Promise<{flags: Array}>}
+ */
+export async function getBoardFlags(owner, repo) {
+  const response = await fetch(`${API_BASE}/board/${owner}/${repo}/flags`, {
+    credentials: 'include'
+  });
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.error || 'Failed to load flags');
+  }
+
+  return data;
+}
+
+/**
+ * Get flags for a specific contributor
+ * @param {string} owner - Repository owner
+ * @param {string} repo - Repository name
+ * @param {string} username - Contributor username
+ * @returns {Promise<{flags: Array}>}
+ */
+export async function getContributorFlags(owner, repo, username) {
+  const response = await fetch(`${API_BASE}/board/${owner}/${repo}/flags/${username}`, {
+    credentials: 'include'
+  });
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.error || 'Failed to load contributor flags');
+  }
+
+  return data;
+}
+
+/**
+ * Create a new task (self-assigned)
+ * @param {string} owner - Repository owner
+ * @param {string} repo - Repository name
+ * @param {object} taskData - Task data {title, description, priority, deadline, labels, linkedPR}
+ * @returns {Promise<{task: object}>}
+ */
+export async function createTask(owner, repo, taskData) {
+  const response = await fetch(`${API_BASE}/board/${owner}/${repo}/tasks`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'include',
+    body: JSON.stringify(taskData)
+  });
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.error || 'Failed to create task');
+  }
+
+  return data;
+}
+
+/**
+ * Update a task (owner only)
+ * @param {string} owner - Repository owner
+ * @param {string} repo - Repository name
+ * @param {string} taskId - Task ID
+ * @param {object} updates - Fields to update
+ * @returns {Promise<{task: object}>}
+ */
+export async function updateTask(owner, repo, taskId, updates) {
+  const response = await fetch(`${API_BASE}/board/${owner}/${repo}/tasks/${taskId}`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'include',
+    body: JSON.stringify(updates)
+  });
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.error || 'Failed to update task');
+  }
+
+  return data;
+}
+
+/**
+ * Delete a task (owner only)
+ * @param {string} owner - Repository owner
+ * @param {string} repo - Repository name
+ * @param {string} taskId - Task ID
+ * @returns {Promise<{success: boolean}>}
+ */
+export async function deleteTask(owner, repo, taskId) {
+  const response = await fetch(`${API_BASE}/board/${owner}/${repo}/tasks/${taskId}`, {
+    method: 'DELETE',
+    credentials: 'include'
+  });
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.error || 'Failed to delete task');
+  }
+
+  return data;
+}
+
+/**
+ * Move a task to a different column (any user)
+ * @param {string} owner - Repository owner
+ * @param {string} repo - Repository name
+ * @param {string} taskId - Task ID
+ * @param {string} column - Target column (todo, in_progress, in_review, done)
+ * @returns {Promise<{task: object}>}
+ */
+export async function moveTask(owner, repo, taskId, column) {
+  const response = await fetch(`${API_BASE}/board/${owner}/${repo}/tasks/${taskId}/move`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'include',
+    body: JSON.stringify({ column })
+  });
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.error || 'Failed to move task');
+  }
+
+  return data;
+}

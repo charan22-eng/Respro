@@ -8,6 +8,7 @@ import webhookRoutes from './routes/webhook.js';
 import authRoutes from './routes/auth.js';
 import collisionRoutes from './routes/collision.js';
 import healthRoutes from './routes/health.js';
+import boardRoutes from './routes/board.js';
 import { startPolling } from './services/pollingService.js';
 
 dotenv.config();
@@ -19,7 +20,7 @@ const CLIENT_URL = process.env.CLIENT_URL || 'http://localhost:5173';
 // Middleware
 app.use(cors({
   origin: CLIENT_URL,
-  methods: ['GET', 'POST', 'DELETE'],
+  methods: ['GET', 'POST', 'DELETE', 'PATCH'],
   credentials: true
 }));
 app.use(express.json({ limit: '2mb' }));
@@ -44,6 +45,7 @@ app.use('/api', playbookRoutes);
 app.use('/api', webhookRoutes);
 app.use('/api', collisionRoutes);
 app.use('/api', healthRoutes);
+app.use('/api/board', boardRoutes);
 
 // Health check
 app.get('/api/health', (req, res) => {

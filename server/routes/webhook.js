@@ -9,6 +9,7 @@ import { updatePlaybookWithEvent, getProjectPlaybook } from '../services/playboo
 import { fetchCommitDetails } from '../services/githubService.js';
 import { broadcast } from '../services/sseService.js';
 import { invalidateCache } from '../services/cacheService.js';
+import { moveTaskByPR } from '../services/boardService.js';
 
 const router = express.Router();
 
@@ -81,6 +82,7 @@ function normalizePREvent(payload) {
 
   return {
     eventType,
+    prNumber: pr.number,
     commitId: pr.merge_commit_sha || pr.head?.sha || '',
     author: pr.user?.login || 'unknown',
     timestamp: pr.updated_at,
@@ -89,7 +91,8 @@ function normalizePREvent(payload) {
     filesChanged: [],
     additions: pr.additions || 0,
     deletions: pr.deletions || 0,
-    primaryArea: derivePrimaryArea([], pr.head?.ref || '')
+    primaryArea: derivePrimaryArea([], pr.head?.ref || ''),
+    merged: pr.merged || false
   };
 }
 
@@ -230,6 +233,38 @@ router.post('/webhook/:owner/:repo', express.raw({ type: 'application/json' }), 
           overallVelocity: result.projectPlaybook?.overallVelocity,
           totalCommits: result.projectPlaybook?.totalCommitsTracked
         });
+      }
+      
+      // Auto-move board tasks based on PR events
+      if (eventData.prNumber) {
+        try {
+          let targetColumn = null;
+          
+          // PR opened → move linked task to in_review
+          if (eventData.eventType === 'pr_opened') {
+            targetColumn = 'in_review';
+          }
+          // PR merged → move linked task to done
+          else if (eventData.eventType === 'merge' && eventData.merged) {
+            targetColumn = 'done';
+          }
+          
+          if (targetColumn) {
+            const movedTask = await moveTaskByPR(owner, repo, eventData.prNumber, targetColumn);
+            if (movedTask) {
+              console.log(`Auto-moved task "${movedTask.title}" to ${targetColumn} via PR #${eventData.prNumber}`);
+              broadcast(owner, repo, 'board_task_moved', {
+                taskId: movedTask.id,
+                taskTitle: movedTask.title,
+                column: targetColumn,
+                prNumber: eventData.prNumber,
+                auto: true
+              });
+            }
+          }
+        } catch (boardError) {
+          console.warn(`Could not auto-move board task for PR #${eventData.prNumber}:`, boardError.message);
+        }
       }
     } catch (error) {
       console.error(`Failed to process webhook event ${eventData.commitId}:`, error.message);
