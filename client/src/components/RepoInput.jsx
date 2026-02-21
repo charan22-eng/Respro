@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 
 function RepoInput({ onSubmit, isLoading, initialValue = '', compact = false }) {
   const [inputValue, setInputValue] = useState(initialValue);
@@ -20,14 +21,14 @@ function RepoInput({ onSubmit, isLoading, initialValue = '', compact = false }) 
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             placeholder="owner/repo or GitHub URL"
-            className="w-full px-4 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-pulse-500 focus:border-transparent outline-none"
+            className="w-full px-4 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
             disabled={isLoading}
           />
         </div>
         <button
           type="submit"
           disabled={isLoading || !inputValue.trim()}
-          className="px-4 py-2 text-sm font-medium text-white bg-pulse-600 rounded-lg hover:bg-pulse-700 focus:ring-2 focus:ring-pulse-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          className="px-4 py-2 text-sm font-medium text-white bg-gray-900 rounded-lg hover:bg-gray-800 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
         >
           {isLoading ? 'Loading...' : 'Analyze'}
         </button>
@@ -36,8 +37,9 @@ function RepoInput({ onSubmit, isLoading, initialValue = '', compact = false }) 
   }
 
   return (
-    <form onSubmit={handleSubmit} className="w-full max-w-2xl">
-      <div className="relative">
+    <form onSubmit={handleSubmit} className="w-full max-w-xl mx-auto">
+      {/* Input field */}
+      <div className="relative mb-4">
         <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
           <svg
             className="w-5 h-5 text-gray-400"
@@ -55,65 +57,73 @@ function RepoInput({ onSubmit, isLoading, initialValue = '', compact = false }) 
           type="text"
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
-          placeholder="Enter GitHub URL (e.g., facebook/react or https://github.com/facebook/react)"
-          className="w-full px-4 py-4 pl-12 text-lg border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-pulse-500 focus:border-pulse-500 outline-none transition-all"
+          placeholder="Enter repository (e.g., facebook/react)"
+          className="w-full px-4 py-4 pl-12 text-base border border-gray-300 rounded-xl focus:ring-2 focus:ring-gray-900 focus:border-gray-900 outline-none transition-all bg-white"
           disabled={isLoading}
         />
-        <div className="absolute inset-y-0 right-0 pr-2 flex items-center">
-          <button
-            type="submit"
-            disabled={isLoading || !inputValue.trim()}
-            className="px-6 py-2 text-white bg-pulse-600 rounded-lg hover:bg-pulse-700 focus:ring-2 focus:ring-pulse-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center space-x-2"
-          >
-            {isLoading ? (
-              <>
-                <svg
-                  className="animate-spin w-4 h-4"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                >
-                  <circle
-                    className="opacity-25"
-                    cx="12"
-                    cy="12"
-                    r="10"
-                    stroke="currentColor"
-                    strokeWidth="4"
-                  />
-                  <path
-                    className="opacity-75"
-                    fill="currentColor"
-                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                  />
-                </svg>
-                <span>Analyzing...</span>
-              </>
-            ) : (
-              <>
-                <span>Get Pulse</span>
-                <svg
-                  className="w-4 h-4"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M14 5l7 7m0 0l-7 7m7-7H3"
-                  />
-                </svg>
-              </>
-            )}
-          </button>
-        </div>
       </div>
-      <p className="mt-3 text-sm text-gray-500 text-center">
+
+      {/* Button - separate row, full width */}
+      <button
+        type="submit"
+        disabled={isLoading || !inputValue.trim()}
+        className="w-full py-4 text-white font-semibold bg-gray-900 rounded-xl hover:bg-gray-800 focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2"
+      >
+        {isLoading ? (
+          <>
+            <svg
+              className="animate-spin w-5 h-5"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                className="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                strokeWidth="4"
+              />
+              <path
+                className="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+              />
+            </svg>
+            <span>Analyzing...</span>
+          </>
+        ) : (
+          <>
+            <span>Get Pulse</span>
+            <svg
+              className="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M14 5l7 7m0 0l-7 7m7-7H3"
+              />
+            </svg>
+          </>
+        )}
+      </button>
+
+      <p className="mt-4 text-sm text-gray-500 text-center">
         Works with any public GitHub repository
       </p>
     </form>
   );
 }
+
+RepoInput.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool,
+  initialValue: PropTypes.string,
+  compact: PropTypes.bool
+};
 
 export default RepoInput;

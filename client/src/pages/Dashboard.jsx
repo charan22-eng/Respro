@@ -262,23 +262,24 @@ function Dashboard() {
         </div>
       </header>
 
-      {/* Main Content */}
+{/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Empty State - Repo Selection */}
+        {/* Empty State - Landing Page */}
         {!repoData && !pulseMutation.isPending && !pulseMutation.isError && (
-          <div className="flex flex-col items-center justify-center min-h-[60vh]">
-            <div className="text-center mb-8">
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">
-                Check your repo's pulse
-              </h2>
-              <p className="text-lg text-gray-600 max-w-md">
-                {user
-                  ? 'Select a repository from your GitHub account to get started.'
-                  : 'Enter any public GitHub repository URL to get an intelligent health summary, activity insights, and blocker detection.'}
-              </p>
-            </div>
+          <div className="flex flex-col items-center justify-center min-h-[70vh]">
+            {/* Main Heading */}
+            <h2 className="text-4xl sm:text-5xl font-bold text-center text-gray-900 mb-4">
+              Check your repo&apos;s pulse
+            </h2>
 
-            {/* Authenticated: show repo selector, with manual fallback */}
+            {/* Subheading */}
+            <p className="text-lg text-gray-600 max-w-lg text-center mb-10">
+              {user
+                ? 'Select a repository from your GitHub account to get started.'
+                : 'Get intelligent health summaries, activity insights, and blocker detection for any GitHub repository.'}
+            </p>
+
+            {/* Input Section */}
             {user && !useManualInput ? (
               <RepoSelector
                 onSubmit={handleSubmit}
@@ -289,12 +290,14 @@ function Dashboard() {
               <div className="w-full max-w-xl">
                 <RepoInput onSubmit={handleSubmit} isLoading={pulseMutation.isPending} />
                 {user && (
-                  <button
-                    onClick={() => setUseManualInput(false)}
-                    className="mt-3 text-sm text-gray-500 hover:text-pulse-600 transition-colors"
-                  >
-                    or select from your repositories
-                  </button>
+                  <div className="text-center mt-4">
+                    <button
+                      onClick={() => setUseManualInput(false)}
+                      className="text-sm text-gray-500 hover:text-gray-700 transition-colors underline"
+                    >
+                      or select from your repositories
+                    </button>
+                  </div>
                 )}
               </div>
             )}
