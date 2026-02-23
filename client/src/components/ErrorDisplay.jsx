@@ -29,7 +29,7 @@ function ErrorDisplay({ error, onRetry, onReset }) {
       case 'ACCESS_DENIED':
         return {
           title: 'Access Denied',
-          description: 'This repository appears to be private. ProjectPulse only works with public repositories.',
+          description: 'This repository appears to be private. GitSage only works with public repositories unless you sign in.',
           icon: (
             <svg className="w-12 h-12 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
@@ -65,18 +65,18 @@ function ErrorDisplay({ error, onRetry, onReset }) {
     <div className="flex flex-col items-center justify-center min-h-[60vh]">
       <div className="text-center max-w-md">
         <div className="flex justify-center mb-4">{icon}</div>
-        <h3 className="text-xl font-semibold text-gray-900 mb-2">{title}</h3>
-        <p className="text-gray-600 mb-6">{description}</p>
+        <h3 className="text-xl font-semibold text-surface-900 mb-2">{title}</h3>
+        <p className="text-surface-600 mb-6">{description}</p>
         <div className="flex items-center justify-center space-x-4">
           <button
             onClick={onRetry}
-            className="px-4 py-2 text-white bg-pulse-600 rounded-lg hover:bg-pulse-700 transition-colors"
+            className="btn-brand"
           >
             Try Again
           </button>
           <button
             onClick={onReset}
-            className="px-4 py-2 text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300 transition-colors"
+            className="btn-secondary"
           >
             Enter New URL
           </button>

@@ -41,11 +41,11 @@ function RepoSelector({ onSubmit, isLoading, onSwitchToManual }) {
   const langColors = {
     JavaScript: 'bg-yellow-400',
     TypeScript: 'bg-blue-500',
-    Python: 'bg-green-500',
+    Python: 'bg-accent-500',
     Java: 'bg-red-500',
     Go: 'bg-cyan-500',
     Rust: 'bg-orange-500',
-    C: 'bg-gray-500',
+    C: 'bg-surface-500',
     'C++': 'bg-pink-500',
     Ruby: 'bg-red-600',
     PHP: 'bg-indigo-400',
@@ -55,7 +55,7 @@ function RepoSelector({ onSubmit, isLoading, onSwitchToManual }) {
     <div className="w-full max-w-xl">
       {/* Search input */}
       <div className="relative mb-3">
-        <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" fill="none"
+        <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-surface-400" fill="none"
              stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
                 d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -65,17 +65,15 @@ function RepoSelector({ onSubmit, isLoading, onSwitchToManual }) {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Search your repositories..."
-          className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-xl text-sm
-                     focus:ring-2 focus:ring-pulse-500 focus:border-transparent outline-none
-                     shadow-sm"
+          className="input-primary pl-10"
           autoFocus
         />
       </div>
 
       {/* Repo list */}
-      <div className="bg-white border border-gray-200 rounded-xl shadow-sm max-h-80 overflow-y-auto">
+      <div className="premium-card max-h-80 overflow-y-auto">
         {loadingRepos && (
-          <div className="px-4 py-8 text-center text-gray-400 text-sm">
+          <div className="px-4 py-8 text-center text-surface-400 text-sm">
             Loading your repositories...
           </div>
         )}
@@ -87,7 +85,7 @@ function RepoSelector({ onSubmit, isLoading, onSwitchToManual }) {
         )}
 
         {!loadingRepos && !error && filtered.length === 0 && (
-          <div className="px-4 py-6 text-center text-gray-400 text-sm">
+          <div className="px-4 py-6 text-center text-surface-400 text-sm">
             {search ? 'No repos match your search' : 'No repositories found'}
           </div>
         )}
@@ -97,31 +95,31 @@ function RepoSelector({ onSubmit, isLoading, onSwitchToManual }) {
             key={repo.fullName}
             onClick={() => handleSelect(repo)}
             disabled={isLoading}
-            className="w-full px-4 py-3 flex items-center justify-between text-left hover:bg-gray-50
-                       border-b border-gray-50 last:border-b-0 transition-colors disabled:opacity-50"
+            className="w-full px-4 py-3 flex items-center justify-between text-left hover:bg-surface-50
+                       border-b border-surface-50 last:border-b-0 transition-all duration-200 disabled:opacity-50"
           >
             <div className="flex-1 min-w-0">
               <div className="flex items-center space-x-2">
-                <span className="font-medium text-gray-900 text-sm truncate">{repo.fullName}</span>
+                <span className="font-medium text-surface-900 text-sm truncate">{repo.fullName}</span>
                 {repo.private && (
-                  <span className="flex-shrink-0 px-1.5 py-0.5 text-xs bg-gray-100 text-gray-600 rounded">
+                  <span className="chip bg-surface-100 text-surface-600">
                     Private
                   </span>
                 )}
               </div>
               {repo.description && (
-                <p className="text-xs text-gray-500 truncate mt-0.5">{repo.description}</p>
+                <p className="text-xs text-surface-500 truncate mt-0.5">{repo.description}</p>
               )}
             </div>
             <div className="flex items-center space-x-3 ml-3 flex-shrink-0">
               {repo.language && (
                 <div className="flex items-center space-x-1">
-                  <span className={`w-2 h-2 rounded-full ${langColors[repo.language] || 'bg-gray-400'}`} />
-                  <span className="text-xs text-gray-500">{repo.language}</span>
+                  <span className={`w-2 h-2 rounded-full ${langColors[repo.language] || 'bg-surface-400'}`} />
+                  <span className="text-xs text-surface-500">{repo.language}</span>
                 </div>
               )}
               {repo.stars > 0 && (
-                <span className="text-xs text-gray-400">{repo.stars}</span>
+                <span className="text-xs text-surface-400">{repo.stars}</span>
               )}
             </div>
           </button>
@@ -132,7 +130,7 @@ function RepoSelector({ onSubmit, isLoading, onSwitchToManual }) {
       {onSwitchToManual && (
         <button
           onClick={onSwitchToManual}
-          className="mt-3 text-sm text-gray-500 hover:text-pulse-600 transition-colors"
+          className="mt-3 text-sm text-surface-500 hover:text-brand-600 transition-colors"
         >
           or enter a repo URL manually
         </button>

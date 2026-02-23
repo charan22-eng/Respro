@@ -222,25 +222,25 @@ function GitGraph({ commits, branches, onSelectCommit, selectedSha, owner, repo 
 
   if (!commits || commits.length === 0) {
     return (
-      <div className="flex items-center justify-center h-full text-gray-400">
+      <div className="flex items-center justify-center h-full text-surface-400">
         No commits to display
       </div>
     );
   }
 
   return (
-    <div className="relative h-full overflow-auto bg-gradient-to-b from-gray-50 to-white rounded-lg">
+    <div className="relative h-full overflow-auto bg-gradient-to-b from-surface-50 to-white rounded-xl">
       {/* Branch legend */}
-      <div className="sticky top-0 bg-white/95 backdrop-blur border-b border-gray-200 px-4 py-3 z-10">
+      <div className="sticky top-0 bg-white/95 backdrop-blur border-b border-surface-200 px-4 py-3 z-10">
         <div className="flex items-center justify-between mb-2">
-          <span className="text-xs font-medium text-gray-500 uppercase tracking-wide">Branches</span>
-          <div className="flex items-center gap-3 text-xs text-gray-400">
+          <span className="text-xs font-medium text-surface-500 uppercase tracking-wide">Branches</span>
+          <div className="flex items-center gap-3 text-xs text-surface-400">
             <span className="flex items-center gap-1">
-              <span className="w-2 h-2 rounded-full bg-green-500"></span>
+              <span className="w-2 h-2 rounded-full bg-accent-500"></span>
               Analyzed
             </span>
             <span className="flex items-center gap-1">
-              <span className="w-2 h-2 rounded-full border-2 border-gray-300"></span>
+              <span className="w-2 h-2 rounded-full border-2 border-surface-300"></span>
               Pending
             </span>
           </div>
@@ -258,10 +258,10 @@ function GitGraph({ commits, branches, onSelectCommit, selectedSha, owner, repo 
                     boxShadow: `0 0 0 2px ${colors.glow}`,
                   }}
                 />
-                <span className="text-xs text-gray-600 truncate max-w-[150px]">
+                <span className="text-xs text-surface-600 truncate max-w-[150px]">
                   {branch}
                 </span>
-                <span className="text-[10px] text-gray-400">
+                <span className="text-[10px] text-surface-400">
                   ({count})
                 </span>
               </div>
@@ -418,10 +418,10 @@ function GitGraph({ commits, branches, onSelectCommit, selectedSha, owner, repo 
                   x={node.x + 30}
                   y={node.y - 14}
                   className="text-[10px] font-mono"
-                  fill="#9ca3af"
+                  fill="#94a3b8"
                 >
                   {node.commit.sha.substring(0, 7)}
-                  <tspan fill="#d1d5db" dx="8">|</tspan>
+                  <tspan fill="#cbd5e1" dx="8">|</tspan>
                   <tspan 
                     fill={node.colors.fill} 
                     dx="8" 
@@ -434,7 +434,7 @@ function GitGraph({ commits, branches, onSelectCommit, selectedSha, owner, repo 
                   x={node.x + 30}
                   y={node.y + 4}
                   className="text-sm font-medium"
-                  fill="#1f2937"
+                  fill="#0f172a"
                 >
                   {(node.commit.message || '').substring(0, 50)}
                   {(node.commit.message || '').length > 50 ? '...' : ''}
@@ -443,11 +443,11 @@ function GitGraph({ commits, branches, onSelectCommit, selectedSha, owner, repo 
                   x={node.x + 30}
                   y={node.y + 22}
                   className="text-xs"
-                  fill="#6b7280"
+                  fill="#64748b"
                 >
                   {node.author}
-                  <tspan fill="#d1d5db" dx="8">|</tspan>
-                  <tspan fill="#9ca3af" dx="8">{timeAgo(node.commit.date)}</tspan>
+                  <tspan fill="#cbd5e1" dx="8">|</tspan>
+                  <tspan fill="#94a3b8" dx="8">{timeAgo(node.commit.date)}</tspan>
                 </text>
               </g>
             </g>
@@ -458,16 +458,16 @@ function GitGraph({ commits, branches, onSelectCommit, selectedSha, owner, repo 
       {/* Tooltip */}
       {hoveredCommit && (
         <div
-          className="absolute bg-gray-900 text-white text-xs rounded-lg px-3 py-2.5 shadow-xl z-20 pointer-events-none max-w-xs border border-gray-700"
+          className="absolute bg-surface-900 text-white text-xs rounded-xl px-3 py-2.5 shadow-elevated z-20 pointer-events-none max-w-xs border border-surface-700"
           style={{
             left: Math.min(tooltipPos.x, svgWidth - 200),
             top: tooltipPos.y,
           }}
         >
           <div className="flex items-center gap-2 mb-1.5">
-            <span className="font-mono text-blue-300">{hoveredCommit.commit.sha.substring(0, 7)}</span>
+            <span className="font-mono text-brand-300">{hoveredCommit.commit.sha.substring(0, 7)}</span>
             <span 
-              className="px-1.5 py-0.5 rounded text-[10px] font-medium"
+              className="px-1.5 py-0.5 rounded-lg text-[10px] font-medium"
               style={{ 
                 backgroundColor: hoveredCommit.colors.fill,
                 color: 'white',
@@ -479,12 +479,12 @@ function GitGraph({ commits, branches, onSelectCommit, selectedSha, owner, repo 
           <div className="font-medium mb-1.5 leading-tight">
             {hoveredCommit.commit.message || 'No message'}
           </div>
-          <div className="flex items-center justify-between text-gray-400">
+          <div className="flex items-center justify-between text-surface-400">
             <span>{hoveredCommit.author}</span>
             <span>{timeAgo(hoveredCommit.commit.date)}</span>
           </div>
           {hoveredCommit.isAnalyzed && (
-            <div className="mt-2 pt-2 border-t border-gray-700 text-green-400 text-[10px] flex items-center gap-1">
+            <div className="mt-2 pt-2 border-t border-surface-700 text-accent-400 text-[10px] flex items-center gap-1">
               <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
               </svg>
@@ -492,7 +492,7 @@ function GitGraph({ commits, branches, onSelectCommit, selectedSha, owner, repo 
             </div>
           )}
           {!hoveredCommit.isAnalyzed && (
-            <div className="mt-2 pt-2 border-t border-gray-700 text-gray-500 text-[10px]">
+            <div className="mt-2 pt-2 border-t border-surface-700 text-surface-500 text-[10px]">
               Click to analyze with AI
             </div>
           )}

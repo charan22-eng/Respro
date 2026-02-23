@@ -14,7 +14,7 @@ function GradeBadge({ grade, size = 'large' }) {
       case 'C': return 'bg-yellow-500 text-white';
       case 'D': return 'bg-orange-500 text-white';
       case 'F': return 'bg-red-500 text-white';
-      default: return 'bg-gray-500 text-white';
+      default: return 'bg-surface-500 text-white';
     }
   };
 
@@ -45,19 +45,19 @@ function ScoreBar({ score, color }) {
       case 'yellow': return 'bg-yellow-500';
       case 'orange': return 'bg-orange-500';
       case 'red': return 'bg-red-500';
-      default: return 'bg-gray-500';
+      default: return 'bg-surface-500';
     }
   };
 
   return (
     <div className="flex items-center gap-3">
-      <div className="flex-1 h-2 bg-gray-200 rounded-full overflow-hidden">
+      <div className="flex-1 h-2 bg-surface-200 rounded-full overflow-hidden">
         <div 
           className={`h-full rounded-full transition-all duration-500 ${getBarColor(color)}`}
           style={{ width: `${score}%` }}
         />
       </div>
-      <span className="text-sm font-medium text-gray-600 w-12 text-right">{score}%</span>
+      <span className="text-sm font-medium text-surface-600 w-12 text-right">{score}%</span>
     </div>
   );
 }
@@ -72,7 +72,7 @@ ScoreBar.propTypes = {
  */
 function OverallScoreCard({ overall }) {
   return (
-    <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
+    <div className="premium-card p-6">
       <div className="flex items-center gap-6">
         {/* Grade Circle */}
         <GradeBadge grade={overall.grade} size="large" />
@@ -80,10 +80,10 @@ function OverallScoreCard({ overall }) {
         {/* Score Details */}
         <div className="flex-1">
           <div className="flex items-baseline gap-2 mb-2">
-            <span className="text-3xl font-bold text-gray-900">{overall.score}</span>
-            <span className="text-lg text-gray-500">/ 100</span>
+            <span className="text-3xl font-bold text-surface-900">{overall.score}</span>
+            <span className="text-lg text-surface-500">/ 100</span>
           </div>
-          <p className="text-gray-600 text-sm leading-relaxed">
+          <p className="text-surface-600 text-sm leading-relaxed">
             {overall.summary}
           </p>
         </div>
@@ -103,17 +103,17 @@ function RecommendationsCard({ suggestions }) {
   if (!suggestions || suggestions.length === 0) return null;
 
   return (
-    <div className="bg-gray-900 rounded-xl p-5 shadow-sm">
-      <h3 className="text-sm font-semibold text-gray-400 uppercase tracking-wide mb-4">
+    <div className="bg-surface-900 rounded-2xl p-5 shadow-sm">
+      <h3 className="text-sm font-semibold text-surface-400 uppercase tracking-wide mb-4">
         Top Recommendations
       </h3>
       <ul className="space-y-3">
         {suggestions.map((suggestion, idx) => (
           <li key={idx} className="flex items-start gap-3">
-            <span className="flex-shrink-0 w-6 h-6 rounded-full bg-pulse-600 text-white text-xs font-bold flex items-center justify-center">
+            <span className="flex-shrink-0 w-6 h-6 rounded-full bg-brand-600 text-white text-xs font-bold flex items-center justify-center">
               {idx + 1}
             </span>
-            <span className="text-gray-200 text-sm leading-relaxed">{suggestion}</span>
+            <span className="text-surface-200 text-sm leading-relaxed">{suggestion}</span>
           </li>
         ))}
       </ul>
@@ -137,30 +137,30 @@ function CategoryCard({ category, isExpanded, onToggle }) {
       case 'C': return 'bg-yellow-100 text-yellow-700';
       case 'D': return 'bg-orange-100 text-orange-700';
       case 'F': return 'bg-red-100 text-red-700';
-      default: return 'bg-gray-100 text-gray-700';
+      default: return 'bg-surface-100 text-surface-700';
     }
   };
 
   return (
-    <div className="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm">
+    <div className="premium-card overflow-hidden">
       {/* Header */}
       <button
         onClick={onToggle}
-        className="w-full px-5 py-4 flex items-center justify-between hover:bg-gray-50 transition-colors"
+        className="w-full px-5 py-4 flex items-center justify-between hover:bg-surface-50 transition-all duration-200"
       >
         <div className="flex items-center gap-4">
-          <div className={`w-10 h-10 rounded-lg flex items-center justify-center font-bold text-sm ${getGradeStyle(category.grade)}`}>
+          <div className={`w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm ${getGradeStyle(category.grade)}`}>
             {category.grade}
           </div>
           <div className="text-left">
-            <h3 className="font-semibold text-gray-900">{category.category}</h3>
+            <h3 className="font-semibold text-surface-900">{category.category}</h3>
             <div className="mt-1 w-40">
               <ScoreBar score={category.score} color={category.color} />
             </div>
           </div>
         </div>
         <svg 
-          className={`w-5 h-5 text-gray-400 transition-transform ${isExpanded ? 'rotate-180' : ''}`} 
+          className={`w-5 h-5 text-surface-400 transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`} 
           fill="none" 
           stroke="currentColor" 
           viewBox="0 0 24 24"
@@ -171,14 +171,14 @@ function CategoryCard({ category, isExpanded, onToggle }) {
 
       {/* Expanded Content */}
       {isExpanded && (
-        <div className="px-5 pb-5 border-t border-gray-100">
+        <div className="px-5 pb-5 border-t border-surface-100">
           {/* Findings */}
           {category.findings && category.findings.length > 0 && (
             <div className="mt-4">
-              <h4 className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">Findings</h4>
+              <h4 className="text-xs font-semibold text-surface-500 uppercase tracking-wide mb-3">Findings</h4>
               <div className="space-y-2">
                 {category.findings.map((finding, idx) => (
-                  <div key={idx} className="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
+                  <div key={idx} className="flex items-start gap-3 p-3 bg-surface-50 rounded-xl">
                     {finding.type === 'success' && (
                       <svg className="w-5 h-5 text-emerald-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
@@ -190,14 +190,14 @@ function CategoryCard({ category, isExpanded, onToggle }) {
                       </svg>
                     )}
                     {finding.type === 'info' && (
-                      <svg className="w-5 h-5 text-blue-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <svg className="w-5 h-5 text-brand-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
                       </svg>
                     )}
                     <div>
-                      <p className="text-sm font-medium text-gray-900">{finding.message}</p>
+                      <p className="text-sm font-medium text-surface-900">{finding.message}</p>
                       {finding.detail && (
-                        <p className="text-xs text-gray-500 mt-0.5">{finding.detail}</p>
+                        <p className="text-xs text-surface-500 mt-0.5">{finding.detail}</p>
                       )}
                     </div>
                   </div>
@@ -209,11 +209,11 @@ function CategoryCard({ category, isExpanded, onToggle }) {
           {/* Suggestions */}
           {category.suggestions && category.suggestions.length > 0 && (
             <div className="mt-4">
-              <h4 className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">Suggestions</h4>
+              <h4 className="text-xs font-semibold text-surface-500 uppercase tracking-wide mb-3">Suggestions</h4>
               <ul className="space-y-2">
                 {category.suggestions.map((suggestion, idx) => (
-                  <li key={idx} className="flex items-start gap-2 text-sm text-gray-600">
-                    <svg className="w-4 h-4 text-pulse-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <li key={idx} className="flex items-start gap-2 text-sm text-surface-600">
+                    <svg className="w-4 h-4 text-brand-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                     </svg>
                     <span>{suggestion}</span>
@@ -226,14 +226,14 @@ function CategoryCard({ category, isExpanded, onToggle }) {
           {/* Metrics */}
           {category.metrics && Object.keys(category.metrics).length > 0 && (
             <div className="mt-4">
-              <h4 className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">Metrics</h4>
+              <h4 className="text-xs font-semibold text-surface-500 uppercase tracking-wide mb-3">Metrics</h4>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                 {Object.entries(category.metrics).map(([key, value]) => (
-                  <div key={key} className="bg-gray-50 rounded-lg p-3 text-center">
-                    <div className="text-lg font-bold text-gray-900">
+                  <div key={key} className="bg-surface-50 rounded-xl p-3 text-center">
+                    <div className="text-lg font-bold text-surface-900">
                       {typeof value === 'number' ? value.toLocaleString() : value || '-'}
                     </div>
-                    <div className="text-xs text-gray-500 capitalize">
+                    <div className="text-xs text-surface-500 capitalize">
                       {key.replace(/([A-Z])/g, ' $1').trim()}
                     </div>
                   </div>
@@ -305,30 +305,30 @@ function HealthCheckupPanel({ owner, repo, onClose }) {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-      <div className="bg-gray-100 rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] flex flex-col overflow-hidden">
+    <div className="modal-backdrop">
+      <div className="bg-surface-100 rounded-2xl shadow-elevated w-full max-w-2xl max-h-[90vh] flex flex-col overflow-hidden animate-scale-in">
         {/* Header */}
-        <div className="bg-white px-6 py-4 border-b border-gray-200 flex items-center justify-between flex-shrink-0">
+        <div className="bg-white px-6 py-4 border-b border-surface-200 flex items-center justify-between flex-shrink-0">
           <div>
-            <h2 className="text-lg font-bold text-gray-900">Health Checkup</h2>
-            <p className="text-sm text-gray-500">{owner}/{repo}</p>
+            <h2 className="text-lg font-bold text-surface-900">Health Checkup</h2>
+            <p className="text-sm text-surface-500">{owner}/{repo}</p>
           </div>
           <div className="flex items-center gap-2">
             <button
               onClick={fetchData}
               disabled={loading}
-              className="p-2 hover:bg-gray-100 rounded-lg transition-colors disabled:opacity-50"
+              className="p-2 hover:bg-surface-100 rounded-xl transition-all duration-200 disabled:opacity-50"
               title="Refresh"
             >
-              <svg className={`w-5 h-5 text-gray-500 ${loading ? 'animate-spin' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className={`w-5 h-5 text-surface-500 ${loading ? 'animate-spin' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
               </svg>
             </button>
             <button
               onClick={onClose}
-              className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+              className="p-2 hover:bg-surface-100 rounded-xl transition-all duration-200"
             >
-              <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-5 h-5 text-surface-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
@@ -340,8 +340,8 @@ function HealthCheckupPanel({ owner, repo, onClose }) {
           {/* Loading State */}
           {loading && (
             <div className="flex flex-col items-center justify-center py-16">
-              <div className="w-10 h-10 border-4 border-pulse-200 border-t-pulse-600 rounded-full animate-spin mb-4" />
-              <p className="text-gray-500 text-sm">Running health checkup...</p>
+              <div className="w-10 h-10 border-4 border-brand-200 border-t-brand-600 rounded-full animate-spin mb-4" />
+              <p className="text-surface-500 text-sm">Running health checkup...</p>
             </div>
           )}
 
@@ -353,11 +353,11 @@ function HealthCheckupPanel({ owner, repo, onClose }) {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Something went wrong</h3>
-              <p className="text-sm text-gray-500">{error}</p>
+              <h3 className="text-lg font-semibold text-surface-900 mb-2">Something went wrong</h3>
+              <p className="text-sm text-surface-500">{error}</p>
               <button
                 onClick={fetchData}
-                className="mt-4 px-4 py-2 bg-gray-900 text-white text-sm font-medium rounded-lg hover:bg-gray-800 transition-colors"
+                className="btn-brand mt-4"
               >
                 Try Again
               </button>
@@ -377,7 +377,7 @@ function HealthCheckupPanel({ owner, repo, onClose }) {
 
               {/* Category Breakdown */}
               <div>
-                <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">
+                <h3 className="text-xs font-semibold text-surface-500 uppercase tracking-wide mb-3">
                   Category Breakdown
                 </h3>
                 <div className="space-y-3">
@@ -394,7 +394,7 @@ function HealthCheckupPanel({ owner, repo, onClose }) {
 
               {/* Footer Info */}
               {data.repoInfo && (
-                <p className="text-xs text-gray-400 text-center pt-2">
+                <p className="text-xs text-surface-400 text-center pt-2">
                   Based on {data.repoInfo.totalCommits} commits
                   {data.repoInfo.techAreas?.length > 0 && ` across ${data.repoInfo.techAreas.length} tech areas`}
                 </p>
@@ -404,10 +404,10 @@ function HealthCheckupPanel({ owner, repo, onClose }) {
         </div>
 
         {/* Footer */}
-        <div className="bg-white px-6 py-3 border-t border-gray-200 flex-shrink-0">
+        <div className="bg-white px-6 py-3 border-t border-surface-200 flex-shrink-0">
           <button
             onClick={onClose}
-            className="w-full py-2.5 bg-gray-900 hover:bg-gray-800 text-white rounded-lg text-sm font-medium transition-colors"
+            className="w-full py-2.5 btn-brand rounded-xl text-sm font-medium"
           >
             Close
           </button>

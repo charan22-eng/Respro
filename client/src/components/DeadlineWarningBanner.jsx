@@ -10,7 +10,7 @@ function DeadlineWarningBanner({ warnings, onTaskClick }) {
     <div className="mb-4 space-y-2">
       {/* Overdue warning banner */}
       {overdueWarnings.length > 0 && (
-        <div className="bg-red-50 border-l-4 border-red-500 p-4 rounded-r-lg">
+        <div className="bg-red-50 border-l-4 border-red-500 p-4 rounded-r-xl">
           <div className="flex items-start">
             <div className="flex-shrink-0">
               <svg className="w-5 h-5 text-red-500" fill="currentColor" viewBox="0 0 20 20">
@@ -26,7 +26,7 @@ function DeadlineWarningBanner({ warnings, onTaskClick }) {
                   <button
                     key={warning.taskId}
                     onClick={() => onTaskClick(warning.taskId)}
-                    className="block w-full text-left text-sm text-red-700 hover:text-red-900 hover:underline"
+                    className="block w-full text-left text-sm text-red-700 hover:text-red-900 hover:underline transition-colors"
                   >
                     <span className="font-medium">{warning.title}</span>
                     <span className="text-red-500 ml-2">
@@ -47,7 +47,7 @@ function DeadlineWarningBanner({ warnings, onTaskClick }) {
 
       {/* Approaching deadline warning banner */}
       {approachingWarnings.length > 0 && (
-        <div className="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-lg">
+        <div className="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-xl">
           <div className="flex items-start">
             <div className="flex-shrink-0">
               <svg className="w-5 h-5 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
@@ -63,7 +63,7 @@ function DeadlineWarningBanner({ warnings, onTaskClick }) {
                   <button
                     key={warning.taskId}
                     onClick={() => onTaskClick(warning.taskId)}
-                    className="block w-full text-left text-sm text-amber-700 hover:text-amber-900 hover:underline"
+                    className="block w-full text-left text-sm text-amber-700 hover:text-amber-900 hover:underline transition-colors"
                   >
                     <span className="font-medium">{warning.title}</span>
                     <span className="text-amber-600 ml-2">

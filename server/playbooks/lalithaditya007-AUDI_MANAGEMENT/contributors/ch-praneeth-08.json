@@ -2,8 +2,8 @@
   "login": "ch-praneeth-08",
   "avatarUrl": "https://avatars.githubusercontent.com/u/196779126?v=4",
   "repoFullName": "Lalithaditya007/AUDI_MANAGEMENT",
-  "lastUpdated": "2026-02-20T22:58:18.833Z",
-  "totalCommits": 20,
+  "lastUpdated": "2026-02-23T11:58:37.751Z",
+  "totalCommits": 43,
   "primaryAreas": [
     "client",
     "root",
@@ -510,6 +510,575 @@
         "async",
         "forms"
       ]
+    },
+    {
+      "commitId": "f13cf08f4e45fae204a9df4e7e7f8f399b362df3",
+      "shortId": "f13cf08",
+      "author": "ch-praneeth-08",
+      "timestamp": "2025-08-16T16:39:30Z",
+      "message": "made changes to navbar spacing",
+      "branch": "aditya",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/admin/AdminDashboard.jsx",
+        "client/src/components/Navbar.jsx"
+      ],
+      "primaryArea": "client",
+      "before": "Navbar had inconsistent spacing and layout issues",
+      "added": "Adjusted CSS classes and positioning logic in Navbar component",
+      "impact": "Improves navigation bar visual consistency and login page detection",
+      "keywords": [
+        "navbar",
+        "spacing",
+        "ui"
+      ]
+    },
+    {
+      "commitId": "1c06ffc981b9402118145db35d973cf7ace502b4",
+      "shortId": "1c06ffc",
+      "author": "ch-praneeth-08",
+      "timestamp": "2025-08-16T16:45:00Z",
+      "message": "made the hero section image larger, and the arrow change",
+      "branch": "aditya",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/pages/Homepage.jsx"
+      ],
+      "primaryArea": "client",
+      "before": "Hero section displayed small background image with outdated arrow",
+      "added": "Enlarged hero background image and modified arrow indicator styling",
+      "impact": "Enhances homepage visual impact and user guidance elements",
+      "keywords": [
+        "hero",
+        "homepage",
+        "styling"
+      ]
+    },
+    {
+      "commitId": "627228b9baed31b37119dabb96f0b461f94f6c2a",
+      "shortId": "627228b",
+      "author": "ch-praneeth-08",
+      "timestamp": "2025-08-16T16:54:50Z",
+      "message": "Merge branch 'shashi' of https://github.com/Lalithaditya007/AUDI_MANAGEMENT into test",
+      "branch": "aditya",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/App.jsx",
+        "client/src/admin/AdminDashboard.jsx",
+        "client/src/admin/AuditoriumPreviewModal.jsx",
+        "client/src/admin/EditAuditorium.jsx",
+        "client/src/admin/ManageAuditoriums.jsx",
+        "server/routes/auditoriumRoutes.js",
+        "server/seed.js",
+        "server/uploads/auditorium/image-1755352543479-91038294.png",
+        "server/uploads/auditorium/image-1755352604329-288387819.png",
+        "server/uploads/auditorium/image-1755362436225-274536613.jpg",
+        "server/uploads/auditorium/image-1755362783950-441429947.jpg"
+      ],
+      "primaryArea": "server",
+      "before": "Auditorium management features were isolated on shashi branch",
+      "added": "Integrated auditorium editing and management modules from shashi branch",
+      "impact": "Consolidates auditorium management into test branch workflow",
+      "keywords": [
+        "merge",
+        "auditorium",
+        "management"
+      ]
+    },
+    {
+      "commitId": "53a827162c96175cc7c2830ee2a247037083f51c",
+      "shortId": "53a8271",
+      "author": "ch-praneeth-08",
+      "timestamp": "2025-08-16T17:23:49Z",
+      "message": "made changes",
+      "branch": "aditya",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/admin/AdminDashboard.jsx",
+        "client/src/admin/AdminProfile.jsx",
+        "client/src/admin/AdminScheduleViewer.jsx",
+        "client/src/admin/AuditoriumPreviewModal.jsx",
+        "client/src/admin/CreateUser.jsx",
+        "client/src/admin/EditAuditorium.jsx",
+        "client/src/admin/ManageAuditoriums.jsx",
+        "client/src/admin/ManageBookings.jsx",
+        "client/src/components/Navbar.jsx",
+        "client/src/pages/Audis/APJAudi.jsx",
+        "client/src/pages/Audis/AuditoriumDetails.jsx",
+        "client/src/pages/Audis/Auditoriums.jsx",
+        "client/src/pages/Audis/KSAudi.jsx",
+        "client/src/pages/Homepage.jsx",
+        "client/src/user/BookAuditorium.jsx"
+      ],
+      "primaryArea": "client",
+      "before": "Admin components had inconsistent headers and minor layout issues",
+      "added": "Standardized spacing and alignment adjustments across admin interface files",
+      "impact": "Polishes admin dashboard appearance and visual hierarchy consistency",
+      "keywords": [
+        "ui",
+        "polish",
+        "admin"
+      ]
+    },
+    {
+      "commitId": "8821026bba9391d7743f9ac827a057b0ca66eb67",
+      "shortId": "8821026",
+      "author": "ch-praneeth-08",
+      "timestamp": "2025-08-16T17:24:11Z",
+      "message": "Merge branch 'aditya' of https://github.com/Lalithaditya007/AUDI_MANAGEMENT into test",
+      "branch": "aditya",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/admin/AdminProfile.jsx",
+        "client/src/components/profile/EditProfileModal.jsx",
+        "client/src/components/profile/ProfileCard.jsx",
+        "client/src/user/UserProfile.jsx",
+        "server/GMAIL_SETUP.md",
+        "server/package-lock.json",
+        "server/package.json",
+        "server/utils/emailService.js"
+      ],
+      "primaryArea": "client",
+      "before": "Profile enhancements and email updates were on separate branches",
+      "added": "Combined profile modal improvements and Gmail authentication documentation",
+      "impact": "Synchronizes user profile features with simplified email service setup",
+      "keywords": [
+        "merge",
+        "profile",
+        "email"
+      ]
+    },
+    {
+      "commitId": "bc4c155718d1c268521fa496c01baf117f550b4e",
+      "shortId": "bc4c155",
+      "author": "ch-praneeth-08",
+      "timestamp": "2025-08-16T18:16:49Z",
+      "message": "done changes to the navbar ui changes need to be do",
+      "branch": "aditya",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/components/Navbar.jsx",
+        "client/src/pages/Homepage.jsx",
+        "client/src/user/Usernavbar.jsx",
+        "client/vite.config.js"
+      ],
+      "primaryArea": "client",
+      "before": "User navbar lacked mobile responsiveness and homepage had testimonials",
+      "added": "Mobile menu toggle for Usernavbar and removed testimonials section",
+      "impact": "Improves mobile navigation and simplifies homepage content structure",
+      "keywords": [
+        "mobile",
+        "navbar",
+        "homepage"
+      ]
+    },
+    {
+      "commitId": "95f56388e2401aded45d689c81f96bd4c8554827",
+      "shortId": "95f5638",
+      "author": "ch-praneeth-08",
+      "timestamp": "2025-04-17T17:56:36Z",
+      "message": "made changes with the booking form",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/user/BookAuditorium.jsx"
+      ],
+      "primaryArea": "client",
+      "before": "Booking form lacked updated conflict detection logic",
+      "added": "Implemented revised booking conflict validation checks",
+      "impact": "Users receive accurate availability feedback",
+      "keywords": [
+        "booking",
+        "conflict detection"
+      ]
+    },
+    {
+      "commitId": "cd1ebf344026145c4ea9b5ea464cde1161ef5806",
+      "shortId": "cd1ebf3",
+      "author": "ch-praneeth-08",
+      "timestamp": "2025-04-17T17:57:19Z",
+      "message": "some booking changes",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "server/controllers/bookingController.js"
+      ],
+      "primaryArea": "server",
+      "before": "Server relied on Luxon for date operations",
+      "added": "Modified date handling in booking controller",
+      "impact": "Backend booking processing updated",
+      "keywords": [
+        "booking controller",
+        "dates"
+      ]
+    },
+    {
+      "commitId": "fed4f2c2d3cb371af66c8a70a5221ff175160c65",
+      "shortId": "fed4f2c",
+      "author": "ch-praneeth-08",
+      "timestamp": "2025-04-18T09:52:37Z",
+      "message": "changes to mail,bookings,history",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/admin/ManageBookings.jsx",
+        "client/src/user/BookingHistory.jsx",
+        "server/controllers/bookingController.js",
+        "server/uploads/event-67f917116005b483c8041966-1744908878505-529363039-image5.jpg",
+        "server/utils/emailService.js"
+      ],
+      "primaryArea": "server",
+      "before": "System lacked past event filtering and lead times",
+      "added": "Past event detection and booking lead time validation",
+      "impact": "Prevents invalid past date selections",
+      "keywords": [
+        "validation",
+        "email notifications"
+      ]
+    },
+    {
+      "commitId": "bc4eb570663c9acf566c9cd1147d6bc695cd4f68",
+      "shortId": "bc4eb57",
+      "author": "ch-praneeth-08",
+      "timestamp": "2025-04-18T15:30:03Z",
+      "message": " reschedule mail",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "server/controllers/bookingController.js",
+        "server/package-lock.json",
+        "server/utils/emailService.js"
+      ],
+      "primaryArea": "server",
+      "before": "No email notifications existed for rescheduling requests",
+      "added": "Reschedule request email notification functions",
+      "impact": "Users and admins receive reschedule alerts",
+      "keywords": [
+        "reschedule",
+        "email"
+      ]
+    },
+    {
+      "commitId": "3099388f873e6bf54e817204881b2068553d4135",
+      "shortId": "3099388",
+      "author": "ch-praneeth-08",
+      "timestamp": "2025-04-18T15:31:10Z",
+      "message": "pacakage.json",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/package-lock.json"
+      ],
+      "primaryArea": "client",
+      "before": "Package lock file had outdated dependency versions",
+      "added": "Updated package lock dependency resolutions",
+      "impact": "Client dependencies synchronized correctly",
+      "keywords": [
+        "dependencies",
+        "package lock"
+      ]
+    },
+    {
+      "commitId": "34ead45ad107cce9ed0ad8032938c3f573a00aa0",
+      "shortId": "34ead45",
+      "author": "ch-praneeth-08",
+      "timestamp": "2025-08-15T16:02:29Z",
+      "message": "added dynamic auditorium management",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/package-lock.json",
+        "client/package.json",
+        "client/src/App.jsx",
+        "client/src/admin/AdminDashboard.jsx",
+        "client/src/pages/Audis/AddAuditorium.jsx",
+        "client/src/pages/Audis/AuditoriumDetails.jsx",
+        "client/src/pages/Audis/Auditoriums.jsx",
+        "client/src/pages/Homepage.jsx",
+        "client/vite.config.js",
+        "needtobedone.txt",
+        "server/controllers/auditoriumController.js",
+        "server/models/Auditorium.js",
+        "server/package-lock.json",
+        "server/routes/auditoriumRoutes.js",
+        "server/seed.js"
+      ],
+      "primaryArea": "client",
+      "before": "Auditoriums were static predefined system entries",
+      "added": "Dynamic auditorium creation interface component",
+      "impact": "Admins can add venues via UI",
+      "keywords": [
+        "auditorium",
+        "dynamic management"
+      ]
+    },
+    {
+      "commitId": "d627f957d63f05ea57e50c1b97d04b3be4607736",
+      "shortId": "d627f95",
+      "author": "ch-praneeth-08",
+      "timestamp": "2025-04-16T13:26:26Z",
+      "message": "added changes to the booking slot selection.",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/package-lock.json",
+        "client/package.json",
+        "client/src/user/BookAuditorium.jsx",
+        "server/controllers/bookingController.js",
+        "server/routes/bookingRoutes.js"
+      ],
+      "primaryArea": "client",
+      "before": "Client package lacked Express dependency and React memoization hooks.",
+      "added": "Integrated Express server and imported useMemo for optimization.",
+      "impact": "Enhanced booking slot selection performance and server capabilities.",
+      "keywords": [
+        "express",
+        "useMemo",
+        "booking"
+      ]
+    },
+    {
+      "commitId": "3c674e42773eb729633bf4965242180bb2081398",
+      "shortId": "3c674e4",
+      "author": "ch-praneeth-08",
+      "timestamp": "2025-04-16T15:02:24Z",
+      "message": " added changes to the rescheduling logic.",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/user/BookingHistory.jsx",
+        "server/controllers/bookingController.js"
+      ],
+      "primaryArea": "client",
+      "before": "Booking history component lacked navigation and memoization hooks.",
+      "added": "Imported useRef, useMemo, and useNavigate for rescheduling features.",
+      "impact": "Enabled user rescheduling with improved navigation and performance.",
+      "keywords": [
+        "rescheduling",
+        "navigation",
+        "hooks"
+      ]
+    },
+    {
+      "commitId": "5e13f2b0bd5753a7508463eb6f2bc41e97d8e94e",
+      "shortId": "5e13f2b",
+      "author": "ch-praneeth-08",
+      "timestamp": "2025-04-16T16:41:26Z",
+      "message": "added changes to navbar and login page.",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/package-lock.json",
+        "client/package.json",
+        "client/src/components/Navbar.jsx",
+        "client/src/pages/Login.jsx"
+      ],
+      "primaryArea": "client",
+      "before": "Navbar component lacked icon library and proper shadow styling.",
+      "added": "Integrated Heroicons library and adjusted navigation bar shadows.",
+      "impact": "Improved navigation aesthetics and iconography capabilities.",
+      "keywords": [
+        "heroicons",
+        "navbar",
+        "styling"
+      ]
+    },
+    {
+      "commitId": "f4c18c2e2ffa0b9d3d6a2cebd137a206de4f2cff",
+      "shortId": "f4c18c2",
+      "author": "ch-praneeth-08",
+      "timestamp": "2025-04-16T17:26:34Z",
+      "message": "made changes to adminschedule and booking history and login pages",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/admin/AdminScheduleViewer.css",
+        "client/src/admin/AdminScheduleViewer.jsx",
+        "client/src/pages/Login.jsx",
+        "client/src/user/BookAuditorium.jsx",
+        "client/src/user/BookingHistory.jsx"
+      ],
+      "primaryArea": "client",
+      "before": "Admin schedule viewer lacked responsive width and reference hooks.",
+      "added": "Full-width CSS containers, useRef import, and layout improvements.",
+      "impact": "Enhanced admin interface responsiveness and form handling.",
+      "keywords": [
+        "admin",
+        "layout",
+        "css"
+      ]
+    },
+    {
+      "commitId": "5494ede466f3c4e318bb9b6659a251c217e94930",
+      "shortId": "5494ede",
+      "author": "ch-praneeth-08",
+      "timestamp": "2025-04-16T17:46:13Z",
+      "message": "made changes to the admin dashboard",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/admin/AdminDashboard.jsx",
+        "client/src/admin/AdminScheduleViewer.jsx"
+      ],
+      "primaryArea": "client",
+      "before": "Admin dashboard had limited trend analysis configuration options.",
+      "added": "Trend tracking state variables and calendar import statements.",
+      "impact": "Enhanced administrative data visualization and scheduling tools.",
+      "keywords": [
+        "dashboard",
+        "trends",
+        "calendar"
+      ]
+    },
+    {
+      "commitId": "9fad16e1da31628a3a8d7eaabae1b71c121b997f",
+      "shortId": "9fad16e",
+      "author": "ch-praneeth-08",
+      "timestamp": "2025-04-16T17:48:52Z",
+      "message": "change",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/assets/ksaudi/ksaudi1.jpg",
+        "client/src/assets/ksaudi/ksaudi2.jpg",
+        "client/src/assets/ksaudi/ksaudi3.jpg",
+        "client/src/assets/ksaudi/ksaudi4.jpg"
+      ],
+      "primaryArea": "client",
+      "before": "KS Audi directory contained previous versions of images.",
+      "added": "Replaced KS Audi photograph files with updated versions.",
+      "impact": "Updated visual assets for KS Auditorium page.",
+      "keywords": [
+        "ksaudi",
+        "images",
+        "update"
+      ]
+    },
+    {
+      "commitId": "2dd83e76d74cc7319e942e1c46338624971a8e38",
+      "shortId": "2dd83e7",
+      "author": "ch-praneeth-08",
+      "timestamp": "2025-04-16T17:54:42Z",
+      "message": "made changes to admin dashboard",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/admin/AdminDashboard.jsx"
+      ],
+      "primaryArea": "client",
+      "before": "B-Block and KS Audi images were outdated files.",
+      "added": "New photograph assets for B-Block and KS Audi.",
+      "impact": "Updated visual documentation for multiple auditoriums.",
+      "keywords": [
+        "images",
+        "bblock",
+        "ksaudi"
+      ]
+    },
+    {
+      "commitId": "8f7cbfce66f4299ba0b793d5c25e7f9a8896cdb3",
+      "shortId": "8f7cbfc",
+      "author": "ch-praneeth-08",
+      "timestamp": "2025-04-17T03:13:31Z",
+      "message": "minor changes to manage bookings",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/admin/ManageBookings.jsx"
+      ],
+      "primaryArea": "client",
+      "before": "APJ auditorium page lacked dedicated image assets.",
+      "added": "Four new APJ photographs and updated page component.",
+      "impact": "Complete visual setup for APJ Auditorium section.",
+      "keywords": [
+        "apj",
+        "images",
+        "auditorium"
+      ]
+    },
+    {
+      "commitId": "c83154f8772bda6a6a940686878f9d4f2e0959e5",
+      "shortId": "c83154f",
+      "author": "ch-praneeth-08",
+      "timestamp": "2025-04-17T16:59:31Z",
+      "message": "made email changes to admin",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/App.css",
+        "client/src/admin/ManageBookings.jsx",
+        "client/src/assets/bblock/bblock1.jpg",
+        "client/src/assets/bblock/bblock2.jpg",
+        "client/src/assets/bblock/bblock3.jpg",
+        "client/src/assets/bblock/bblock4.jpg",
+        "client/src/assets/clg.jpg",
+        "client/src/assets/clgss.jpg",
+        "client/src/assets/ksaudi/ksaudi1.jpg",
+        "client/src/assets/ksaudi/ksaudi2.jpg",
+        "client/src/assets/ksaudi/ksaudi3.jpg",
+        "client/src/assets/ksaudi/ksaudi4.jpg",
+        "client/src/user/BookAuditorium.jsx",
+        "server/controllers/bookingController.js",
+        "server/models/Booking.js",
+        "server/uploads/event-67f917116005b483c8041966-1744908878505-529363039-image5.jpg",
+        "server/utils/emailService.js"
+      ],
+      "primaryArea": "client",
+      "before": "APJ section lacked images and comprehensive styling.",
+      "added": "APJ auditorium photos and extensive CSS rule updates.",
+      "impact": "Complete styling and visual asset overhaul for APJ.",
+      "keywords": [
+        "apj",
+        "css",
+        "images"
+      ]
+    },
+    {
+      "commitId": "6a812dc883368a476084970f8e372f03420e25a6",
+      "shortId": "6a812dc",
+      "author": "ch-praneeth-08",
+      "timestamp": "2025-04-17T17:01:01Z",
+      "message": "made change",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/assets/apj/apj1.jpg",
+        "client/src/assets/apj/apj2.jpg",
+        "client/src/assets/apj/apj3.jpg",
+        "client/src/assets/apj/apj4.jpg",
+        "client/src/index.css",
+        "client/src/pages/Audis/APJAudi.jsx",
+        "client/src/pages/Audis/Auditoriums.jsx",
+        "client/src/pages/Homepage.jsx",
+        "client/src/user/BookAuditorium.jsx",
+        "server/controllers/bookingController.js"
+      ],
+      "primaryArea": "client",
+      "before": "Event description field had complex validation requirements.",
+      "added": "Simplified event description input handling and layout.",
+      "impact": "Streamlined event description user interface section.",
+      "keywords": [
+        "description",
+        "form",
+        "ui"
+      ]
+    },
+    {
+      "commitId": "f9ced03faff1a2a403156c478029a78059c527cf",
+      "shortId": "f9ced03",
+      "author": "ch-praneeth-08",
+      "timestamp": "2025-04-17T17:05:14Z",
+      "message": "small change in event description",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/user/BookAuditorium.jsx"
+      ],
+      "primaryArea": "client",
+      "before": "State unknown.",
+      "added": "small change in event description",
+      "impact": "Impact unclear.",
+      "keywords": []
     }
   ]
 }

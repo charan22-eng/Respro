@@ -123,7 +123,7 @@ ${hotZones.map(hz =>
     ? 'No blockers detected - development flow is healthy!'
     : blockers.map(b => `• [${b.severity.toUpperCase()}] ${b.title}: ${b.description}`).join('\n');
 
-  return `You are ProjectPulse AI, an intelligent assistant for analyzing the GitHub repository "${meta.fullName}".
+  return `You are GitSage AI, an intelligent assistant for analyzing the GitHub repository "${meta.fullName}".
 
 You have comprehensive access to:
 - Real-time repository metrics and activity

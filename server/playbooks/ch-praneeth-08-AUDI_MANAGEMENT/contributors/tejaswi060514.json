@@ -1,0 +1,98 @@
+{
+  "login": "tejaswi060514",
+  "avatarUrl": "https://avatars.githubusercontent.com/u/185596989?v=4",
+  "repoFullName": "ch-praneeth-08/AUDI_MANAGEMENT",
+  "lastUpdated": "2026-02-23T12:13:22.356Z",
+  "totalCommits": 3,
+  "primaryAreas": [
+    "client"
+  ],
+  "contributorSummary": "",
+  "completionSignals": {
+    "velocityTrend": "unknown",
+    "commitSentiment": "neutral",
+    "churnSignal": "none",
+    "lastUpdated": "2026-02-23T12:13:22.319Z"
+  },
+  "commits": [
+    {
+      "commitId": "a296f6da038db5a559351e60cf90a622490032d4",
+      "shortId": "a296f6d",
+      "author": "tejaswi060514",
+      "timestamp": "2025-04-18T14:41:15Z",
+      "message": "footer is changed",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/package-lock.json",
+        "client/package.json",
+        "client/src/App.jsx",
+        "client/src/admin/Adminnavbar.jsx",
+        "client/src/assets/logo.png",
+        "client/src/components/Footer.jsx",
+        "client/src/pages/Homepage.jsx"
+      ],
+      "primaryArea": "client",
+      "before": "Footer lacked icon integration",
+      "added": "React Icons library and footer assets",
+      "impact": "Enhanced navigation visual elements",
+      "keywords": [
+        "footer",
+        "react-icons"
+      ]
+    },
+    {
+      "commitId": "94432afe9cf6a9efd467720256bb344598df7d95",
+      "shortId": "94432af",
+      "author": "tejaswi060514",
+      "timestamp": "2025-04-18T14:42:28Z",
+      "message": "footer is changed",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/App.css",
+        "client/src/admin/ManageBookings.jsx",
+        "client/src/index.css",
+        "client/src/pages/Audis/Auditoriums.jsx",
+        "client/src/pages/Homepage.jsx",
+        "client/src/user/BookAuditorium.jsx",
+        "client/src/user/BookingHistory.jsx",
+        "server/controllers/bookingController.js",
+        "server/models/Booking.js",
+        "server/utils/emailService.js"
+      ],
+      "primaryArea": "client",
+      "before": "Minimal CSS styling and effects",
+      "added": "Blob animations and enhanced backgrounds",
+      "impact": "Modernized application aesthetics",
+      "keywords": [
+        "CSS",
+        "animations",
+        "styling"
+      ]
+    },
+    {
+      "commitId": "f7805f449fed312d6dd2f1f4b254750356bf88a1",
+      "shortId": "f7805f4",
+      "author": "tejaswi060514",
+      "timestamp": "2025-04-20T11:41:22Z",
+      "message": "footer is changed",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/App.css",
+        "client/src/components/Footer.jsx",
+        "client/src/index.css",
+        "client/src/pages/Homepage.jsx"
+      ],
+      "primaryArea": "client",
+      "before": "Previous footer implementation",
+      "added": "Refined footer styling and structure",
+      "impact": "Improved footer presentation",
+      "keywords": [
+        "footer",
+        "UI"
+      ]
+    }
+  ]
+}

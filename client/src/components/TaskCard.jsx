@@ -5,14 +5,14 @@ import PropTypes from 'prop-types';
 const priorityConfig = {
   critical: { bg: 'bg-red-100', text: 'text-red-800', border: 'border-red-300', dot: 'bg-red-500' },
   high: { bg: 'bg-orange-100', text: 'text-orange-800', border: 'border-orange-300', dot: 'bg-orange-500' },
-  medium: { bg: 'bg-blue-100', text: 'text-blue-800', border: 'border-blue-300', dot: 'bg-blue-500' },
-  low: { bg: 'bg-gray-100', text: 'text-gray-700', border: 'border-gray-300', dot: 'bg-gray-400' }
+  medium: { bg: 'bg-brand-100', text: 'text-brand-800', border: 'border-brand-300', dot: 'bg-brand-500' },
+  low: { bg: 'bg-surface-100', text: 'text-surface-700', border: 'border-surface-300', dot: 'bg-surface-400' }
 };
 
 const deadlineStatusConfig = {
   overdue: { bg: 'bg-red-50', border: 'border-red-400', icon: 'text-red-500' },
   approaching: { bg: 'bg-amber-50', border: 'border-amber-400', icon: 'text-amber-500' },
-  on_track: { bg: 'bg-white', border: 'border-gray-200', icon: 'text-gray-400' }
+  on_track: { bg: 'bg-white', border: 'border-surface-200', icon: 'text-surface-400' }
 };
 
 function formatDeadline(deadline) {
@@ -43,7 +43,7 @@ function TaskCard({ task, onClick, currentUser }) {
 
   const style = {
     transform: CSS.Transform.toString(transform),
-    transition,
+    transition: transition || 'transform 200ms cubic-bezier(0.25, 1, 0.5, 1), box-shadow 200ms ease',
     opacity: isDragging ? 0.5 : 1
   };
 
@@ -59,16 +59,16 @@ function TaskCard({ task, onClick, currentUser }) {
       {...listeners}
       onClick={() => onClick(task)}
       className={`
-        p-3 rounded-lg border-2 cursor-grab active:cursor-grabbing
+        p-3 rounded-2xl border-2 cursor-grab active:cursor-grabbing
         ${deadlineStatus.bg} ${deadlineStatus.border}
         ${task.flagged ? 'ring-2 ring-red-400 ring-offset-1' : ''}
-        hover:shadow-md transition-all duration-150
-        ${isDragging ? 'shadow-lg scale-105' : ''}
+        hover:shadow-card-hover hover:-translate-y-0.5 transition-all duration-200 ease-out
+        ${isDragging ? 'shadow-elevated scale-105 rotate-2' : ''}
       `}
     >
       {/* Priority & Flag indicator */}
       <div className="flex items-center justify-between mb-2">
-        <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium ${priority.bg} ${priority.text}`}>
+        <span className={`status-badge ${priority.bg} ${priority.text}`}>
           <span className={`w-1.5 h-1.5 rounded-full ${priority.dot} mr-1.5`}></span>
           {task.priority}
         </span>
@@ -82,13 +82,13 @@ function TaskCard({ task, onClick, currentUser }) {
       </div>
 
       {/* Title */}
-      <h4 className="text-sm font-semibold text-gray-900 mb-1 line-clamp-2">
+      <h4 className="text-sm font-semibold text-surface-900 mb-1 line-clamp-2">
         {task.title}
       </h4>
 
       {/* Description preview */}
       {task.description && (
-        <p className="text-xs text-gray-600 mb-2 line-clamp-2">
+        <p className="text-xs text-surface-600 mb-2 line-clamp-2">
           {task.description}
         </p>
       )}
@@ -97,18 +97,18 @@ function TaskCard({ task, onClick, currentUser }) {
       {task.labels && task.labels.length > 0 && (
         <div className="flex flex-wrap gap-1 mb-2">
           {task.labels.slice(0, 3).map((label, idx) => (
-            <span key={idx} className="px-1.5 py-0.5 bg-pulse-100 text-pulse-700 text-xs rounded">
+            <span key={idx} className="chip text-brand-700 bg-brand-100">
               {label}
             </span>
           ))}
           {task.labels.length > 3 && (
-            <span className="text-xs text-gray-500">+{task.labels.length - 3}</span>
+            <span className="text-xs text-surface-500">+{task.labels.length - 3}</span>
           )}
         </div>
       )}
 
       {/* Footer: Deadline, PR link, Assignee */}
-      <div className="flex items-center justify-between mt-2 pt-2 border-t border-gray-200">
+      <div className="flex items-center justify-between mt-2 pt-2 border-t border-surface-200">
         {/* Deadline */}
         <div className={`flex items-center text-xs ${deadlineStatus.icon}`}>
           <svg className="w-3.5 h-3.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -126,7 +126,7 @@ function TaskCard({ task, onClick, currentUser }) {
 
         {/* Assignee */}
         <div className="flex items-center" title={`Assigned to ${task.assignee}${isOwner ? ' (you)' : ''}`}>
-          <div className={`w-5 h-5 rounded-full flex items-center justify-center text-xs font-medium ${isOwner ? 'bg-pulse-500 text-white' : 'bg-gray-300 text-gray-700'}`}>
+          <div className={`avatar w-5 h-5 rounded-full flex items-center justify-center text-xs font-medium ${isOwner ? 'bg-brand-500 text-white' : 'bg-surface-300 text-surface-700'}`}>
             {task.assignee[0].toUpperCase()}
           </div>
         </div>

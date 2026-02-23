@@ -1,7 +1,7 @@
 {
-  "name": "projectpulse-server",
+  "name": "gitsage-server",
   "version": "1.0.0",
-  "description": "Backend API for ProjectPulse - GitHub repository health dashboard",
+  "description": "Backend API for GitSage - The brain behind your branches",
   "main": "index.js",
   "type": "module",
   "scripts": {

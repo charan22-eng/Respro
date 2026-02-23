@@ -1,9 +1,486 @@
 {
   "repoFullName": "ch-praneeth-08/AUDI_MANAGEMENT",
-  "lastUpdated": "2026-02-20T19:53:34.125Z",
-  "totalCommitsTracked": 0,
-  "projectSummary": "",
-  "techAreas": [],
-  "overallVelocity": "steady",
-  "commits": []
+  "lastUpdated": "2026-02-23T12:13:22.386Z",
+  "totalCommitsTracked": 20,
+  "projectSummary": "This is an auditorium booking and event management platform currently in active full-stack development. Recent commits deliver robust backend booking logic with conflict detection and automated lifecycle alerts, refined frontend interfaces with animations and toast notifications, and expanded admin tooling for dynamic venue and user creation. Multiple contributors are driving synchronized improvements across frontend, backend, and cloud infrastructure, indicating accelerating momentum.",
+  "techAreas": [
+    "client",
+    "server"
+  ],
+  "overallVelocity": "accelerating",
+  "commits": [
+    {
+      "commitId": "f9ced03faff1a2a403156c478029a78059c527cf",
+      "shortId": "f9ced03",
+      "author": "ch-praneeth-08",
+      "timestamp": "2025-04-17T17:05:14Z",
+      "message": "small change in event description",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/user/BookAuditorium.jsx"
+      ],
+      "primaryArea": "client",
+      "before": "Event description section contained verbose markup",
+      "added": "Condensed event description input handling",
+      "impact": "Streamlined booking form interface",
+      "keywords": [
+        "event description",
+        "booking form"
+      ]
+    },
+    {
+      "commitId": "95f56388e2401aded45d689c81f96bd4c8554827",
+      "shortId": "95f5638",
+      "author": "ch-praneeth-08",
+      "timestamp": "2025-04-17T17:56:36Z",
+      "message": "made changes with the booking form",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/user/BookAuditorium.jsx"
+      ],
+      "primaryArea": "client",
+      "before": "Booking conflict detection used previous implementation",
+      "added": "Refactored conflict checking logic",
+      "impact": "Improved booking validation accuracy",
+      "keywords": [
+        "booking conflicts",
+        "validation"
+      ]
+    },
+    {
+      "commitId": "cd1ebf344026145c4ea9b5ea464cde1161ef5806",
+      "shortId": "cd1ebf3",
+      "author": "ch-praneeth-08",
+      "timestamp": "2025-04-17T17:57:19Z",
+      "message": "some booking changes",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "server/controllers/bookingController.js"
+      ],
+      "primaryArea": "server",
+      "before": "Basic booking controller with limited features",
+      "added": "Comprehensive booking management functions",
+      "impact": "Robust server-side booking operations",
+      "keywords": [
+        "booking controller",
+        "server"
+      ]
+    },
+    {
+      "commitId": "fed4f2c2d3cb371af66c8a70a5221ff175160c65",
+      "shortId": "fed4f2c",
+      "author": "ch-praneeth-08",
+      "timestamp": "2025-04-18T09:52:37Z",
+      "message": "changes to mail,bookings,history",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/admin/ManageBookings.jsx",
+        "client/src/user/BookingHistory.jsx",
+        "server/controllers/bookingController.js",
+        "server/uploads/event-67f917116005b483c8041966-1744908878505-529363039-image5.jpg",
+        "server/utils/emailService.js"
+      ],
+      "primaryArea": "server",
+      "before": "Manual history tracking and basic emails",
+      "added": "Automated past-event detection and email alerts",
+      "impact": "Complete booking lifecycle automation",
+      "keywords": [
+        "email notifications",
+        "booking history"
+      ]
+    },
+    {
+      "commitId": "a296f6da038db5a559351e60cf90a622490032d4",
+      "shortId": "a296f6d",
+      "author": "tejaswi060514",
+      "timestamp": "2025-04-18T14:41:15Z",
+      "message": "footer is changed",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/package-lock.json",
+        "client/package.json",
+        "client/src/App.jsx",
+        "client/src/admin/Adminnavbar.jsx",
+        "client/src/assets/logo.png",
+        "client/src/components/Footer.jsx",
+        "client/src/pages/Homepage.jsx"
+      ],
+      "primaryArea": "client",
+      "before": "Footer lacked icon integration",
+      "added": "React Icons library and footer assets",
+      "impact": "Enhanced navigation visual elements",
+      "keywords": [
+        "footer",
+        "react-icons"
+      ]
+    },
+    {
+      "commitId": "94432afe9cf6a9efd467720256bb344598df7d95",
+      "shortId": "94432af",
+      "author": "tejaswi060514",
+      "timestamp": "2025-04-18T14:42:28Z",
+      "message": "footer is changed",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/App.css",
+        "client/src/admin/ManageBookings.jsx",
+        "client/src/index.css",
+        "client/src/pages/Audis/Auditoriums.jsx",
+        "client/src/pages/Homepage.jsx",
+        "client/src/user/BookAuditorium.jsx",
+        "client/src/user/BookingHistory.jsx",
+        "server/controllers/bookingController.js",
+        "server/models/Booking.js",
+        "server/utils/emailService.js"
+      ],
+      "primaryArea": "client",
+      "before": "Minimal CSS styling and effects",
+      "added": "Blob animations and enhanced backgrounds",
+      "impact": "Modernized application aesthetics",
+      "keywords": [
+        "CSS",
+        "animations",
+        "styling"
+      ]
+    },
+    {
+      "commitId": "bc4eb570663c9acf566c9cd1147d6bc695cd4f68",
+      "shortId": "bc4eb57",
+      "author": "ch-praneeth-08",
+      "timestamp": "2025-04-18T15:30:03Z",
+      "message": " reschedule mail",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "server/controllers/bookingController.js",
+        "server/package-lock.json",
+        "server/utils/emailService.js"
+      ],
+      "primaryArea": "server",
+      "before": "No reschedule communication capability",
+      "added": "Reschedule email notifications and alerts",
+      "impact": "Users notified of schedule changes",
+      "keywords": [
+        "reschedule",
+        "email"
+      ]
+    },
+    {
+      "commitId": "3099388f873e6bf54e817204881b2068553d4135",
+      "shortId": "3099388",
+      "author": "ch-praneeth-08",
+      "timestamp": "2025-04-18T15:31:10Z",
+      "message": "pacakage.json",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/package-lock.json"
+      ],
+      "primaryArea": "client",
+      "before": "Outdated client dependencies",
+      "added": "Updated package-lock versions",
+      "impact": "Dependency synchronization maintained",
+      "keywords": [
+        "dependencies",
+        "package-lock"
+      ]
+    },
+    {
+      "commitId": "13b3625b4e157eaf60db067af5d0e1b91e94650e",
+      "shortId": "13b3625",
+      "author": "Slaltihaditya-23071A12B9",
+      "timestamp": "2025-04-18T16:52:51Z",
+      "message": "added toastbar and checked the errors",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/package-lock.json",
+        "client/package.json",
+        "client/src/admin/ManageBookings.jsx",
+        "client/src/user/BookAuditorium.jsx",
+        "client/src/user/BookingHistory.jsx"
+      ],
+      "primaryArea": "client",
+      "before": "Silent error handling without feedback",
+      "added": "Toast notification system integration",
+      "impact": "Real-time user action feedback",
+      "keywords": [
+        "toast notifications",
+        "error handling"
+      ]
+    },
+    {
+      "commitId": "f2d52455c53442791d42b2a810b071350f9674ea",
+      "shortId": "f2d5245",
+      "author": "Slaltihaditya-23071A12B9",
+      "timestamp": "2025-04-19T05:20:06Z",
+      "message": "login modifed and removed the uploads",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/pages/Login.jsx"
+      ],
+      "primaryArea": "client",
+      "before": "Login component with upload dependencies",
+      "added": "Simplified login without upload logic",
+      "impact": "Cleaner authentication component",
+      "keywords": [
+        "login",
+        "authentication"
+      ]
+    },
+    {
+      "commitId": "93b865909fadd03d8d09cebaa4011b074160195c",
+      "shortId": "93b8659",
+      "author": "Slaltihaditya-23071A12B9",
+      "timestamp": "2025-04-20T05:28:03Z",
+      "message": "connected to azure",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/components/Events.jsx",
+        "client/src/user/BookingHistory.jsx",
+        "server/controllers/bookingController.js",
+        "server/package-lock.json",
+        "server/package.json",
+        "server/routes/bookingRoutes.js",
+        "server/server.js",
+        "server/uploads/event-68032ba5fcfd4d39e44810b3-1735708601623-619982048-WhatsApp_Image_2025_02_19_at_11.49.55_12d510da.jpg",
+        "server/uploads/event-68032ba5fcfd4d39e44810b3-1745047793357-421188923-WhatsApp_Image_2025_04_03_at_20.06.32_05bf8fe8.jpg",
+        "server/uploads/event-68032ba5fcfd4d39e44810b3-1745047973055-973593482-WhatsApp_Image_2025_04_11_at_23.25.34_cf7b9afe.jpg",
+        "server/uploads/event-68032ba5fcfd4d39e44810b3-1745048176707-511074074-WhatsApp_Image_2025_03_27_at_15.42.38_7b23266a.jpg",
+        "server/uploads/event-68032ba5fcfd4d39e44810b3-1745048437632-494194391-WhatsApp_Image_2025_04_19_at_13.07.19_a2fc5d43.jpg"
+      ],
+      "primaryArea": "server",
+      "before": "Local filesystem image storage",
+      "added": "Azure cloud storage integration",
+      "impact": "Scalable cloud-based asset hosting",
+      "keywords": [
+        "azure",
+        "cloud storage"
+      ]
+    },
+    {
+      "commitId": "b63185064bad9667f5c93c7fdb5dbfc90ab91b51",
+      "shortId": "b631850",
+      "author": "Slaltihaditya-23071A12B9",
+      "timestamp": "2025-04-20T07:04:58Z",
+      "message": "extended the event dates in the home page",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "server/controllers/bookingController.js"
+      ],
+      "primaryArea": "server",
+      "before": "Limited event date range on homepage",
+      "added": "Extended event display date range",
+      "impact": "More upcoming events visible",
+      "keywords": [
+        "events",
+        "homepage"
+      ]
+    },
+    {
+      "commitId": "f7805f449fed312d6dd2f1f4b254750356bf88a1",
+      "shortId": "f7805f4",
+      "author": "tejaswi060514",
+      "timestamp": "2025-04-20T11:41:22Z",
+      "message": "footer is changed",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/App.css",
+        "client/src/components/Footer.jsx",
+        "client/src/index.css",
+        "client/src/pages/Homepage.jsx"
+      ],
+      "primaryArea": "client",
+      "before": "Previous footer implementation",
+      "added": "Refined footer styling and structure",
+      "impact": "Improved footer presentation",
+      "keywords": [
+        "footer",
+        "UI"
+      ]
+    },
+    {
+      "commitId": "80ab350c3b4fe451fc6ab0c14a888478d214029c",
+      "shortId": "80ab350",
+      "author": "Lalithaditya007",
+      "timestamp": "2025-04-23T06:55:42Z",
+      "message": "changed book now button functionality and the 3 months advance thing",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/App.jsx",
+        "client/src/pages/Homepage.jsx",
+        "server/controllers/bookingController.js"
+      ],
+      "primaryArea": "client",
+      "before": "Fixed three-month advance booking window",
+      "added": "Modified advance booking time limits",
+      "impact": "Flexible booking advance scheduling",
+      "keywords": [
+        "booking window",
+        "advance"
+      ]
+    },
+    {
+      "commitId": "484887a93d85579371a482a2a8766f9491657a29",
+      "shortId": "484887a",
+      "author": "shivv-byri",
+      "timestamp": "2025-04-23T07:09:55Z",
+      "message": "changes to be done",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "needtobedone.txt"
+      ],
+      "primaryArea": "root",
+      "before": "No pending tasks documented",
+      "added": "Todo list with feature requirements",
+      "impact": "Documented remaining development work",
+      "keywords": [
+        "documentation",
+        "todo"
+      ]
+    },
+    {
+      "commitId": "f3bb01249835cf1ebc73fd1b736966a3b41a9b6c",
+      "shortId": "f3bb012",
+      "author": "shivv-byri",
+      "timestamp": "2025-04-23T07:09:59Z",
+      "message": "Merge branch 'main' of https://github.com/Lalithaditya007/AUDI_MANAGEMENT",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/App.jsx",
+        "client/src/pages/Homepage.jsx",
+        "server/controllers/bookingController.js"
+      ],
+      "primaryArea": "client",
+      "before": "Branch with divergent booking logic",
+      "added": "Merged booking functionality updates",
+      "impact": "Synchronized main branch code",
+      "keywords": [
+        "merge",
+        "booking"
+      ]
+    },
+    {
+      "commitId": "545efb6284de85686f0bb923fb8156dc78ce8179",
+      "shortId": "545efb6",
+      "author": "Lalithaditya007",
+      "timestamp": "2025-04-23T10:27:50Z",
+      "message": "done the changes like the pop up and mailing and homepage for the admin",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/admin/AdminDashboard.jsx",
+        "client/src/pages/Homepage.jsx",
+        "server/controllers/bookingController.js",
+        "server/models/Booking.js",
+        "server/package-lock.json",
+        "server/package.json",
+        "server/routes/bookingRoutes.js",
+        "server/server.js",
+        "server/services/reminderScheduler.js",
+        "server/utils/emailService.js"
+      ],
+      "primaryArea": "server",
+      "before": "Basic admin dashboard without alerts",
+      "added": "Admin popups and notification system",
+      "impact": "Enhanced admin workflow efficiency",
+      "keywords": [
+        "admin dashboard",
+        "notifications"
+      ]
+    },
+    {
+      "commitId": "e4376737433d4a78a323c6cc75b53f21821f6e07",
+      "shortId": "e437673",
+      "author": "Lalithaditya007",
+      "timestamp": "2025-04-23T10:29:55Z",
+      "message": "something",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "needtobedone.txt"
+      ],
+      "primaryArea": "root",
+      "before": "Undocumented pending features",
+      "added": "Task list for admin improvements",
+      "impact": "Clear development roadmap defined",
+      "keywords": [
+        "admin",
+        "todo"
+      ]
+    },
+    {
+      "commitId": "14465f4c71d74eaee460c6d82cbd2255c528d6ab",
+      "shortId": "14465f4",
+      "author": "Lalithaditya007",
+      "timestamp": "2025-08-15T12:41:39Z",
+      "message": "added creation user feature to the admin",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/App.jsx",
+        "client/src/admin/AdminDashboard.jsx",
+        "client/src/admin/Adminnavbar.jsx",
+        "client/src/admin/CreateUser.jsx",
+        "needtobedone.txt",
+        "server/controllers/authController.js",
+        "server/routes/auth.js"
+      ],
+      "primaryArea": "client",
+      "before": "Manual user creation process",
+      "added": "Admin user creation interface",
+      "impact": "Self-service user account management",
+      "keywords": [
+        "user creation",
+        "admin"
+      ]
+    },
+    {
+      "commitId": "34ead45ad107cce9ed0ad8032938c3f573a00aa0",
+      "shortId": "34ead45",
+      "author": "ch-praneeth-08",
+      "timestamp": "2025-08-15T16:02:29Z",
+      "message": "added dynamic auditorium management",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/package-lock.json",
+        "client/package.json",
+        "client/src/App.jsx",
+        "client/src/admin/AdminDashboard.jsx",
+        "client/src/pages/Audis/AddAuditorium.jsx",
+        "client/src/pages/Audis/AuditoriumDetails.jsx",
+        "client/src/pages/Audis/Auditoriums.jsx",
+        "client/src/pages/Homepage.jsx",
+        "client/vite.config.js",
+        "needtobedone.txt",
+        "server/controllers/auditoriumController.js",
+        "server/models/Auditorium.js",
+        "server/package-lock.json",
+        "server/routes/auditoriumRoutes.js",
+        "server/seed.js"
+      ],
+      "primaryArea": "client",
+      "before": "Static auditorium configuration only",
+      "added": "Dynamic auditorium creation interface",
+      "impact": "Admins can add venues dynamically",
+      "keywords": [
+        "auditorium",
+        "dynamic management"
+      ]
+    }
+  ]
 }

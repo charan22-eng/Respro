@@ -35,7 +35,7 @@ async function githubFetch(endpoint, token) {
   const url = `${GITHUB_API_BASE}${endpoint}`;
   const headers = {
     'Accept': 'application/vnd.github.v3+json',
-    'User-Agent': 'ProjectPulse'
+    'User-Agent': 'GitSage'
   };
 
   if (token) {

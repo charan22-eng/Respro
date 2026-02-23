@@ -50,7 +50,7 @@ async function fetchCommitDetail(owner, repo, sha, token) {
   const url = `${GITHUB_API_BASE}/repos/${owner}/${repo}/commits/${sha}`;
   const headers = {
     'Accept': 'application/vnd.github.v3+json',
-    'User-Agent': 'ProjectPulse'
+    'User-Agent': 'GitSage'
   };
 
   if (token) {

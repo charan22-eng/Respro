@@ -8,9 +8,9 @@ import { getCollisions, resolveCollision, unresolveCollision } from '../utils/ap
 function StatusIndicator({ level, score }) {
   const configs = {
     low: {
-      color: 'text-green-600',
-      bgColor: 'bg-green-50',
-      borderColor: 'border-green-200',
+      color: 'text-accent-600',
+      bgColor: 'bg-accent-50',
+      borderColor: 'border-accent-200',
       icon: (
         <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -48,12 +48,12 @@ function StatusIndicator({ level, score }) {
   const config = configs[level] || configs.low;
 
   return (
-    <div className={`${config.bgColor} ${config.borderColor} border rounded-2xl p-6 text-center`}>
+    <div className={`${config.bgColor} ${config.borderColor} border rounded-2xl p-6 text-center transition-all duration-200`}>
       <div className={`${config.color} inline-flex mb-3`}>{config.icon}</div>
       <div className={`text-4xl font-bold ${config.color} mb-1`}>{score}</div>
-      <div className="text-sm text-gray-500 mb-2">Overlap Score</div>
+      <div className="text-sm text-surface-500 mb-2">Overlap Score</div>
       <div className={`font-semibold ${config.color}`}>{config.title}</div>
-      <div className="text-xs text-gray-500">{config.subtitle}</div>
+      <div className="text-xs text-surface-500">{config.subtitle}</div>
     </div>
   );
 }
@@ -68,16 +68,16 @@ StatusIndicator.propTypes = {
  */
 function StatCard({ label, value, color = 'gray' }) {
   const colorClasses = {
-    gray: 'text-gray-900',
+    gray: 'text-surface-900',
     red: 'text-red-600',
     amber: 'text-amber-600',
-    green: 'text-green-600'
+    green: 'text-accent-600'
   };
 
   return (
-    <div className="bg-white rounded-xl p-4 border border-gray-100 shadow-sm">
+    <div className="premium-card p-4">
       <div className={`text-2xl font-bold ${colorClasses[color]}`}>{value}</div>
-      <div className="text-xs text-gray-500 mt-1">{label}</div>
+      <div className="text-xs text-surface-500 mt-1">{label}</div>
     </div>
   );
 }
@@ -95,7 +95,7 @@ function OverlapItem({ collision, isExpanded, onToggle, onResolve, onUnresolve, 
   const severityConfig = {
     high: { dot: 'bg-red-500', bg: 'bg-red-50 hover:bg-red-100', border: 'border-red-200' },
     medium: { dot: 'bg-amber-500', bg: 'bg-amber-50 hover:bg-amber-100', border: 'border-amber-200' },
-    low: { dot: 'bg-green-500', bg: 'bg-green-50 hover:bg-green-100', border: 'border-green-200' }
+    low: { dot: 'bg-accent-500', bg: 'bg-accent-50 hover:bg-accent-100', border: 'border-accent-200' }
   };
 
   // Collision type labels and icons
@@ -118,7 +118,7 @@ function OverlapItem({ collision, isExpanded, onToggle, onResolve, onUnresolve, 
   };
 
   const config = collision.isResolved 
-    ? { dot: 'bg-gray-400', bg: 'bg-gray-50 hover:bg-gray-100', border: 'border-gray-200' }
+    ? { dot: 'bg-surface-400', bg: 'bg-surface-50 hover:bg-surface-100', border: 'border-surface-200' }
     : severityConfig[collision.severity] || severityConfig.low;
   const typeInfo = typeConfig[collision.type] || typeConfig.file_only;
   
@@ -127,7 +127,7 @@ function OverlapItem({ collision, isExpanded, onToggle, onResolve, onUnresolve, 
   const filePath = collision.file.split('/').slice(0, -1).join('/');
 
   return (
-    <div className={`rounded-xl border ${config.border} overflow-hidden transition-all ${collision.isResolved ? 'opacity-60' : ''}`}>
+    <div className={`rounded-2xl border ${config.border} overflow-hidden transition-all duration-200 ${collision.isResolved ? 'opacity-60' : ''}`}>
       <button
         onClick={onToggle}
         className={`w-full ${config.bg} p-4 text-left transition-colors`}
@@ -137,32 +137,32 @@ function OverlapItem({ collision, isExpanded, onToggle, onResolve, onUnresolve, 
             <span className={`w-2 h-2 rounded-full ${config.dot} flex-shrink-0`} />
             <div className="min-w-0">
               <div className="flex items-center gap-2">
-                <span className={`font-medium truncate ${collision.isResolved ? 'text-gray-500 line-through' : 'text-gray-900'}`}>
+                <span className={`font-medium truncate ${collision.isResolved ? 'text-surface-500 line-through' : 'text-surface-900'}`}>
                   {fileName}
                 </span>
-                <span className="text-xs px-2 py-0.5 rounded-full bg-white/60 text-gray-600 whitespace-nowrap">
+                <span className="chip whitespace-nowrap">
                   {typeInfo.icon} {typeInfo.label}
                 </span>
                 {collision.isResolved && (
-                  <span className="text-xs px-2 py-0.5 rounded-full bg-green-100 text-green-700 whitespace-nowrap">
+                  <span className="status-badge bg-accent-100 text-accent-700 whitespace-nowrap">
                     Resolved
                   </span>
                 )}
               </div>
               {filePath && (
-                <div className="text-xs text-gray-500 truncate">{filePath}/</div>
+                <div className="text-xs text-surface-500 truncate">{filePath}/</div>
               )}
             </div>
           </div>
           <div className="flex items-center gap-4 flex-shrink-0">
             <div className="text-right">
-              <div className="text-sm font-medium text-gray-700">
+              <div className="text-sm font-medium text-surface-700">
                 {collision.authorCount} {collision.authorCount === 1 ? 'person' : 'people'}
               </div>
-              <div className="text-xs text-gray-500">{collision.totalCommits} changes</div>
+              <div className="text-xs text-surface-500">{collision.totalCommits} changes</div>
             </div>
             <svg 
-              className={`w-5 h-5 text-gray-400 transition-transform ${isExpanded ? 'rotate-180' : ''}`} 
+              className={`w-5 h-5 text-surface-400 transition-transform duration-200 ${isExpanded ? 'rotate-180' : ''}`} 
               fill="none" 
               stroke="currentColor" 
               viewBox="0 0 24 24"
@@ -174,13 +174,13 @@ function OverlapItem({ collision, isExpanded, onToggle, onResolve, onUnresolve, 
       </button>
 
       {isExpanded && (
-        <div className="bg-white p-4 border-t border-gray-100">
+        <div className="bg-white p-4 border-t border-surface-100">
           {/* Collision type explanation */}
-          <div className="text-xs text-gray-500 mb-3 flex items-center gap-1">
+          <div className="text-xs text-surface-500 mb-3 flex items-center gap-1">
             <span>{typeInfo.icon}</span>
             <span>{typeInfo.description}</span>
             {collision.daysSinceActivity !== undefined && (
-              <span className="ml-2 text-gray-400">
+              <span className="ml-2 text-surface-400">
                 · Last activity {collision.daysSinceActivity === 0 ? 'today' : `${collision.daysSinceActivity}d ago`}
               </span>
             )}
@@ -188,11 +188,11 @@ function OverlapItem({ collision, isExpanded, onToggle, onResolve, onUnresolve, 
 
           {/* Show overlapping functions if available */}
           {collision.overlapDetails?.functions?.length > 0 && (
-            <div className="mb-3 p-2 bg-purple-50 rounded-lg">
+            <div className="mb-3 p-2 bg-purple-50 rounded-xl">
               <div className="text-xs font-medium text-purple-700 mb-1">Overlapping functions:</div>
               <div className="flex flex-wrap gap-1">
                 {collision.overlapDetails.functions.map(func => (
-                  <code key={func} className="text-xs bg-purple-100 text-purple-800 px-2 py-0.5 rounded">
+                  <code key={func} className="text-xs bg-purple-100 text-purple-800 px-2 py-0.5 rounded-lg">
                     {func}()
                   </code>
                 ))}
@@ -203,16 +203,16 @@ function OverlapItem({ collision, isExpanded, onToggle, onResolve, onUnresolve, 
           {/* Contributors */}
           <div className="flex flex-wrap gap-3 mb-4">
             {collision.authors.map((author, idx) => (
-              <div key={author.name} className="flex items-center gap-2 bg-gray-50 rounded-lg px-3 py-2">
+              <div key={author.name} className="flex items-center gap-2 bg-surface-50 rounded-xl px-3 py-2">
                 <div 
-                  className="w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-bold"
+                  className="avatar w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-bold"
                   style={{ backgroundColor: `hsl(${(idx * 137.5) % 360}, 65%, 50%)` }}
                 >
                   {author.name.substring(0, 2).toUpperCase()}
                 </div>
                 <div>
-                  <div className="text-sm font-medium text-gray-900">{author.name}</div>
-                  <div className="text-xs text-gray-500">{author.commits} commits</div>
+                  <div className="text-sm font-medium text-surface-900">{author.name}</div>
+                  <div className="text-xs text-surface-500">{author.commits} commits</div>
                 </div>
               </div>
             ))}
@@ -220,11 +220,11 @@ function OverlapItem({ collision, isExpanded, onToggle, onResolve, onUnresolve, 
 
           {/* Suggestion */}
           {collision.suggestion && !collision.isResolved && (
-            <div className="flex items-start gap-3 p-3 bg-blue-50 rounded-lg mb-4">
-              <svg className="w-5 h-5 text-blue-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="flex items-start gap-3 p-3 bg-brand-50 rounded-xl mb-4">
+              <svg className="w-5 h-5 text-brand-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
               </svg>
-              <p className="text-sm text-blue-700">{collision.suggestion}</p>
+              <p className="text-sm text-brand-700">{collision.suggestion}</p>
             </div>
           )}
 
@@ -234,7 +234,7 @@ function OverlapItem({ collision, isExpanded, onToggle, onResolve, onUnresolve, 
               <button
                 onClick={(e) => { e.stopPropagation(); onUnresolve(collision.id); }}
                 disabled={isResolving}
-                className="px-4 py-2 text-sm font-medium text-gray-600 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors disabled:opacity-50"
+                className="btn-secondary disabled:opacity-50"
               >
                 {isResolving ? 'Processing...' : 'Bring Back'}
               </button>
@@ -242,7 +242,7 @@ function OverlapItem({ collision, isExpanded, onToggle, onResolve, onUnresolve, 
               <button
                 onClick={(e) => { e.stopPropagation(); onResolve(collision.id); }}
                 disabled={isResolving}
-                className="px-4 py-2 text-sm font-medium text-white bg-green-600 hover:bg-green-700 rounded-lg transition-colors disabled:opacity-50 flex items-center gap-2"
+                className="px-4 py-2 text-sm font-medium text-white bg-accent-600 hover:bg-accent-700 rounded-xl transition-all duration-200 disabled:opacity-50 flex items-center gap-2"
               >
                 {isResolving ? (
                   'Resolving...'
@@ -279,20 +279,20 @@ function HotZoneItem({ zone, maxCommits, rank }) {
   const percentage = Math.round((zone.commitCount / maxCommits) * 100);
 
   return (
-    <div className="flex items-center gap-4 p-3 bg-white rounded-lg border border-gray-100">
-      <div className="w-6 h-6 bg-gray-100 rounded-full flex items-center justify-center text-xs font-bold text-gray-500">
+    <div className="flex items-center gap-4 p-3 premium-card">
+      <div className="w-6 h-6 bg-surface-100 rounded-full flex items-center justify-center text-xs font-bold text-surface-500">
         {rank}
       </div>
       <div className="flex-1 min-w-0">
-        <div className="font-medium text-gray-900 truncate text-sm">{zone.area}</div>
+        <div className="font-medium text-surface-900 truncate text-sm">{zone.area}</div>
         <div className="flex items-center gap-2 mt-1">
-          <div className="flex-1 h-1.5 bg-gray-100 rounded-full overflow-hidden">
+          <div className="flex-1 h-1.5 bg-surface-100 rounded-full overflow-hidden">
             <div
-              className="h-full bg-gradient-to-r from-amber-400 to-orange-500 rounded-full"
+              className="h-full bg-gradient-to-r from-amber-400 to-orange-500 rounded-full transition-all duration-500"
               style={{ width: `${percentage}%` }}
             />
           </div>
-          <span className="text-xs text-gray-500 whitespace-nowrap">
+          <span className="text-xs text-surface-500 whitespace-nowrap">
             {zone.authorCount} contributors
           </span>
         </div>
@@ -312,14 +312,14 @@ HotZoneItem.propTypes = {
  */
 function EmptyState() {
   return (
-    <div className="text-center py-16">
-      <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-        <svg className="w-10 h-10 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <div className="empty-state">
+      <div className="empty-state-icon bg-accent-100">
+        <svg className="w-10 h-10 text-accent-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
       </div>
-      <h3 className="text-xl font-semibold text-gray-900 mb-2">No Overlaps Detected</h3>
-      <p className="text-gray-500 max-w-sm mx-auto">
+      <h3 className="text-xl font-semibold text-surface-900 mb-2">No Overlaps Detected</h3>
+      <p className="text-surface-500 max-w-sm mx-auto">
         Great news! Your team is working on different areas of the codebase. 
         No coordination issues found.
       </p>
@@ -388,7 +388,6 @@ function CollisionRadarPanel({ owner, repo, onClose }) {
     setResolvingId(collisionId);
     try {
       await resolveCollision(owner, repo, collisionId);
-      // Update local state immediately for responsiveness
       setData(prev => ({
         ...prev,
         collisions: prev.collisions.map(c => 
@@ -412,7 +411,6 @@ function CollisionRadarPanel({ owner, repo, onClose }) {
     setResolvingId(collisionId);
     try {
       await unresolveCollision(owner, repo, collisionId);
-      // Update local state immediately
       setData(prev => ({
         ...prev,
         collisions: prev.collisions.map(c => 
@@ -440,10 +438,10 @@ function CollisionRadarPanel({ owner, repo, onClose }) {
   const displayedCollisions = showResolved ? collisions : activeCollisions;
 
   return (
-    <div className="fixed inset-0 bg-gray-900/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-      <div className="bg-gray-50 rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] flex flex-col overflow-hidden">
+    <div className="modal-backdrop">
+      <div className="bg-surface-50 rounded-2xl shadow-elevated w-full max-w-4xl max-h-[90vh] flex flex-col overflow-hidden animate-scale-in">
         {/* Header */}
-        <div className="bg-white px-6 py-4 border-b border-gray-200 flex items-center justify-between flex-shrink-0">
+        <div className="bg-white px-6 py-4 border-b border-surface-200 flex items-center justify-between flex-shrink-0">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-indigo-600 rounded-xl flex items-center justify-center">
               <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -453,17 +451,17 @@ function CollisionRadarPanel({ owner, repo, onClose }) {
               </svg>
             </div>
             <div>
-              <h2 className="text-lg font-bold text-gray-900">Collision Radar</h2>
-              <p className="text-sm text-gray-500">
+              <h2 className="text-lg font-bold text-surface-900">Collision Radar</h2>
+              <p className="text-sm text-surface-500">
                 {owner}/{repo}
               </p>
             </div>
           </div>
           <button
             onClick={onClose}
-            className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+            className="p-2 hover:bg-surface-100 rounded-xl transition-all duration-200"
           >
-            <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-5 h-5 text-surface-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
@@ -474,7 +472,7 @@ function CollisionRadarPanel({ owner, repo, onClose }) {
           {loading && (
             <div className="flex flex-col items-center justify-center py-16">
               <div className="w-12 h-12 border-4 border-purple-200 border-t-purple-600 rounded-full animate-spin mb-4" />
-              <p className="text-gray-500">Scanning for overlaps...</p>
+              <p className="text-surface-500">Scanning for overlaps...</p>
             </div>
           )}
 
@@ -485,8 +483,8 @@ function CollisionRadarPanel({ owner, repo, onClose }) {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Something went wrong</h3>
-              <p className="text-gray-500">{error}</p>
+              <h3 className="text-lg font-semibold text-surface-900 mb-2">Something went wrong</h3>
+              <p className="text-surface-500">{error}</p>
             </div>
           )}
 
@@ -511,25 +509,25 @@ function CollisionRadarPanel({ owner, repo, onClose }) {
                 <div className="flex gap-2">
                   <button
                     onClick={() => setActiveTab('overlaps')}
-                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                    className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${
                       activeTab === 'overlaps'
-                        ? 'bg-purple-100 text-purple-700'
-                        : 'bg-white text-gray-600 hover:bg-gray-100'
+                        ? 'bg-brand-100 text-brand-700'
+                        : 'bg-white text-surface-600 hover:bg-surface-100'
                     }`}
                   >
                     File Overlaps
                     {activeCollisions.length > 0 && (
-                      <span className="ml-2 px-2 py-0.5 bg-purple-200 text-purple-700 rounded-full text-xs">
+                      <span className="ml-2 px-2 py-0.5 bg-brand-200 text-brand-700 rounded-full text-xs">
                         {activeCollisions.length}
                       </span>
                     )}
                   </button>
                   <button
                     onClick={() => setActiveTab('hotzones')}
-                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                    className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200 ${
                       activeTab === 'hotzones'
-                        ? 'bg-purple-100 text-purple-700'
-                        : 'bg-white text-gray-600 hover:bg-gray-100'
+                        ? 'bg-brand-100 text-brand-700'
+                        : 'bg-white text-surface-600 hover:bg-surface-100'
                     }`}
                   >
                     Hot Zones
@@ -543,12 +541,12 @@ function CollisionRadarPanel({ owner, repo, onClose }) {
                 
                 {/* Show resolved toggle */}
                 {activeTab === 'overlaps' && resolvedCollisions.length > 0 && (
-                  <label className="flex items-center gap-2 text-sm text-gray-600 cursor-pointer">
+                  <label className="flex items-center gap-2 text-sm text-surface-600 cursor-pointer">
                     <input
                       type="checkbox"
                       checked={showResolved}
                       onChange={(e) => setShowResolved(e.target.checked)}
-                      className="w-4 h-4 text-purple-600 rounded border-gray-300 focus:ring-purple-500"
+                      className="w-4 h-4 text-brand-600 rounded border-surface-300 focus:ring-brand-500"
                     />
                     Show resolved ({resolvedCollisions.length})
                   </label>
@@ -582,7 +580,7 @@ function CollisionRadarPanel({ owner, repo, onClose }) {
                 <div>
                   {hotZones.length === 0 ? (
                     <div className="text-center py-12">
-                      <p className="text-gray-500">No hot zones detected.</p>
+                      <p className="text-surface-500">No hot zones detected.</p>
                     </div>
                   ) : (
                     <div className="space-y-2">
@@ -603,13 +601,13 @@ function CollisionRadarPanel({ owner, repo, onClose }) {
         </div>
 
         {/* Footer */}
-        <div className="bg-white px-6 py-3 border-t border-gray-200 flex items-center justify-between flex-shrink-0">
-          <p className="text-xs text-gray-400">
+        <div className="bg-white px-6 py-3 border-t border-surface-200 flex items-center justify-between flex-shrink-0">
+          <p className="text-xs text-surface-400">
             Based on {stats.totalCommitsAnalyzed || 0} commits from {stats.totalAuthors || 0} contributors
           </p>
           <button
             onClick={onClose}
-            className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg text-sm font-medium transition-colors"
+            className="btn-secondary"
           >
             Close
           </button>

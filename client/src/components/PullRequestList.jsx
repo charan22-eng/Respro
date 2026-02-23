@@ -11,41 +11,43 @@ function PullRequestList({ pullRequests }) {
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+    <div className="premium-card p-6">
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-lg font-semibold text-gray-900">Open Pull Requests</h3>
-        <span className="text-sm text-gray-500">{pullRequests.length} open</span>
+        <h3 className="text-lg font-semibold text-surface-900">Open Pull Requests</h3>
+        <span className="text-sm text-surface-500">{pullRequests.length} open</span>
       </div>
       
       {pullRequests.length === 0 ? (
-        <div className="text-center py-8 text-gray-500">
-          <svg
-            className="w-12 h-12 mx-auto mb-3 text-gray-300"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-            />
-          </svg>
-          <p>No open pull requests</p>
+        <div className="empty-state py-8">
+          <div className="empty-state-icon">
+            <svg
+              className="w-8 h-8 text-surface-400"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+          </div>
+          <p className="text-surface-500">No open pull requests</p>
         </div>
       ) : (
         <div className="space-y-3">
           {pullRequests.slice(0, 5).map((pr) => (
             <div
               key={pr.number}
-              className={`p-3 rounded-lg bg-gray-50 ${pr.isDraft ? 'opacity-60' : ''}`}
+              className={`p-3 rounded-xl bg-surface-50 hover:bg-surface-100 transition-all duration-200 ${pr.isDraft ? 'opacity-60' : ''}`}
             >
               <div className="flex items-start justify-between">
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center space-x-2">
                     <svg
-                      className="w-4 h-4 text-green-500 flex-shrink-0"
+                      className="w-4 h-4 text-accent-500 flex-shrink-0"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -57,20 +59,20 @@ function PullRequestList({ pullRequests }) {
                         d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"
                       />
                     </svg>
-                    <span className="font-medium text-gray-900 truncate">
+                    <span className="font-medium text-surface-900 truncate">
                       {pr.title}
                     </span>
                     {pr.isDraft && (
-                      <span className="px-2 py-0.5 text-xs font-medium bg-gray-200 text-gray-600 rounded">
+                      <span className="chip bg-surface-200 text-surface-600">
                         Draft
                       </span>
                     )}
                   </div>
-                  <div className="mt-1 text-sm text-gray-500">
+                  <div className="mt-1 text-sm text-surface-500">
                     #{pr.number} opened {formatDate(pr.createdAt)} by {pr.author}
                   </div>
                   {pr.branch && (
-                    <div className="mt-1 text-xs text-gray-400">
+                    <div className="mt-1 text-xs text-surface-400 font-mono">
                       {pr.branch} → {pr.baseBranch}
                     </div>
                   )}
@@ -82,7 +84,7 @@ function PullRequestList({ pullRequests }) {
       )}
       
       {pullRequests.length > 5 && (
-        <p className="mt-3 text-sm text-gray-500 text-center">
+        <p className="mt-3 text-sm text-surface-500 text-center">
           +{pullRequests.length - 5} more pull requests
         </p>
       )}

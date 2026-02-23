@@ -27,7 +27,7 @@ app.use(express.json({ limit: '2mb' }));
 
 // Session middleware (before routes)
 app.use(session({
-  secret: process.env.SESSION_SECRET || 'projectpulse-session-secret',
+  secret: process.env.SESSION_SECRET || 'gitsage-session-secret',
   resave: false,
   saveUninitialized: false,
   cookie: {
@@ -62,7 +62,7 @@ app.use((err, req, res, next) => {
 });
 
 const server = app.listen(PORT, () => {
-  console.log(`ProjectPulse server running on http://localhost:${PORT}`);
+  console.log(`GitSage server running on http://localhost:${PORT}`);
   
   // Start background polling for real-time updates
   startPolling();

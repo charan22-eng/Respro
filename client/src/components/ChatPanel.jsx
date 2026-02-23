@@ -169,20 +169,20 @@ function ChatMessage({ message, isStreaming }) {
     <div className={`flex ${isUser ? 'justify-end' : 'justify-start'}`}>
       <div className={`max-w-[85%] rounded-2xl px-4 py-3 ${
         isUser
-          ? 'bg-gray-900 text-white'
+          ? 'bg-surface-900 text-white'
           : isError
             ? 'bg-red-50 text-red-700 border border-red-200'
-            : 'bg-gray-100 text-gray-800'
+            : 'bg-surface-100 text-surface-800'
       }`}>
         {isUser ? (
           <p className="text-sm whitespace-pre-wrap">{message.content}</p>
         ) : (
-          <div className="text-sm prose prose-sm max-w-none prose-p:my-1 prose-ul:my-1 prose-li:my-0.5 prose-headings:my-2 prose-code:bg-gray-200 prose-code:px-1 prose-code:rounded">
+          <div className="text-sm prose prose-sm max-w-none prose-p:my-1 prose-ul:my-1 prose-li:my-0.5 prose-headings:my-2 prose-code:bg-surface-200 prose-code:px-1 prose-code:rounded">
             <ReactMarkdown>{message.content}</ReactMarkdown>
           </div>
         )}
         {isStreaming && (
-          <span className="inline-block w-1.5 h-4 bg-gray-400 animate-pulse ml-0.5 align-middle rounded-full" />
+          <span className="inline-block w-1.5 h-4 bg-surface-400 animate-pulse ml-0.5 align-middle rounded-full" />
         )}
       </div>
     </div>
@@ -273,18 +273,19 @@ function ChatPanel({ repoData }) {
     return (
       <button
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-6 right-6 w-14 h-14 bg-gray-900 hover:bg-gray-800
-                   text-white rounded-2xl shadow-lg flex items-center justify-center
-                   transition-all hover:scale-105 z-50 group"
-        title="Ask your repo"
+        className="fixed bottom-6 right-6 w-16 h-16 bg-slate-900 hover:bg-slate-800
+                   text-white rounded-2xl shadow-2xl flex items-center justify-center
+                   transition-all hover:scale-110 z-[9999] group border-2 border-slate-700"
+        style={{ boxShadow: '0 10px 40px rgba(0, 0, 0, 0.4)' }}
+        title="Ask GitSage"
       >
-        <svg className="w-6 h-6 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg className="w-7 h-7 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
                 d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
         </svg>
         {/* Notification dot when there are blockers */}
         {repoData.blockers?.length > 0 && (
-          <span className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full text-[10px] font-bold flex items-center justify-center">
+          <span className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 rounded-full text-[10px] font-bold flex items-center justify-center ring-2 ring-white">
             {repoData.blockers.length}
           </span>
         )}
@@ -296,27 +297,27 @@ function ChatPanel({ repoData }) {
   const panelHeight = isExpanded ? 'h-[600px]' : 'h-[500px]';
 
   return (
-    <div className={`fixed bottom-6 right-6 ${panelWidth} ${panelHeight} bg-white rounded-2xl shadow-2xl
-                    border border-gray-200 flex flex-col z-50 transition-all duration-200`}>
+    <div className={`fixed bottom-6 right-6 ${panelWidth} ${panelHeight} bg-white rounded-2xl shadow-elevated
+                    border border-slate-200 flex flex-col z-[9999] transition-all duration-200`}>
       {/* Header */}
-      <div className="px-4 py-3 bg-gray-900 text-white rounded-t-2xl flex items-center justify-between flex-shrink-0">
+      <div className="px-4 py-3 bg-slate-900 text-white rounded-t-2xl flex items-center justify-between flex-shrink-0">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-xl bg-white/10 flex items-center justify-center">
+          <div className="w-8 h-8 rounded-xl bg-white/20 flex items-center justify-center">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
                     d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
             </svg>
           </div>
           <div>
-            <h3 className="font-semibold text-sm">Ask ProjectPulse</h3>
-            <p className="text-xs text-gray-400">{repoData.meta?.name || 'Repository'}</p>
+            <h3 className="font-semibold text-sm text-white">Ask GitSage</h3>
+            <p className="text-xs text-slate-300">{repoData.meta?.name || 'Repository'}</p>
           </div>
         </div>
         <div className="flex items-center gap-1">
           {messages.length > 0 && (
             <button
               onClick={clearChat}
-              className="p-2 hover:bg-white/10 rounded-lg transition-colors"
+              className="p-2 hover:bg-white/10 rounded-lg transition-colors text-white"
               title="Clear chat"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -326,7 +327,7 @@ function ChatPanel({ repoData }) {
           )}
           <button
             onClick={() => setIsExpanded(!isExpanded)}
-            className="p-2 hover:bg-white/10 rounded-lg transition-colors"
+            className="p-2 hover:bg-white/10 rounded-lg transition-colors text-white"
             title={isExpanded ? "Collapse" : "Expand"}
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -339,7 +340,8 @@ function ChatPanel({ repoData }) {
           </button>
           <button
             onClick={() => setIsOpen(false)}
-            className="p-2 hover:bg-white/10 rounded-lg transition-colors"
+            className="p-2 hover:bg-white/10 rounded-lg transition-colors text-white"
+            title="Close"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -354,8 +356,8 @@ function ChatPanel({ repoData }) {
         {messages.length === 0 && !isStreaming && (
           <div className="space-y-4">
             <div className="text-center py-2">
-              <p className="text-sm text-gray-500">
-                Ask me anything about <span className="font-medium text-gray-700">{repoData.meta?.name}</span>
+              <p className="text-sm text-surface-500">
+                Ask me anything about <span className="font-medium text-surface-700">{repoData.meta?.name}</span>
               </p>
             </div>
             
@@ -366,13 +368,13 @@ function ChatPanel({ repoData }) {
                   key={i}
                   onClick={() => handleSend(suggestion.text)}
                   className="flex items-center gap-3 text-left text-sm px-3 py-2.5 rounded-xl
-                             bg-gray-50 hover:bg-gray-100 border border-gray-200
-                             hover:border-gray-300 transition-all group"
+                             bg-surface-50 hover:bg-surface-100 border border-surface-200
+                             hover:border-surface-300 transition-all group"
                 >
-                  <div className="w-8 h-8 rounded-lg bg-gray-200 group-hover:bg-gray-300 flex items-center justify-center text-gray-600 transition-colors">
+                  <div className="w-8 h-8 rounded-lg bg-surface-200 group-hover:bg-surface-300 flex items-center justify-center text-surface-600 transition-colors">
                     <SuggestionIcon type={suggestion.icon} />
                   </div>
-                  <span className="text-gray-700 group-hover:text-gray-900">{suggestion.text}</span>
+                  <span className="text-surface-700 group-hover:text-surface-900">{suggestion.text}</span>
                 </button>
               ))}
             </div>
@@ -395,14 +397,14 @@ function ChatPanel({ repoData }) {
         {/* Loading indicator */}
         {isStreaming && !streamingText && (
           <div className="flex justify-start">
-            <div className="rounded-2xl px-4 py-3 bg-gray-100">
+            <div className="rounded-2xl px-4 py-3 bg-surface-100">
               <div className="flex items-center gap-2">
                 <div className="flex gap-1">
-                  <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" />
-                  <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.15s' }} />
-                  <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.3s' }} />
+                  <div className="w-2 h-2 bg-surface-400 rounded-full animate-bounce" />
+                  <div className="w-2 h-2 bg-surface-400 rounded-full animate-bounce" style={{ animationDelay: '0.15s' }} />
+                  <div className="w-2 h-2 bg-surface-400 rounded-full animate-bounce" style={{ animationDelay: '0.3s' }} />
                 </div>
-                <span className="text-xs text-gray-500">Thinking...</span>
+                <span className="text-xs text-surface-500">Thinking...</span>
               </div>
             </div>
           </div>
@@ -412,7 +414,7 @@ function ChatPanel({ repoData }) {
       </div>
 
       {/* Input area */}
-      <div className="p-3 border-t border-gray-200 flex-shrink-0 bg-gray-50 rounded-b-2xl">
+      <div className="p-3 border-t border-surface-200 flex-shrink-0 bg-surface-50 rounded-b-2xl">
         <div className="flex gap-2">
           <input
             ref={inputRef}
@@ -422,16 +424,13 @@ function ChatPanel({ repoData }) {
             onKeyDown={handleKeyDown}
             placeholder="Ask a question..."
             disabled={isStreaming}
-            className="flex-1 px-4 py-2.5 bg-white border border-gray-300 rounded-xl text-sm
-                       focus:ring-2 focus:ring-gray-900 focus:border-transparent
-                       disabled:bg-gray-100 disabled:text-gray-400 outline-none
-                       placeholder:text-gray-400"
+            className="input-primary flex-1 text-sm"
           />
           <button
             onClick={() => handleSend()}
             disabled={isStreaming || !input.trim()}
-            className="px-4 py-2.5 bg-gray-900 text-white rounded-xl hover:bg-gray-800
-                       disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors
+            className="px-4 py-2.5 bg-brand-600 text-white rounded-xl hover:bg-brand-700
+                       disabled:bg-surface-300 disabled:cursor-not-allowed transition-colors
                        flex items-center justify-center"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

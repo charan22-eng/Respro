@@ -22,21 +22,21 @@ function LiveEventToast({ events, onDismiss }) {
       {events.slice(-5).map((event) => (
         <div
           key={event.id}
-          className="bg-white border border-gray-200 rounded-lg shadow-lg p-4 animate-slide-in"
+          className="premium-card p-4 animate-slide-in shadow-elevated"
         >
           <div className="flex items-start justify-between">
             <div className="flex items-center space-x-2">
               <span className="flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-2 w-2 rounded-full bg-green-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                <span className="animate-ping absolute inline-flex h-2 w-2 rounded-full bg-accent-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-accent-500"></span>
               </span>
-              <span className="text-xs font-medium text-green-600 uppercase tracking-wide">
+              <span className="text-xs font-medium text-accent-600 uppercase tracking-wide">
                 Live Event
               </span>
             </div>
             <button
               onClick={() => onDismiss(event.id)}
-              className="text-gray-400 hover:text-gray-600 transition-colors"
+              className="text-surface-400 hover:text-surface-600 transition-colors"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -47,16 +47,16 @@ function LiveEventToast({ events, onDismiss }) {
           <div className="mt-2">
             {/* Event type badge */}
             <div className="flex items-center space-x-2 mb-1">
-              <span className={`text-xs px-1.5 py-0.5 rounded ${
+              <span className={`text-xs px-1.5 py-0.5 rounded-md ${
                 event.eventType === 'commit' ? 'bg-blue-100 text-blue-700' :
                 event.eventType === 'merge' ? 'bg-purple-100 text-purple-700' :
-                event.eventType === 'pr_open' ? 'bg-green-100 text-green-700' :
-                'bg-gray-100 text-gray-600'
+                event.eventType === 'pr_open' ? 'bg-accent-100 text-accent-700' :
+                'bg-surface-100 text-surface-600'
               }`}>
                 {event.eventType?.replace('_', ' ') || 'push'}
               </span>
               {event.branch && (
-                <span className="text-xs text-gray-400">
+                <span className="text-xs text-surface-400">
                   on {event.branch}
                 </span>
               )}
@@ -64,11 +64,11 @@ function LiveEventToast({ events, onDismiss }) {
 
             {/* Author and commit info */}
             <div className="flex items-center space-x-2 mb-1">
-              <span className="text-sm font-medium text-gray-900">
+              <span className="text-sm font-medium text-surface-900">
                 {event.author || 'Unknown'}
               </span>
               {event.shortId && (
-                <code className="text-xs font-mono text-gray-400">
+                <code className="text-xs font-mono text-surface-400">
                   {event.shortId}
                 </code>
               )}
@@ -76,22 +76,22 @@ function LiveEventToast({ events, onDismiss }) {
 
             {/* Commit message */}
             {event.message && (
-              <p className="text-sm text-gray-600 line-clamp-2">
+              <p className="text-sm text-surface-600 line-clamp-2">
                 {event.message}
               </p>
             )}
 
             {/* AI Summary (if processed) */}
             {event.added && (
-              <div className="mt-2 pt-2 border-t border-gray-100">
+              <div className="mt-2 pt-2 border-t border-surface-100">
                 <div className="flex items-start space-x-1">
-                  <span className="text-xs font-medium text-green-600 flex-shrink-0">Added:</span>
-                  <span className="text-xs text-gray-700">{event.added}</span>
+                  <span className="text-xs font-medium text-accent-600 flex-shrink-0">Added:</span>
+                  <span className="text-xs text-surface-700">{event.added}</span>
                 </div>
                 {event.impact && (
                   <div className="flex items-start space-x-1 mt-0.5">
-                    <span className="text-xs font-medium text-blue-600 flex-shrink-0">Impact:</span>
-                    <span className="text-xs text-gray-600">{event.impact}</span>
+                    <span className="text-xs font-medium text-brand-600 flex-shrink-0">Impact:</span>
+                    <span className="text-xs text-surface-600">{event.impact}</span>
                   </div>
                 )}
               </div>
@@ -99,7 +99,7 @@ function LiveEventToast({ events, onDismiss }) {
 
             {/* Processing indicator */}
             {!event.added && event.processing !== false && (
-              <div className="mt-2 flex items-center space-x-2 text-xs text-gray-400">
+              <div className="mt-2 flex items-center space-x-2 text-xs text-surface-400">
                 <svg className="animate-spin h-3 w-3" fill="none" viewBox="0 0 24 24">
                   <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                   <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>

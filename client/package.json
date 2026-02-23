@@ -1,7 +1,7 @@
 {
-  "name": "projectpulse-client",
+  "name": "gitsage-client",
   "version": "1.0.0",
-  "description": "Frontend for ProjectPulse - GitHub repository health dashboard",
+  "description": "Frontend for GitSage - The brain behind your branches",
   "type": "module",
   "scripts": {
     "dev": "vite",

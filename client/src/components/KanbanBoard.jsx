@@ -23,10 +23,10 @@ import ContributorFlagBadge from './ContributorFlagBadge';
 import { getBoard, createTask, updateTask, deleteTask, moveTask } from '../utils/api';
 
 const COLUMNS = [
-  { id: 'todo', title: 'To Do', color: 'bg-gray-100', headerColor: 'bg-gray-200' },
+  { id: 'todo', title: 'To Do', color: 'bg-slate-50', headerColor: 'bg-slate-100' },
   { id: 'in_progress', title: 'In Progress', color: 'bg-blue-50', headerColor: 'bg-blue-100' },
   { id: 'in_review', title: 'In Review', color: 'bg-purple-50', headerColor: 'bg-purple-100' },
-  { id: 'done', title: 'Done', color: 'bg-green-50', headerColor: 'bg-green-100' }
+  { id: 'done', title: 'Done', color: 'bg-emerald-50', headerColor: 'bg-emerald-100' }
 ];
 
 function Column({ column, tasks, currentUser, onTaskClick, onAddTask }) {
@@ -40,11 +40,11 @@ function Column({ column, tasks, currentUser, onTaskClick, onAddTask }) {
       className={`flex flex-col rounded-xl ${column.color} ${isOver ? 'ring-2 ring-blue-400' : ''} transition-all min-h-[400px]`}
     >
       {/* Column header */}
-      <div className={`px-4 py-3 ${column.headerColor} rounded-t-xl border-b border-gray-200`}>
+      <div className={`px-4 py-3 ${column.headerColor} rounded-t-xl border-b border-slate-200`}>
         <div className="flex items-center justify-between">
-          <h3 className="font-semibold text-gray-800">{column.title}</h3>
+          <h3 className="font-semibold text-slate-700">{column.title}</h3>
           <div className="flex items-center space-x-2">
-            <span className="px-2 py-0.5 bg-white/50 rounded-full text-sm font-medium text-gray-600">
+            <span className="px-2 py-0.5 bg-white/70 rounded-full text-sm font-medium text-slate-600">
               {tasks.length}
             </span>
             {column.id === 'todo' && (
@@ -53,7 +53,7 @@ function Column({ column, tasks, currentUser, onTaskClick, onAddTask }) {
                 className="p-1 hover:bg-white/50 rounded transition-colors"
                 title="Add task"
               >
-                <svg className="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-4 h-4 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
                 </svg>
               </button>
@@ -75,7 +75,7 @@ function Column({ column, tasks, currentUser, onTaskClick, onAddTask }) {
           ))}
         </SortableContext>
         {tasks.length === 0 && (
-          <div className="h-32 flex items-center justify-center text-gray-400 text-sm">
+          <div className="h-32 flex items-center justify-center text-slate-400 text-sm">
             No tasks
           </div>
         )}
@@ -97,7 +97,7 @@ Column.propTypes = {
   onAddTask: PropTypes.func.isRequired
 };
 
-function KanbanBoard({ owner, repo, currentUser, onClose }) {
+function KanbanBoard({ owner, repo, currentUser, onClose, embedded = false }) {
   const queryClient = useQueryClient();
   const [selectedTask, setSelectedTask] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -247,10 +247,162 @@ function KanbanBoard({ owner, repo, currentUser, onClose }) {
     setIsCreating(false);
   };
 
+  // Embedded mode - render inline without modal wrapper
+  if (embedded) {
+    return (
+      <div className="flex flex-col h-full min-h-[600px]">
+        {/* Embedded Header */}
+        <div 
+          className="flex-shrink-0 px-6 py-4 text-white rounded-t-xl"
+          style={{ background: 'linear-gradient(to right, #1e40af, #3b82f6)' }}
+        >
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-2">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                </svg>
+                <h2 className="text-xl font-bold">Task Board</h2>
+              </div>
+            </div>
+            <div className="flex items-center space-x-3">
+              {assignees.length > 0 && (
+                <div className="hidden md:flex items-center space-x-2 mr-2">
+                  {assignees.slice(0, 3).map(username => (
+                    <ContributorFlagBadge
+                      key={username}
+                      owner={owner}
+                      repo={repo}
+                      username={username}
+                    />
+                  ))}
+                </div>
+              )}
+              <button
+                onClick={() => refetch()}
+                className="p-2 rounded-lg transition-colors bg-white/20 hover:bg-white/30"
+                title="Refresh board"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                </svg>
+              </button>
+              <button
+                onClick={handleCreateClick}
+                className="flex items-center space-x-2 px-4 py-2 bg-white text-blue-700 rounded-lg font-medium transition-colors hover:bg-blue-50"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                </svg>
+                <span>New Task</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Embedded Content */}
+        <div className="flex-1 overflow-auto p-6 bg-slate-50">
+          {isLoading ? (
+            <div className="h-full flex items-center justify-center">
+              <div className="flex flex-col items-center space-y-3 text-slate-500">
+                <svg className="animate-spin h-8 w-8" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                <span>Loading board...</span>
+              </div>
+            </div>
+          ) : error ? (
+            <div className="h-full flex items-center justify-center">
+              <div className="text-center">
+                <div className="w-16 h-16 mx-auto mb-4 bg-red-100 rounded-full flex items-center justify-center">
+                  <svg className="w-8 h-8 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <p className="font-medium text-red-600">Failed to load board</p>
+                <p className="text-sm text-slate-500 mt-1">{error.message}</p>
+                <button
+                  onClick={() => refetch()}
+                  className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700"
+                >
+                  Try Again
+                </button>
+              </div>
+            </div>
+          ) : (
+            <>
+              <DeadlineWarningBanner
+                warnings={data?.warnings}
+                onTaskClick={handleWarningTaskClick}
+              />
+              <DndContext
+                sensors={sensors}
+                collisionDetection={closestCorners}
+                onDragStart={handleDragStart}
+                onDragEnd={handleDragEnd}
+              >
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                  {COLUMNS.map(column => (
+                    <Column
+                      key={column.id}
+                      column={column}
+                      tasks={tasksByColumn[column.id] || []}
+                      currentUser={currentUser}
+                      onTaskClick={handleTaskClick}
+                      onAddTask={handleCreateClick}
+                    />
+                  ))}
+                </div>
+                <DragOverlay>
+                  {activeTask ? (
+                    <div className="opacity-90 rotate-3">
+                      <TaskCard
+                        task={activeTask}
+                        onClick={() => {}}
+                        currentUser={currentUser}
+                      />
+                    </div>
+                  ) : null}
+                </DragOverlay>
+              </DndContext>
+            </>
+          )}
+        </div>
+
+        {/* Embedded Footer */}
+        <div className="flex-shrink-0 px-6 py-3 border-t border-slate-200 flex items-center justify-between text-sm text-slate-600 bg-slate-50 rounded-b-xl">
+          <div className="flex items-center space-x-4">
+            <span className="font-medium">{data?.board?.tasks?.length || 0} total tasks</span>
+            <span className="text-slate-300">|</span>
+            <span className="text-red-600">{data?.warnings?.filter(w => w.deadlineStatus === 'overdue').length || 0} overdue</span>
+            <span className="text-slate-300">|</span>
+            <span className="text-amber-600">{data?.warnings?.filter(w => w.deadlineStatus === 'approaching').length || 0} due soon</span>
+          </div>
+          <div className="text-slate-400 text-xs">
+            {data?.board?.lastUpdated && `Last updated: ${new Date(data.board.lastUpdated).toLocaleString()}`}
+          </div>
+        </div>
+
+        {/* Task Modal */}
+        <TaskModal
+          task={selectedTask}
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+          onSave={handleSaveTask}
+          onDelete={handleDeleteTask}
+          currentUser={currentUser}
+          isCreating={isCreating}
+        />
+      </div>
+    );
+  }
+
+  // Modal mode - original behavior
   return (
     <div 
       className="fixed inset-0 z-50 overflow-hidden"
-      style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
+      style={{ backgroundColor: 'rgba(15, 23, 42, 0.6)' }}
     >
       {/* Main Panel */}
       <div 
@@ -259,7 +411,7 @@ function KanbanBoard({ owner, repo, currentUser, onClose }) {
         {/* Header */}
         <div 
           className="flex-shrink-0 px-6 py-4 text-white"
-          style={{ background: 'linear-gradient(to right, #2563eb, #1d4ed8)' }}
+          style={{ background: 'linear-gradient(to right, #1e40af, #3b82f6)' }}
         >
           <div className="flex items-center justify-between">
             {/* Left side - Title */}
@@ -304,7 +456,7 @@ function KanbanBoard({ owner, repo, currentUser, onClose }) {
               {/* Create task button */}
               <button
                 onClick={handleCreateClick}
-                className="flex items-center space-x-2 px-4 py-2 bg-white text-blue-700 rounded-lg font-medium transition-colors hover:bg-gray-100"
+                className="flex items-center space-x-2 px-4 py-2 bg-white text-blue-700 rounded-lg font-medium transition-colors hover:bg-blue-50"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
@@ -328,10 +480,10 @@ function KanbanBoard({ owner, repo, currentUser, onClose }) {
         </div>
 
         {/* Content */}
-        <div className="flex-1 overflow-auto p-6 bg-gray-50">
+        <div className="flex-1 overflow-auto p-6 bg-slate-50">
           {isLoading ? (
             <div className="h-full flex items-center justify-center">
-              <div className="flex flex-col items-center space-y-3 text-gray-500">
+              <div className="flex flex-col items-center space-y-3 text-slate-500">
                 <svg className="animate-spin h-8 w-8" fill="none" viewBox="0 0 24 24">
                   <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                   <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
@@ -348,10 +500,10 @@ function KanbanBoard({ owner, repo, currentUser, onClose }) {
                   </svg>
                 </div>
                 <p className="font-medium text-red-600">Failed to load board</p>
-                <p className="text-sm text-gray-500 mt-1">{error.message}</p>
+                <p className="text-sm text-slate-500 mt-1">{error.message}</p>
                 <button
                   onClick={() => refetch()}
-                  className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                  className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700"
                 >
                   Try Again
                 </button>
@@ -404,17 +556,16 @@ function KanbanBoard({ owner, repo, currentUser, onClose }) {
 
         {/* Footer stats */}
         <div 
-          className="flex-shrink-0 px-6 py-3 border-t border-gray-200 flex items-center justify-between text-sm text-gray-600"
-          style={{ backgroundColor: '#f9fafb' }}
+          className="flex-shrink-0 px-6 py-3 border-t border-slate-200 flex items-center justify-between text-sm text-slate-600 bg-slate-50"
         >
           <div className="flex items-center space-x-4">
             <span className="font-medium">{data?.board?.tasks?.length || 0} total tasks</span>
-            <span className="text-gray-300">|</span>
+            <span className="text-slate-300">|</span>
             <span className="text-red-600">{data?.warnings?.filter(w => w.deadlineStatus === 'overdue').length || 0} overdue</span>
-            <span className="text-gray-300">|</span>
+            <span className="text-slate-300">|</span>
             <span className="text-amber-600">{data?.warnings?.filter(w => w.deadlineStatus === 'approaching').length || 0} due soon</span>
           </div>
-          <div className="text-gray-400 text-xs">
+          <div className="text-slate-400 text-xs">
             {data?.board?.lastUpdated && `Last updated: ${new Date(data.board.lastUpdated).toLocaleString()}`}
           </div>
         </div>
@@ -438,7 +589,8 @@ KanbanBoard.propTypes = {
   owner: PropTypes.string.isRequired,
   repo: PropTypes.string.isRequired,
   currentUser: PropTypes.string.isRequired,
-  onClose: PropTypes.func.isRequired
+  onClose: PropTypes.func,
+  embedded: PropTypes.bool
 };
 
 export default KanbanBoard;

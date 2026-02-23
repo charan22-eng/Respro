@@ -2,8 +2,8 @@
   "login": "Shashipreetham1",
   "avatarUrl": null,
   "repoFullName": "Lalithaditya007/AUDI_MANAGEMENT",
-  "lastUpdated": "2026-02-20T22:58:18.835Z",
-  "totalCommits": 16,
+  "lastUpdated": "2026-02-21T05:00:40.829Z",
+  "totalCommits": 21,
   "primaryAreas": [
     "client",
     "root",
@@ -431,6 +431,169 @@
         "users",
         "avatars",
         "admin"
+      ]
+    },
+    {
+      "commitId": "bb386f604a56be585a9963ca5e87afc2a0bdfb95",
+      "shortId": "bb386f6",
+      "author": "Shashipreetham1",
+      "timestamp": "2025-08-16T14:26:09Z",
+      "message": "added multer functionality",
+      "branch": "aditya",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/admin/CreateUser.jsx",
+        "client/src/components/Navbar.jsx",
+        "client/src/pages/Audis/AddAuditorium.jsx",
+        "needtobedone.txt",
+        "server/controllers/auditoriumController.js",
+        "server/controllers/bookingController.js",
+        "server/multerConfig.js",
+        "server/routes/auditoriumRoutes.js",
+        "server/routes/bookingRoutes.js",
+        "server/server.js",
+        "server/uploads/auditorium/image-1755352543479-91038294.png",
+        "server/uploads/auditorium/image-1755352604329-288387819.png"
+      ],
+      "primaryArea": "server",
+      "before": "Auditorium creation lacked navigation and user feedback notifications",
+      "added": "React Router navigation and toast notification imports to AddAuditorium",
+      "impact": "Enables user redirection and success feedback when adding auditoriums",
+      "keywords": [
+        "navigation",
+        "toast",
+        "multer"
+      ]
+    },
+    {
+      "commitId": "9ba15f3d76cf401bbca41a4080e3c06a2af35829",
+      "shortId": "9ba15f3",
+      "author": "Shashipreetham1",
+      "timestamp": "2025-08-16T16:53:28Z",
+      "message": "added auditoriums",
+      "branch": "aditya",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/App.jsx",
+        "client/src/admin/AdminDashboard.jsx",
+        "client/src/admin/AuditoriumPreviewModal.jsx",
+        "client/src/admin/EditAuditorium.jsx",
+        "client/src/admin/ManageAuditoriums.jsx",
+        "server/routes/auditoriumRoutes.js",
+        "server/seed.js",
+        "server/uploads/auditorium/image-1755352543479-91038294.png",
+        "server/uploads/auditorium/image-1755352604329-288387819.png",
+        "server/uploads/auditorium/image-1755362436225-274536613.jpg",
+        "server/uploads/auditorium/image-1755362783950-441429947.jpg"
+      ],
+      "primaryArea": "server",
+      "before": "Admin dashboard lacked auditorium editing and management tools",
+      "added": "EditAuditorium, ManageAuditoriums components and PreviewModal functionality",
+      "impact": "Enables full CRUD operations and preview capabilities for auditoriums",
+      "keywords": [
+        "auditorium",
+        "crud",
+        "admin"
+      ]
+    },
+    {
+      "commitId": "7d14d86972fd569bc7c91b3331bce0251e81cc42",
+      "shortId": "7d14d86",
+      "author": "Shashipreetham1",
+      "timestamp": "2025-08-16T17:27:26Z",
+      "message": "audi pictures changed",
+      "branch": "aditya",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/admin/AdminDashboard.jsx",
+        "client/src/admin/AuditoriumPreviewModal.jsx",
+        "client/src/admin/EditAuditorium.jsx",
+        "client/src/admin/ManageAuditoriums.jsx",
+        "client/src/components/profile/ProfileCard.jsx",
+        "client/src/pages/Audis/AddAuditorium.jsx",
+        "client/src/pages/Audis/AuditoriumDetails.jsx",
+        "client/src/pages/Audis/Auditoriums.jsx",
+        "client/src/pages/Homepage.jsx",
+        "client/src/user/BookingHistory.jsx",
+        "server/controllers/auditoriumController.js",
+        "server/routes/auditoriumRoutes.js",
+        "server/uploads/auditorium/images-1755364115828-59640942.jpg",
+        "server/uploads/auditorium/images-1755364115833-834084194.jpg"
+      ],
+      "primaryArea": "client",
+      "before": "Auditorium images displayed statically without carousel functionality",
+      "added": "React-slick carousel integration and enhanced image state management",
+      "impact": "Supports multiple auditorium images with sliding preview navigation",
+      "keywords": [
+        "carousel",
+        "images",
+        "auditorium"
+      ]
+    },
+    {
+      "commitId": "2f8d3faf7d174e8e363e7b22a4420ae83be90601",
+      "shortId": "2f8d3fa",
+      "author": "Shashipreetham1",
+      "timestamp": "2025-08-16T17:27:59Z",
+      "message": "Merge branch 'test' of https://github.com/Lalithaditya007/AUDI_MANAGEMENT into shashi",
+      "branch": "aditya",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/admin/AdminDashboard.jsx",
+        "client/src/admin/AdminProfile.jsx",
+        "client/src/admin/AdminScheduleViewer.jsx",
+        "client/src/admin/AuditoriumPreviewModal.jsx",
+        "client/src/admin/CreateUser.jsx",
+        "client/src/admin/EditAuditorium.jsx",
+        "client/src/admin/ManageAuditoriums.jsx",
+        "client/src/admin/ManageBookings.jsx",
+        "client/src/components/Navbar.jsx",
+        "client/src/components/profile/EditProfileModal.jsx",
+        "client/src/components/profile/ProfileCard.jsx",
+        "client/src/pages/Audis/APJAudi.jsx",
+        "client/src/pages/Audis/AuditoriumDetails.jsx",
+        "client/src/pages/Audis/Auditoriums.jsx",
+        "client/src/pages/Audis/KSAudi.jsx",
+        "client/src/pages/Homepage.jsx",
+        "client/src/user/BookAuditorium.jsx",
+        "client/src/user/UserProfile.jsx",
+        "server/GMAIL_SETUP.md",
+        "server/package-lock.json",
+        "server/package.json",
+        "server/utils/emailService.js"
+      ],
+      "primaryArea": "client",
+      "before": "Admin UI refinements existed on test branch only",
+      "added": "Synchronized admin dashboard spacing and layout improvements from test",
+      "impact": "Aligns shashi branch with latest admin interface polish updates",
+      "keywords": [
+        "merge",
+        "admin",
+        "ui"
+      ]
+    },
+    {
+      "commitId": "4ca4b0c66af71e7daf76d975c2ca4972a2b38fda",
+      "shortId": "4ca4b0c",
+      "author": "Shashipreetham1",
+      "timestamp": "2025-08-16T18:21:55Z",
+      "message": "done changes",
+      "branch": "aditya",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/pages/Homepage.jsx",
+        "client/vite.config.js",
+        "needtobedone.txt",
+        "server/server.js"
+      ],
+      "primaryArea": "client",
+      "before": "Homepage arrow positioning required adjustment and Vite needed network access",
+      "added": "Arrow placement fixes and enabled Vite host configuration for networking",
+      "impact": "Corrects visual alignment and allows external device testing access",
+      "keywords": [
+        "vite",
+        "homepage",
+        "network"
       ]
     }
   ]

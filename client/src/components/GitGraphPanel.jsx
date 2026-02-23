@@ -102,21 +102,21 @@ function GitGraphPanel({ repoData, onClose }) {
 
   return (
     <div 
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm"
+      className="modal-backdrop"
       onClick={handleBackdropClick}
     >
-      <div className="relative w-full max-w-6xl h-[85vh] mx-4 bg-white rounded-xl shadow-2xl overflow-hidden flex flex-col">
+      <div className="relative w-full max-w-6xl h-[85vh] mx-4 bg-white rounded-2xl shadow-elevated overflow-hidden flex flex-col animate-scale-in">
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200 bg-gradient-to-r from-gray-50 to-white">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-surface-200 bg-gradient-to-r from-surface-50 to-white">
           <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-gradient-to-br from-pulse-500 to-purple-600 rounded-lg flex items-center justify-center">
+            <div className="w-10 h-10 bg-gradient-to-br from-brand-500 to-purple-600 rounded-xl flex items-center justify-center">
               <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
               </svg>
             </div>
             <div>
-              <h2 className="text-lg font-bold text-gray-900">Git Graph</h2>
-              <p className="text-sm text-gray-500">
+              <h2 className="text-lg font-bold text-surface-900">Git Graph</h2>
+              <p className="text-sm text-surface-500">
                 {owner}/{repo} · {commits.length} commits
               </p>
             </div>
@@ -127,12 +127,12 @@ function GitGraphPanel({ repoData, onClose }) {
             <div className="flex items-center gap-3">
               {/* Progress indicator */}
               <div className="text-right">
-                <div className="text-xs text-gray-500">
+                <div className="text-xs text-surface-500">
                   {analysisStatus.analyzed}/{analysisStatus.total} analyzed
                 </div>
-                <div className="w-24 h-1.5 bg-gray-200 rounded-full mt-1 overflow-hidden">
+                <div className="w-24 h-1.5 bg-surface-200 rounded-full mt-1 overflow-hidden">
                   <div 
-                    className="h-full bg-green-500 rounded-full transition-all duration-500"
+                    className="h-full bg-accent-500 rounded-full transition-all duration-500"
                     style={{ width: `${progressPercent}%` }}
                   />
                 </div>
@@ -143,10 +143,10 @@ function GitGraphPanel({ repoData, onClose }) {
                 <button
                   onClick={handleStartAnalysis}
                   disabled={analysisStatus.isProcessing}
-                  className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-all ${
+                  className={`px-3 py-1.5 text-xs font-medium rounded-xl transition-all duration-200 ${
                     analysisStatus.isProcessing
-                      ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                      : 'bg-pulse-500 text-white hover:bg-pulse-600 shadow-sm'
+                      ? 'bg-surface-100 text-surface-400 cursor-not-allowed'
+                      : 'bg-brand-500 text-white hover:bg-brand-600 shadow-sm'
                   }`}
                 >
                   {analysisStatus.isProcessing ? (
@@ -167,9 +167,9 @@ function GitGraphPanel({ repoData, onClose }) {
             {/* Close button */}
             <button
               onClick={onClose}
-              className="p-2 hover:bg-gray-100 rounded-full transition-colors"
+              className="p-2 hover:bg-surface-100 rounded-xl transition-all duration-200"
             >
-              <svg className="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-6 h-6 text-surface-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
@@ -198,7 +198,7 @@ function GitGraphPanel({ repoData, onClose }) {
 
           {/* Summary card section - slides in from right */}
           <div 
-            className={`transition-all duration-300 ease-in-out border-l border-gray-200 overflow-hidden ${
+            className={`transition-all duration-300 ease-in-out border-l border-surface-200 overflow-hidden ${
               selectedCommit ? 'w-[40%] opacity-100' : 'w-0 opacity-0'
             }`}
           >
@@ -216,11 +216,11 @@ function GitGraphPanel({ repoData, onClose }) {
         </div>
 
         {/* Footer hint */}
-        <div className="px-6 py-3 border-t border-gray-200 bg-gray-50">
-          <p className="text-xs text-gray-500 text-center">
+        <div className="px-6 py-3 border-t border-surface-200 bg-surface-50">
+          <p className="text-xs text-surface-500 text-center">
             Click on a commit node to view AI-powered analysis · 
-            <span className="text-green-600 font-medium"> Filled nodes</span> = analyzed · 
-            <span className="text-gray-600"> Hollow nodes</span> = pending · 
+            <span className="text-accent-600 font-medium"> Filled nodes</span> = analyzed · 
+            <span className="text-surface-600"> Hollow nodes</span> = pending · 
             Press ESC to close
           </p>
         </div>

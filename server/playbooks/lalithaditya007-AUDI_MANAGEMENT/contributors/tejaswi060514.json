@@ -1,0 +1,265 @@
+{
+  "login": "tejaswi060514",
+  "avatarUrl": "https://avatars.githubusercontent.com/u/185596989?v=4",
+  "repoFullName": "Lalithaditya007/AUDI_MANAGEMENT",
+  "lastUpdated": "2026-02-23T11:58:37.740Z",
+  "totalCommits": 10,
+  "primaryAreas": [
+    "client"
+  ],
+  "contributorSummary": "",
+  "completionSignals": {
+    "velocityTrend": "unknown",
+    "commitSentiment": "neutral",
+    "churnSignal": "none",
+    "lastUpdated": "2026-02-21T18:08:09.222Z"
+  },
+  "commits": [
+    {
+      "commitId": "a296f6da038db5a559351e60cf90a622490032d4",
+      "shortId": "a296f6d",
+      "author": "tejaswi060514",
+      "timestamp": "2025-04-18T14:41:15Z",
+      "message": "footer is changed",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/package-lock.json",
+        "client/package.json",
+        "client/src/App.jsx",
+        "client/src/admin/Adminnavbar.jsx",
+        "client/src/assets/logo.png",
+        "client/src/components/Footer.jsx",
+        "client/src/pages/Homepage.jsx"
+      ],
+      "primaryArea": "client",
+      "before": "Footer component lacked icon library support",
+      "added": "Integrated React Icons library dependency",
+      "impact": "UI now supports vector icons",
+      "keywords": [
+        "react icons",
+        "footer"
+      ]
+    },
+    {
+      "commitId": "94432afe9cf6a9efd467720256bb344598df7d95",
+      "shortId": "94432af",
+      "author": "tejaswi060514",
+      "timestamp": "2025-04-18T14:42:28Z",
+      "message": "footer is changed",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/App.css",
+        "client/src/admin/ManageBookings.jsx",
+        "client/src/index.css",
+        "client/src/pages/Audis/Auditoriums.jsx",
+        "client/src/pages/Homepage.jsx",
+        "client/src/user/BookAuditorium.jsx",
+        "client/src/user/BookingHistory.jsx",
+        "server/controllers/bookingController.js",
+        "server/models/Booking.js",
+        "server/utils/emailService.js"
+      ],
+      "primaryArea": "client",
+      "before": "CSS lacked animation effects and modern styling",
+      "added": "Blob animation CSS and enhanced visual effects",
+      "impact": "Homepage displays animated background elements",
+      "keywords": [
+        "CSS animations",
+        "blob effects"
+      ]
+    },
+    {
+      "commitId": "f7805f449fed312d6dd2f1f4b254750356bf88a1",
+      "shortId": "f7805f4",
+      "author": "tejaswi060514",
+      "timestamp": "2025-04-20T11:41:22Z",
+      "message": "footer is changed",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/App.css",
+        "client/src/components/Footer.jsx",
+        "client/src/index.css",
+        "client/src/pages/Homepage.jsx"
+      ],
+      "primaryArea": "client",
+      "before": "Footer styling was cluttered and inconsistent",
+      "added": "Streamlined footer CSS and component structure",
+      "impact": "Cleaner footer visual presentation",
+      "keywords": [
+        "footer",
+        "CSS"
+      ]
+    },
+    {
+      "commitId": "030e0fa99d4423aa30dc9f002511553a0b99224e",
+      "shortId": "030e0fa",
+      "author": "tejaswi060514",
+      "timestamp": "2025-04-16T17:27:04Z",
+      "message": "ks audi images has been changed",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/assets/ksaudi/ksaudi1.jpg",
+        "client/src/assets/ksaudi/ksaudi2.jpg",
+        "client/src/assets/ksaudi/ksaudi3.jpg",
+        "client/src/assets/ksaudi/ksaudi4.jpg"
+      ],
+      "primaryArea": "client",
+      "before": "KS Audi image assets displayed outdated auditorium photographs.",
+      "added": "Updated KS Audi image files with new photographs.",
+      "impact": "Refreshed visual representation of KS Auditorium.",
+      "keywords": [
+        "ksaudi",
+        "images",
+        "assets"
+      ]
+    },
+    {
+      "commitId": "3ac1ef9c980873cb78979867f670a53ce93c64db",
+      "shortId": "3ac1ef9",
+      "author": "tejaswi060514",
+      "timestamp": "2025-04-16T17:38:23Z",
+      "message": "ks audi imgs are changed",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/admin/AdminScheduleViewer.css",
+        "client/src/admin/AdminScheduleViewer.jsx",
+        "client/src/pages/Login.jsx",
+        "client/src/user/BookAuditorium.jsx",
+        "client/src/user/BookingHistory.jsx"
+      ],
+      "primaryArea": "client",
+      "before": "Admin schedule and login pages lacked full-width layouts.",
+      "added": "CSS width constraints and useRef hook for login.",
+      "impact": "Improved administrative interface layout and stability.",
+      "keywords": [
+        "admin",
+        "css",
+        "layout"
+      ]
+    },
+    {
+      "commitId": "372bc0118bc20cbc35f46423b8ca2063529a6399",
+      "shortId": "372bc01",
+      "author": "tejaswi060514",
+      "timestamp": "2025-04-16T18:12:13Z",
+      "message": "ks audi imgs",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/assets/bblock/bblock1.jpg",
+        "client/src/assets/ksaudi/ksaudi1.jpg",
+        "client/src/assets/ksaudi/ksaudi2.jpg",
+        "client/src/assets/ksaudi/ksaudi3.jpg",
+        "client/src/assets/ksaudi/ksaudi4.jpg"
+      ],
+      "primaryArea": "client",
+      "before": "Admin dashboard lacked comprehensive trend analysis setup.",
+      "added": "Analytics state management and calendar component dependencies.",
+      "impact": "Improved administrative reporting and scheduling capabilities.",
+      "keywords": [
+        "admin",
+        "analytics",
+        "dashboard"
+      ]
+    },
+    {
+      "commitId": "6290fda6495a61c6e154002175310c4d3a984898",
+      "shortId": "6290fda",
+      "author": "tejaswi060514",
+      "timestamp": "2025-04-16T18:13:19Z",
+      "message": "ks audi imgs",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/admin/AdminDashboard.jsx",
+        "client/src/admin/AdminScheduleViewer.jsx"
+      ],
+      "primaryArea": "client",
+      "before": "B-Block auditorium displayed outdated photograph assets.",
+      "added": "New image files for B-Block auditorium views.",
+      "impact": "Enhanced visual representation of B-Block facility.",
+      "keywords": [
+        "bblock",
+        "images",
+        "assets"
+      ]
+    },
+    {
+      "commitId": "8704fa5f7f057aafa9d3584043b4e31f7ca8158a",
+      "shortId": "8704fa5",
+      "author": "tejaswi060514",
+      "timestamp": "2025-04-16T18:25:45Z",
+      "message": "bblock imgs",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/assets/bblock/bblock1.jpg",
+        "client/src/assets/bblock/bblock2.jpg",
+        "client/src/assets/bblock/bblock3.jpg",
+        "client/src/assets/bblock/bblock4.jpg"
+      ],
+      "primaryArea": "client",
+      "before": "Campus building images showed outdated college photographs.",
+      "added": "New clg.jpg and clgss.jpg campus image files.",
+      "impact": "Updated application branding with current campus visuals.",
+      "keywords": [
+        "campus",
+        "images",
+        "branding"
+      ]
+    },
+    {
+      "commitId": "8025bd1e2cf9bdfdafc639e22e3e99f3d39c0aa0",
+      "shortId": "8025bd1",
+      "author": "tejaswi060514",
+      "timestamp": "2025-04-16T18:35:44Z",
+      "message": "imgs changed",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/assets/clg.jpg",
+        "client/src/assets/clgss.jpg"
+      ],
+      "primaryArea": "client",
+      "before": "Manage bookings header used inconsistent flexbox alignment.",
+      "added": "Adjusted header layout classes for better alignment.",
+      "impact": "Improved booking management interface header presentation.",
+      "keywords": [
+        "bookings",
+        "header",
+        "ui"
+      ]
+    },
+    {
+      "commitId": "97d393e2673f826216df121442aba1106f62577b",
+      "shortId": "97d393e",
+      "author": "tejaswi060514",
+      "timestamp": "2025-04-17T13:39:25Z",
+      "message": "apj audi imgs",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/assets/apj/apj1.jpg",
+        "client/src/assets/apj/apj2.jpg",
+        "client/src/assets/apj/apj3.jpg",
+        "client/src/assets/apj/apj4.jpg",
+        "client/src/pages/Audis/APJAudi.jsx",
+        "client/src/pages/Audis/Auditoriums.jsx"
+      ],
+      "primaryArea": "client",
+      "before": "Auditorium listing page lacked animations and dynamic state.",
+      "added": "Blob animations CSS, useState, and useEffect hooks.",
+      "impact": "Enhanced visual effects and dynamic content loading.",
+      "keywords": [
+        "animations",
+        "auditoriums",
+        "hooks"
+      ]
+    }
+  ]
+}

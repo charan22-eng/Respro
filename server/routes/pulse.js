@@ -323,7 +323,7 @@ router.get('/repos/:owner/:repo/contributors/:username/commits', async (req, res
     const url = `https://api.github.com/repos/${owner}/${repo}/commits?author=${username}&per_page=5`;
     const headers = {
       'Accept': 'application/vnd.github.v3+json',
-      'User-Agent': 'ProjectPulse'
+      'User-Agent': 'GitSage'
     };
     if (token) headers['Authorization'] = `Bearer ${token}`;
 

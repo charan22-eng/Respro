@@ -72,33 +72,38 @@ function ContributorList({ contributors, commits, owner, repo, onAnalyzeCommit }
     }
   }
 
+  const handleSummarize = (sha) => {
+    if (onAnalyzeCommit) {
+      onAnalyzeCommit(sha);
+    }
+  };
+
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-      <div className="flex items-center justify-between mb-4">
-        <h3 className="text-lg font-semibold text-gray-900">Contributors</h3>
-        <span className="text-sm text-gray-500">{contributors.length} total</span>
+    <div className="space-y-4">
+      <div className="flex items-center justify-between">
+        <h3 className="text-lg font-semibold" style={{ color: '#0f172a' }}>Contributors</h3>
+        <span className="text-sm" style={{ color: '#64748b' }}>{contributors.length} total</span>
       </div>
 
       {/* Search */}
       {contributors.length > 3 && (
-        <div className="mb-4">
+        <div>
           <input
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search contributors..."
-            className="w-full px-3 py-1.5 text-sm border border-gray-200 rounded-lg
-                       focus:ring-2 focus:ring-pulse-500 focus:border-transparent outline-none"
+            className="input-primary text-sm py-2"
           />
         </div>
       )}
 
       {filtered.length === 0 ? (
-        <p className="text-gray-500 text-sm">
+        <p className="text-sm" style={{ color: '#64748b' }}>
           {searchQuery ? 'No contributors match your search' : 'No contributors found'}
         </p>
       ) : (
-        <div className="space-y-1">
+        <div className="space-y-2">
           {displayList.map((contributor) => {
             const recentCommits = Object.values(contributor.commitsByDay || {}).reduce(
               (sum, count) => sum + count, 0
@@ -109,40 +114,63 @@ function ContributorList({ contributors, commits, owner, repo, onAnalyzeCommit }
             const isLoading = loadingUser === contributor.login;
 
             return (
-              <div key={contributor.login}>
+              <div key={contributor.login} className="border border-slate-200 rounded-xl overflow-hidden">
                 {/* Clickable contributor row */}
                 <button
                   onClick={() => handleExpand(contributor.login)}
-                  className={`w-full flex items-center justify-between p-2 rounded-lg text-left transition-colors
-                    ${isExpanded ? 'bg-pulse-50 border border-pulse-200' : 'hover:bg-gray-50'}`}
+                  className={`w-full flex items-center justify-between p-3 text-left transition-all duration-200 ${
+                    isExpanded ? 'bg-blue-50' : 'hover:bg-slate-50'
+                  }`}
                 >
                   <div className="flex items-center space-x-3">
                     <div className="relative flex-shrink-0">
                       {contributor.avatarUrl ? (
-                        <img src={contributor.avatarUrl} alt={contributor.login}
-                             className="w-8 h-8 rounded-full" />
+                        <img 
+                          src={contributor.avatarUrl} 
+                          alt={contributor.login}
+                          className="w-9 h-9 rounded-full ring-2 ring-slate-100" 
+                        />
                       ) : (
-                        <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center">
-                          <span className="text-sm font-medium text-gray-600">
-                            {contributor.login[0].toUpperCase()}
-                          </span>
+                        <div 
+                          className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-semibold"
+                          style={{ background: '#e0e7ff', color: '#4338ca' }}
+                        >
+                          {contributor.login[0].toUpperCase()}
                         </div>
                       )}
                       {isActive && (
-                        <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-green-500 rounded-full border-2 border-white" />
+                        <div 
+                          className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full border-2 border-white"
+                          style={{ background: '#10b981' }}
+                        />
                       )}
                     </div>
                     <div>
-                      <span className="font-medium text-gray-900 text-sm">{contributor.login}</span>
+                      <span className="font-medium text-sm" style={{ color: '#0f172a' }}>
+                        {contributor.login}
+                      </span>
                       {isActive && (
-                        <span className="ml-2 text-xs text-green-600">{recentCommits} this week</span>
+                        <span 
+                          className="ml-2 text-xs font-medium"
+                          style={{ color: '#059669' }}
+                        >
+                          {recentCommits} this week
+                        </span>
                       )}
                     </div>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <span className="text-sm text-gray-500">{contributor.totalCommits} commits</span>
-                    <svg className={`w-4 h-4 text-gray-400 transition-transform ${isExpanded ? 'rotate-180' : ''}`}
-                         fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <span 
+                      className="text-sm px-2 py-0.5 rounded-full"
+                      style={{ background: '#f1f5f9', color: '#64748b' }}
+                    >
+                      {contributor.totalCommits} commits
+                    </span>
+                    <svg 
+                      className={`w-4 h-4 transition-transform ${isExpanded ? 'rotate-180' : ''}`}
+                      style={{ color: '#94a3b8' }}
+                      fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    >
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                     </svg>
                   </div>
@@ -150,48 +178,69 @@ function ContributorList({ contributors, commits, owner, repo, onAnalyzeCommit }
 
                 {/* Commit dropdown */}
                 {isExpanded && (
-                  <div className="ml-11 mt-1 mb-2">
+                  <div className="border-t border-slate-100 bg-slate-50/50">
                     {isLoading && userCommits.length === 0 ? (
-                      <div className="py-3 text-xs text-gray-400 flex items-center space-x-2">
-                        <svg className="animate-spin w-3 h-3" fill="none" viewBox="0 0 24 24">
+                      <div className="px-4 py-4 flex items-center justify-center space-x-2" style={{ color: '#94a3b8' }}>
+                        <svg className="animate-spin w-4 h-4" fill="none" viewBox="0 0 24 24">
                           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                           <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
                         </svg>
-                        <span>Loading commits...</span>
+                        <span className="text-sm">Loading commits...</span>
                       </div>
                     ) : userCommits.length === 0 ? (
-                      <p className="py-2 text-xs text-gray-400">No recent commits found</p>
+                      <p className="px-4 py-4 text-sm text-center" style={{ color: '#94a3b8' }}>
+                        No recent commits found
+                      </p>
                     ) : (
-                      <div className="border border-gray-100 rounded-lg overflow-hidden divide-y divide-gray-50">
+                      <div className="divide-y divide-slate-100">
                         {userCommits.map((commit) => (
-                          <div key={commit.sha}
-                               className="flex items-center justify-between px-3 py-2 hover:bg-gray-50 gap-2">
-                            <div className="flex items-center space-x-2 min-w-0 flex-1">
-                              <code className="text-xs font-mono text-gray-400 flex-shrink-0">
-                                {commit.sha.substring(0, 7)}
-                              </code>
-                              <span className="text-xs text-gray-700 truncate">
-                                {commit.message.length > 40
-                                  ? commit.message.substring(0, 40) + '...'
-                                  : commit.message}
-                              </span>
-                              <span className="text-xs text-gray-400 flex-shrink-0 hidden sm:inline">
-                                {timeAgo(commit.date)}
-                              </span>
-                            </div>
-                            {onAnalyzeCommit && (
+                          <div 
+                            key={commit.sha}
+                            className="px-4 py-3 hover:bg-white transition-colors"
+                          >
+                            <div className="flex items-start justify-between gap-3">
+                              <div className="flex-1 min-w-0">
+                                <div className="flex items-center space-x-2 mb-1">
+                                  <code 
+                                    className="text-xs font-mono px-1.5 py-0.5 rounded"
+                                    style={{ background: '#e2e8f0', color: '#475569' }}
+                                  >
+                                    {commit.sha.substring(0, 7)}
+                                  </code>
+                                  <span className="text-xs" style={{ color: '#94a3b8' }}>
+                                    {timeAgo(commit.date)}
+                                  </span>
+                                </div>
+                                <p 
+                                  className="text-sm truncate"
+                                  style={{ color: '#334155' }}
+                                  title={commit.message}
+                                >
+                                  {commit.message.length > 60
+                                    ? commit.message.substring(0, 60) + '...'
+                                    : commit.message}
+                                </p>
+                              </div>
+                              
+                              {/* Summarize Button */}
                               <button
                                 onClick={(e) => {
                                   e.stopPropagation();
-                                  onAnalyzeCommit(commit.sha);
+                                  handleSummarize(commit.sha);
                                 }}
-                                className="px-2 py-0.5 text-xs font-medium text-pulse-700 bg-pulse-50
-                                           hover:bg-pulse-100 rounded border border-pulse-200 flex-shrink-0
-                                           transition-colors"
+                                className="flex-shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg transition-all hover:shadow-sm"
+                                style={{ 
+                                  background: 'linear-gradient(135deg, #3b82f6 0%, #6366f1 100%)',
+                                  color: 'white'
+                                }}
+                                title="Analyze this commit"
                               >
+                                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                                </svg>
                                 Summarize
                               </button>
-                            )}
+                            </div>
                           </div>
                         ))}
                       </div>
@@ -205,7 +254,7 @@ function ContributorList({ contributors, commits, owner, repo, onAnalyzeCommit }
       )}
 
       {filtered.length > 10 && (
-        <p className="mt-3 text-sm text-gray-500 text-center">
+        <p className="text-sm text-center" style={{ color: '#64748b' }}>
           +{filtered.length - 10} more contributors
         </p>
       )}

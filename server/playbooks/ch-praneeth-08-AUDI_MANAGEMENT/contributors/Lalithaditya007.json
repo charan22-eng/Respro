@@ -1,0 +1,118 @@
+{
+  "login": "Lalithaditya007",
+  "avatarUrl": "https://avatars.githubusercontent.com/u/179290841?v=4",
+  "repoFullName": "ch-praneeth-08/AUDI_MANAGEMENT",
+  "lastUpdated": "2026-02-23T12:13:22.379Z",
+  "totalCommits": 4,
+  "primaryAreas": [
+    "client",
+    "server",
+    "root"
+  ],
+  "contributorSummary": "",
+  "completionSignals": {
+    "velocityTrend": "unknown",
+    "commitSentiment": "neutral",
+    "churnSignal": "none",
+    "lastUpdated": "2026-02-23T12:13:22.360Z"
+  },
+  "commits": [
+    {
+      "commitId": "80ab350c3b4fe451fc6ab0c14a888478d214029c",
+      "shortId": "80ab350",
+      "author": "Lalithaditya007",
+      "timestamp": "2025-04-23T06:55:42Z",
+      "message": "changed book now button functionality and the 3 months advance thing",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/App.jsx",
+        "client/src/pages/Homepage.jsx",
+        "server/controllers/bookingController.js"
+      ],
+      "primaryArea": "client",
+      "before": "Fixed three-month advance booking window",
+      "added": "Modified advance booking time limits",
+      "impact": "Flexible booking advance scheduling",
+      "keywords": [
+        "booking window",
+        "advance"
+      ]
+    },
+    {
+      "commitId": "545efb6284de85686f0bb923fb8156dc78ce8179",
+      "shortId": "545efb6",
+      "author": "Lalithaditya007",
+      "timestamp": "2025-04-23T10:27:50Z",
+      "message": "done the changes like the pop up and mailing and homepage for the admin",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/admin/AdminDashboard.jsx",
+        "client/src/pages/Homepage.jsx",
+        "server/controllers/bookingController.js",
+        "server/models/Booking.js",
+        "server/package-lock.json",
+        "server/package.json",
+        "server/routes/bookingRoutes.js",
+        "server/server.js",
+        "server/services/reminderScheduler.js",
+        "server/utils/emailService.js"
+      ],
+      "primaryArea": "server",
+      "before": "Basic admin dashboard without alerts",
+      "added": "Admin popups and notification system",
+      "impact": "Enhanced admin workflow efficiency",
+      "keywords": [
+        "admin dashboard",
+        "notifications"
+      ]
+    },
+    {
+      "commitId": "e4376737433d4a78a323c6cc75b53f21821f6e07",
+      "shortId": "e437673",
+      "author": "Lalithaditya007",
+      "timestamp": "2025-04-23T10:29:55Z",
+      "message": "something",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "needtobedone.txt"
+      ],
+      "primaryArea": "root",
+      "before": "Undocumented pending features",
+      "added": "Task list for admin improvements",
+      "impact": "Clear development roadmap defined",
+      "keywords": [
+        "admin",
+        "todo"
+      ]
+    },
+    {
+      "commitId": "14465f4c71d74eaee460c6d82cbd2255c528d6ab",
+      "shortId": "14465f4",
+      "author": "Lalithaditya007",
+      "timestamp": "2025-08-15T12:41:39Z",
+      "message": "added creation user feature to the admin",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/App.jsx",
+        "client/src/admin/AdminDashboard.jsx",
+        "client/src/admin/Adminnavbar.jsx",
+        "client/src/admin/CreateUser.jsx",
+        "needtobedone.txt",
+        "server/controllers/authController.js",
+        "server/routes/auth.js"
+      ],
+      "primaryArea": "client",
+      "before": "Manual user creation process",
+      "added": "Admin user creation interface",
+      "impact": "Self-service user account management",
+      "keywords": [
+        "user creation",
+        "admin"
+      ]
+    }
+  ]
+}

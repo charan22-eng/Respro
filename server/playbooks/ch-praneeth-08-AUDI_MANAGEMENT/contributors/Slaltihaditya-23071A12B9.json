@@ -1,0 +1,115 @@
+{
+  "login": "Slaltihaditya-23071A12B9",
+  "avatarUrl": "https://avatars.githubusercontent.com/u/173556037?v=4",
+  "repoFullName": "ch-praneeth-08/AUDI_MANAGEMENT",
+  "lastUpdated": "2026-02-23T12:13:22.353Z",
+  "totalCommits": 4,
+  "primaryAreas": [
+    "client",
+    "server"
+  ],
+  "contributorSummary": "",
+  "completionSignals": {
+    "velocityTrend": "unknown",
+    "commitSentiment": "neutral",
+    "churnSignal": "none",
+    "lastUpdated": "2026-02-23T12:13:22.341Z"
+  },
+  "commits": [
+    {
+      "commitId": "13b3625b4e157eaf60db067af5d0e1b91e94650e",
+      "shortId": "13b3625",
+      "author": "Slaltihaditya-23071A12B9",
+      "timestamp": "2025-04-18T16:52:51Z",
+      "message": "added toastbar and checked the errors",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/package-lock.json",
+        "client/package.json",
+        "client/src/admin/ManageBookings.jsx",
+        "client/src/user/BookAuditorium.jsx",
+        "client/src/user/BookingHistory.jsx"
+      ],
+      "primaryArea": "client",
+      "before": "Silent error handling without feedback",
+      "added": "Toast notification system integration",
+      "impact": "Real-time user action feedback",
+      "keywords": [
+        "toast notifications",
+        "error handling"
+      ]
+    },
+    {
+      "commitId": "f2d52455c53442791d42b2a810b071350f9674ea",
+      "shortId": "f2d5245",
+      "author": "Slaltihaditya-23071A12B9",
+      "timestamp": "2025-04-19T05:20:06Z",
+      "message": "login modifed and removed the uploads",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/pages/Login.jsx"
+      ],
+      "primaryArea": "client",
+      "before": "Login component with upload dependencies",
+      "added": "Simplified login without upload logic",
+      "impact": "Cleaner authentication component",
+      "keywords": [
+        "login",
+        "authentication"
+      ]
+    },
+    {
+      "commitId": "93b865909fadd03d8d09cebaa4011b074160195c",
+      "shortId": "93b8659",
+      "author": "Slaltihaditya-23071A12B9",
+      "timestamp": "2025-04-20T05:28:03Z",
+      "message": "connected to azure",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/components/Events.jsx",
+        "client/src/user/BookingHistory.jsx",
+        "server/controllers/bookingController.js",
+        "server/package-lock.json",
+        "server/package.json",
+        "server/routes/bookingRoutes.js",
+        "server/server.js",
+        "server/uploads/event-68032ba5fcfd4d39e44810b3-1735708601623-619982048-WhatsApp_Image_2025_02_19_at_11.49.55_12d510da.jpg",
+        "server/uploads/event-68032ba5fcfd4d39e44810b3-1745047793357-421188923-WhatsApp_Image_2025_04_03_at_20.06.32_05bf8fe8.jpg",
+        "server/uploads/event-68032ba5fcfd4d39e44810b3-1745047973055-973593482-WhatsApp_Image_2025_04_11_at_23.25.34_cf7b9afe.jpg",
+        "server/uploads/event-68032ba5fcfd4d39e44810b3-1745048176707-511074074-WhatsApp_Image_2025_03_27_at_15.42.38_7b23266a.jpg",
+        "server/uploads/event-68032ba5fcfd4d39e44810b3-1745048437632-494194391-WhatsApp_Image_2025_04_19_at_13.07.19_a2fc5d43.jpg"
+      ],
+      "primaryArea": "server",
+      "before": "Local filesystem image storage",
+      "added": "Azure cloud storage integration",
+      "impact": "Scalable cloud-based asset hosting",
+      "keywords": [
+        "azure",
+        "cloud storage"
+      ]
+    },
+    {
+      "commitId": "b63185064bad9667f5c93c7fdb5dbfc90ab91b51",
+      "shortId": "b631850",
+      "author": "Slaltihaditya-23071A12B9",
+      "timestamp": "2025-04-20T07:04:58Z",
+      "message": "extended the event dates in the home page",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "server/controllers/bookingController.js"
+      ],
+      "primaryArea": "server",
+      "before": "Limited event date range on homepage",
+      "added": "Extended event display date range",
+      "impact": "More upcoming events visible",
+      "keywords": [
+        "events",
+        "homepage"
+      ]
+    }
+  ]
+}

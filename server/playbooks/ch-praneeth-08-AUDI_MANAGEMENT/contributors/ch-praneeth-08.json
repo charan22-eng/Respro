@@ -1,0 +1,180 @@
+{
+  "login": "ch-praneeth-08",
+  "avatarUrl": "https://avatars.githubusercontent.com/u/196779126?v=4",
+  "repoFullName": "ch-praneeth-08/AUDI_MANAGEMENT",
+  "lastUpdated": "2026-02-23T12:13:22.383Z",
+  "totalCommits": 7,
+  "primaryAreas": [
+    "client",
+    "server"
+  ],
+  "contributorSummary": "",
+  "completionSignals": {
+    "velocityTrend": "unknown",
+    "commitSentiment": "neutral",
+    "churnSignal": "none",
+    "lastUpdated": "2026-02-23T12:13:22.290Z"
+  },
+  "commits": [
+    {
+      "commitId": "f9ced03faff1a2a403156c478029a78059c527cf",
+      "shortId": "f9ced03",
+      "author": "ch-praneeth-08",
+      "timestamp": "2025-04-17T17:05:14Z",
+      "message": "small change in event description",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/user/BookAuditorium.jsx"
+      ],
+      "primaryArea": "client",
+      "before": "Event description section contained verbose markup",
+      "added": "Condensed event description input handling",
+      "impact": "Streamlined booking form interface",
+      "keywords": [
+        "event description",
+        "booking form"
+      ]
+    },
+    {
+      "commitId": "95f56388e2401aded45d689c81f96bd4c8554827",
+      "shortId": "95f5638",
+      "author": "ch-praneeth-08",
+      "timestamp": "2025-04-17T17:56:36Z",
+      "message": "made changes with the booking form",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/user/BookAuditorium.jsx"
+      ],
+      "primaryArea": "client",
+      "before": "Booking conflict detection used previous implementation",
+      "added": "Refactored conflict checking logic",
+      "impact": "Improved booking validation accuracy",
+      "keywords": [
+        "booking conflicts",
+        "validation"
+      ]
+    },
+    {
+      "commitId": "cd1ebf344026145c4ea9b5ea464cde1161ef5806",
+      "shortId": "cd1ebf3",
+      "author": "ch-praneeth-08",
+      "timestamp": "2025-04-17T17:57:19Z",
+      "message": "some booking changes",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "server/controllers/bookingController.js"
+      ],
+      "primaryArea": "server",
+      "before": "Basic booking controller with limited features",
+      "added": "Comprehensive booking management functions",
+      "impact": "Robust server-side booking operations",
+      "keywords": [
+        "booking controller",
+        "server"
+      ]
+    },
+    {
+      "commitId": "fed4f2c2d3cb371af66c8a70a5221ff175160c65",
+      "shortId": "fed4f2c",
+      "author": "ch-praneeth-08",
+      "timestamp": "2025-04-18T09:52:37Z",
+      "message": "changes to mail,bookings,history",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/src/admin/ManageBookings.jsx",
+        "client/src/user/BookingHistory.jsx",
+        "server/controllers/bookingController.js",
+        "server/uploads/event-67f917116005b483c8041966-1744908878505-529363039-image5.jpg",
+        "server/utils/emailService.js"
+      ],
+      "primaryArea": "server",
+      "before": "Manual history tracking and basic emails",
+      "added": "Automated past-event detection and email alerts",
+      "impact": "Complete booking lifecycle automation",
+      "keywords": [
+        "email notifications",
+        "booking history"
+      ]
+    },
+    {
+      "commitId": "bc4eb570663c9acf566c9cd1147d6bc695cd4f68",
+      "shortId": "bc4eb57",
+      "author": "ch-praneeth-08",
+      "timestamp": "2025-04-18T15:30:03Z",
+      "message": " reschedule mail",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "server/controllers/bookingController.js",
+        "server/package-lock.json",
+        "server/utils/emailService.js"
+      ],
+      "primaryArea": "server",
+      "before": "No reschedule communication capability",
+      "added": "Reschedule email notifications and alerts",
+      "impact": "Users notified of schedule changes",
+      "keywords": [
+        "reschedule",
+        "email"
+      ]
+    },
+    {
+      "commitId": "3099388f873e6bf54e817204881b2068553d4135",
+      "shortId": "3099388",
+      "author": "ch-praneeth-08",
+      "timestamp": "2025-04-18T15:31:10Z",
+      "message": "pacakage.json",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/package-lock.json"
+      ],
+      "primaryArea": "client",
+      "before": "Outdated client dependencies",
+      "added": "Updated package-lock versions",
+      "impact": "Dependency synchronization maintained",
+      "keywords": [
+        "dependencies",
+        "package-lock"
+      ]
+    },
+    {
+      "commitId": "34ead45ad107cce9ed0ad8032938c3f573a00aa0",
+      "shortId": "34ead45",
+      "author": "ch-praneeth-08",
+      "timestamp": "2025-08-15T16:02:29Z",
+      "message": "added dynamic auditorium management",
+      "branch": "main",
+      "eventType": "commit",
+      "filesChanged": [
+        "client/package-lock.json",
+        "client/package.json",
+        "client/src/App.jsx",
+        "client/src/admin/AdminDashboard.jsx",
+        "client/src/pages/Audis/AddAuditorium.jsx",
+        "client/src/pages/Audis/AuditoriumDetails.jsx",
+        "client/src/pages/Audis/Auditoriums.jsx",
+        "client/src/pages/Homepage.jsx",
+        "client/vite.config.js",
+        "needtobedone.txt",
+        "server/controllers/auditoriumController.js",
+        "server/models/Auditorium.js",
+        "server/package-lock.json",
+        "server/routes/auditoriumRoutes.js",
+        "server/seed.js"
+      ],
+      "primaryArea": "client",
+      "before": "Static auditorium configuration only",
+      "added": "Dynamic auditorium creation interface",
+      "impact": "Admins can add venues dynamically",
+      "keywords": [
+        "auditorium",
+        "dynamic management"
+      ]
+    }
+  ]
+}
