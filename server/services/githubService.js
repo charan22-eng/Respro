@@ -35,7 +35,7 @@ async function githubFetch(endpoint, token) {
   const url = `${GITHUB_API_BASE}${endpoint}`;
   const headers = {
     'Accept': 'application/vnd.github.v3+json',
-    'User-Agent': 'GitSage'
+    'User-Agent': 'respro'
   };
 
   if (token) {
@@ -60,6 +60,38 @@ async function githubFetch(endpoint, token) {
 
   if (!response.ok) {
     throw new Error(`GitHub API error: ${response.status} ${response.statusText}`);
+  }
+
+  // Handle empty 204 No Content response
+  if (response.status === 204) return null;
+
+  return response.json();
+}
+
+/**
+ * Make an authenticated POST/PATCH request to the GitHub API
+ */
+async function githubMutate(endpoint, method, payload, token) {
+  const url = `${GITHUB_API_BASE}${endpoint}`;
+  const headers = {
+    'Accept': 'application/vnd.github.v3+json',
+    'User-Agent': 'respro',
+    'Content-Type': 'application/json'
+  };
+
+  if (token) {
+    headers['Authorization'] = `Bearer ${token}`;
+  }
+
+  const response = await fetch(url, {
+    method,
+    headers,
+    body: JSON.stringify(payload)
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(`GitHub API error: ${response.status} ${response.statusText} - ${errorText}`);
   }
 
   return response.json();
@@ -589,5 +621,41 @@ async function fetchFullCommitInfo(owner, repo, sha, token) {
   }
 }
 
-export { fetchCommitDetails, fetchLatestCommitSha, fetchFullCommitInfo, fetchAllCommits };
-export default { fetchRepoData, parseRepoUrl, fetchCommitDetails, fetchLatestCommitSha, fetchFullCommitInfo, fetchAllCommits };
+/**
+ * Create a GitHub Check Run
+ */
+async function createCheckRun(owner, repo, token, checkName, headSha, status = 'in_progress', output = null) {
+  const payload = {
+    name: checkName,
+    head_sha: headSha,
+    status
+  };
+  
+  if (output) {
+    payload.output = output;
+  }
+  
+  return githubMutate(`/repos/${owner}/${repo}/check-runs`, 'POST', payload, token);
+}
+
+/**
+ * Update a GitHub Check Run
+ */
+async function updateCheckRun(owner, repo, token, checkRunId, status, conclusion, output = null) {
+  const payload = {
+    status
+  };
+  
+  if (conclusion) {
+    payload.conclusion = conclusion; // 'success', 'failure', 'neutral', 'cancelled', 'timed_out', 'action_required'
+  }
+  
+  if (output) {
+    payload.output = output;
+  }
+  
+  return githubMutate(`/repos/${owner}/${repo}/check-runs/${checkRunId}`, 'PATCH', payload, token);
+}
+
+export { fetchCommitDetails, fetchLatestCommitSha, fetchFullCommitInfo, fetchAllCommits, createCheckRun, updateCheckRun };
+export default { fetchRepoData, parseRepoUrl, fetchCommitDetails, fetchLatestCommitSha, fetchFullCommitInfo, fetchAllCommits, createCheckRun, updateCheckRun };

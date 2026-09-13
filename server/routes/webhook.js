@@ -10,19 +10,21 @@ import { fetchCommitDetails } from '../services/githubService.js';
 import { broadcast } from '../services/sseService.js';
 import { invalidateCache } from '../services/cacheService.js';
 import { moveTaskByPR } from '../services/boardService.js';
+import { createCheckRun, updateCheckRun } from '../services/githubService.js';
+import { sendChatMessage } from '../services/chatService.js';
+import { getWebhookSecret } from './auth.js';
 
 const router = express.Router();
-
-const WEBHOOK_SECRET = process.env.GITHUB_WEBHOOK_SECRET || '';
 
 /**
  * Verify GitHub webhook signature
  */
 function verifySignature(payload, signature) {
-  if (!WEBHOOK_SECRET) return true; // Skip verification if no secret configured
+  const secret = getWebhookSecret();
+  if (!secret) return true; // Skip verification if no secret configured
   if (!signature) return false;
 
-  const hmac = crypto.createHmac('sha256', WEBHOOK_SECRET);
+  const hmac = crypto.createHmac('sha256', secret);
   const digest = 'sha256=' + hmac.update(payload).digest('hex');
   try {
     return crypto.timingSafeEqual(Buffer.from(digest), Buffer.from(signature));
@@ -76,14 +78,17 @@ function normalizePREvent(payload) {
   if (!pr) return null;
 
   let eventType = 'pr_' + payload.action;
+  let commitId = pr.head?.sha || '';
+  
   if (payload.action === 'closed' && pr.merged) {
     eventType = 'merge';
+    commitId = pr.merge_commit_sha || commitId;
   }
 
   return {
     eventType,
     prNumber: pr.number,
-    commitId: pr.merge_commit_sha || pr.head?.sha || '',
+    commitId,
     author: pr.user?.login || 'unknown',
     timestamp: pr.updated_at,
     message: pr.title,
@@ -92,7 +97,8 @@ function normalizePREvent(payload) {
     additions: pr.additions || 0,
     deletions: pr.deletions || 0,
     primaryArea: derivePrimaryArea([], pr.head?.ref || ''),
-    merged: pr.merged || false
+    merged: pr.merged || false,
+    baseBranch: pr.base?.ref || ''
   };
 }
 
@@ -127,7 +133,8 @@ router.post('/webhook/:owner/:repo', express.raw({ type: 'application/json' }), 
   // Get raw body for signature verification
   const rawBody = typeof req.body === 'string' ? req.body : JSON.stringify(req.body);
 
-  if (WEBHOOK_SECRET && !verifySignature(rawBody, signature)) {
+  const secret = getWebhookSecret();
+  if (secret && !verifySignature(rawBody, signature)) {
     console.warn(`Webhook signature verification failed for ${owner}/${repo}`);
     return res.status(401).json({ error: 'Invalid signature' });
   }
@@ -264,6 +271,47 @@ router.post('/webhook/:owner/:repo', express.raw({ type: 'application/json' }), 
           }
         } catch (boardError) {
           console.warn(`Could not auto-move board task for PR #${eventData.prNumber}:`, boardError.message);
+        }
+
+        // Phase 3: Distribution (GitHub Check Runs)
+        if (token && (eventData.eventType === 'pr_opened' || eventData.eventType === 'pr_synchronize')) {
+          try {
+            console.log(`Running respro analysis for PR #${eventData.prNumber}...`);
+            const check = await createCheckRun(
+              owner, 
+              repo, 
+              token, 
+              'respro AI Review', 
+              eventData.commitId, 
+              'in_progress'
+            );
+
+            const playbook = await getProjectPlaybook(owner, repo);
+            
+            const prompt = `Analyze PR #${eventData.prNumber}: "${eventData.message}" 
+Branch: ${eventData.branch} -> ${eventData.baseBranch || 'main'}
+
+Please provide a brief impact analysis based on the Project Playbook. Does this align with the overall velocity and tech areas? Are there any potential collisions with recent active branches?`;
+
+            const aiResponse = await sendChatMessage([{ role: 'user', content: prompt }], { meta: { owner, name: repo, fullName: `${owner}/${repo}` }, playbook });
+
+            await updateCheckRun(
+              owner, 
+              repo, 
+              token, 
+              check.id, 
+              'completed', 
+              'success',
+              {
+                title: 'respro PR Analysis',
+                summary: 'AI Analysis complete',
+                text: aiResponse
+              }
+            );
+            console.log(`Successfully posted respro Check Run for PR #${eventData.prNumber}`);
+          } catch (checkError) {
+            console.error(`Failed to run GitHub Check for PR #${eventData.prNumber}:`, checkError.message);
+          }
         }
       }
     } catch (error) {

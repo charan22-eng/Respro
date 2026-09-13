@@ -1,4 +1,4 @@
-# GitSage
+# respro
 
 **The brain behind your branches** - A GitHub repository health dashboard with AI-powered insights, collision detection, and task management.
 
@@ -15,7 +15,7 @@
 ### AI-Powered Features
 - **Intelligent Health Summaries**: AI-generated repository health analysis
 - **Commit Analysis (Playbook)**: Every commit gets an AI-powered before/after/impact summary
-- **Chat Assistant**: Ask GitSage AI questions about your repository
+- **Chat Assistant**: Ask respro AI questions about your repository
 - **Blocker Detection**: Automatic detection of development blockers
 
 ### Collaboration Tools
@@ -34,7 +34,7 @@
 
 - **Frontend**: React + Vite, Tailwind CSS, React Query, @dnd-kit, Recharts
 - **Backend**: Node.js + Express
-- **AI**: Anthropic Claude API
+- **AI**: Ollama (Local AI Inference)
 - **Data Source**: GitHub REST API
 - **Real-time**: Server-Sent Events (SSE)
 - **Caching**: In-memory cache with configurable TTL
@@ -42,7 +42,7 @@
 ## Project Structure
 
 ```
-gitsage/
+respro/
 ├── client/                  # React + Vite frontend
 │   ├── src/
 │   │   ├── components/      # UI components (KanbanBoard, TaskCard, etc.)
@@ -74,14 +74,14 @@ gitsage/
 - Node.js 18+
 - npm or yarn
 - GitHub Personal Access Token (optional, but recommended for higher rate limits)
-- Anthropic API Key (for AI features)
+- Ollama installed locally with a compatible model (e.g. `kimi-k2.5:cloud`)
 
 ### Installation
 
 1. Clone the repository:
    ```bash
    git clone <repo-url>
-   cd gitsage
+   cd respro
    ```
 
 2. Install server dependencies:
@@ -141,19 +141,21 @@ gitsage/
 | Variable | Description | Required |
 |----------|-------------|----------|
 | `GITHUB_TOKEN` | GitHub Personal Access Token | Recommended |
-| `ANTHROPIC_API_KEY` | Anthropic API Key | For AI features |
+| `OLLAMA_BASE_URL` | Ollama instance URL | For AI features |
+| `OLLAMA_CHAT_MODEL` | Ollama model for chat | For AI features |
+| `OLLAMA_SUMMARY_MODEL` | Ollama model for summaries | For AI features |
 | `GITHUB_CLIENT_ID` | GitHub OAuth App Client ID | For auth |
 | `GITHUB_CLIENT_SECRET` | GitHub OAuth App Secret | For auth |
 | `GITHUB_WEBHOOK_SECRET` | Webhook verification secret | For webhooks |
 | `SESSION_SECRET` | Session encryption secret | Recommended |
-| `PORT` | Server port (default: 3001) | No |
+| `PORT` | Server port (default: 3002) | No |
 | `CLIENT_URL` | Client URL for CORS (default: http://localhost:5173) | No |
 
 ## GitHub OAuth Setup
 
 1. Go to GitHub Settings > Developer settings > OAuth Apps
 2. Create a new OAuth App
-3. Set Authorization callback URL to `http://localhost:3001/api/auth/github/callback`
+3. Set Authorization callback URL to `http://localhost:3002/api/auth/github/callback`
 4. Copy Client ID and Client Secret to your `.env` file
 
 ## Deployment

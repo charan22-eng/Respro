@@ -3,19 +3,10 @@
  * Kanban board persistence and deadline management
  */
 
-import fs from 'fs/promises';
-import path from 'path';
 import crypto from 'crypto';
+import { getDb } from './db.js';
 
-const PLAYBOOK_DIR = process.env.PLAYBOOK_DIR || path.join(process.cwd(), 'playbooks');
-
-function getRepoDir(owner, repo) {
-  return path.join(PLAYBOOK_DIR, `${owner}-${repo}`);
-}
-
-function getBoardPath(owner, repo) {
-  return path.join(getRepoDir(owner, repo), 'board.json');
-}
+// Board paths are no longer used for SQLite storage
 
 /**
  * Create an empty board structure
@@ -104,35 +95,32 @@ export function computeDeadlineStatuses(board) {
 }
 
 /**
- * Load board from disk, create if doesn't exist
+ * Load board from DB, create if doesn't exist
  */
 export async function loadBoard(owner, repo) {
-  const boardPath = getBoardPath(owner, repo);
+  const db = await getDb();
+  const id = `${owner}/${repo}`;
+  const row = await db.get('SELECT data FROM boards WHERE id = ?', id);
   
-  try {
-    const data = await fs.readFile(boardPath, 'utf-8');
-    const board = JSON.parse(data);
+  if (row) {
+    const board = JSON.parse(row.data);
     return computeDeadlineStatuses(board);
-  } catch (err) {
-    if (err.code === 'ENOENT') {
-      // Board doesn't exist, create empty one
-      const board = createEmptyBoard(owner, repo);
-      await saveBoard(owner, repo, board);
-      return board;
-    }
-    throw err;
+  } else {
+    // Board doesn't exist, create empty one
+    const board = createEmptyBoard(owner, repo);
+    await saveBoard(owner, repo, board);
+    return board;
   }
 }
 
 /**
- * Save board to disk
+ * Save board to DB
  */
 export async function saveBoard(owner, repo, board) {
-  const repoDir = getRepoDir(owner, repo);
-  await fs.mkdir(repoDir, { recursive: true });
-  
+  const db = await getDb();
+  const id = `${owner}/${repo}`;
   board.lastUpdated = new Date().toISOString();
-  await fs.writeFile(getBoardPath(owner, repo), JSON.stringify(board, null, 2));
+  await db.run('INSERT OR REPLACE INTO boards (id, data) VALUES (?, ?)', id, JSON.stringify(board));
 }
 
 /**

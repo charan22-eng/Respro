@@ -4,7 +4,7 @@
  */
 
 const OLLAMA_BASE_URL = process.env.OLLAMA_BASE_URL || 'http://localhost:11434';
-const OLLAMA_MODEL = process.env.OLLAMA_MODEL || 'kimi-k2.5:cloud';
+const OLLAMA_MODEL = process.env.OLLAMA_MODEL || 'llama3.2';
 const OLLAMA_TIMEOUT = 300000; // 5 minutes for cloud models
 
 console.log(`Ollama Service initialized with model: ${OLLAMA_MODEL} at ${OLLAMA_BASE_URL}`);

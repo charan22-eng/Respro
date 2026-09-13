@@ -1,5 +1,24 @@
 /node_modules
 /server/.env
+/node_modules
+/server/.env
 /client/.env
 /server/node_modules
 /client/node_modules
+client/dist/
+server/.cache/
+server/playbooks/
+server/sessions/
+
+# Database files
+*.db
+*.db-shm
+*.db-wal
+
+# Downloaded bare clones
+.repos/
+
+# Env files
+.env
+.env.*
+!.env.example

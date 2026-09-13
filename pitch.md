@@ -1,4 +1,4 @@
-# GitSage - Pitch Deck
+# respro - Pitch Deck
 
 > **"The Brain Behind Your Branches"**
 
@@ -39,11 +39,11 @@ Engineering teams today are **flying blind**. They ship code every day but lack 
 
 ---
 
-## The Solution: GitSage
+## The Solution: respro
 
-GitSage is an **AI-powered repository intelligence platform** that gives engineering teams a living, breathing understanding of their codebase -- not just what changed, but *why it matters*.
+respro is an **AI-powered repository intelligence platform** that gives engineering teams a living, breathing understanding of their codebase -- not just what changed, but *why it matters*.
 
-Connect a GitHub repo. In seconds, GitSage pulls commits, branches, PRs, issues, and contributors -- then layers on AI analysis, collision detection, health scoring, and smart task management to give teams complete situational awareness.
+Connect a GitHub repo. In seconds, respro pulls commits, branches, PRs, issues, and contributors -- then layers on AI analysis, collision detection, health scoring, and smart task management to give teams complete situational awareness.
 
 ---
 
@@ -51,7 +51,7 @@ Connect a GitHub repo. In seconds, GitSage pulls commits, branches, PRs, issues,
 
 ### 1. AI Health Pulse -- Instant Project Diagnostics
 
-GitSage generates an AI-powered health summary the moment you connect a repo:
+respro generates an AI-powered health summary the moment you connect a repo:
 
 - **Health Rating**: Healthy / At Risk / Critical -- at a glance
 - **Smart Headline**: A one-sentence diagnosis of project state
@@ -64,7 +64,7 @@ This isn't a dashboard you check weekly. It's a **living diagnostic** that updat
 
 ### 2. Collision Radar -- Catch Conflicts Before They Happen
 
-This is our **strongest differentiator**. GitSage performs three levels of overlap detection across a configurable time window (default: 3 days):
+This is our **strongest differentiator**. respro performs three levels of overlap detection across a configurable time window (default: 3 days):
 
 | Level | What It Detects | How |
 |-------|----------------|-----|
@@ -74,7 +74,7 @@ This is our **strongest differentiator**. GitSage performs three levels of overl
 
 Each collision is scored by risk level, tracks which developers are involved, and supports **resolution tracking** -- teams can mark collisions as resolved and track who resolved them and when.
 
-**Why this matters**: Merge conflicts are the #2 developer productivity killer (after unclear requirements). GitSage surfaces them *before* they happen, saving hours of conflict resolution and preventing regressions.
+**Why this matters**: Merge conflicts are the #2 developer productivity killer (after unclear requirements). respro surfaces them *before* they happen, saving hours of conflict resolution and preventing regressions.
 
 ### 3. Project Playbook -- Institutional Memory That Never Leaves
 
@@ -87,13 +87,13 @@ Every commit that enters the repository gets an AI-generated summary with three 
 These summaries are persisted to disk as structured JSON playbooks -- one per project, plus per-contributor breakdowns. The playbook:
 
 - **Survives team turnover**: New engineers can read the playbook to understand months of project history in minutes
-- **Feeds the AI chat**: When you ask GitSage questions, it has the full playbook as context
+- **Feeds the AI chat**: When you ask respro questions, it has the full playbook as context
 - **Batch initializes**: First connection processes up to 20 historical commits to bootstrap the knowledge base
 - **Background analysis**: A queue-based background service continuously processes unanalyzed commits (max 2 concurrent repos, 2s delay between commits to avoid rate limits)
 
 ### 4. Deep Commit Analysis -- X-Ray Vision for Every Change
 
-Go beyond `git log`. GitSage's commit analyzer:
+Go beyond `git log`. respro's commit analyzer:
 
 - Fetches the full diff for any commit
 - Intelligently filters out noise (lock files, images, build artifacts, binaries)
@@ -138,7 +138,7 @@ A built-in task board with four columns (To Do, In Progress, In Review, Done) th
 
 ### 8. Real-Time Everything -- SSE + Webhooks + Polling
 
-GitSage is not a static dashboard. It's a **live system**:
+respro is not a static dashboard. It's a **live system**:
 
 - **Server-Sent Events (SSE)**: Client subscribes per-repo; receives live updates for new commits, analysis completions, collision changes
 - **GitHub Webhooks**: Automatically created on OAuth; processes push, pull_request, and create events in real time
@@ -167,7 +167,7 @@ GitSage is not a static dashboard. It's a **live system**:
 
 ### Key architectural decisions:
 
-- **Local AI via Ollama**: No data leaves your infrastructure. All AI processing happens locally through Ollama, making GitSage suitable for enterprises with strict data sovereignty requirements. No OpenAI API keys, no cloud AI dependencies, no per-token costs.
+- **Local AI via Ollama**: No data leaves your infrastructure. All AI processing happens locally through Ollama, making respro suitable for enterprises with strict data sovereignty requirements. No OpenAI API keys, no cloud AI dependencies, no per-token costs.
 - **Version-based caching**: Cache invalidation is tied to the latest commit SHA, not arbitrary TTLs. When a new commit lands, the cache invalidates. When nothing changes, responses are instant from disk.
 - **Persistent playbooks**: Project knowledge is stored as structured JSON on disk, not in a database. This makes backup, migration, and inspection trivial.
 - **Modular service architecture**: 13 focused services, each with a single responsibility, making the system easy to extend and maintain.
@@ -192,7 +192,7 @@ GitSage is not a static dashboard. It's a **live system**:
 ## Key Strengths
 
 ### 1. No Tool Does What We Do
-GitSage is the **only platform** that combines AI commit intelligence + collision detection + health scoring + task management in one unified interface. Competitors focus on one slice; we deliver the full picture.
+respro is the **only platform** that combines AI commit intelligence + collision detection + health scoring + task management in one unified interface. Competitors focus on one slice; we deliver the full picture.
 
 ### 2. Privacy-First AI
 All AI processing runs locally through Ollama. Your code never leaves your infrastructure. This is a dealbreaker advantage for enterprises, government contractors, and any team handling sensitive codebases.
@@ -201,7 +201,7 @@ All AI processing runs locally through Ollama. Your code never leaves your infra
 No other tool parses git diffs and extracts function signatures across 8 languages to detect overlapping work at the function level. This is novel and immediately valuable.
 
 ### 4. Zero Database Dependency
-No Postgres, no MongoDB, no Redis. GitSage uses disk-based JSON with version-aware caching. This means near-zero setup friction, easy backup, and trivial deployment.
+No Postgres, no MongoDB, no Redis. respro uses disk-based JSON with version-aware caching. This means near-zero setup friction, easy backup, and trivial deployment.
 
 ### 5. Institutional Memory as a Feature
 The playbook system turns commit history from a write-only log into a searchable, AI-enriched knowledge base that persists across team changes.
@@ -242,7 +242,7 @@ Letter grades across Code Collaboration, Project Velocity, and Bus Factor replac
 ```
                     AI Commit    Collision    Health     Kanban    Local    Real-
                     Analysis     Detection    Scoring    Board     AI       Time
-GitSage               Y            Y            Y         Y        Y        Y
+respro               Y            Y            Y         Y        Y        Y
 GitHub Insights       -            -            -         -        -        -
 GitPrime/Flow         -            -            ~         -        -        -
 LinearB               -            -            ~         -        -        ~
@@ -250,7 +250,7 @@ CodeClimate           -            -            ~         -        -        -
 Sleuth                -            -            ~         -        -        ~
 ```
 
-**GitSage is the only platform that checks every box.**
+**respro is the only platform that checks every box.**
 
 ---
 
@@ -279,7 +279,7 @@ Sleuth                -            -            ~         -        -        ~
 - Automated code review suggestions powered by playbook context
 - Cross-repo collision detection for monorepo and multi-repo architectures
 - Team performance benchmarks with anonymized industry comparisons
-- API platform -- let other tools consume GitSage intelligence
+- API platform -- let other tools consume respro intelligence
 
 ---
 
@@ -297,9 +297,9 @@ Sleuth                -            -            ~         -        -        ~
 
 ## The Ask
 
-GitSage is built, working, and ready to scale. We're looking for:
+respro is built, working, and ready to scale. We're looking for:
 
-- **Early adopter teams** willing to deploy GitSage on their repositories and provide feedback
+- **Early adopter teams** willing to deploy respro on their repositories and provide feedback
 - **Design partners** in enterprise environments to validate the privacy-first local AI model
 - **Investment** to accelerate the v2 roadmap (multi-repo, integrations, historical trends)
 
@@ -307,8 +307,8 @@ GitSage is built, working, and ready to scale. We're looking for:
 
 ## One-Liner
 
-**GitSage gives engineering teams AI-powered X-ray vision into their repositories -- catching code collisions before they happen, turning commit history into institutional memory, and replacing gut-feeling status updates with letter-graded health scores -- all with an AI that never sees your code leave your infrastructure.**
+**respro gives engineering teams AI-powered X-ray vision into their repositories -- catching code collisions before they happen, turning commit history into institutional memory, and replacing gut-feeling status updates with letter-graded health scores -- all with an AI that never sees your code leave your infrastructure.**
 
 ---
 
-*GitSage -- The Brain Behind Your Branches.*
+*respro -- The Brain Behind Your Branches.*

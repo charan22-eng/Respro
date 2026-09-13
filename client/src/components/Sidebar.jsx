@@ -72,14 +72,14 @@ function Sidebar({ activeView, onViewChange, repoData, user, onLogout, collapsed
         >
           <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 overflow-hidden">
             <img 
-              src="/gitsage-logo.jpeg" 
-              alt="GitSage Logo" 
+              src="/respro-logo.jpeg" 
+              alt="respro Logo" 
               className="w-full h-full object-cover"
             />
           </div>
           {!collapsed && (
             <div className="text-left">
-              <h1 className="text-lg font-bold" style={{ color: '#0f172a' }}>GitSage</h1>
+              <h1 className="text-lg font-bold" style={{ color: '#0f172a' }}>respro</h1>
               <p className="text-xs" style={{ color: '#64748b' }}>The brain behind your branches</p>
             </div>
           )}

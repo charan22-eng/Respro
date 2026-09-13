@@ -277,7 +277,7 @@ function ChatPanel({ repoData }) {
                    text-white rounded-2xl shadow-2xl flex items-center justify-center
                    transition-all hover:scale-110 z-[9999] group border-2 border-slate-700"
         style={{ boxShadow: '0 10px 40px rgba(0, 0, 0, 0.4)' }}
-        title="Ask GitSage"
+        title="Ask respro"
       >
         <svg className="w-7 h-7 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
@@ -309,7 +309,7 @@ function ChatPanel({ repoData }) {
             </svg>
           </div>
           <div>
-            <h3 className="font-semibold text-sm text-white">Ask GitSage</h3>
+            <h3 className="font-semibold text-sm text-white">Ask respro</h3>
             <p className="text-xs text-slate-300">{repoData.meta?.name || 'Repository'}</p>
           </div>
         </div>

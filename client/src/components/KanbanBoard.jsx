@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo } from 'react';
+import { useState, useCallback, useMemo, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import {
@@ -97,7 +97,7 @@ Column.propTypes = {
   onAddTask: PropTypes.func.isRequired
 };
 
-function KanbanBoard({ owner, repo, currentUser, onClose, embedded = false }) {
+function KanbanBoard({ owner, repo, currentUser, onClose, embedded = false, boardRefreshKey = 0 }) {
   const queryClient = useQueryClient();
   const [selectedTask, setSelectedTask] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -110,6 +110,13 @@ function KanbanBoard({ owner, repo, currentUser, onClose, embedded = false }) {
     queryFn: () => getBoard(owner, repo),
     refetchInterval: 30000,
   });
+
+  // Watch for real-time SSE updates
+  useEffect(() => {
+    if (boardRefreshKey > 0) {
+      refetch();
+    }
+  }, [boardRefreshKey, refetch]);
 
   // Mutations
   const createMutation = useMutation({
@@ -590,7 +597,8 @@ KanbanBoard.propTypes = {
   repo: PropTypes.string.isRequired,
   currentUser: PropTypes.string.isRequired,
   onClose: PropTypes.func,
-  embedded: PropTypes.bool
+  embedded: PropTypes.bool,
+  boardRefreshKey: PropTypes.number
 };
 
 export default KanbanBoard;

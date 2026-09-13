@@ -15,9 +15,9 @@ function getClientUrl() { return process.env.CLIENT_URL || 'http://localhost:517
 
 // Generate a stable webhook secret if not set
 let webhookSecret = null;
-function getWebhookSecret() {
+export function getWebhookSecret() {
   if (webhookSecret) return webhookSecret;
-  webhookSecret = process.env.GITHUB_WEBHOOK_SECRET?.trim() || 'gitsage-webhook-' + crypto.randomBytes(8).toString('hex');
+  webhookSecret = process.env.GITHUB_WEBHOOK_SECRET?.trim() || 'respro-webhook-' + crypto.randomBytes(8).toString('hex');
   if (!process.env.GITHUB_WEBHOOK_SECRET?.trim()) {
     process.env.GITHUB_WEBHOOK_SECRET = webhookSecret;
   }
@@ -91,7 +91,7 @@ router.get('/auth/github/callback', async (req, res) => {
       headers: {
         'Authorization': `Bearer ${accessToken}`,
         'Accept': 'application/vnd.github.v3+json',
-        'User-Agent': 'GitSage'
+        'User-Agent': 'respro'
       }
     });
 
@@ -142,7 +142,7 @@ router.get('/auth/repos', async (req, res) => {
       headers: {
         'Authorization': `Bearer ${req.session.githubToken}`,
         'Accept': 'application/vnd.github.v3+json',
-        'User-Agent': 'GitSage'
+        'User-Agent': 'respro'
       }
     });
 
@@ -195,7 +195,7 @@ router.post('/auth/webhook', async (req, res) => {
       headers: {
         'Authorization': `Bearer ${req.session.githubToken}`,
         'Accept': 'application/vnd.github.v3+json',
-        'User-Agent': 'GitSage',
+        'User-Agent': 'respro',
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({

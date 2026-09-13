@@ -8,6 +8,7 @@ import { fetchLatestCommitSha, fetchFullCommitInfo } from './githubService.js';
 import { broadcast, getActiveRepos } from './sseService.js';
 import { updatePlaybookWithEvent, getProjectPlaybook } from './playbookService.js';
 import { invalidateCache } from './cacheService.js';
+import { cleanupUnusedClones } from './cloneService.js';
 
 // Track last known commit SHA for each repo
 const repoVersions = new Map();
@@ -20,6 +21,8 @@ const getToken = () => process.env.GITHUB_TOKEN;
 
 let pollingInterval = null;
 let isPolling = false;
+let lastCleanupTime = Date.now();
+const CLEANUP_INTERVAL_MS = 60 * 60 * 1000; // 1 hour
 
 /**
  * Check a single repo for new commits
@@ -147,6 +150,13 @@ async function pollActiveRepos() {
   isPolling = true;
   
   try {
+    // Run background cleanup once per hour
+    const now = Date.now();
+    if (now - lastCleanupTime > CLEANUP_INTERVAL_MS) {
+      lastCleanupTime = now;
+      cleanupUnusedClones().catch(e => console.error('[Polling] Cleanup error:', e.message));
+    }
+
     const activeRepos = getActiveRepos();
     
     if (activeRepos.length === 0) {

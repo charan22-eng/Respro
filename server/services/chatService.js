@@ -4,8 +4,11 @@
  * Enhanced with playbook context and collision detection data
  */
 
+import { searchCommits } from './embeddingService.js';
+import { searchFiles } from './ragService.js';
+
 const OLLAMA_BASE_URL = process.env.OLLAMA_BASE_URL || 'http://localhost:11434';
-const CHAT_MODEL = process.env.OLLAMA_CHAT_MODEL || 'kimi-k2.5:cloud';
+const CHAT_MODEL = process.env.OLLAMA_CHAT_MODEL || 'llama3.2';
 const CHAT_TIMEOUT = 180000; // 3 minutes for cloud model
 
 /**
@@ -38,7 +41,8 @@ function buildSystemPrompt(repoContext) {
     contributors = [], 
     blockers = [],
     playbook,
-    collisions
+    collisions,
+    ragContext = ''
   } = repoContext;
 
   // Get active contributors from recent commits
@@ -75,7 +79,7 @@ ${(playbook.contributorSummaries || []).slice(0, 5).map(cs =>
   // Build collision context if available
   let collisionContext = '';
   if (collisions) {
-    const activeCollisions = (collisions.collisions || []).filter(c => c.status === 'active');
+    const activeCollisions = (collisions.collisions || []).filter(c => !c.isResolved);
     const hotZones = (collisions.hotZones || []).slice(0, 5);
     
     if (activeCollisions.length > 0 || hotZones.length > 0) {
@@ -83,12 +87,12 @@ ${(playbook.contributorSummaries || []).slice(0, 5).map(cs =>
 === COLLISION RADAR (Work Overlap Detection) ===
 Active Collisions: ${activeCollisions.length}
 ${activeCollisions.slice(0, 5).map(c => 
-  `• ${c.contributor1} ↔ ${c.contributor2}: ${c.type} in ${c.file} [${c.severity}]`
+  `• ${c.authors[0]?.name} ↔ ${c.authors[1]?.name}: ${c.type} in ${c.file} [${c.severity}]`
 ).join('\n') || 'No active collisions'}
 
-Hot Zones (frequently modified files):
+Hot Zones (frequently modified areas):
 ${hotZones.map(hz => 
-  `• ${hz.file}: ${hz.contributors?.length || 0} contributors, ${hz.totalModifications || 0} modifications`
+  `• ${hz.area}: ${hz.authorCount || 0} contributors, ${hz.commitCount || 0} modifications`
 ).join('\n') || 'No hot zones detected'}
 `;
     }
@@ -123,7 +127,7 @@ ${hotZones.map(hz =>
     ? 'No blockers detected - development flow is healthy!'
     : blockers.map(b => `• [${b.severity.toUpperCase()}] ${b.title}: ${b.description}`).join('\n');
 
-  return `You are GitSage AI, an intelligent assistant for analyzing the GitHub repository "${meta.fullName}".
+  return `You are respro AI, an intelligent assistant for analyzing the GitHub repository "${meta.fullName}".
 
 You have comprehensive access to:
 - Real-time repository metrics and activity
@@ -170,6 +174,7 @@ ${issueSummary}
 === BLOCKERS ===
 ${blockerSummary}
 ${playbookContext}${collisionContext}
+${ragContext}
 === END CONTEXT ===
 
 Now respond to the user's question using the data above. Be helpful, specific, and data-driven.`;
@@ -190,6 +195,33 @@ function cleanResponse(text) {
  * @returns {Promise<string>} Complete response text
  */
 export async function streamChatResponse(messages, repoContext, onChunk) {
+  // Extract latest user query for RAG
+  const lastUserMsg = messages.filter(m => m.role === 'user').pop();
+  if (lastUserMsg && repoContext.meta) {
+    try {
+      const { owner, name } = repoContext.meta;
+      const [relevantCommits, relevantFiles] = await Promise.all([
+        searchCommits(owner, name, lastUserMsg.content, 5),
+        searchFiles(owner, name, lastUserMsg.content, 3)
+      ]);
+      
+      let ragSection = '';
+      if (relevantCommits && relevantCommits.length > 0) {
+        ragSection += `\n=== RELEVANT PAST COMMITS (Semantic Search) ===\n` + 
+          relevantCommits.map(c => `[Sim=${c.similarity.toFixed(2)}] ${c.text}`).join('\n\n');
+      }
+      if (relevantFiles && relevantFiles.length > 0) {
+        ragSection += `\n\n=== RELEVANT SOURCE CODE (Codebase RAG) ===\n` + 
+          relevantFiles.map(f => `--- ${f.filepath} (Sim=${f.similarity.toFixed(2)}) ---\n${f.content}`).join('\n\n');
+      }
+      if (ragSection) {
+        repoContext.ragContext = ragSection;
+      }
+    } catch (e) {
+      console.warn('RAG search failed:', e.message);
+    }
+  }
+
   const systemPrompt = buildSystemPrompt(repoContext);
 
   const controller = new AbortController();
@@ -257,6 +289,33 @@ export async function streamChatResponse(messages, repoContext, onChunk) {
  * Non-streaming version (fallback)
  */
 export async function sendChatMessage(messages, repoContext) {
+  // Extract latest user query for RAG
+  const lastUserMsg = messages.filter(m => m.role === 'user').pop();
+  if (lastUserMsg && repoContext.meta) {
+    try {
+      const { owner, name } = repoContext.meta;
+      const [relevantCommits, relevantFiles] = await Promise.all([
+        searchCommits(owner, name, lastUserMsg.content, 5),
+        searchFiles(owner, name, lastUserMsg.content, 3)
+      ]);
+      
+      let ragSection = '';
+      if (relevantCommits && relevantCommits.length > 0) {
+        ragSection += `\n=== RELEVANT PAST COMMITS (Semantic Search) ===\n` + 
+          relevantCommits.map(c => `[Sim=${c.similarity.toFixed(2)}] ${c.text}`).join('\n\n');
+      }
+      if (relevantFiles && relevantFiles.length > 0) {
+        ragSection += `\n\n=== RELEVANT SOURCE CODE (Codebase RAG) ===\n` + 
+          relevantFiles.map(f => `--- ${f.filepath} (Sim=${f.similarity.toFixed(2)}) ---\n${f.content}`).join('\n\n');
+      }
+      if (ragSection) {
+        repoContext.ragContext = ragSection;
+      }
+    } catch (e) {
+      console.warn('RAG search failed:', e.message);
+    }
+  }
+
   const systemPrompt = buildSystemPrompt(repoContext);
 
   const controller = new AbortController();

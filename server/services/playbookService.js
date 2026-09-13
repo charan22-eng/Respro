@@ -3,24 +3,24 @@
  * Persistent JSON-based knowledge store for project and contributor playbooks
  */
 
-import fs from 'fs/promises';
-import path from 'path';
+import { Mutex } from 'async-mutex';
+import { getDb } from './db.js';
+import { saveCommitEmbedding } from './embeddingService.js';
 import { summarizeEvent, batchSummarizeEvents, regenerateProjectSummary, regenerateContributorSummary } from './commitSummarizer.js';
 import { fetchCommitDetails } from './githubService.js';
 
-const PLAYBOOK_DIR = process.env.PLAYBOOK_DIR || path.join(process.cwd(), 'playbooks');
+// Map of mutexes per repository to prevent concurrent writes
+const repoMutexes = new Map();
 
-function getRepoDir(owner, repo) {
-  return path.join(PLAYBOOK_DIR, `${owner}-${repo}`);
+function getRepoMutex(owner, repo) {
+  const key = `${owner}/${repo}`;
+  if (!repoMutexes.has(key)) {
+    repoMutexes.set(key, new Mutex());
+  }
+  return repoMutexes.get(key);
 }
 
-function getProjectPath(owner, repo) {
-  return path.join(getRepoDir(owner, repo), 'project.json');
-}
-
-function getContributorPath(owner, repo, username) {
-  return path.join(getRepoDir(owner, repo), 'contributors', `${username}.json`);
-}
+// Playbook paths are no longer used for SQLite storage
 
 /**
  * Derive primary area from file paths (most common top-level directory)
@@ -51,95 +51,75 @@ function deriveTechAreas(commits) {
 }
 
 /**
- * Initialize a new playbook for a repo (creates dirs + empty project.json)
+ * Initialize a new playbook for a repo
  */
 export async function initPlaybook(owner, repo) {
-  const repoDir = getRepoDir(owner, repo);
-  const contributorsDir = path.join(repoDir, 'contributors');
-
-  await fs.mkdir(contributorsDir, { recursive: true });
-
-  const projectPath = getProjectPath(owner, repo);
-  try {
-    await fs.access(projectPath);
-    // Already exists, return it
-    const data = await fs.readFile(projectPath, 'utf-8');
-    return JSON.parse(data);
-  } catch {
-    // Doesn't exist, create empty
-    const playbook = {
-      repoFullName: `${owner}/${repo}`,
-      lastUpdated: new Date().toISOString(),
-      totalCommitsTracked: 0,
-      projectSummary: '',
-      techAreas: [],
-      overallVelocity: 'steady',
-      commits: []
-    };
-    await fs.writeFile(projectPath, JSON.stringify(playbook, null, 2));
-    return playbook;
+  const db = await getDb();
+  const id = `${owner}/${repo}`;
+  const row = await db.get('SELECT data FROM projects WHERE id = ?', id);
+  if (row) {
+    return JSON.parse(row.data);
   }
+  
+  const playbook = {
+    repoFullName: id,
+    lastUpdated: new Date().toISOString(),
+    totalCommitsTracked: 0,
+    projectSummary: '',
+    techAreas: [],
+    overallVelocity: 'steady',
+    commits: []
+  };
+  await db.run('INSERT INTO projects (id, data) VALUES (?, ?)', id, JSON.stringify(playbook));
+  return playbook;
 }
 
 /**
  * Read project playbook (returns null if doesn't exist)
  */
 export async function getProjectPlaybook(owner, repo) {
-  try {
-    const data = await fs.readFile(getProjectPath(owner, repo), 'utf-8');
-    return JSON.parse(data);
-  } catch {
-    return null;
-  }
+  const db = await getDb();
+  const row = await db.get('SELECT data FROM projects WHERE id = ?', `${owner}/${repo}`);
+  return row ? JSON.parse(row.data) : null;
 }
 
 /**
  * Read contributor playbook (returns null if doesn't exist)
  */
 export async function getContributorPlaybook(owner, repo, username) {
-  try {
-    const data = await fs.readFile(getContributorPath(owner, repo, username), 'utf-8');
-    return JSON.parse(data);
-  } catch {
-    return null;
-  }
+  const db = await getDb();
+  const row = await db.get('SELECT data FROM contributors WHERE id = ?', `${owner}/${repo}/${username}`);
+  return row ? JSON.parse(row.data) : null;
 }
 
 /**
  * Get all contributor playbooks for a repo
  */
 export async function getAllContributorPlaybooks(owner, repo) {
-  const contributorsDir = path.join(getRepoDir(owner, repo), 'contributors');
-  try {
-    const files = await fs.readdir(contributorsDir);
-    const contributors = {};
-    for (const file of files) {
-      if (!file.endsWith('.json')) continue;
-      const data = await fs.readFile(path.join(contributorsDir, file), 'utf-8');
-      const playbook = JSON.parse(data);
-      contributors[playbook.login] = playbook;
-    }
-    return contributors;
-  } catch {
-    return {};
+  const db = await getDb();
+  const rows = await db.all('SELECT data FROM contributors WHERE id LIKE ?', `${owner}/${repo}/%`);
+  const contributors = {};
+  for (const row of rows) {
+    const playbook = JSON.parse(row.data);
+    contributors[playbook.login] = playbook;
   }
+  return contributors;
 }
 
 /**
  * Write project playbook to disk
  */
 export async function writeProjectPlaybook(owner, repo, playbook) {
-  await fs.mkdir(getRepoDir(owner, repo), { recursive: true });
-  await fs.writeFile(getProjectPath(owner, repo), JSON.stringify(playbook, null, 2));
+  const db = await getDb();
+  await db.run('INSERT OR REPLACE INTO projects (id, data) VALUES (?, ?)', `${owner}/${repo}`, JSON.stringify(playbook));
 }
 
 /**
  * Write contributor playbook to disk
  */
 async function writeContributorPlaybook(owner, repo, username, playbook) {
-  const dir = path.join(getRepoDir(owner, repo), 'contributors');
-  await fs.mkdir(dir, { recursive: true });
-  await fs.writeFile(getContributorPath(owner, repo, username), JSON.stringify(playbook, null, 2));
+  const db = await getDb();
+  await db.run('INSERT OR REPLACE INTO contributors (id, data) VALUES (?, ?)', `${owner}/${repo}/${username}`, JSON.stringify(playbook));
 }
 
 /**
@@ -182,6 +162,13 @@ export async function updatePlaybookWithEvent(owner, repo, eventData) {
   projectPlaybook.lastUpdated = new Date().toISOString();
   projectPlaybook.techAreas = deriveTechAreas(projectPlaybook.commits);
 
+  // Save vector embedding for RAG
+  try {
+    await saveCommitEmbedding(owner, repo, eventData.commitId, entry);
+  } catch (e) {
+    console.warn(`Failed to save embedding for commit ${eventData.commitId}:`, e.message);
+  }
+
   // Update/create contributor playbook
   let contributorPlaybook = await getContributorPlaybook(owner, repo, eventData.author);
   if (!contributorPlaybook) {
@@ -210,31 +197,38 @@ export async function updatePlaybookWithEvent(owner, repo, eventData) {
     contributorPlaybook.commits.map(c => c.primaryArea).filter(a => a !== 'unknown')
   )].slice(0, 5);
 
-  // Regenerate summaries (non-blocking errors)
+  const mutex = getRepoMutex(owner, repo);
+  const release = await mutex.acquire();
+  
   try {
-    const projSummary = await regenerateProjectSummary(projectPlaybook);
-    if (projSummary) {
-      projectPlaybook.projectSummary = projSummary.projectSummary;
-      projectPlaybook.overallVelocity = projSummary.overallVelocity;
+    // Regenerate summaries (non-blocking errors)
+    try {
+      const projSummary = await regenerateProjectSummary(projectPlaybook);
+      if (projSummary) {
+        projectPlaybook.projectSummary = projSummary.projectSummary;
+        projectPlaybook.overallVelocity = projSummary.overallVelocity;
+      }
+    } catch (e) {
+      console.warn('Failed to regenerate project summary:', e.message);
     }
-  } catch (e) {
-    console.warn('Failed to regenerate project summary:', e.message);
-  }
 
-  try {
-    const contribSummary = await regenerateContributorSummary(contributorPlaybook, projectPlaybook);
-    if (contribSummary) {
-      contributorPlaybook.contributorSummary = contribSummary;
+    try {
+      const contribSummary = await regenerateContributorSummary(contributorPlaybook, projectPlaybook);
+      if (contribSummary) {
+        contributorPlaybook.contributorSummary = contribSummary;
+      }
+    } catch (e) {
+      console.warn('Failed to regenerate contributor summary:', e.message);
     }
-  } catch (e) {
-    console.warn('Failed to regenerate contributor summary:', e.message);
+
+    // Write to disk
+    await writeProjectPlaybook(owner, repo, projectPlaybook);
+    await writeContributorPlaybook(owner, repo, eventData.author, contributorPlaybook);
+
+    return { projectPlaybook, contributorPlaybook, updated: true };
+  } finally {
+    release();
   }
-
-  // Write to disk
-  await writeProjectPlaybook(owner, repo, projectPlaybook);
-  await writeContributorPlaybook(owner, repo, eventData.author, contributorPlaybook);
-
-  return { projectPlaybook, contributorPlaybook, updated: true };
 }
 
 /**
@@ -344,6 +338,11 @@ export async function initializeFromExistingCommits(owner, repo, commits, repoDa
 
     projectPlaybook.commits.push(entry);
 
+    // Save vector embedding
+    try {
+      await saveCommitEmbedding(owner, repo, entry.commitId, entry);
+    } catch (e) {}
+
     // Also create/update contributor playbook
     let contribPb = await getContributorPlaybook(owner, repo, events[i].author);
     if (!contribPb) {
@@ -372,21 +371,27 @@ export async function initializeFromExistingCommits(owner, repo, commits, repoDa
   projectPlaybook.lastUpdated = new Date().toISOString();
   projectPlaybook.techAreas = deriveTechAreas(projectPlaybook.commits);
 
-  // Regenerate project summary
+  const mutex = getRepoMutex(owner, repo);
+  const release = await mutex.acquire();
   try {
-    const projSummary = await regenerateProjectSummary(projectPlaybook);
-    if (projSummary) {
-      projectPlaybook.projectSummary = projSummary.projectSummary;
-      projectPlaybook.overallVelocity = projSummary.overallVelocity;
+    // Regenerate project summary
+    try {
+      const projSummary = await regenerateProjectSummary(projectPlaybook);
+      if (projSummary) {
+        projectPlaybook.projectSummary = projSummary.projectSummary;
+        projectPlaybook.overallVelocity = projSummary.overallVelocity;
+      }
+    } catch (e) {
+      console.warn('Failed to generate project summary during init:', e.message);
     }
-  } catch (e) {
-    console.warn('Failed to generate project summary during init:', e.message);
+
+    await writeProjectPlaybook(owner, repo, projectPlaybook);
+    console.log(`Playbook initialized with ${newCommits.length} commits for ${owner}/${repo}`);
+
+    return projectPlaybook;
+  } finally {
+    release();
   }
-
-  await writeProjectPlaybook(owner, repo, projectPlaybook);
-  console.log(`Playbook initialized with ${newCommits.length} commits for ${owner}/${repo}`);
-
-  return projectPlaybook;
 }
 
 /**

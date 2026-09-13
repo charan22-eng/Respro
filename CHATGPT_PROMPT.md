@@ -2,7 +2,7 @@
 
 ## Instructions for ChatGPT
 
-I built a full-stack AI-powered project called **GitSage** in a **24-hour hackathon** and I need two things from you:
+I built a full-stack AI-powered project called **respro** in a **24-hour hackathon** and I need two things from you:
 
 1. **A LinkedIn post** announcing this project — make it engaging, professional, and highlight the technical depth AND the fact that this was all built in just 24 hours. It should generate interest from recruiters, hiring managers, and fellow developers. Keep it concise but impactful. Use a conversational yet professional tone. Include relevant hashtags.
 
@@ -13,10 +13,10 @@ I built a full-stack AI-powered project called **GitSage** in a **24-hour hackat
 ## About the Project
 
 ### Project Name
-**GitSage** — "The Brain Behind Your Branches"
+**respro** — "The Brain Behind Your Branches"
 
 ### What It Is
-GitSage is an **AI-powered GitHub repository intelligence platform** built entirely in a **24-hour hackathon**. It gives engineering teams deep, real-time insights into their repositories. It goes far beyond what GitHub natively offers — providing AI-generated health scores, collision detection between developers, commit-level analysis, a living project playbook, task management, and a conversational AI assistant that understands your entire codebase.
+respro is an **AI-powered GitHub repository intelligence platform** built entirely in a **24-hour hackathon**. It gives engineering teams deep, real-time insights into their repositories. It goes far beyond what GitHub natively offers — providing AI-generated health scores, collision detection between developers, commit-level analysis, a living project playbook, task management, and a conversational AI assistant that understands your entire codebase.
 
 ### The Problem It Solves
 Engineering teams working on large repositories struggle with:
@@ -26,7 +26,7 @@ Engineering teams working on large repositories struggle with:
 - Commit messages are often cryptic — understanding what a commit actually did requires reading diffs manually
 - Task management is disconnected from the actual codebase
 
-GitSage solves all of this with AI-powered automation and real-time intelligence.
+respro solves all of this with AI-powered automation and real-time intelligence.
 
 ### Context: 24-Hour Hackathon
 This entire project — all 10,000+ lines of code, 13 backend services, 30+ React components, custom SVG visualizations, AI integrations, real-time event system, and polished UI — was **designed, architected, and built from scratch in a single 24-hour hackathon**. This is critical context for both the LinkedIn post and the resume. The time constraint makes the scope and quality of this project especially impressive.
@@ -227,7 +227,7 @@ This entire project — all 10,000+ lines of code, 13 backend services, 30+ Reac
 ## What I Want From You (ChatGPT)
 
 ### LinkedIn Post
-- Write an engaging LinkedIn post (300-500 words) announcing GitSage
+- Write an engaging LinkedIn post (300-500 words) announcing respro
 - **Emphasize that this was built in a 24-hour hackathon** — this is the hook that makes the scope impressive
 - Highlight the technical depth and the problem it solves
 - Make it appeal to both technical and non-technical audiences

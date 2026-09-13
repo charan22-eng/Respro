@@ -22,6 +22,7 @@ function App() {
   const [aiPending, setAiPending] = useState(false);
   const [liveEvents, setLiveEvents] = useState([]);
   const [playbookRefreshKey, setPlaybookRefreshKey] = useState(0);
+  const [boardRefreshKey, setBoardRefreshKey] = useState(0);
   
   // UI state
   const [activeView, setActiveView] = useState('overview');
@@ -91,6 +92,11 @@ function App() {
             playbookAvailable: eventData.available
           }));
           setPlaybookRefreshKey(k => k + 1);
+          break;
+          
+        case 'board_task_moved':
+        case 'board_updated':
+          setBoardRefreshKey(k => k + 1);
           break;
       }
     });
@@ -198,10 +204,11 @@ function App() {
           <CollaborationPage
             repoData={repoData}
             onAnalyzeCommit={handleAnalyzeCommit}
+            playbookRefreshKey={playbookRefreshKey}
           />
         );
       case 'tasks':
-        return <TasksPage repoData={repoData} user={user} />;
+        return <TasksPage repoData={repoData} user={user} boardRefreshKey={boardRefreshKey} />;
       default:
         return (
           <OverviewPage

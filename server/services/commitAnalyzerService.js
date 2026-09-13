@@ -5,7 +5,7 @@
 
 const GITHUB_API_BASE = 'https://api.github.com';
 const OLLAMA_BASE_URL = process.env.OLLAMA_BASE_URL || 'http://localhost:11434';
-const OLLAMA_MODEL = process.env.OLLAMA_MODEL || 'kimi-k2.5:cloud';
+const OLLAMA_MODEL = process.env.OLLAMA_MODEL || 'llama3.2';
 const OLLAMA_TIMEOUT = 300000; // 5 minutes for cloud models
 
 // File patterns to ignore during analysis
@@ -50,7 +50,7 @@ async function fetchCommitDetail(owner, repo, sha, token) {
   const url = `${GITHUB_API_BASE}/repos/${owner}/${repo}/commits/${sha}`;
   const headers = {
     'Accept': 'application/vnd.github.v3+json',
-    'User-Agent': 'GitSage'
+    'User-Agent': 'respro'
   };
 
   if (token) {

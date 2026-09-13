@@ -12,6 +12,7 @@
 
 import { getProjectPlaybook, writeProjectPlaybook } from './playbookService.js';
 import { fetchCommitDetails } from './githubService.js';
+import { simulateMerge } from './mergeSimulationService.js';
 
 /**
  * Time window for considering commits as "concurrent work" (in milliseconds)
@@ -519,6 +520,26 @@ async function detectFileCollisions(commits, owner, repo, token, resolvedCollisi
       resolvedAt: resolvedCollisions[collisionId]?.resolvedAt,
       daysSinceActivity
     });
+  }
+
+  // Phase 2A: Merge Forecast
+  // Run simulateMerge for top high/medium severity collisions
+  for (const collision of collisions) {
+    if (collision.type === COLLISION_TYPE.LINE_OVERLAP || collision.type === COLLISION_TYPE.FUNCTION_OVERLAP) {
+       const branch1 = collision.authors[0].allCommits[0]?.branch || 'main';
+       const branch2 = collision.authors[1].allCommits[0]?.branch || 'main';
+       
+       if (branch1 !== branch2) {
+          const sim = await simulateMerge(owner, repo, branch1, branch2, token);
+          if (sim.hasConflicts) {
+             collision.severity = SEVERITY.HIGH;
+             collision.overlapDetails.isGroundTruthConflict = true;
+             collision.overlapDetails.conflictDiff = sim.conflictDiff;
+             collision.overlapDetails.effortEstimate = sim.effortEstimate;
+             collision.suggestion = `🚨 TRUE MERGE CONFLICT DETECTED between ${branch1} and ${branch2}. Effort to resolve: ${sim.effortEstimate}.`;
+          }
+       }
+    }
   }
   
   // Sort: unresolved first, then by type/severity

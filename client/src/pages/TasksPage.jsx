@@ -5,7 +5,7 @@ import KanbanBoard from '../components/KanbanBoard';
  * Tasks Page - Kanban Board for task management
  * Note: This page requires GitHub authentication
  */
-function TasksPage({ repoData, user }) {
+function TasksPage({ repoData, user, boardRefreshKey }) {
   const { meta } = repoData;
 
   // If no user is authenticated, show auth prompt
@@ -94,6 +94,7 @@ function TasksPage({ repoData, user }) {
           repo={meta.name}
           currentUser={user.login}
           embedded={true}
+          boardRefreshKey={boardRefreshKey}
         />
       </div>
     </div>
@@ -108,6 +109,7 @@ TasksPage.propTypes = {
     }).isRequired,
   }).isRequired,
   user: PropTypes.object,
+  boardRefreshKey: PropTypes.number,
 };
 
 export default TasksPage;

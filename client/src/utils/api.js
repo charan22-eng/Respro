@@ -19,11 +19,13 @@ export function subscribeToUpdates(owner, repo, onEvent) {
     'event_processed',
     'playbook_updated',
     'event_error',
-    // Background analysis events
     'background_analysis_started',
     'commit_analyzed',
     'background_analysis_completed',
-    'background_analysis_error'
+    'background_analysis_error',
+    // Board events
+    'board_task_moved',
+    'board_updated'
   ];
 
   eventTypes.forEach(type => {

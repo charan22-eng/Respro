@@ -7,7 +7,7 @@ import { getCollisions } from '../utils/api';
 /**
  * Collaboration Page - Team analysis, collision detection, contributor insights
  */
-function CollaborationPage({ repoData, onAnalyzeCommit }) {
+function CollaborationPage({ repoData, onAnalyzeCommit, playbookRefreshKey = 0 }) {
   const [activeTab, setActiveTab] = useState('contributors');
   const [collisions, setCollisions] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -39,6 +39,13 @@ function CollaborationPage({ repoData, onAnalyzeCommit }) {
       fetchCollisions();
     }
   }, [activeTab, fetchCollisions]);
+
+  // Watch for real-time SSE updates (new commits arriving)
+  useEffect(() => {
+    if (playbookRefreshKey > 0 && activeTab === 'collisions') {
+      fetchCollisions();
+    }
+  }, [playbookRefreshKey, activeTab, fetchCollisions]);
 
   const tabs = [
     { id: 'contributors', label: 'Contributors', description: 'Team member analysis' },
@@ -333,6 +340,23 @@ function CollaborationPage({ repoData, onAnalyzeCommit }) {
                                 </div>
                               </div>
                             )}
+
+                            {/* True Merge Conflict Details */}
+                            {collision.overlapDetails?.isGroundTruthConflict && (
+                              <div className="mt-4 p-3 rounded bg-red-50 border border-red-200">
+                                <div className="flex justify-between items-center mb-2">
+                                  <span className="text-xs font-bold text-red-800">💥 Simulated Merge Conflict</span>
+                                  <span className="text-xs font-medium px-2 py-0.5 bg-red-200 text-red-800 rounded">
+                                    Effort: {collision.overlapDetails.effortEstimate}
+                                  </span>
+                                </div>
+                                {collision.overlapDetails.conflictDiff && (
+                                  <pre className="text-xs overflow-x-auto p-2 bg-slate-900 text-slate-50 rounded">
+                                    <code>{collision.overlapDetails.conflictDiff}</code>
+                                  </pre>
+                                )}
+                              </div>
+                            )}
                           </div>
                           
                           {/* Stats on right side */}
@@ -376,6 +400,7 @@ CollaborationPage.propTypes = {
     contributors: PropTypes.array,
   }).isRequired,
   onAnalyzeCommit: PropTypes.func,
+  playbookRefreshKey: PropTypes.number,
 };
 
 export default CollaborationPage;

@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import session from 'express-session';
+import sessionFileStore from 'session-file-store';
 import dotenv from 'dotenv';
 import pulseRoutes from './routes/pulse.js';
 import playbookRoutes from './routes/playbook.js';
@@ -14,8 +15,10 @@ import { startPolling } from './services/pollingService.js';
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 3003;
+const PORT = process.env.PORT || 3002;
 const CLIENT_URL = process.env.CLIENT_URL || 'http://localhost:5173';
+
+const FileStore = sessionFileStore(session);
 
 // Middleware
 app.use(cors({
@@ -27,7 +30,8 @@ app.use(express.json({ limit: '2mb' }));
 
 // Session middleware (before routes)
 app.use(session({
-  secret: process.env.SESSION_SECRET || 'gitsage-session-secret',
+  store: new FileStore({ path: './sessions', retries: 0, logFn: function(){} }),
+  secret: process.env.SESSION_SECRET || 'respro-session-secret',
   resave: false,
   saveUninitialized: false,
   cookie: {
@@ -62,7 +66,7 @@ app.use((err, req, res, next) => {
 });
 
 const server = app.listen(PORT, () => {
-  console.log(`GitSage server running on http://localhost:${PORT}`);
+  console.log(`respro server running on http://localhost:${PORT}`);
   
   // Start background polling for real-time updates
   startPolling();

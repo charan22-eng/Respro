@@ -93,15 +93,15 @@ function LandingPage({ user, onSubmit, isLoading }) {
             {/* Logo */}
             <div className="flex justify-center mb-6">
               <img 
-                src="/gitsage-logo.jpeg" 
-                alt="GitSage Logo" 
+                src="/respro-logo.jpeg" 
+                alt="respro Logo" 
                 className="w-24 h-24 md:w-32 md:h-32 rounded-2xl shadow-xl"
               />
             </div>
 
             {/* Headline */}
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-tight" style={{ color: '#0f172a' }}>
-              Meet <span className="gradient-text">GitSage</span>
+              Meet <span className="gradient-text">respro</span>
             </h1>
             <p className="text-xl md:text-2xl font-medium mb-2" style={{ color: '#334155' }}>
               The brain behind your branches
